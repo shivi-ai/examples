@@ -6,8 +6,31 @@ These examples will help you to start developing with ChargeTrip Graph API:
 2. Select a car example;
 3. ...  
 
+
+### Installation
+
+```
+$ yarn
+```
+
+#### Local Development
+
+```
+$ yarn dev
+```
+
+This command starts a local development server and opens up a browser window. It will continually rebuild the application as your source files change. Note that there is no hot reloading.
+
+### Build
+
+```
+$ yarn build
+```
+
+This command generates a static content into the `public` directory.
+
 ### Useful links
 
-1. ChargeTrip GraphAPI [docs](https://docs.chargetrip.com/);
-2. ChargeTrip GraphAPI [playground](https://playground.chargetrip.com/);
-3. ChargeTrip GraphAPI schema [information](https://voyager.chargetrip.com/).
+1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/);
+2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/);
+3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).

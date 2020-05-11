@@ -1,0 +1,36 @@
+{
+  "name": "chargetrip-examples",
+  "description": "Example of building a simple route with ChargeTrip GraphQL API",
+  "main": "route/index.js",
+  "version": "1.0.0",
+  "dependencies": {
+    "@urql/core": "^1.7.0",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.1",
+    "subscriptions-transport-ws": "^0.9.16",
+    "wonka": "^4.0.13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/preset-env": "^7.9.6",
+    "@callstack/eslint-config": "^9.1.0",
+    "@rollup/plugin-babel": "^5.0.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-replace": "^2.3.2",
+    "eslint": "^6.8.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.8.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "serve": "^11.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "dev": "npm-run-all --parallel start watch",
+    "start": "serve public",
+    "lint": "yarn eslint --ext .js ./"
+  }
+}
