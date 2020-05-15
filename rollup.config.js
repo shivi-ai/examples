@@ -2,7 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import babel from "@rollup/plugin-babel";
-import { terser } from "rollup-plugin-terser";
+import {terser} from "rollup-plugin-terser";
 
 const production = !process.env.ROLLUP_WATCH;
 const plugins = [
@@ -12,7 +12,11 @@ const plugins = [
   resolve({
     browser: true
   }),
-  commonjs(),
+  commonjs({
+    namedExports: {
+      '@mapbox/polyline': ['decode']
+    }
+  }),
   babel({
     exclude: "node_modules/**"
   }),

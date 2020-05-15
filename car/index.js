@@ -1,1 +1,1 @@
-console.log("Car example");
+console.log('Car example');
