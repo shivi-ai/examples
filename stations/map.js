@@ -43,10 +43,10 @@ const selectPinlet = point => {
   const statusVals = ['free', 'unknown', 'error'];
   const speedVals = ['slow', 'fast'];
 
-  let status = statusVals.contains(point.status) ? point.status : 'busy';
-  let speed = speedVals.contains(point.speed) ? point.speed : 'turbo';
+  let status = statusVals.includes(point.status) ? point.status : 'busy';
+  let speed = speedVals.includes(point.speed) ? point.speed : 'turbo';
 
-  return `pinlet_${status}_${speed}_standard_inactive'`
+  return `pinlet_${status}_${speed}_standard_inactive`;
 };
 
 /**
