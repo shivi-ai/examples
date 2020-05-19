@@ -46,4 +46,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'stations/index.js',
+    output: {
+      file: 'public/stations/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];

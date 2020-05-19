@@ -77,7 +77,7 @@ const drawPolyline = coordinates => {
  *
  * @param legs {array} route legs
  */
-function showLegs(legs) {
+const showLegs = legs => {
   if (legs.length === 0) return;
 
   let points = [];
@@ -171,7 +171,7 @@ const addMarker = (coordinates, label, offset, className = 'location-label') => 
  *
  * @param legs {array} route points
  */
-function loadMarkers(legs) {
+const loadMarkers = legs => {
   // origin point marker (origin of the first leg)
   const label = `From<br><strong>Amsterdam</strong>`;
   const offset = [+30, -30];
@@ -190,6 +190,6 @@ function loadMarkers(legs) {
       addMarker(leg.destination.geometry.coordinates, label, offset);
     }
   });
-}
+};
 
 export { drawRoute };

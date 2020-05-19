@@ -7,8 +7,9 @@ import * as mapboxPolyline from '@mapbox/polyline';
 import { getDurationString } from '../utils';
 
 /**
- * For the purpose of this example we use urgl lightweights GraphQL client.
+ * For the purpose of this example we use urgl - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
+ * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
   'x-client-id': '5e8c22366f9c5f23ab0eff39',

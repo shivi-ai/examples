@@ -4,7 +4,7 @@ These examples will help you to start developing with Chargetrip Graph API:
 
 1. Build a simple route [example](https://chargetrip.github.io/examples/route/);
 2. Select a car [example](https://chargetrip.github.io/examples/car/);
-3. ...
+3. Show stations on a map [example](https://chargetrip.github.io/examples/stations/);
 
 ### Installation
 
