@@ -1,7 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
-import serve from 'rollup-plugin-serve';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
@@ -23,7 +22,6 @@ const plugins = [
     exclude: 'node_modules/**',
     babelHelpers: 'bundled',
   }),
-  serve({ open: true, port: 3000, contentBase: ['public'] }),
   production && terser(),
 ];
 
