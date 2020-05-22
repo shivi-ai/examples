@@ -1,107 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chargetrip Graph API examples</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        color: #323c4d;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <title>Chargetrip Graph API examples</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: #323c4d;
-    }
+      a {
+        color: #3485f7;
+      }
 
-    a {
-      color: #3485f7;
-    }
+      nav {
+        margin: 0;
+        background: #3485f7;
+      }
 
-    nav {
-      margin: 0;
-      background: #3485f7;
-    }
+      main {
+        max-width: 1000px;
+        margin: 80px auto 0;
+      }
 
-    main {
-      max-width: 1000px;
-      margin: 80px auto 0;
-    }
+      .logo {
+        margin: 10px;
+      }
 
-    .logo {
-      margin: 10px;
-    }
+      .header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
 
-    .header {
-      text-align: center;
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 1.5;
-    }
+      .header h1 {
+        font-size: 64px;
+        color: #0c0e11;
+        line-height: 1;
+      }
 
-    .header h1 {
-      font-size: 64px;
-      color: #0c0e11;
-      line-height: 1;
-    }
+      .examples {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .examples {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .example {
+        display: block;
+        border: 1px solid #b8bfcc;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 10px;
+        text-decoration: none;
+        cursor: hand;
+        color: #323c4d;
+      }
 
-    .example {
-      display: block;
-      border: 1px solid #b8bfcc;
-      border-radius: 10px;
-      padding: 25px;
-      margin: 10px;
-      text-decoration: none;
-      cursor: hand;
-      color: #323c4d;
-    }
+      .example:hover {
+        border-color: #3485f7;
+      }
 
-    .example:hover {
-      border-color: #3485f7;
-    }
+      .example h2 {
+        margin: 0 0 10px;
+        color: #3485f7;
+      }
+    </style>
+  </head>
 
-    .example h2 {
-      margin: 0 0 10px;
-      color: #3485f7;
-    }
+  <body>
+    <nav class="menu">
+      <a href="https://chargetrip.com/" aria-label="Chargetrip">
+        <img class="logo" src="logo.svg" alt="logo" />
+      </a>
+    </nav>
+    <main>
+      <header class="header">
+        <h1>Chargetrip API<br />examples ⚡️</h1>
+        <p>
+          The Chargetrip API gives you the ability to integrate smart, EV-specific routing into products built for
+          drivers of electric cars. Our engineering team has built some examples for you to show how easy it is to work
+          with our API. To see the code, check out our <a href="https://github.com/chargetrip/examples">github</a>.
+        </p>
+      </header>
 
-
-  </style>
-</head>
-
-<body>
-<nav class="menu">
-  <a href="https://chargetrip.com/" aria-label="Chargetrip">
-    <img class="logo" src="logo.svg" alt="logo"/>
-  </a>
-</nav>
-<main>
-  <header class="header">
-    <h1>Chargetrip API<br/>examples ⚡️</h1>
-    <p>The Chargetrip API gives you the ability to integrate smart, EV-specific routing into products built for drivers of electric cars.
-      Our engineering team has built some examples for you to show how easy it is to work with our API. To see the code, check out our <a href="https://github.com/chargetrip/examples">github</a>.</p>
-  </header>
-
-  <div class="examples">
-    <a href="car/" class="example">
-      <h2>Select a car 🚘</h2>
-      <p>Simple example of how to query the list of cars or a specific car.</p>
-    </a>
-    <a href="stations/" class="example">
-      <h2>Query stations 🗺</h2>
-      <p>Simple example of how to query staions and show them on a map.</p>
-    </a>
-    <a href="route/" class="example">
-      <h2>Build a route 🛤</h2>
-      <p>Simple example of how to request a route and show it on a map.</p>
-    </a>
-  </div>
-</main>
-
-</body>
-
+      <div class="examples">
+        <a href="car/" class="example">
+          <h2>Select a car 🚘</h2>
+          <p>Simple example of how to query the list of cars or a specific car.</p>
+        </a>
+        <a href="stations/" class="example">
+          <h2>Query stations 🗺</h2>
+          <p>Simple example of how to query staions and show them on a map.</p>
+        </a>
+        <a href="route/" class="example">
+          <h2>Build a route 🛤</h2>
+          <p>Simple example of how to request a route and show it on a map.</p>
+        </a>
+        <a href="tile-service/" class="example">
+          <h2>Tile Service 🌐</h2>
+          <p>Display stations on the map using our Vector Tile Server.</p>
+        </a>
+      </div>
+    </main>
+  </body>
 </html>
