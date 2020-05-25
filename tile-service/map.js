@@ -101,23 +101,16 @@ const loadStations = () => {
      * The map will always be recenterd around the cluster that was clicked on.
      */
     map.on('click', ({ point, target }) => {
-      const currentZoom = map.getZoom();
       const features = target.queryRenderedFeatures(point, {
         layers: ['clusters', 'cluster_count', 'unclustered-stations'],
       });
-      if (features && features.length > 0 && currentZoom < 9) {
+      if (features && features.length > 0 && features[0].properties.count > 1) {
         map.flyTo({
           center: [features[0].properties.lng, features[0].properties.lat],
-          zoom: 9,
+          zoom: features[0].properties.expansionZoom,
           speed: 1,
         });
-      } else if (features && features.length > 0 && currentZoom >= 9 && currentZoom < 14) {
-        map.flyTo({
-          center: [features[0].properties.lng, features[0].properties.lat],
-          zoom: 13,
-          speed: 1,
-        });
-      } else {
+      } else if (features && features.length > 0) {
         map.flyTo({
           center: [features[0].properties.lng, features[0].properties.lat],
         });
