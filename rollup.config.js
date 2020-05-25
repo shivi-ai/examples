@@ -54,9 +54,9 @@ export default [
     plugins,
   },
   {
-    input: 'tile-service/index.js',
+    input: 'tile-server/index.js',
     output: {
-      file: 'public/tile-service/bundle.js',
+      file: 'public/tile-server/bundle.js',
       format: 'iife',
       sourcemap: true,
     },

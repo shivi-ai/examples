@@ -45,18 +45,19 @@
 
       .examples {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
       }
 
       .example {
         display: block;
+        max-width: 250px;
         border: 1px solid #b8bfcc;
         border-radius: 10px;
         padding: 25px;
         margin: 10px;
         text-decoration: none;
-        cursor: hand;
+        cursor: pointer;
         color: #323c4d;
       }
 
@@ -100,8 +101,8 @@
           <h2>Build a route 🛤</h2>
           <p>Simple example of how to request a route and show it on a map.</p>
         </a>
-        <a href="tile-service/" class="example">
-          <h2>Tile Service 🌐</h2>
+        <a href="tile-server/" class="example">
+          <h2>Vector Tile Server 🌐</h2>
           <p>Display stations on the map using our Vector Tile Server.</p>
         </a>
       </div>
