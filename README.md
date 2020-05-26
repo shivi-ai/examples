@@ -6,13 +6,13 @@
   <span>⚡️</span>
   <a href="https://docs.chargetrip.com/">Docs</a>
   <span>⚡</span>
+  <a href="https://chargetrip.github.io/examples/">Examples</a>
+  <span>⚡</span>
   <a href="https://spectrum.chat/chargetrip?tab=posts">Spectrum</a>
 </div>
 <hr>
 
-Here you can find ready-to-run examples explaining how to work with Chargetrip API. Each example has instructions in the corresponding README file.  
-If something is not explained or you miss an example, please let know but opening an issue or contacting us in [Spectrum](https://spectrum.chat/chargetrip?tab=posts) chat.
-We improve our documentation continuously, and your feedback is valuable.
+Here you can find ready-to-run examples explaining how to work with Chargetrip API. Each example has instructions in the corresponding README file. If something is not explained or you miss an example, please let know by opening an issue or contacting us in [Spectrum](https://spectrum.chat/chargetrip?tab=posts) chat. We improve our documentation continuously, and your feedback is valuable.
 
 Available examples:
 
