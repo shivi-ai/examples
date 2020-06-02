@@ -2,38 +2,38 @@
 <html lang="nl">
   <head>
     <title>Route example</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;500&display=swap" rel="stylesheet">
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet'/>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;500&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bundle.css" />
   </head>
 
   <body>
-      <div id="map"></div>
-      <div class="journey-specs">
-        <header>
-          <h1>Amsterdam to Berlin</h1>
-          <p id="duration"></p>
-          <p id="overview"></p>
-          <div id="loader">Loading...</div>
-        </header>
-        <div class="specs">
-          Charge Duration
-          <span id="charge-duration">--,--</span>
-        </div>
-        <div class="specs">
-          Cost Estimation
-          <span id="cost">--,--</span>
-        </div>
-        <div class="specs">
-          Total Consumption
-          <span id="consumption">--,--</span>
-        </div>
-        <div class="specs">
-          CO2 Spared
-          <span id="co2">--,--</span>
-        </div>
+    <div id="map"></div>
+    <div class="journey-specs">
+      <header>
+        <h1>Amsterdam to Berlin</h1>
+        <p id="duration"></p>
+        <p id="overview"></p>
+        <div id="loader">Loading...</div>
+      </header>
+      <div class="specs">
+        Charge Duration
+        <span id="charge-duration">--,--</span>
       </div>
+      <div class="specs">
+        Cost Estimation
+        <span id="cost">--,--</span>
+      </div>
+      <div class="specs">
+        Total Consumption
+        <span id="consumption">--,--</span>
+      </div>
+      <div class="specs">
+        CO2 Spared
+        <span id="co2">--,--</span>
+      </div>
+    </div>
   </body>
   <script src="bundle.js"></script>
 </html>
