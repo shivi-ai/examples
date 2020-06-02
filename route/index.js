@@ -6,8 +6,6 @@ import { drawRoute } from './map.js';
 import * as mapboxPolyline from '@mapbox/polyline';
 import { getDurationString } from '../utils';
 
-import './styles.css';
-
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
