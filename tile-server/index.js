@@ -19,7 +19,7 @@ const map = new mapboxgl.Map({
       return {
         url: url,
         headers: {
-          'x-client-id': '5e8c22366f9c5f23ab0eff39',
+          'x-client-id': '5ed1175bad06853b3aa1e492',
         },
       };
     }
@@ -42,58 +42,38 @@ map.on('load', () => {
   });
 
   /**
-   * This first layer will display a circle for each cluster of stations.
+   * This tfirst layer will display a station icon.
+   * This layer will only be shown if the cluster count is 1
+   */
+  map.addLayer({
+    id: 'unclustered-stations',
+    type: 'symbol',
+    layout: {
+      'icon-image': 'free-fast-pinlet',
+      'icon-size': 0.55,
+    },
+    source: 'stations',
+    'source-layer': 'stations',
+  });
+
+  /**
+   * This second layer will display the clusterd stations.
    * This layer will be shown as long as the cluster count is above 1.
    */
   map.addLayer({
     id: 'clusters',
-    type: 'circle',
-    source: 'stations',
-    'source-layer': 'stations',
-    interactive: true,
-    filter: ['>', ['get', 'count'], 1],
-    paint: {
-      'circle-color': '#11b4da',
-      'circle-radius': 9,
-      'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff',
-    },
-  });
-
-  /**
-   * This second layer will display the cluster count.
-   * This layer will be shown as long as the cluster count is above 1.
-   */
-  map.addLayer({
-    id: 'cluster_count',
     type: 'symbol',
     source: 'stations',
     'source-layer': 'stations',
     interactive: true,
     filter: ['>', ['get', 'count'], 1],
     layout: {
+      'icon-image': 'empty-charger',
+      'icon-size': 0.8,
       'text-field': '{count}',
       'text-size': 8,
     },
   });
-
-  /**
-   * This third layer will display a station icon.
-   * This layer will only be shown if the cluster count is 1, as it is hidden behind the other 2 layers.
-   */
-  map.addLayer(
-    {
-      id: 'unclustered-stations',
-      type: 'symbol',
-      layout: {
-        'icon-image': 'pinlet_free_slow_standard_inactive',
-        'icon-size': 0.55,
-      },
-      source: 'stations',
-      'source-layer': 'stations',
-    },
-    'clusters',
-  );
 });
 
 /**
@@ -104,7 +84,7 @@ map.on('load', () => {
  */
 map.on('click', ({ point, target }) => {
   const features = target.queryRenderedFeatures(point, {
-    layers: ['clusters', 'cluster_count', 'unclustered-stations'],
+    layers: ['clusters', 'unclustered-stations'],
   });
   if (features && features.length > 0 && features[0].properties.count > 1) {
     map.flyTo({
@@ -117,4 +97,34 @@ map.on('click', ({ point, target }) => {
       center: [features[0].properties.lng, features[0].properties.lat],
     });
   }
+});
+
+map.on('load', function() {
+  map.addSource('eco', {
+    type: 'geojson',
+    data: {
+      type: 'Feature',
+      geometry: {
+        type: 'Polygon',
+        coordinates: [
+          [
+            [8, 61],
+            [11, 61],
+            [11, 45],
+            [8, 45],
+            [8, 61],
+          ],
+        ],
+      },
+    },
+  });
+  map.addLayer({
+    id: 'eco',
+    type: 'line',
+    source: 'eco',
+    layout: {},
+    paint: {
+      'line-color': '#010738',
+    },
+  });
 });
