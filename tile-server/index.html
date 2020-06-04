@@ -5,11 +5,32 @@
     <title>Tile Service Example</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;600&display=swap" rel="stylesheet" />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
   </head>
 
   <body>
     <div id="map"></div>
+    <div class="info">
+      <div><h1>Charging station Provider</h1></div>
+      <div class="providers">
+        <a class="providers-left">EcoMovement </a>
+        <a class="providers-right">Open Charge</a>
+      </div>
+      <div class="provider">
+        <img src="ecomovement.svg" />
+        EcoMovement
+        <span>Premium</span>
+      </div>
+      <div class="provider-info">
+        High quality dynamic charging locations data. Verified and more extensive database of charging points.
+        <div class="contact-button"><img src="contact.svg" /> <a>Contact Sales</a></div>
+      </div>
+      <div class="provider"><img src="ocm.svg" /> Open Charge Map</div>
+      <div class="provider-info">
+        Global and public charging locations data. Provided for free.
+      </div>
+    </div>
   </body>
   <script src="bundle.js"></script>
 </html>
