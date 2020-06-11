@@ -11,22 +11,27 @@
 
   <body>
     <div id="map"></div>
-    <div class="info">
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/route" title="github examples">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <div class="card">
       <div><h1>Charging station Provider</h1></div>
       <div class="providers">
-        <a class="providers-left">EcoMovement </a>
-        <a class="providers-right">Open Charge</a>
+        <a class="eco" id="eco">EcoMovement </a>
+        <a class="ocm" id="ocm">Open Charge</a>
       </div>
-      <div class="provider">
-        <img src="ecomovement.svg" />
+      <div class="provider-eco">
         EcoMovement
         <span>Premium</span>
       </div>
       <div class="provider-info">
         High quality dynamic charging locations data. Verified and more extensive database of charging points.
-        <div class="contact-button"><img src="contact.svg" /> <a>Contact Sales</a></div>
       </div>
-      <div class="provider"><img src="ocm.svg" /> Open Charge Map</div>
+      <div class="provider-ocm">Open Charge Map</div>
       <div class="provider-info">
         Global and public charging locations data. Provided for free.
       </div>
