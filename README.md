@@ -35,10 +35,10 @@ Run the application:
 $ yarn dev
 ```
 
-This command starts a local development server. It will continually rebuild the application as your source files change. Note that there is no hot reloading.
+This command starts a local development server on `http://localhost:5000`. It will continually rebuild the application as your source files change. Note that there is no hot reloading.
 
 ## Useful links
 
-1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/);
-2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/);
+1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/)
+2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/)
 3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).

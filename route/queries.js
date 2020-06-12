@@ -22,7 +22,7 @@ mutation newRoute{
             stateOfCharge: { value: 72.5, type: kwh }
             finalStateOfCharge: { value: 0, type: kwh }
           }
-          plugs: { chargingPower: 150, standard: TESLA_R }
+          plugs: { chargingPower: 150, standard: TESLA_S }
           adapters: [
             { chargingPower: 150, standard: IEC_62196_T2_COMBO }
             { chargingPower: 150, standard: CHADEMO }
@@ -46,7 +46,7 @@ mutation newRoute{
         }
       }
     )
-    }
+  }
 `;
 
 export const routeUpdate = qql`

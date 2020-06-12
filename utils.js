@@ -13,5 +13,5 @@ export function parseSeconds(secs) {
 export const getDurationString = duration => {
   const { hours: durationHours, minutes: durationMinutes } = parseSeconds(duration);
 
-  return durationHours === 0 ? `${durationMinutes} min` : `${durationHours} h ${durationMinutes} min`;
+  return durationHours === 0 ? `${durationMinutes} min` : `${durationHours} hr ${durationMinutes} min`;
 };
