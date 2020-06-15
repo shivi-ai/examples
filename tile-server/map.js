@@ -68,7 +68,19 @@ export const displayMap = ({ provider }) => {
       id: 'unclustered-stations',
       type: 'symbol',
       layout: {
-        'icon-image': 'free-fast-pinlet',
+        'icon-image': [
+          'match',
+          ['get', 'status'],
+          'error',
+          ['concat', 'brokken-', ['get', 'speed']],
+          'unknown',
+          ['concat', 'unknown-', ['get', 'speed']],
+          'busy',
+          ['concat', 'in-use-', ['get', 'speed']],
+          'free',
+          ['concat', 'available-', ['get', 'speed']],
+          '',
+        ],
         'icon-size': 0.9,
         'icon-offset': [0, -16],
       },
@@ -88,7 +100,7 @@ export const displayMap = ({ provider }) => {
       interactive: true,
       filter: ['>', ['get', 'count'], 1],
       layout: {
-        'icon-image': 'empty-charger',
+        'icon-image': 'cluster',
         'icon-size': 0.9,
         'icon-offset': [0, -16],
         'text-field': [

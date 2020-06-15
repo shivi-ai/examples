@@ -40,13 +40,13 @@ map.on('mouseleave', 'path', function() {
  * @param point {array} Array containing station data
  */
 const selectPinlet = point => {
-  const statusVals = ['free', 'unknown', 'error'];
+  const statusVals = ['available', 'unknown', 'broken'];
   const speedVals = ['slow', 'fast'];
 
-  let status = statusVals.includes(point.status) ? point.status : 'busy';
+  let status = statusVals.includes(point.status) ? point.status : 'in-use';
   let speed = speedVals.includes(point.speed) ? point.speed : 'turbo';
 
-  return `pinlet_${status}_${speed}_standard_inactive`;
+  return `${status}-${speed}`;
 };
 
 /**
