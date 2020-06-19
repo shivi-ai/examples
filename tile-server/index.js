@@ -1,27 +1,18 @@
 import { displayMap } from './map';
 
 /**
- * For this example we give two providers with different data-sets
- * EcoMovement and Open Charge Map. Users can switch between the two.
+ * For this example we give two providers with different data-sets.
+ * EcoMovement and Open Charge Map. You can switch between the two.
  */
+const searchParams = new URLSearchParams(document.location.search);
+const provider = searchParams.get('provider');
+displayMap(provider);
 
-let searchParams = new URLSearchParams(document.location.search);
-const urlEnd = searchParams.get('provider');
-
-if (urlEnd === 'ocm') {
-  document.getElementById('ocm').setAttribute('class', 'clicked');
-  displayMap({ provider: urlEnd });
-} else {
-  document.getElementById('eco').setAttribute('class', 'clicked');
-  displayMap({ provider: urlEnd });
-}
-
-document.getElementById('eco').addEventListener('click', () => {
-  searchParams.set('provider', 'eco');
-  window.location.href = '?' + searchParams.toString();
-});
-
-document.getElementById('ocm').addEventListener('click', () => {
-  searchParams.set('provider', 'ocm');
-  window.location.href = '?' + searchParams.toString();
+document.querySelector('.legend-button').addEventListener('click', () => {
+  const legend = document.getElementById('legend');
+  if (legend.style.display !== 'block') {
+    legend.style.display = 'block';
+  } else {
+    legend.style.display = 'none';
+  }
 });

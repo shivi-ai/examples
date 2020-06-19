@@ -1,11 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 
-const config = {
+const providers = {
   eco: '5ed1175bad06853b3aa1e492',
   ocm: '5e8c22366f9c5f23ab0eff39',
 };
-
-let cachedProviderName;
 
 /**
  * Mapbox runs 'transformRequest' before it makes a request for an external URL
@@ -18,10 +16,10 @@ let cachedProviderName;
  * IMPORTANT!
  * In this example we switch between two data providers. Mapbox has caching on zoom levels in place to make
  * the map blazing fast. For the purpose of this demo we have to make sure Mapbox invalidates all tiles
- * when we change between ocm and eco movement. We do this by setting a max-age on the request header.
- * Don't use this technique in a real world project because you will lose some the built in optimalisation!
+ * when we change between ocm and eco-movement providers. We do this by setting a max-age to 0 in the request header.
+ * Don't use this technique in a real-world project because you will lose the built-in optimisation!
  */
-export const displayMap = ({ provider }) => {
+export const displayMap = provider => {
   mapboxgl.accessToken =
     'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0ZTNrZmd1MXoxIn0.aFteYnUc_GxwjTLGvB3uCg';
   let map = new mapboxgl.Map({
@@ -32,11 +30,10 @@ export const displayMap = ({ provider }) => {
     transformRequest: (url, resourceType) => {
       if (resourceType === 'Tile' && url.startsWith('https://api.chargetrip.io')) {
         const headers = {
-          'x-client-id': config[provider] || config['eco'],
+          'x-client-id': providers[provider] || providers['eco'],
+          'Cache-Control': 'max-age=0',
         };
-        if (!provider !== cachedProviderName) {
-          headers[`Cache-Control`] = 'max-age=0';
-        }
+
         return {
           url,
           headers,
@@ -44,6 +41,11 @@ export const displayMap = ({ provider }) => {
       }
     },
   });
+
+  const clusterIcon = () => {
+    if (provider === 'ocm') return 'cluster-unknown';
+    return 'cluster';
+  };
 
   /**
    * Display all stations that we request from the Tile Server.
@@ -100,7 +102,7 @@ export const displayMap = ({ provider }) => {
       interactive: true,
       filter: ['>', ['get', 'count'], 1],
       layout: {
-        'icon-image': 'cluster',
+        'icon-image': clusterIcon(),
         'icon-size': 0.9,
         'icon-offset': [0, -16],
         'text-field': [
