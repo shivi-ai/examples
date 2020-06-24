@@ -2,15 +2,90 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Chargetrip API: station example</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;600&display=swap" rel="stylesheet" />
+    <title>Chargetrip API: Tile Service example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="Show charging stations on the map with the Chargetrip API. Filter stations based on a power or amenities available nearby."
+    />
+    <meta
+      name="keywords"
+      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map, filters"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div id="map"></div>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/stations" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <div class="station-filters">
+      <div class="section">
+        <h2>Reachable from your location</h2>
+        <div class="range-slider">
+          <label class="range-thumb" id="range-thumb" for="range"></label>
+          <input type="range" min="1000" max="20000" value="5000" step="1000" id="range" />
+          <div class="range-info">
+            <span>1</span>
+            <span>20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Charging Power</h2>
+        <ul class="filters power">
+          <li>
+            <input type="checkbox" class="filter-input" id="turbo" value="turbo" />
+            <label for="turbo">Turbo - 100 to 350 kW <br /><span>Aprox. 30 min charge</span></label>
+          </li>
+          <li>
+            <input type="checkbox" class="filter-input" id="fast" value="fast" />
+            <label for="fast">Fast - 43 to 100 kW <br /><span>Aprox. 60 min charge</span></label>
+          </li>
+          <li>
+            <input type="checkbox" class="filter-input" id="slow" value="slow" />
+            <label for="slow">Slow - 1 to 43 kW <br /><span>Aprox. 7 hour charge</span></label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Amenities</h2>
+        <ul class="filters amenities">
+          <li>
+            <input type="checkbox" class="filter-input" id="supermarket" value="supermarket" />
+            <label for="supermarket">Supermarket</label>
+          </li>
+          <li></li>
+          <li>
+            <input type="checkbox" class="filter-input" id="bathroom" value="bathroom" />
+            <label for="bathroom">Bathroom</label>
+          </li>
+          <li>
+            <input type="checkbox" class="filter-input" id="restaurant" value="restaurant" />
+            <label for="restaurant">Restaurant</label>
+          </li>
+        </ul>
+      </div>
+      <a
+        class="chargetrip-logo"
+        href="https://chargetrip.com/"
+        aria-label="Made with love at Chargetrip"
+        title="Made with love at Chargetrip"
+        >Made with ❤️ at</a
+      >
+    </div>
   </body>
   <script src="bundle.js"></script>
 </html>
