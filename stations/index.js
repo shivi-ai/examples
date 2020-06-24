@@ -1,6 +1,7 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getStationsAround } from './queries.js';
-import { loadStation } from './map.js';
+import { loadStation, showCenter } from './map.js';
+import { initFilters } from './filters.js';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
@@ -22,21 +23,34 @@ const client = createClient({
 
 /**
  * In this example we fetch the closest stations around Oudekerksplein, 1012 GZ Amsterdam, Noord-Holland, Netherlands
- * with a radius of 5000 meters which have a supermarket and
- * at least one connector of 50 kWh or 22 kWh
+ * with a radius of 5000 meters
  */
-client
-  .query(getStationsAround, {
-    query: {
-      location: { type: 'Point', coordinates: [4.8979755, 52.3745403] },
-      distance: 5000,
-      power: [50, 22],
-      amenities: ['supermarket'],
-    },
-  })
-  .toPromise()
-  .then(response => {
-    const stations = response.data.stationAround;
-    loadStation(stations);
-  })
-  .catch(error => console.log(error));
+const fetchStations = ({ distance, power, amenities }) =>
+  client
+    .query(getStationsAround, {
+      query: {
+        location: { type: 'Point', coordinates: [4.8979755, 52.3745403] },
+        distance,
+        power,
+        amenities,
+      },
+    })
+    .toPromise()
+    .then(response => {
+      return response.data.stationAround;
+    })
+    .catch(error => console.log(error));
+
+/**
+ * Display statins on the map
+ **/
+const displayMap = filters => {
+  fetchStations(filters)
+    .then(stations => {
+      showCenter();
+      loadStation(stations);
+    })
+    .catch(error => console.log(error));
+};
+
+initFilters(displayMap);

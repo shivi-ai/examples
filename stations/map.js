@@ -4,65 +4,35 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0Z
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ck98fwwp159v71ip7xhs8bwts',
-  zoom: 11,
+  zoom: 11.4,
   center: [4.8979755, 52.3745403],
 });
 
-const popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false,
-});
-
-map.on('mouseenter', 'path', e => {
-  map.getCanvas().style.cursor = 'pointer';
-
-  let coordinates = e.features[0].geometry.coordinates;
-  let description = e.features[0].properties.description;
-
-  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  }
-
-  popup
-    .setLngLat(coordinates)
-    .setHTML(description)
-    .addTo(map);
-});
-
-map.on('mouseleave', 'path', function() {
-  map.getCanvas().style.cursor = '';
-  popup.remove();
-});
-
 /**
- * Return what icon will be used to display the charging station, depending on the speed and status.
- *
- * @param point {array} Array containing station data
+ * Icon for the charging station differs base on the speed (slow, fast, turbo),
+ * and status(available, busy, unkown or broken).
+ * If a charging station has multiple speeds the fastest speed will be shown.
+ * @param station {object} Station data
  */
-const selectPinlet = point => {
-  const statusVals = ['available', 'unknown', 'broken'];
-  const speedVals = ['slow', 'fast'];
-
-  let status = statusVals.includes(point.status) ? point.status : 'in-use';
-  let speed = speedVals.includes(point.speed) ? point.speed : 'turbo';
-
-  return `${status}-${speed}`;
-};
+const selectPinlet = station => `${station.status}-${station.speed}`;
 
 /**
- * Draw the stations on the map and show data about the station on hover.
+ * Draw the stations on the map.
  *
  * @param stations {array} Array of stations
  */
 
-const loadStation = stations => {
-  const points = stations.map(point => ({
+export const loadStation = stations => {
+  if (map.getLayer('path')) map.removeLayer('path');
+  if (map.getSource('path')) map.removeSource('path');
+
+  const points = stations.map(station => ({
     type: 'Feature',
     properties: {
-      icon: selectPinlet(point),
-      description: point.address,
+      icon: selectPinlet(station),
+      description: station.address,
     },
-    geometry: point.location,
+    geometry: station.location,
   }));
 
   map.addLayer({
@@ -71,7 +41,7 @@ const loadStation = stations => {
     layout: {
       'icon-image': '{icon}',
       'icon-allow-overlap': true,
-      'icon-size': 0.55,
+      'icon-size': 0.9,
     },
     source: {
       type: 'geojson',
@@ -83,4 +53,32 @@ const loadStation = stations => {
   });
 };
 
-export { loadStation };
+export const showCenter = () => {
+  if (map.getSource('start')) return;
+  map.addSource('start', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [4.8979755, 52.3745403],
+          },
+        },
+      ],
+    },
+  });
+
+  map.addLayer({
+    id: 'start',
+    type: 'symbol',
+    source: 'start',
+    layout: {
+      'icon-allow-overlap': true,
+      'icon-image': 'location_big',
+      'icon-size': 1,
+    },
+  });
+};
