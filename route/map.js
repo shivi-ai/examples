@@ -29,21 +29,6 @@ export const drawRoute = (coordinates, legs) => {
 };
 
 /**
- * Return what icon will be used to display the charging station, depending on the speed and status.
- *
- * @param point {array} Array containing station data
- */
-const selectPinlet = point => {
-  const statusVals = ['available', 'unknown', 'broken'];
-  const speedVals = ['slow', 'fast'];
-
-  let status = statusVals.includes(point.status) ? point.status : 'in-use';
-  let speed = speedVals.includes(point.speed) ? point.speed : 'turbo';
-
-  return `${status}-${speed}`;
-};
-
-/**
  * Draw route polyline on a map.
  *
  * @param coordinates {object} polyline coordinates
@@ -114,7 +99,7 @@ const showLegs = legs => {
         type: 'Feature',
         properties: {
           description: `${getDurationString(leg.chargeTime)}`,
-          icon: selectPinlet(leg),
+          icon: 'unknown-turbo',
         },
         geometry: leg.destination.geometry,
       });

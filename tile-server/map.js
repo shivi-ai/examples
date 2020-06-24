@@ -11,6 +11,8 @@ const providers = {
  * See example in MapboxGL JS documentation: https://docs.mapbox.com/mapbox-gl-js/api/#requestparameters.
  *
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
+ * The key sin this example is are public ones and gives access only to a part of our extensive database.
+ * You need a registered `x-client-id` to access the full database.
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  *
  * IMPORTANT!
@@ -70,19 +72,7 @@ export const displayMap = provider => {
       id: 'unclustered-stations',
       type: 'symbol',
       layout: {
-        'icon-image': [
-          'match',
-          ['get', 'status'],
-          'error',
-          ['concat', 'brokken-', ['get', 'speed']],
-          'unknown',
-          ['concat', 'unknown-', ['get', 'speed']],
-          'busy',
-          ['concat', 'in-use-', ['get', 'speed']],
-          'free',
-          ['concat', 'available-', ['get', 'speed']],
-          '',
-        ],
+        'icon-image': ['concat', ['get', 'status'], '-', ['get', 'speed']],
         'icon-size': 0.9,
         'icon-offset': [0, -16],
       },
@@ -146,7 +136,7 @@ export const displayMap = provider => {
   });
   /**
    * If Ecomovement has been selected as provider a polygon will be displayed.
-   * This polygon will show in what data is available for free.
+   * This polygon will show in what area data is available for free.
    */
   if (provider !== 'ocm') {
     map.on('load', () => {

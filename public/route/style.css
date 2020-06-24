@@ -196,11 +196,17 @@ section:last-child {
   outline: none;
 }
 
+/* Link to Chargetrip website */
 .chargetrip-logo {
-  display: block;
+  display: inline-block;
   height: 40px;
-  background: url('images/chargetrip.svg') no-repeat 16px center;
-  text-indent: -100%;
+  line-height: 40px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  padding-right: 90px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 15px;
+  color: var(--black);
 }
 
 /* Mapbox styles */

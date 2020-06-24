@@ -6,6 +6,8 @@ import { initFilters } from './filters.js';
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
+ * The key in this example is a public one and gives access only to a part of our extensive database.
+ * You need a registered `x-client-id` to access the full database.
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
