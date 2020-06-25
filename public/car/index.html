@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
   <head>
-    <title>Chargetrip API: car example</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet" />
+    <title>Chargetrip API: Query the car example</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Query the list of cars with Chargetrip API and compare the models" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <h1>Car Example</h1>
-    <p>Check console for output...</p>
+    <main>
+      <div class="github-link">
+        <a href="https://github.com/chargetrip/examples/tree/master/car" title="github project">
+          View on Github
+        </a>
+        <button
+          aria-label="remove github link"
+          title="remove github link"
+          onclick="this.parentElement.remove()"
+        ></button>
+      </div>
+
+      <div id="cars">Loading...</div>
+
+      <div class="car-specs">
+        <ul>
+          <li class="icon range">Best Range</li>
+          <li class="icon battery">Useable battery</li>
+          <li class="icon efficiency">Efficiency</li>
+          <li class="icon plug">Plug type</li>
+        </ul>
+
+        <ul>
+          <h5>Route</h5>
+          <li>City</li>
+          <li>Highway</li>
+          <li>Plug type</li>
+        </ul>
+
+        <ul>
+          <li>Acceleration</li>
+          <li>Top speed</li>
+          <li>Total power</li>
+          <li>Total torque</li>
+        </ul>
+      </div>
+
+      <script id="car-template" type="x-tmpl-mustache">
+        {{#carProfile}}
+        <div class="car-profile">
+          <header>
+            <h1>{{make}}</h1>
+            <p>{{model}}</p>
+            <img class="car-image" alt="car image" src="{{{image}}}"/>
+          </header>
+
+          <div class="section">
+            <h2>Car details</h2>
+            <ul>
+              <li>{{range}}</li>
+              <li>{{battery}}</li>
+              <li>{{efficiency}}</li>
+              <li>{{plug}}</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>Weather data</h2>
+            <div class="weather-types weather-types-title"><span>mild</span> <span>cold</span></div>
+            <ul>
+              <li class="weather-types"><span>{{cityMild}}</span> <span>{{cityCold}}</span></li>
+              <li class="weather-types"><span>{{highwayMild}}</span> <span>{{highwayCold}}</span></li>
+              <li class="weather-types"><span>{{combinedMild}}</span> <span>{{combinedCold}}</span></li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>Performance</h2>
+            <ul>
+              <li>{{acceleration}}</li>
+              <li>{{topSpeed}}</li>
+              <li>{{power}}</li>
+              <li>{{torque}}</li>
+            </ul>
+          </div>
+          <a class="chargetrip-logo" href="https://chargetrip.com/" aria-label="Made with love at Chargetrip" title="Made with love at Chargetrip">Made with ❤️ at</a>
+        </div>
+        {{/carProfile}}
+      </script>
+    </main>
   </body>
   <script src="bundle.js"></script>
 </html>

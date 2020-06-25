@@ -9,6 +9,7 @@
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.1",
     "mapbox-gl": "^1.10.0",
+    "mustache": "^4.0.1",
     "subscriptions-transport-ws": "^0.9.16",
     "wonka": "^4.0.13"
   },
