@@ -19,7 +19,7 @@ Available examples:
 1. Build a simple route [example](https://chargetrip.github.io/examples/route/);
 2. Select a car [example](https://chargetrip.github.io/examples/car/);
 3. Show stations on a map [example](https://chargetrip.github.io/examples/stations/);
-4. Show all stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/).
+4. Show stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/).
 
 ## Installation and local development
 
