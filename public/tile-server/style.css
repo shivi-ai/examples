@@ -282,9 +282,10 @@ h1 {
 .chargetrip-logo {
   display: inline-block;
   height: 40px;
-  line-height: 40px;
+  line-height: 38px;
   background: url('images/chargetrip.svg') no-repeat right center transparent;
-  padding-right: 90px;
+  background-size: 72px;
+  padding-right: 80px;
   font-size: 12px;
   font-weight: 600;
   margin: 0 15px;
