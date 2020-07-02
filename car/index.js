@@ -25,7 +25,8 @@ const client = createClient({
 /**
  * You can access a list of all available cars using the `carList` query.
  * In this example we use our playground, which has only 4 card available.
- * Chargetrip operates an extensive database of EV makes, editions, and versions, each with their specific consumption models.
+ * Chargetrip operates an extensive database of EV makes, editions, and versions,
+ * each with their specific consumption models.
  * You need a registered x-client-id to access the full car database.
  * Contact us if you are interested in working with the full database.
  * **/
