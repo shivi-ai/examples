@@ -163,7 +163,7 @@ input[type='range']:focus::-webkit-slider-runnable-track {
   opacity: 0;
 }
 
-.filter-input~label::before {
+.filter-input ~ label::before {
   position: absolute;
   top: 50%;
   left: 0;
@@ -177,12 +177,12 @@ input[type='range']:focus::-webkit-slider-runnable-track {
   content: '';
 }
 
-.filter-input:checked~label::before {
+.filter-input:checked ~ label::before {
   background-color: var(--blue);
   border-color: var(--blue);
 }
 
-.filter-input:checked~label::after {
+.filter-input:checked ~ label::after {
   position: absolute;
   top: 50%;
   left: 7px;
@@ -242,9 +242,10 @@ input[type='range']:focus::-webkit-slider-runnable-track {
 .chargetrip-logo {
   display: inline-block;
   height: 40px;
-  line-height: 40px;
+  line-height: 38px;
   background: url('images/chargetrip.svg') no-repeat right center transparent;
-  padding-right: 90px;
+  background-size: 72px;
+  padding-right: 76px;
   font-size: 12px;
   font-weight: 600;
   margin: 0 15px;
