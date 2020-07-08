@@ -62,4 +62,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'elevation-plot/index.js',
+    output: {
+      file: 'public/elevation-plot/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];

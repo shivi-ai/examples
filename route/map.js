@@ -31,7 +31,7 @@ export const drawRoute = (coordinates, legs) => {
 /**
  * Draw route polyline on a map.
  *
- * @param coordinates {object} polyline coordinates
+ * @param coordinates {array} polyline coordinates
  */
 const drawPolyline = coordinates => {
   const geojson = {
