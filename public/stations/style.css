@@ -66,6 +66,24 @@ a {
   overflow-y: auto;
 }
 
+.station-filters header {
+  background-color: #202024;
+  padding: 30px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+  color: #ffffff;
+}
+.station-filters header .subtext {
+  color: #e8edf1;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .section {
   margin: 0 15px;
   border-bottom: 1px solid #edf2f6;

@@ -25,7 +25,7 @@ const client = createClient({
 
 /**
  * In this example we fetch the closest stations around Oudekerksplein, 1012 GZ Amsterdam, Noord-Holland, Netherlands
- * with a radius of 5000 meters
+ * with a radius of 3000 meters
  */
 const fetchStations = ({ distance, power, amenities }) =>
   client

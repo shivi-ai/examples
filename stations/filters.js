@@ -11,7 +11,7 @@ const powers = {
 };
 
 export const defaultFilters = {
-  distance: 5000,
+  distance: 3000,
   power: [],
   amenities: [],
 };
@@ -23,7 +23,7 @@ const rangeSlider = document.getElementById('range');
 const rangeThumb = document.getElementById('range-thumb');
 
 const updateRangeSliderValue = () => {
-  const percent = (rangeSlider.value - 1000) / 19000;
+  const percent = (rangeSlider.value - 1000) / 9000;
   const newPosition = percent * rangeSlider.offsetWidth - percent * 60;
 
   rangeThumb.innerHTML = `${rangeSlider.value / 1000} km`;
