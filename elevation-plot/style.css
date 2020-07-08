@@ -1,0 +1,292 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: #323c4d;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+@-webkit-keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+span {
+  font-weight: 600;
+  line-height: 30px;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 8px 0 2px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 24px 16px 0;
+  margin: 0 0 12px;
+  color: #0c0c10;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tooltip {
+  position: absolute;
+  width: 221px;
+  height: 24px;
+  left: 50%;
+  top: 46%;
+
+  background: #0c0c0f;
+  border-radius: 2px;
+  transition: opacity 500ms;
+
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.tooltip span {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  color: #ffffff;
+  border-radius: 109.6px;
+  padding-left: 8px;
+}
+
+.journey-specs {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+
+  background-color: #ffffff;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  overflow-y: scroll;
+  max-height: calc(100% - 2em);
+  border-radius: 8px;
+
+  width: 360px;
+  scrollbar-width: none;
+}
+
+.header {
+  position: relative;
+  background-color: #030303;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 24px;
+  border-radius: 8px 8px 0 0;
+  align-items: center;
+}
+
+.header-route {
+  font-size: 16px;
+  color: #e8edf1;
+}
+
+.content {
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  top: -8px;
+  background: white;
+}
+
+.tags {
+  text-align: center;
+  margin: 9px 0;
+  color: #edf2f6;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid #ffffff;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  align-items: center;
+  margin: 0 4px;
+  border-radius: 12px;
+}
+
+.info {
+  padding: 0 16px 8px;
+  border-bottom: 1px solid #e8edf1;
+}
+
+.info li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 30px;
+  line-height: 48px;
+}
+
+.info-elevation {
+  background: url('images/elevation.svg') no-repeat left center;
+}
+
+.info-consumption {
+  background: url('images/consumption.svg') no-repeat left center;
+}
+
+.info-average-speed {
+  background: url('images/average-speed.svg') no-repeat left center;
+}
+
+.chart {
+  position: relative;
+  padding: 0 5px;
+  min-height: 150px;
+}
+
+.stations-layer {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  outline: none;
+  z-index: 3;
+}
+
+.elevation-indicator {
+  display: none;
+  position: absolute;
+  bottom: 27px;
+  left: 10px;
+  height: 125px;
+  width: 2px;
+  background-color: #ea8538;
+  z-index: 3;
+}
+
+#loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Mapbox style overrides */
+.mapboxgl-popup-tip {
+  display: none;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  width: 50px;
+  padding: 1px;
+
+  background: #030303;
+  margin-bottom: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+/* Github link */
+.github {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 16px;
+  right: 16px;
+
+  padding: 0 12px;
+
+  background-color: #030303;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 40px;
+}
+
+.github a {
+  background: url('images/github.svg') no-repeat left center;
+  margin: 0 8px 0 0;
+  padding: 0 16px 0 28px;
+  border-right: 1px solid #54545c;
+}
+
+.github button {
+  cursor: pointer;
+  border: none;
+  background: url('images/close.svg') no-repeat;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  -webkit-appearance: none;
+}
+
+.github button:focus {
+  outline: none;
+}
+
+/* Link to Chargetrip website */
+.chargetrip-logo {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  padding-right: 90px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 15px;
+  color: var(--black);
+}

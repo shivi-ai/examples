@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Chargetrip API: Elevation plot example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Build a route with the Chargetrip API and show elevation data" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing elevation consumption" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div class="github">
+      <a href="https://github.com/chargetrip/examples/elevation-plot" title="github examples">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <div class="tooltip">
+      <span>Click on the line to see more details</span>
+    </div>
+
+    <div class="journey-specs" id="journey">
+      <header class="header">
+        <h1>Journey Specs</h1>
+        <div class="header-route">Amsterdam • Berlin</div>
+        <div class="tags">
+          <div id="upHill" class="tag">Uphill --•--</div>
+          <div id="downHill" class="tag">Downhill --•--</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <h2>Elevation levels</h2>
+        <div class="chart">
+          <div id="loader">Loading...</div>
+          <canvas id="elevationGraph" height="130px"></canvas>
+          <div class="elevation-indicator" id="elevationIndicator"></div>
+          <canvas class="stations-layer" id="stationsLayer"></canvas>
+        </div>
+
+        <h2>Details</h2>
+        <ul class="info">
+          <li class="info-elevation">
+            Elevation
+            <span id="height">--•--</span>
+          </li>
+          <li class="info-consumption">
+            Consumption Estimation
+            <span id="consumption">--•--</span>
+          </li>
+          <li class="info-average-speed">
+            Average Speed
+            <span id="average-speed">--•--</span>
+          </li>
+        </ul>
+
+        <a
+          class="chargetrip-logo"
+          href="https://chargetrip.com/"
+          aria-label="Made with love at Chargetrip"
+          title="Made with love at Chargetrip"
+          >Made with ❤️ at</a
+        >
+      </div>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>
