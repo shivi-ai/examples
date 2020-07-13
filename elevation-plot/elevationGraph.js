@@ -152,10 +152,10 @@ export const displayElevationData = (elevationUp, elevationDown) => {
   document.getElementById('elevationIndicator').style.display = 'block';
 
   // The highest point of the elevation plot
-  document.getElementById('upHill').innerHTML = `Uphill ${(elevationUp / 1000).toFixed(0)}km`;
+  document.getElementById('upHill').innerHTML = `Uphill ${(elevationUp / 1000).toFixed(0) ?? 'Unknown'}km`;
 
   // The lowest point of the elevation plot
-  document.getElementById('downHill').innerHTML = `Downhill ${(elevationDown / 1000).toFixed(0)}km`;
+  document.getElementById('downHill').innerHTML = `Downhill ${(elevationDown / 1000).toFixed(0) ?? 'Unknown'}km`;
 };
 
 /**
@@ -165,11 +165,11 @@ export const displayElevationData = (elevationUp, elevationDown) => {
  */
 export const displaySpecs = path => {
   // The consumption, in kWh, of this route path segment.
-  document.getElementById('consumption').innerHTML = path.routePath.consumptionPerKm * 1000 + ' Wh/km';
+  document.getElementById('consumption').innerHTML = path.routePath?.consumptionPerKm * 1000 ?? 'Unknown' + ' Wh/km';
 
   // The elevation (altitude) in meters for this route path segment.
-  document.getElementById('height').innerHTML = path.routePath.elevation + ' m';
+  document.getElementById('height').innerHTML = path.routePath?.elevation ?? 'Unknown' + ' m';
 
   // The average speed, in km/h, for this route path segment.
-  document.getElementById('average-speed').innerHTML = path.routePath.avSpeed + ' km';
+  document.getElementById('average-speed').innerHTML = path.routePath?.avSpeed ?? 'Unknown' + ' km';
 };

@@ -52,6 +52,7 @@ client
   .toPromise()
   .then(response => {
     const routeId = response.data.newRoute;
+    if (!routeId) return Promise.reject('Could not retrieve Route ID. The response is not valid.');
 
     const { unsubscribe } = pipe(
       client.executeSubscription(createRequest(routeUpdate, { id: routeId })),
@@ -63,9 +64,8 @@ client
         if (status === 'done' && route) {
           unsubscribe();
 
-          const routeData = result.data.routeUpdatedById.route;
-          drawRoutePolyline(routeData); // draw a polyline on a map
-          displayRouteData(routeData); // fill in the route information
+          drawRoutePolyline(route); // draw a polyline on a map
+          displayRouteData(route); // fill in the route information
         }
       }),
     );
@@ -100,24 +100,28 @@ const displayRouteData = data => {
   document.querySelector('.tags').style.display = 'flex';
 
   // the total duration of the journey (including charge time), in seconds
-  document.getElementById('duration').innerHTML = `${getDurationString(data.duration)}`;
+  document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
 
   // the total distance of the route, in meters
-  document.getElementById('distance').innerHTML = `${(data.distance / 1000).toFixed(0)} km`;
+  document.getElementById('distance').innerHTML = data.distance ? `${(data.distance / 1000).toFixed(0)} km` : 'Unknown';
 
   // the amount of stops in this route
-  document.getElementById('stop').innerHTML = `${data.charges} stops`;
+  document.getElementById('stop').innerHTML = `${data.charges ?? 0} stops`;
 
   // the total time required to charge of the entire route, in seconds
-  document.getElementById('charge-duration').innerHTML = getDurationString(data.chargeTime);
+  document.getElementById('charge-duration').innerHTML = getDurationString(data.chargeTime ?? 0);
 
   // the total energy used of the route, in kWh
-  document.getElementById('consumption-overview').innerHTML = `${data.consumption.toFixed(2)} kWh`;
-  document.getElementById('consumption').innerHTML = `${data.consumption.toFixed(2)} kWh`;
+  document.getElementById('consumption-overview').innerHTML = data.consumption
+    ? `${data.consumption.toFixed(2)} kWh`
+    : 'Unknown';
+  document.getElementById('consumption').innerHTML = data.consumption
+    ? `${data.consumption.toFixed(2)} kWh`
+    : 'Unknown';
 
   // the money saved by the user driving this route with the electric vehicle
-  document.getElementById('cost').innerHTML = `${data.saving.currency || '€'} ${data.saving.money} `;
+  document.getElementById('cost').innerHTML = `${data.saving?.currency || '€'} ${data.saving?.money ?? 0} `;
 
   // the total amount of CO2 which were used with a petrol vehicle
-  document.getElementById('co2').innerHTML = `${data.saving.co2 / 1000} Kg`;
+  document.getElementById('co2').innerHTML = data.saving?.co2 ? `${data.saving.co2 / 1000} Kg` : 'Unknown';
 };

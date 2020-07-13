@@ -22,7 +22,9 @@ const selectPinlet = station => `${station.status}-${station.speed}`;
  * @param stations {array} Array of stations
  */
 
-export const loadStation = stations => {
+export const showStations = stations => {
+  if (!stations || stations.length === 0) return;
+
   document.getElementById('stationAmount').innerHTML = stations.length;
   if (map.getLayer('path')) map.removeLayer('path');
   if (map.getSource('path')) map.removeSource('path');
@@ -31,7 +33,6 @@ export const loadStation = stations => {
     type: 'Feature',
     properties: {
       icon: selectPinlet(station),
-      description: station.address,
     },
     geometry: station.location,
   }));

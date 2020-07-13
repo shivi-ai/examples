@@ -34,6 +34,6 @@ client
   .query(getCarList)
   .toPromise()
   .then(response => {
-    displayCarsData(response.data.carList);
+    displayCarsData(response.data?.carList);
   })
   .catch(error => console.log(error));

@@ -108,7 +108,7 @@ const showLegs = legs => {
     properties: {
       icon: 'location_big',
     },
-    geometry: legs[0].origin.geometry,
+    geometry: legs[0].origin?.geometry,
   });
 
   route.push({
@@ -116,7 +116,7 @@ const showLegs = legs => {
     properties: {
       icon: 'arrival',
     },
-    geometry: legs[legs.length - 1].destination.geometry,
+    geometry: legs[legs.length - 1].destination?.geometry,
   });
 
   // draw origin and destination points on a map

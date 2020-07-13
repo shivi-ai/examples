@@ -21,11 +21,11 @@ fetchRoute((routeId, routeData) => {
 });
 
 const drawRoutePolyline = (id, data) => {
-  const decodedData = mapboxPolyline.decode(data.polyline);
+  const decodedData = mapboxPolyline.decode(data?.polyline);
   const reversed = decodedData.map(item => item.reverse());
   const { elevationUp, elevationDown } = data;
 
-  drawRoute(id, reversed, data.legs);
+  drawRoute(id, reversed, data?.legs);
   displayElevationData(elevationUp, elevationDown);
 
   // fetch information about start of the route

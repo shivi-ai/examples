@@ -122,15 +122,15 @@ export const displayMap = provider => {
     const features = target.queryRenderedFeatures(point, {
       layers: ['clusters', 'unclustered-stations'],
     });
-    if (features && features.length > 0 && features[0].properties.count > 1) {
+    if (features && features.length > 0 && features[0].properties?.count > 1) {
       map.flyTo({
-        center: [features[0].properties.lng, features[0].properties.lat],
-        zoom: features[0].properties.expansionZoom,
+        center: [features[0].properties?.lng, features[0].properties?.lat],
+        zoom: features[0].properties?.expansionZoom,
         speed: 1,
       });
     } else if (features && features.length > 0) {
       map.flyTo({
-        center: [features[0].properties.lng, features[0].properties.lat],
+        center: [features[0].properties?.lng, features[0].properties?.lat],
       });
     }
   });

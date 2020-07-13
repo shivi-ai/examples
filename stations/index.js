@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getStationsAround } from './queries.js';
-import { loadStation, showCenter } from './map.js';
+import { showStations, showCenter } from './map.js';
 import { initFilters } from './filters.js';
 
 /**
@@ -39,7 +39,7 @@ const fetchStations = ({ distance, power, amenities }) =>
     })
     .toPromise()
     .then(response => {
-      return response.data.stationAround;
+      return response.data?.stationAround;
     })
     .catch(error => console.log(error));
 
@@ -50,7 +50,7 @@ const displayMap = filters => {
   fetchStations(filters)
     .then(stations => {
       showCenter();
-      loadStation(stations);
+      showStations(stations);
     })
     .catch(error => console.log(error));
 };

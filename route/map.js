@@ -10,6 +10,35 @@ const map = new mapboxgl.Map({
   center: [8.1320104, 52.3758916],
 });
 
+// Display the charge time on a hover
+const popup = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+});
+
+map.on('mouseenter', 'legs', e => {
+  if (e.features[0]?.properties?.icon !== 'arrival' && e.features[0]?.properties?.icon !== 'location_big') {
+    map.getCanvas().style.cursor = 'pointer';
+
+    const coordinates = e.features[0]?.geometry?.coordinates;
+    const description = e.features[0]?.properties?.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    popup
+      .setLngLat(coordinates)
+      .setHTML(description)
+      .addTo(map);
+  }
+});
+
+map.on('mouseleave', 'legs', function() {
+  map.getCanvas().style.cursor = '';
+  popup.remove();
+});
+
 /**
  * Draw route polyline and show charging stations on the map.
  *
@@ -89,7 +118,7 @@ const showLegs = legs => {
     properties: {
       icon: 'location_big',
     },
-    geometry: legs[0].origin.geometry,
+    geometry: legs[0].origin?.geometry,
   });
 
   legs.map((leg, index) => {
@@ -101,7 +130,7 @@ const showLegs = legs => {
           description: `${getDurationString(leg.chargeTime)}`,
           icon: 'unknown-turbo',
         },
-        geometry: leg.destination.geometry,
+        geometry: leg.destination?.geometry,
       });
     } else {
       // add destination point (last leg)
@@ -110,7 +139,7 @@ const showLegs = legs => {
         properties: {
           icon: 'arrival',
         },
-        geometry: leg.destination.geometry,
+        geometry: leg.destination?.geometry,
       });
     }
   });
@@ -132,36 +161,5 @@ const showLegs = legs => {
         features: points,
       },
     },
-  });
-
-  /**
-   * Display the charge time on a hover.
-   */
-
-  const popup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false,
-  });
-
-  map.on('mouseenter', 'legs', e => {
-    if (e.features[0].properties.icon !== 'arrival' && e.features[0].properties.icon !== 'location_big') {
-      map.getCanvas().style.cursor = 'pointer';
-
-      const coordinates = e.features[0].geometry.coordinates;
-      const description = e.features[0].properties.description;
-
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-      popup
-        .setLngLat(coordinates)
-        .setHTML(description)
-        .addTo(map);
-    }
-  });
-
-  map.on('mouseleave', 'legs', function() {
-    map.getCanvas().style.cursor = '';
-    popup.remove();
   });
 };
