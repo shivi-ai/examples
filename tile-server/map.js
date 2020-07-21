@@ -61,7 +61,7 @@ export const displayMap = provider => {
     map.addSource('stations', {
       type: 'vector',
       tiles: [
-        'https://api.chargetrip.io/station/{z}/{x}/{y}/tile.mvt?&connectors[]=CHADEMO&connectors[]=IEC_62196_T2_COMBO',
+        'https://api.chargetrip.io/station/{z}/{x}/{y}/tile.mvt?&powers=all&connectors[]=CHADEMO&connectors[]=IEC_62196_T2_COMBO',
       ],
     });
     /**
