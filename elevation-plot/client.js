@@ -70,7 +70,7 @@ export const fetchRoute = callback => {
  * Fetch route path data.
  *
  * @param id {string} Route ID
- * @param point {object} Coordinates of the path
+ * @param point {array} Coordinates of the path
  *
  * @returns {Promise<OperationResult<any> | void>}
  */

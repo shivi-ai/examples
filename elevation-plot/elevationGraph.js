@@ -165,11 +165,16 @@ export const displayElevationData = (elevationUp, elevationDown) => {
  */
 export const displaySpecs = path => {
   // The consumption, in kWh, of this route path segment.
-  document.getElementById('consumption').innerHTML = path.routePath?.consumptionPerKm * 1000 ?? 'Unknown' + ' Wh/km';
+  document.getElementById('consumption').innerHTML =
+    path.routePath?.consumptionPerKm >= 0 ? `${path.routePath?.consumptionPerKm * 1000} Wh/km` : 'Uknown';
 
   // The elevation (altitude) in meters for this route path segment.
-  document.getElementById('height').innerHTML = path.routePath?.elevation ?? 'Unknown' + ' m';
+  document.getElementById('height').innerHTML = path.routePath?.elevation
+    ? `${path.routePath?.elevation} m`
+    : 'Unknown';
 
   // The average speed, in km/h, for this route path segment.
-  document.getElementById('average-speed').innerHTML = path.routePath?.avSpeed ?? 'Unknown' + ' km';
+  document.getElementById('average-speed').innerHTML = path.routePath?.avSpeed
+    ? `${path.routePath?.avSpeed} km`
+    : 'Unknown';
 };
