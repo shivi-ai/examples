@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import { fetchRoutePath } from './client';
 import { positionElevationIndicator, displaySpecs } from './elevationGraph';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0ZTNrZmd1MXoxIn0.aFteYnUc_GxwjTLGvB3uCg';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 const map = new mapboxgl.Map({
   container: 'map',

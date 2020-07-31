@@ -23,7 +23,7 @@ const providers = {
  */
 export const displayMap = provider => {
   mapboxgl.accessToken =
-    'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0ZTNrZmd1MXoxIn0.aFteYnUc_GxwjTLGvB3uCg';
+    'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
   let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/chargetrip/ck98fwwp159v71ip7xhs8bwts',
