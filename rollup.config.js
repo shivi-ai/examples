@@ -3,10 +3,12 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import json from "@rollup/plugin-json";
 
 // eslint-disable-next-line no-undef
 const production = !process.env.ROLLUP_WATCH;
 const plugins = [
+  json(),
   replace({
     'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
   }),
@@ -20,7 +22,6 @@ const plugins = [
   }),
   babel({
     exclude: 'node_modules/**',
-    babelHelpers: 'bundled',
   }),
   production && terser(),
 ];
@@ -30,6 +31,15 @@ export default [
     input: 'route/index.js',
     output: {
       file: 'public/route/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'directions/index.js',
+    output: {
+      file: 'public/directions/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
