@@ -1,0 +1,347 @@
+:root {
+  --blue: #0078ff;
+  --white: #ffffff;
+  --black: #030303;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #323c4d;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+span {
+  font-weight: 600;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  color: #e8edf1;
+}
+
+h2 {
+  padding-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tooltip {
+  position: fixed;
+  bottom: 50px;
+  left: 16px;
+  height: 64px;
+  width: 360px;
+  display: none;
+
+  padding: 0 12px;
+  background: #ffffff;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+
+  color: #202024;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  transition: opacity 500ms;
+
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.tooltip-icon {
+  border-right: 1px solid #54545c;
+}
+
+.icon {
+  padding: 0 16px 50px 32px;
+  margin: 0 8px 0 0;
+  background: url('images/location.svg') no-repeat center;
+
+  animation-name: bounce;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+.tooltip-info {
+  padding-top: 10px;
+  margin-left: 20px;
+}
+
+.tooltip-info span {
+  font-weight: normal;
+  color: #404046;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.animation {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.line {
+  margin-left: 12px;
+  width: 25px;
+  height: 2px;
+  border-radius: 5px;
+  background-color: #0c0c10;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+.journey-specs {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 360px;
+  max-height: calc(100% - 2em);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  background-color: #030303;
+  color: #fff;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.journey-specs header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.journey-specs header span {
+  color: #ffffff;
+  border-radius: 109.6px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.journey-specs-details {
+  position: absolute;
+  top: 110px;
+  left: 16px;
+  width: 360px;
+  max-height: calc(100% - 2em);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  color: #030303;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.slider-container {
+  margin: 0 16px;
+}
+.section {
+  border-bottom: 1px solid #edf2f6;
+}
+
+/* Range slider */
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 10px 0;
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+input[type='range']::-moz-focus-outer {
+  border: 0;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: var(--blue);
+  border-radius: 125px;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  width: 70px;
+  height: 32px;
+  margin-top: -14px;
+  box-shadow: 0 1px 5px rgba(37, 42, 50, 0.2);
+  background: #fff;
+  border-radius: 125px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type='range']::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background: var(--blue);
+  border-radius: 125px;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 70px;
+  height: 32px;
+  margin-top: -14px;
+  box-shadow: 0 1px 5px rgba(37, 42, 50, 0.2);
+  background: #fff;
+  border-radius: 125px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.range-slider {
+  position: relative;
+  padding: 0 0px 25px;
+}
+
+.range-thumb {
+  position: absolute;
+  top: -2px;
+  left: 259.5px;
+  width: 70px;
+  color: #202024;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 32px;
+  pointer-events: none;
+}
+
+.range-info {
+  display: flex;
+  padding-top: 10px;
+  justify-content: space-between;
+  color: #404046;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+}
+
+/* View project on the github link */
+.github-link {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+
+  background-color: #030303;
+  border-radius: 20px;
+
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.github-link a {
+  padding: 0 16px 0 32px;
+  margin: 0 8px 0 0;
+  background: url('images/github.svg') no-repeat left center;
+  border-right: 1px solid #54545c;
+}
+
+.github-link button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: url('images/close.svg') no-repeat;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.github button:focus {
+  outline: none;
+}
+
+/* Link to Chargetrip website */
+.chargetrip-logo {
+  display: inline-block;
+  height: 40px;
+  line-height: 38px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  background-size: 72px;
+  padding-right: 76px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 15px;
+  color: var(--black);
+}
+
+/* Mapbox styles */
+.mapboxgl-popup-tip,
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  width: 120px;
+  padding: 10px;
+  margin-bottom: 30px;
+  background: #030303;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 22px;
+}
