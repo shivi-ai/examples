@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Chargetrip API: example of the impact of your SOC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Build a route with the Chargetrip API" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/state-of-charge" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <div class="tooltip" id="calculating">
+      <div class="tooltip-icon">
+        <div class="icon animation"></div>
+        <div class="line"></div>
+      </div>
+      <div class="tooltip-info">
+        Recalculating route <br />
+        <span>Please wait...</span>
+      </div>
+    </div>
+    <div class="journey-specs">
+      <header>
+        <span id="loader">Loading...</span>
+        <span class="duration" id="duration"></span>
+        <h1>Amsterdam • Berlin</h1>
+      </header>
+    </div>
+
+    <div class="journey-specs-details">
+      <div class="section">
+        <div class="slider-container">
+          <h2>Initial state of charge</h2>
+          <div class="range-slider">
+            <label class="range-thumb" id="range-thumb" for="range">435 km</label>
+            <input type="range" min="0" max="435" value="435" step="1" id="range" />
+            <div class="range-info">
+              <span>0 km</span>
+              <span>435 km</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a
+        class="chargetrip-logo"
+        href="https://chargetrip.com/"
+        aria-label="Made with love at Chargetrip"
+        title="Made with love at Chargetrip"
+        >Made with ❤️ at</a
+      >
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>

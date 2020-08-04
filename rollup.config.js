@@ -81,4 +81,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'state-of-charge/index.js',
+    output: {
+      file: 'public/state-of-charge/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];
