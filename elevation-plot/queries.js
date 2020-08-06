@@ -90,7 +90,7 @@ export const getRoutePath = (id, location) => `
       location: { type: Point, coordinates: [${location}] }
     ) {
       elevation
-      avSpeed
+      averageSpeed
       consumptionPerKm
     }
 }`;

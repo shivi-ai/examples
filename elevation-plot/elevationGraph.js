@@ -174,7 +174,8 @@ export const displaySpecs = path => {
     : 'Unknown';
 
   // The average speed, in km/h, for this route path segment.
-  document.getElementById('average-speed').innerHTML = path.routePath?.avSpeed
-    ? `${path.routePath?.avSpeed} km`
+  console.log(path);
+  document.getElementById('average-speed').innerHTML = path.routePath?.averageSpeed
+    ? `${path.routePath?.averageSpeed} km`
     : 'Unknown';
 };
