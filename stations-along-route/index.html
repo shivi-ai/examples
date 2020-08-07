@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Chargetrip API: stations along route example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Build a route with the Chargetrip API and display stations along the route" />
+    <meta
+      name="keywords"
+      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing charging-stations alternative-stations"
+    />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/route" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <button class="legend-button" aria-label="display legend" title="display-legend"></button>
+    <div class="legend" id="legend">
+      <div class="section-title">Availability</div>
+      <ul class="section section-border">
+        <li class="section-required">Required station<br /><span>To reach the destination stop here</span></li>
+        <li class="section-alternative">Alternative station along route <br /><span>Optional stop to charge</span></li>
+      </ul>
+      <div class="section-title">Charging speed</div>
+      <ul class="section">
+        <li class="section-turbo">Turbo<br /><span>150 kW to 350 kW</span></li>
+        <li class="section-fast">Fast<br /><span>43 kW to 150 kW</span></li>
+      </ul>
+    </div>
+
+    <div class="journey-specs">
+      <header>
+        <h1>Stations along the route</h1>
+        <h2>Amsterdam • Osnabrück</h2>
+        <span id="loader">Loading...</span>
+        <div class="tags">
+          <div id="distance" class="tag"></div>
+          <div id="duration" class="tag"></div>
+          <div id="consumption-overview" class="tag"></div>
+        </div>
+      </header>
+    </div>
+
+    <div class="journey-specs-details">
+      <ul class="info">
+        <h2>Alternative station data</h2>
+        <li class="info-show">
+          Show alternative stations
+          <label class="switch" id="alternative">
+            <input type="checkbox" />
+            <span class="switch-slider"><span class="switch-slider-text" id="switch">OFF</span></span>
+          </label>
+        </li>
+        <li class="info-amount">Number of alternative stations <span id="amount">0</span></li>
+      </ul>
+
+      <a
+        class="chargetrip-logo"
+        href="https://chargetrip.com/"
+        aria-label="Made with love at Chargetrip"
+        title="Made with love at Chargetrip"
+        >Made with ❤️ at</a
+      >
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>
