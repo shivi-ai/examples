@@ -3,7 +3,7 @@ import qql from 'graphql-tag';
 /*
  * In this example we request a route from Amsterdam, Netherlands to Berlin, Germany
  * The changing conditions are:
- *   - full battery at Amsterdam, Germany
+ *   - full battery at Amsterdam, Netherlands
  *   - no desired range at Berlin, Germany
  *   - EV can charge at CHadMO changers
  *   - should use climate (temperature and weather conditions)

@@ -82,6 +82,15 @@ export default [
     plugins,
   },
   {
+    input: 'stations-along-route/index.js',
+    output: {
+      file: 'public/stations-along-route/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
     input: 'state-of-charge/index.js',
     output: {
       file: 'public/state-of-charge/bundle.js',
@@ -89,5 +98,5 @@ export default [
       sourcemap: true,
     },
     plugins,
-  },
+   },
 ];

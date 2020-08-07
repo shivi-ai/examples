@@ -23,6 +23,8 @@ Available examples:
 3. Show stations on a map [example](https://chargetrip.github.io/examples/stations/);
 4. Show stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/);
 5. Build a route and display an elevation profile [example](https://chargetrip.github.io/examples/elevation-plot/).
+6. Build a route and recalculate if your SOC changes [example](https://chargetrip.github.io/examples/state-of-charge/)
+7. Build a route and display stations along the route [example](https://chargetrip.github.io/examples/stations-along-route/);
 
 ## Installation and local development
 

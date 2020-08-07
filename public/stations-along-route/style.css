@@ -1,0 +1,402 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #323c4d;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+span {
+  font-weight: 600;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1 {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  margin-top: 0px;
+  font-weight: normal;
+  font-size: 16px;
+  color: #e8edf1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  border-bottom: 1px solid #e8edf1;
+}
+
+section:last-child {
+  padding-bottom: 16px;
+  border-bottom: none;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.journey-specs {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 360px;
+  height: 160px;
+  max-height: calc(100% - 2em);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  background-color: #030303;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.journey-specs header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0px 20px 0;
+  background-color: #030303;
+  color: #e8edf1;
+}
+
+.journey-specs-details {
+  position: absolute;
+  top: 160px;
+  left: 16px;
+  width: 360px;
+  max-height: calc(100% - 2em);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.station-data:focus {
+  outline: none;
+}
+
+.tags {
+  display: none;
+  margin-top: 16px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  margin: 0 6px;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.info {
+  padding: 0 16px 8px;
+  border-bottom: 1px solid #e8edf1;
+}
+
+.info h2 {
+  padding: 20px 0 0 0;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0c0c10;
+}
+.info li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 30px;
+  font-size: 15px;
+  line-height: 48px;
+}
+
+.info-amount {
+  background: url('images/station-amount.svg') no-repeat left center;
+}
+
+.info-show {
+  background: url('images/show.svg') no-repeat left center;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  height: 24px;
+  width: 56px;
+  border-radius: 4px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The ON and OFF slider */
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.switch-slider-text {
+  position: relative;
+  top: -13px;
+  left: 23px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  top: 3px;
+  background-color: white;
+  border-radius: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .switch-slider {
+  border-radius: 4px;
+  background-color: #1f97ff;
+  border: 1px solid #086cc2;
+}
+
+input:focus + .switch-slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .switch-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  left: 8px;
+}
+
+.tags {
+  display: none;
+  margin-top: 10px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  margin: 0 6px;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.station-type {
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+.station-type span {
+  font-size: 16px;
+  height: 50px;
+}
+
+.station-type-fast {
+  padding: 40px;
+  background: url('images/along-fast.svg') no-repeat left center;
+}
+
+.station-type-turbo {
+  padding: 40px;
+  background: url('images/along-turbo.svg') no-repeat left center;
+}
+
+/* View project on the github link */
+.github-link {
+  position: fixed;
+  top: 16px;
+  right: 66px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+
+  background-color: #030303;
+  border-radius: 20px;
+
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.github-link a {
+  padding: 0 16px 0 32px;
+  margin: 0 8px 0 0;
+  background: url('images/github.svg') no-repeat left center;
+  border-right: 1px solid #54545c;
+  color: #fff;
+  text-decoration: none;
+}
+
+.github-link button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: url('images/close.svg') no-repeat;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.github button:focus {
+  outline: none;
+}
+
+/* Display a legend of chargeing stations */
+.legend-button {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  background: url('images/legend.svg') no-repeat center center #fff;
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+.legend-button:focus {
+  outline: none;
+}
+
+.legend {
+  display: none;
+  position: absolute;
+  width: 320px;
+  max-height: calc(630px - 2em);
+  right: 16px;
+  top: 64px;
+
+  background: #ffffff;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.section {
+  /* padding: 16px;
+  padding-bottom: 5px; */
+}
+
+.section-border {
+  border-bottom: 1px solid #edf2f6;
+  padding-bottom: 16px;
+}
+
+.section-title {
+  padding: 24px 16px 0 16px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #0c0c10;
+}
+
+.section li {
+  padding: 13px 0 9px 8px;
+  margin: 0 20px;
+  padding-left: 40px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  color: #202024;
+}
+
+.section li span {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 17px;
+  color: #787884;
+}
+
+.section-required {
+  padding: 0 0 30px 60px;
+  background: url('images/required-Station.svg') no-repeat left center;
+}
+
+.section-alternative {
+  padding: 0 0 30px 60px;
+  margin-bottom: 8px;
+  background: url('images/alternative-station.svg') no-repeat left center;
+}
+
+.section-turbo {
+  background: url('images/turbo.svg') no-repeat left center;
+}
+
+.section-fast {
+  background: url('images/fast.svg') no-repeat left center;
+}
+
+/* Link to Chargetrip website */
+.chargetrip-logo {
+  display: inline-block;
+  height: 40px;
+  line-height: 38px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  background-size: 72px;
+  padding-right: 76px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 15px;
+  color: var(--black);
+}

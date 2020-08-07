@@ -1,44 +1,12 @@
 import mapboxgl from 'mapbox-gl';
-import { sliderUpdate } from './slider';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ck98fwwp159v71ip7xhs8bwts',
-  zoom: 6,
-  center: [8.1320104, 52.3758916],
-});
-
-// Display the charge time on a hover
-const popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false,
-});
-
-map.on('mouseenter', 'legs', e => {
-  if (e.features[0]?.properties?.icon !== 'arrival' && e.features[0]?.properties?.icon !== 'location_big') {
-    map.getCanvas().style.cursor = 'pointer';
-
-    const coordinates = e.features[0]?.geometry?.coordinates;
-    const description = `Expected state of charge at arrival ${(e.features[0]?.properties?.description / 1000).toFixed(
-      0,
-    )} km`;
-
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    popup
-      .setLngLat(coordinates)
-      .setHTML(description)
-      .addTo(map);
-  }
-});
-
-map.on('mouseleave', 'legs', function() {
-  map.getCanvas().style.cursor = '';
-  popup.remove();
+  zoom: 7.5,
+  center: [6, 52.2288],
 });
 
 /**
@@ -47,7 +15,10 @@ map.on('mouseleave', 'legs', function() {
  * @param coordinates {array} Array of coordinates
  * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
  */
-export const drawRoute = (coordinates, legs) => {
+export const drawRoute = (coordinates, legs, alternatives) => {
+  const onSwitch = document.getElementById('alternative');
+  const sliderSwitch = document.getElementById('switch');
+
   if (map.loaded()) {
     drawPolyline(coordinates);
     showLegs(legs);
@@ -57,6 +28,20 @@ export const drawRoute = (coordinates, legs) => {
       showLegs(legs);
     });
   }
+  onSwitch.addEventListener('input', () => {
+    if (map.getLayer('stations-along-route') && map.getSource('stations-along-route')) {
+      document.getElementById('amount').innerHTML = '0';
+      document.getElementById('switch').innerHTML = 'OFF';
+      sliderSwitch.style.left = '22px';
+      map.removeLayer('stations-along-route');
+      map.removeSource('stations-along-route');
+    } else {
+      showAlternatives(alternatives);
+      document.getElementById('amount').innerHTML = alternatives.length;
+      document.getElementById('switch').innerHTML = 'ON';
+      sliderSwitch.style.left = '5px';
+    }
+  });
 };
 
 /**
@@ -65,8 +50,6 @@ export const drawRoute = (coordinates, legs) => {
  * @param coordinates {array} polyline coordinates
  */
 const drawPolyline = coordinates => {
-  if (map.getLayer('polyline')) map.removeLayer('polyline');
-  if (map.getSource('polyline-source')) map.removeSource('polyline-source');
   const geojson = {
     type: 'FeatureCollection',
     features: [
@@ -83,7 +66,6 @@ const drawPolyline = coordinates => {
 
   map.addSource('polyline-source', {
     type: 'geojson',
-    lineMetrics: true,
     data: geojson,
   });
 
@@ -97,27 +79,8 @@ const drawPolyline = coordinates => {
       'line-cap': 'round',
     },
     paint: {
-      'line-color': 'red',
-      'line-width': 6,
-      // 'line-gradient' must be specified using an expression
-      // with the special 'line-progress' property
-      'line-gradient': [
-        'interpolate',
-        ['linear'],
-        ['line-progress'],
-        0,
-        'blue',
-        0.1,
-        'royalblue',
-        0.3,
-        'cyan',
-        0.5,
-        'lime',
-        0.7,
-        'yellow',
-        1,
-        'red',
-      ],
+      'line-color': '#0078FF',
+      'line-width': 3,
     },
   });
 };
@@ -132,8 +95,6 @@ const drawPolyline = coordinates => {
  * @param legs {array} route legs
  */
 const showLegs = legs => {
-  if (map.getLayer('legs')) map.removeLayer('legs');
-  if (map.getSource('legs')) map.removeSource('legs');
   if (legs.length === 0) return;
 
   let points = [];
@@ -143,7 +104,6 @@ const showLegs = legs => {
   points.push({
     type: 'Feature',
     properties: {
-      description: legs[0].rangeStart,
       icon: 'location_big',
     },
     geometry: legs[0].origin?.geometry,
@@ -155,8 +115,7 @@ const showLegs = legs => {
       points.push({
         type: 'Feature',
         properties: {
-          description: legs[i].rangeEnd,
-          icon: 'unknown-turbo',
+          icon: 'free-turbo',
         },
         geometry: legs[i].destination?.geometry,
       });
@@ -166,7 +125,6 @@ const showLegs = legs => {
         type: 'Feature',
         properties: {
           icon: 'arrival',
-          description: legs[i].rangeEnd,
         },
         geometry: legs[i].destination?.geometry,
       });
@@ -180,7 +138,7 @@ const showLegs = legs => {
     layout: {
       'icon-image': '{icon}',
       'icon-allow-overlap': true,
-      'icon-size': ['case', ['==', ['get', 'icon'], 'location-big'], ['literal', 0.7], ['literal', 0.8]],
+      'icon-size': 1,
       'icon-offset': ['case', ['==', ['get', 'icon'], 'location_big'], ['literal', [0, 0]], ['literal', [0, -15]]],
     },
     source: {
@@ -188,6 +146,44 @@ const showLegs = legs => {
       data: {
         type: 'FeatureCollection',
         features: points,
+      },
+    },
+  });
+};
+
+/**
+ * Icon for the charging station differs base on the speed (slow, fast, turbo),
+ * and status(available, busy, unkown or broken).
+ * If a charging station has multiple speeds the fastest speed will be shown.
+ * @param station {object} Station data
+ */
+const selectPinlet = station => `along-${station.speed}`;
+
+const showAlternatives = alternatives => {
+  if (alternatives.length === 0) return;
+
+  const locations = alternatives.map(station => {
+    return {
+      type: 'Feature',
+      properties: {
+        icon: selectPinlet(station),
+      },
+      geometry: station.location,
+    };
+  });
+  // draw route points on a map
+  map.addLayer({
+    id: 'stations-along-route',
+    type: 'symbol',
+    layout: {
+      'icon-image': '{icon}',
+      'icon-allow-overlap': true,
+    },
+    source: {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: locations,
       },
     },
   });
