@@ -49,6 +49,46 @@ mutation newRoute{
   }
 `;
 
+export const queryRoute = qql`
+query getRoute($id: ID!) {
+  route(id: $id) {
+    route {
+      charges
+      saving {
+        money
+        co2
+      }
+      chargeTime
+      distance
+      duration
+      consumption
+      elevationPlot
+      elevationUp
+      elevationDown
+      id
+      polyline
+      legs{
+        distance
+        chargeTime
+        origin{
+          geometry{
+            type
+            coordinates
+          }
+        }
+        destination{
+          geometry
+          {
+            type
+            coordinates
+          }
+        }
+      }
+    }
+    status
+  }
+}`;
+
 export const routeUpdate = qql`
 subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {

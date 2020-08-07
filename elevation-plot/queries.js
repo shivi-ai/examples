@@ -83,6 +83,39 @@ subscription routeUpdatedById($id: ID!){
 }
 `;
 
+export const queryRoute = qql`
+query getRoute($id: ID!) {
+  route(id: $id) {
+    status
+    route {
+      distance
+      duration
+      elevationPlot
+      elevationUp
+      elevationDown
+      id
+      polyline
+      legs{
+        distance
+        chargeTime
+        origin{
+          geometry{
+            type
+            coordinates
+          }
+        }
+        destination{
+          geometry
+          {
+            type
+            coordinates
+          }
+        }
+      }
+    }
+  }
+}`;
+
 export const getRoutePath = (id, location) => `
 {
     routePath(
