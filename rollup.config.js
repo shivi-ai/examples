@@ -3,7 +3,9 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
-import json from "@rollup/plugin-json";
+import json from '@rollup/plugin-json';
+
+require('dotenv').config();
 
 // eslint-disable-next-line no-undef
 const production = !process.env.ROLLUP_WATCH;
@@ -11,6 +13,8 @@ const plugins = [
   json(),
   replace({
     'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
+    // eslint-disable-next-line no-undef
+    'process.env.MAPBOX_TOKEN': JSON.stringify(process.env.MAPBOX_TOKEN),
   }),
   resolve({
     browser: true,
@@ -98,5 +102,5 @@ export default [
       sourcemap: true,
     },
     plugins,
-   },
+  },
 ];

@@ -21,9 +21,11 @@ const providers = {
  * when we change between ocm and eco-movement providers. We do this by setting a max-age to 0 in the request header.
  * Don't use this technique in a real-world project because you will lose the built-in optimisation!
  */
+
+// eslint-disable-next-line no-undef
+mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+
 export const displayMap = provider => {
-  mapboxgl.accessToken =
-    'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
   let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/chargetrip/ck98fwwp159v71ip7xhs8bwts',

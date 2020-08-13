@@ -1,7 +1,8 @@
 import mapboxgl from 'mapbox-gl';
 import { getDurationString } from '../utils';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0ZTNrZmd1MXoxIn0.aFteYnUc_GxwjTLGvB3uCg';
+// eslint-disable-next-line no-undef
+mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
 
 const map = new mapboxgl.Map({
   container: 'map',
