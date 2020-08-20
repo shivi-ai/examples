@@ -31,7 +31,7 @@ Our Playground has a station database that is populated with freely available Eu
 Once we have a car and station database, we can start planning the route:
 
 1. We have to request a new route. For that we use the `newRoute` mutation. We will need to pass information about the car including SOC, origin and destination. The SOC is a variable in this mutation. As a result we will get an ID of a newly created route. You can read all the details about this mutation in our [Chargetrip API documentation](https://docs.chargetrip.com/#request-a-new-route).
-2. We can now query the route uding the route ID and show the route on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
+2. With a route ID we can request route information and show the route on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
 3. Using the slider we can request a new route when the SOC changes and show how this effects the route.
 
 ### Useful links
