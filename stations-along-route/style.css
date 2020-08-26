@@ -218,6 +218,10 @@ input:checked + .switch-slider:before {
   left: 8px;
 }
 
+input:checked + .switch-slider .switch-slider-text {
+  left: 5px;
+}
+
 .tags {
   display: none;
   margin-top: 10px;
@@ -370,7 +374,7 @@ input:checked + .switch-slider:before {
 
 .section-required {
   padding: 0 0 30px 60px;
-  background: url('images/required-Station.svg') no-repeat left center;
+  background: url('images/required-station.svg') no-repeat left center;
 }
 
 .section-alternative {
