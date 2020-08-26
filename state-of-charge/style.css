@@ -59,7 +59,7 @@ a {
   height: 100%;
 }
 
-.tooltip {
+.notification {
   position: fixed;
   bottom: 50px;
   left: 16px;
@@ -89,7 +89,7 @@ a {
   animation-fill-mode: forwards;
 }
 
-.tooltip-icon {
+.notification-icon {
   border-right: 1px solid #54545c;
 }
 
@@ -104,7 +104,7 @@ a {
   animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
 }
 
-.tooltip-info {
+.notification-info {
   padding-top: 10px;
   margin-left: 20px;
 }
