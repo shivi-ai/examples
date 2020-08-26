@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
-const map = new mapboxgl.Map({
+export const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ck98fwwp159v71ip7xhs8bwts',
   zoom: 7.5,
@@ -15,10 +15,7 @@ const map = new mapboxgl.Map({
  * @param coordinates {array} Array of coordinates
  * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
  */
-export const drawRoute = (coordinates, legs, alternatives) => {
-  const onSwitch = document.getElementById('alternative');
-  const sliderSwitch = document.getElementById('switch');
-
+export const drawRoute = (coordinates, legs) => {
   if (map.loaded()) {
     drawPolyline(coordinates);
     showLegs(legs);
@@ -28,20 +25,6 @@ export const drawRoute = (coordinates, legs, alternatives) => {
       showLegs(legs);
     });
   }
-  onSwitch.addEventListener('input', () => {
-    if (map.getLayer('stations-along-route') && map.getSource('stations-along-route')) {
-      document.getElementById('amount').innerHTML = '0';
-      document.getElementById('switch').innerHTML = 'OFF';
-      sliderSwitch.style.left = '22px';
-      map.removeLayer('stations-along-route');
-      map.removeSource('stations-along-route');
-    } else {
-      showAlternatives(alternatives);
-      document.getElementById('amount').innerHTML = alternatives.length;
-      document.getElementById('switch').innerHTML = 'ON';
-      sliderSwitch.style.left = '5px';
-    }
-  });
 };
 
 /**
@@ -159,7 +142,7 @@ const showLegs = legs => {
  */
 const selectPinlet = station => `along-${station.speed}`;
 
-const showAlternatives = alternatives => {
+export const showAlternatives = alternatives => {
   if (alternatives.length === 0) return;
 
   const locations = alternatives.map(station => {
@@ -171,6 +154,7 @@ const showAlternatives = alternatives => {
       geometry: station.location,
     };
   });
+
   // draw route points on a map
   map.addLayer({
     id: 'stations-along-route',
@@ -187,4 +171,11 @@ const showAlternatives = alternatives => {
       },
     },
   });
+};
+
+export const hideAlternatives = () => {
+  if (map.getLayer('stations-along-route') && map.getSource('stations-along-route')) {
+    map.removeLayer('stations-along-route');
+    map.removeSource('stations-along-route');
+  }
 };

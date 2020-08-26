@@ -2,7 +2,7 @@ import { createClient, createRequest, defaultExchanges, subscriptionExchange } f
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createRoute, routeUpdate } from './queries.js';
-import { drawRoute } from './map.js';
+import { drawRoute, showAlternatives, hideAlternatives } from './map.js';
 import * as mapboxPolyline from '@mapbox/polyline';
 import { getDurationString } from '../utils';
 
@@ -72,6 +72,8 @@ client
   })
   .catch(error => console.log(error));
 
+let routeData;
+
 /**
  * Draw a route on a map.
  *
@@ -86,10 +88,15 @@ client
 const drawRoutePolyline = data => {
   const decodedData = mapboxPolyline.decode(data.polyline);
   const reversed = decodedData.map(item => item.reverse());
+  routeData = data;
 
-  drawRoute(reversed, data.legs, data.stationsAlongRoute);
+  drawRoute(reversed, data.legs);
   displayRouteData(data);
 };
+
+const showAlternativeStationsSwitcher = document.getElementById('showAlternativeStationsSwitcher');
+const amountOfAlternativesInfo = document.getElementById('alternativeStationsAmount');
+const sliderLabel = document.querySelector('.switch-slider-text');
 
 /**
  * Show journey specific information like duration, consumption etc.
@@ -98,6 +105,8 @@ const drawRoutePolyline = data => {
  */
 const displayRouteData = data => {
   document.getElementById('loader').remove();
+  document.getElementById('showAlternativeStationsSwitcher').removeAttribute('disabled');
+
   document.querySelector('.tags').style.display = 'flex';
 
   // the total duration of the journey (including charge time), in seconds
@@ -107,7 +116,7 @@ const displayRouteData = data => {
   document.getElementById('distance').innerHTML = data.distance ? `${(data.distance / 1000).toFixed(0)} km` : 'Unknown';
 
   // the amount of alternative stations on this route
-  document.getElementById('amount').innerHTML = 0;
+  document.getElementById('alternativeStationsAmount').innerHTML = 0;
 
   // the total energy used of the route, in kWh
   document.getElementById('consumption-overview').innerHTML = data.consumption
@@ -121,5 +130,21 @@ document.querySelector('.legend-button').addEventListener('click', () => {
     legend.style.display = 'block';
   } else {
     legend.style.display = 'none';
+  }
+});
+
+showAlternativeStationsSwitcher.addEventListener('input', e => {
+  const alternatives = routeData.stationsAlongRoute ?? [];
+
+  if (e.target.checked) {
+    amountOfAlternativesInfo.innerHTML = alternatives.length;
+    sliderLabel.innerHTML = 'ON';
+
+    showAlternatives(alternatives);
+  } else {
+    amountOfAlternativesInfo.innerHTML = '0';
+    sliderLabel.innerHTML = 'OFF';
+
+    hideAlternatives();
   }
 });
