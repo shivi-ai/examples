@@ -34,8 +34,10 @@ export const drawRoutePolyline = data => {
  * @param data {object} route specification
  */
 const displayRouteData = data => {
-  document.getElementById('loader').remove();
-
   // the total duration of the journey (including charge time), in seconds
   document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
+
+  // remove loader after first initial route is calculated
+  const loader = document.getElementById('loader');
+  if (loader) loader.remove();
 };

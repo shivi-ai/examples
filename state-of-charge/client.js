@@ -56,7 +56,6 @@ export const fetchRoute = (soc, callback) => {
           // You can keep listening to the route changes to update route information.
           // For this example we want to only draw the initial route.
           if (status === 'done' && route) {
-            document.getElementById('calculating').style.display = 'none';
             unsubscribe();
             callback(route);
           }
