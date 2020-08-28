@@ -41,15 +41,6 @@ export default [
     plugins,
   },
   {
-    input: 'directions/index.js',
-    output: {
-      file: 'public/directions/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
     input: 'car/index.js',
     output: {
       file: 'public/car/bundle.js',
