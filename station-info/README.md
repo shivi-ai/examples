@@ -1,7 +1,7 @@
-# Build a station map with Chargetrip API
+# Fetch station details with Chargetrip API
 
-This tutorial explains how to show charging stations on a map and how to filter them.  
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/stations).
+This tutorial explains how to fetch station details and suggests how to parse the data.  
+To see this example live 👉 [demo](https://chargetrip.github.io/examples/station-info).
 
 ### Technical stack
 
@@ -14,11 +14,12 @@ We use our Playground environment for this example. Our Playground has a station
 
 ### Steps to take
 
-To get stations around a location:
+To get stations around a location and fetch specific station details:
 
 1. We need to use `stationAround` query. We need to pass the information about a geojson point, and the distance we want to search in. In addition to this we can also add the power we would like the stations to have or specify which amenities should be around. As a result we will get a list of stations that meet our requirements. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#get-stations-around-a-geojson-point).
 2. Now we can show stations on the map.
-3. Each station has information about the charging speed and the availability. This information is useful if you want to display different icons base on the type of the station or its availability. In this example we use public database OCM, which doesn't provide this information.
+3. Click on s station will fetch its details. We use `station` query for that. You can specify what data you would like to get back. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#get-single-station-data).
+4. Each station has information about the charging speed and the availability. This information is useful if you want to display different icons base on the type of the station or its availability.
 
 ### Useful links
 

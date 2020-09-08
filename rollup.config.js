@@ -5,6 +5,7 @@ import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
 
+// eslint-disable-next-line no-undef
 require('dotenv').config();
 
 // eslint-disable-next-line no-undef
@@ -53,6 +54,15 @@ export default [
     input: 'stations/index.js',
     output: {
       file: 'public/stations/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'station-info/index.js',
+    output: {
+      file: 'public/station-info/bundle.js',
       format: 'iife',
       sourcemap: true,
     },

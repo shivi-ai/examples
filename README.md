@@ -21,10 +21,11 @@ Available examples:
 1. Build a simple route [example](https://chargetrip.github.io/examples/route/);
 2. Select a car [example](https://chargetrip.github.io/examples/car/);
 3. Show stations on a map [example](https://chargetrip.github.io/examples/stations/);
-4. Show stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/);
-5. Build a route and display an elevation profile [example](https://chargetrip.github.io/examples/elevation-plot/).
-6. Build a route and recalculate if your SOC changes [example](https://chargetrip.github.io/examples/state-of-charge/)
-7. Build a route and display stations along the route [example](https://chargetrip.github.io/examples/stations-along-route/);
+4. Query a specific station [example](https://chargetrip.github.io/examples/station-info/);
+5. Show stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/);
+6. Build a route and display an elevation profile [example](https://chargetrip.github.io/examples/elevation-plot/).
+7. Build a route and recalculate if your SOC changes [example](https://chargetrip.github.io/examples/state-of-charge/)
+8. Build a route and display stations along the route [example](https://chargetrip.github.io/examples/stations-along-route/);
 
 ## Installation and local development
 
