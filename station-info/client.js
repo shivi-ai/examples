@@ -30,7 +30,7 @@ export const fetchStations = () =>
     .query(getStationsAround, {
       query: {
         location: { type: 'Point', coordinates: [9.9801115, 53.5475679] },
-        distance: 300000,
+        distance: 3000,
       },
     })
     .toPromise()
