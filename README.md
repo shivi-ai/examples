@@ -26,6 +26,7 @@ Available examples:
 6. Build a route and display an elevation profile [example](https://chargetrip.github.io/examples/elevation-plot/).
 7. Build a route and recalculate if your SOC changes [example](https://chargetrip.github.io/examples/state-of-charge/)
 8. Build a route and display stations along the route [example](https://chargetrip.github.io/examples/stations-along-route/);
+9. Build a route and display alternative routes [example](https://chargetrip.github.io/examples/alternative-routes/);
 
 ## Installation and local development
 

@@ -104,4 +104,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'alternative-routes/index.js',
+    output: {
+      file: 'public/alternative-routes/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];
