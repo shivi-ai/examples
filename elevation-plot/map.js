@@ -2,8 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import { fetchRoutePath } from './client';
 import { positionElevationIndicator, displaySpecs } from './elevationGraph';
 
-// eslint-disable-next-line no-undef
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 const map = new mapboxgl.Map({
   container: 'map',

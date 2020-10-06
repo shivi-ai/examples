@@ -22,8 +22,7 @@ const providers = {
  * Don't use this technique in a real-world project because you will lose the built-in optimisation!
  */
 
-// eslint-disable-next-line no-undef
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 export const displayMap = provider => {
   let map = new mapboxgl.Map({

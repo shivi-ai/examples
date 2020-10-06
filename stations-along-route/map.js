@@ -1,7 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 
-// eslint-disable-next-line no-undef
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 export const map = new mapboxgl.Map({
   container: 'map',
@@ -122,7 +121,6 @@ const showLegs = legs => {
     layout: {
       'icon-image': '{icon}',
       'icon-allow-overlap': true,
-      'icon-size': 1,
       'icon-offset': ['case', ['==', ['get', 'icon'], 'location_big'], ['literal', [0, 0]], ['literal', [0, -15]]],
     },
     source: {
