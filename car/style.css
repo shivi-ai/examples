@@ -57,7 +57,9 @@ a {
 
 .car-specs {
   position: absolute;
+  height: 75%;
   top: 312px;
+  bottom: 50px;
   left: 0;
   bottom: 0;
   z-index: -1;
@@ -96,14 +98,6 @@ a {
 
 .range {
   background-image: url('images/range.svg');
-}
-
-.battery {
-  background-image: url('images/battery.svg');
-}
-
-.efficiency {
-  background-image: url('images/efficiency.svg');
 }
 
 .plug {
@@ -162,21 +156,8 @@ a {
 
 .section {
   padding: 16px;
+  height: 350px;
   border-bottom: 1px solid #edf2f6;
-}
-
-.weather-types {
-  display: flex;
-  justify-content: space-between;
-}
-
-.weather-types-title {
-  margin: 32px 0 16px;
-  color: #787884;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 24px;
-  text-transform: capitalize;
 }
 
 /* Link to Chargetrip website */
@@ -193,6 +174,30 @@ a {
   font-weight: 600;
   line-height: 38px;
   background-size: 72px;
+}
+
+.banner {
+  position: fixed;
+  height: 32px;
+  width: 600px;
+  left: 240px;
+  top: 20px;
+  border-radius: 6px;
+  background: #331600;
+  border-right: 1px solid #edf2f6;
+  margin: 0 32px;
+  border: 1px solid #ed7922;
+  box-sizing: border-box;
+}
+
+.banner spec {
+  background: url('images/info.svg') no-repeat left center;
+  padding-left: 32px;
+  margin: 0 8px 0 8px;
+  color: #ed7922;
+  font-size: 14px;
+  line-height: 30px;
+  align-items: center;
 }
 
 .car-profile:last-child .chargetrip-logo {
