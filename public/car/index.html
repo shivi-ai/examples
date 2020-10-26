@@ -25,28 +25,18 @@
         ></button>
       </div>
 
+      <div class="banner">
+        <spec
+          >To get more details about about a car, please use the car query:
+          <pre style="display:inline;">car(id: $carId)</pre>
+        </spec>
+      </div>
       <div id="cars">Loading...</div>
 
       <div class="car-specs">
         <ul>
           <li class="icon range">Best Range</li>
-          <li class="icon battery">Useable battery</li>
-          <li class="icon efficiency">Efficiency</li>
           <li class="icon plug">Plug type</li>
-        </ul>
-
-        <ul>
-          <p><strong>Route</strong></p>
-          <li>City</li>
-          <li>Highway</li>
-          <li>Plug type</li>
-        </ul>
-
-        <ul>
-          <li>Acceleration</li>
-          <li>Top speed</li>
-          <li>Total power</li>
-          <li>Total torque</li>
         </ul>
       </div>
 
@@ -63,31 +53,10 @@
             <h2>Car details</h2>
             <ul>
               <li>{{range}}</li>
-              <li>{{battery}}</li>
-              <li>{{efficiency}}</li>
               <li>{{plug}}</li>
             </ul>
           </div>
 
-          <div class="section">
-            <h2>Weather data</h2>
-            <div class="weather-types weather-types-title"><span>mild</span> <span>cold</span></div>
-            <ul>
-              <li class="weather-types"><span>{{cityMild}}</span> <span>{{cityCold}}</span></li>
-              <li class="weather-types"><span>{{highwayMild}}</span> <span>{{highwayCold}}</span></li>
-              <li class="weather-types"><span>{{combinedMild}}</span> <span>{{combinedCold}}</span></li>
-            </ul>
-          </div>
-
-          <div class="section">
-            <h2>Performance</h2>
-            <ul>
-              <li>{{acceleration}}</li>
-              <li>{{topSpeed}}</li>
-              <li>{{power}}</li>
-              <li>{{torque}}</li>
-            </ul>
-          </div>
           <a class="chargetrip-logo" href="https://chargetrip.com/" aria-label="Made with love at Chargetrip" title="Made with love at Chargetrip">Made with ❤️ at</a>
         </div>
         {{/carProfile}}

@@ -4,25 +4,14 @@ export const getCarList = qql`
 query carList {
     carList(size: 10, page: 0) {
       id
-      externalId
       make
       carModel
       batteryUsableKwh
       connectors{
         standard
       }
-      range {
-        wltp
-        best {
-          highway
-          city
-          combined
-        }
-        worst {
-          highway
-          city
-          combined
-        }
+      chargetripRange {
+       best
       }
       batteryEfficiency {
         average
@@ -41,9 +30,11 @@ query carList {
       acceleration
       topSpeed
       torque
-      images{
-        type
-        url
+      imagesData{
+        image {
+          type
+          url
+        }
       }
     }
   }
