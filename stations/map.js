@@ -10,6 +10,37 @@ const map = new mapboxgl.Map({
   center: [4.8979755, 52.3745403],
 });
 
+map.on('load', function() {
+  // add empty user location source
+  if (!map.getSource('user-location-source')) {
+    map.addSource('user-location-source', {
+      type: 'geojson',
+      cluster: false,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
+
+  // add user location layer
+  if (!map.getLayer('user-location')) {
+    map.addLayer({
+      id: 'user-location',
+      type: 'symbol',
+      source: 'user-location-source',
+      interactive: false,
+      layout: {
+        'text-ignore-placement': true,
+        'icon-image': 'your-location',
+        'icon-allow-overlap': false,
+      },
+    });
+  }
+
+  document.getElementById('centerMe').style.visibility = 'visible';
+});
+
 /**
  * Icon for the charging station differs base on the speed (slow, fast, turbo),
  * and status(available, busy, unkown or broken).
@@ -85,4 +116,53 @@ export const showCenter = () => {
       'icon-size': 1,
     },
   });
+};
+
+/* Center map on my location */
+const userLocationOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+const getLocation = async () => {
+  return new Promise((resolve, reject) => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(resolve, reject, userLocationOptions);
+    } else {
+      reject();
+    }
+  });
+};
+
+export const centerMe = async () => {
+  try {
+    const {
+      coords: { latitude, longitude },
+    } = await getLocation();
+
+    if (latitude && longitude) {
+      if (map.getLayer('user-location') && map.getSource('user-location-source')) {
+        map.getSource('user-location-source').setData({
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [longitude, latitude],
+              },
+            },
+          ],
+        });
+      }
+
+      map.flyTo({
+        center: [longitude, latitude],
+      });
+    }
+  } catch (error) {
+    document.getElementById('centerMe').innerHTML = '🚫';
+    console.log(error);
+  }
 };

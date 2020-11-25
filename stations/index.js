@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getStationsAround } from './queries.js';
-import { showStations, showCenter } from './map.js';
+import { showStations, showCenter, centerMe } from './map.js';
 import { initFilters } from './filters.js';
 
 /**
@@ -56,3 +56,14 @@ const displayMap = filters => {
 };
 
 initFilters(displayMap);
+
+document.getElementById('centerMe').addEventListener('click', () => {
+  centerMe();
+});
+
+navigator.permissions.query({ name: 'geolocation' }).then(result => {
+  if (result.state === 'denied') {
+    document.getElementById('centerMe').innerHTML = '🚫';
+    console.log('User denied sharing his location');
+  }
+});

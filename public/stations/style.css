@@ -288,3 +288,27 @@ input[type='range']::-moz-range-thumb {
   margin: 0 15px;
   color: var(--black);
 }
+
+.centerMe-button {
+  position: absolute;
+  right: 16px;
+  top: 62px;
+  visibility: hidden;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  min-width: 32px;
+  background: black;
+  border: none;
+  line-height: 32px;
+  text-align: center;
+  padding-left: 3px;
+}
+.centerMe-button:focus {
+  outline: none;
+}
+
+.centerMe-button.disabled {
+}
