@@ -156,7 +156,7 @@ const displayRouteData = data => {
 const getGoogleMapDirectionsURL = legs => {
   if (legs.length === 0) return;
 
-  let googleDirURL = `https://google.com/maps/dir/?api=1`;
+  let googleDirURL = `https://www.google.com/maps/dir/?api=1`;
   const origin = legs[0].origin?.geometry?.coordinates;
   const destination = legs[legs.length - 1].destination?.geometry?.coordinates;
 
