@@ -14,9 +14,6 @@ mutation newRoute{
       input: {
         ev: {
           id: "5d161be5c9eef46132d9d20a"
-          battery: {
-            stateOfCharge: { value: 72.5, type: kwh }
-          }
           plugs: { chargingPower: 150, standard: TESLA_S }
           adapters: [
             { chargingPower: 150, standard: IEC_62196_T2_COMBO }
@@ -47,7 +44,6 @@ export const queryRoute = qql`
 query getRoute($id: ID!) {
   route(id: $id) {
     alternatives {
-      type
       polyline
       charges
       duration
@@ -86,10 +82,6 @@ query getRoute($id: ID!) {
       distance
       duration
       consumption
-      elevationPlot
-      elevationUp
-      elevationDown
-      type
       polyline
       legs{
         distance
@@ -157,10 +149,6 @@ subscription routeUpdatedById($id: ID!){
       distance
       duration
       consumption
-      elevationPlot
-      elevationUp
-      elevationDown
-      type
       polyline
       legs{
         distance

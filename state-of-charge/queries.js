@@ -18,7 +18,6 @@ mutation newRoute{
         ev: {
           id: "5d161be5c9eef46132d9d20a"
           battery: {
-            capacity: { value: 72.5, type: kwh }
             stateOfCharge: { value: ${soc}, type: km }
           }
           plugs: { chargingPower: 150, standard: TESLA_S }

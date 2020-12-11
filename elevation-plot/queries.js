@@ -17,10 +17,6 @@ mutation newRoute{
       input: {
         ev: {
           id: "5d161be5c9eef46132d9d20a"
-          battery: {
-            capacity: { value: 72.5, type: kwh }
-            stateOfCharge: { value: 72.5, type: kwh }
-          }
           plugs: { chargingPower: 150, standard: TESLA_S }
           adapters: [
             { chargingPower: 150, standard: IEC_62196_T2_COMBO }
@@ -53,15 +49,12 @@ subscription routeUpdatedById($id: ID!){
     status
     route {
       distance
-      duration
       elevationPlot
       elevationUp
       elevationDown
-      id
       polyline
       legs{
         distance
-        chargeTime
         origin{
           geometry{
             type
@@ -87,7 +80,6 @@ query getRoute($id: ID!) {
     status
     route {
       distance
-      duration
       elevationPlot
       elevationUp
       elevationDown
@@ -95,7 +87,6 @@ query getRoute($id: ID!) {
       polyline
       legs{
         distance
-        chargeTime
         origin{
           geometry{
             type
