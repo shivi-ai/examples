@@ -1,7 +1,7 @@
 import qql from 'graphql-tag';
 
 /*
- * In this example we request a route from Amsterdam, Netherlands to Neubrandenburg, Germany
+ * In this example we request a route from Amsterdam, Netherlands to Berlin, Germany
  * The changing conditions are:
  *   - The state of charge is 72.5 kwh
  *   - EV can charge at Tesla, CHADEMO and Type 2 changers
@@ -31,8 +31,8 @@ mutation newRoute{
           }
           destination: {
             type: Feature
-            geometry: { type: Point, coordinates: [13.2779, 53.5678] }
-            properties: { name: "Neubrandenburg, Germany" }
+            geometry: { type: Point, coordinates: [13.3888599, 52.5170365] }
+            properties: { name: "Berlin, Germany" }
           }
         }
       }
