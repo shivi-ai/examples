@@ -9,11 +9,15 @@ export const displayCarsData = (cars = []) => {
 
   cars.map(car => {
     profiles.push({
-      make: car.make ?? 'Unknown',
-      model: car.carModel ?? 'Unknown',
-      image: car.imagesData?.image?.url,
-      range: `${car.chargetripRange.best ?? 'Unknown'} km`,
+      make: car.naming.make ?? 'Unknown',
+      model: car.naming.model ?? 'Unknown',
+      image: car.media?.image?.url,
+      range: `${car.range.chargetrip_range.best ?? 'Unknown'} km`,
+      battery: `${car.battery.usable_kwh ?? 'Unknown'} kWh`,
       plug: car.connectors?.[0]?.standard ?? 'Unknown',
+      power: `${car.connectors?.[0]?.power ?? 'Unknown'} kWh`,
+      adapter: car.adapters?.[0]?.standard ?? 'No adapter',
+      adaptpower: car.adapters?.[0]?.power ? `${car.adapters?.[0]?.power + ' kwh'}` : '',
     });
   });
 

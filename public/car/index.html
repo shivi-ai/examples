@@ -36,8 +36,17 @@
       <div class="car-specs">
         <ul>
           <li class="icon range">Best Range</li>
+          <li class="icon battery">Useable battery</li>
           <li class="icon plug">Plug type</li>
+          <li class="icon power">Power</li>
         </ul>
+
+        <div class="adapter-specs">
+          <ul>
+            <li class="icon plug">Adapter type</li>
+            <li class="icon power">Power</li>
+          </ul>
+        </div>
       </div>
 
       <script id="car-template" type="x-tmpl-mustache">
@@ -53,7 +62,17 @@
             <h2>Car details</h2>
             <ul>
               <li>{{range}}</li>
+              <li>{{battery}}</li>
               <li>{{plug}}</li>
+              <li>{{power}}</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>Adapters</h2>
+            <ul>
+              <li>{{adapter}}</li>
+              <li>{{adaptpower}}</li>
             </ul>
           </div>
 

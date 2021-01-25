@@ -2,40 +2,69 @@ import qql from 'graphql-tag';
 
 export const getCarList = qql`
 query carList {
-    carList(size: 10, page: 0) {
+  carList(size: 200, page: 0) {
       id
-      make
-      carModel
-      batteryUsableKwh
-      connectors{
+      naming {
+        make
+        model
+        version
+        edition
+        chargetrip_version
+      }
+      connectors {
         standard
+        power
+        time
+        speed
       }
-      chargetripRange {
-       best
+      adapters {
+        standard
+        power
+        time
+        speed
       }
-      batteryEfficiency {
-        average
-        best {
-          highway
-          city
-          combined
-        }
-        worst {
-          highway
-          city
-          combined
-        }
+      battery {
+        usable_kwh
+        full_kwh
       }
-      power
-      acceleration
-      topSpeed
-      torque
-      imagesData{
+      body {
+        seats
+      }
+      range {
+        chargetrip_range {
+          best
+          worst
+       }
+      }
+      media {
         image {
+          id
           type
           url
+          height
+          width
+          thumbnail_url
+          thumbnail_height
+          thumbnail_width
         }
+        brand {
+          id
+          type
+          url
+          height
+          width
+          thumbnail_url
+          thumbnail_height
+          thumbnail_width
+        }
+        video {
+          id
+          url
+       }
       }
-    }
+      routing {
+       fast_charging_support
+      }
+      }
   }
 `;
