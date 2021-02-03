@@ -167,6 +167,7 @@ const showLegs = legs => {
     layout: {
       'icon-image': '{icon}',
       'icon-allow-overlap': true,
+      'icon-ignore-placement': true,
       'icon-size': ['case', ['==', ['get', 'icon'], 'location-big'], ['literal', 0.7], ['literal', 0.8]],
       'icon-offset': ['case', ['==', ['get', 'icon'], 'location_big'], ['literal', [0, 0]], ['literal', [0, -15]]],
     },
