@@ -50,7 +50,10 @@ let renderedCars = [];
 
 /**
  * The function that handles all our GraphQL networking alongside it's parameters.
- * @param { page: number, size: number, search: string } - Object that manages the page, size and search to be send towards our request
+ * @param { Object } - Object that manages the page, size and search to be send towards our request
+ * @param { number } page - Number of the page we are on
+ * @param { number } [size] - Number of cars that we should fetch in one request
+ * @param { string } search - The keywords that we should filter our car list on
  */
 const fetchCars = ({ page, size = 10, search = '' }) => {
   client
@@ -65,7 +68,8 @@ const fetchCars = ({ page, size = 10, search = '' }) => {
 /**
  * A function to group the carlist by make
  * @param { Map } groupedCars - Our current set of already rendered cars grouped by make
- * @param { Object } cars - A list of cars coming from the Chargetrip API
+ * @param { Object } cars - An array of cars coming from the Chargetrip API
+ * @param { string } cars[].naming.make - The make of the car
  */
 const groupCars = (groupedCars, cars) => {
   // Loop through all the cars
@@ -87,6 +91,9 @@ const groupCars = (groupedCars, cars) => {
 /**
  * Render function that constructs or list and list headers.
  * @param { Map } groupedCars - Contains our cars grouped by make
+ * @param { string } groupedCars[].header - The header for this specific section (make)
+ * @param { Object } groupedCars[].cars - The cars within a specific section
+ * @param { string } groupedCars[].cars[].id - The id of the specific car that we are rendering
  */
 const renderCarList = groupedCars => {
   groupedCars.forEach((cars, header) => {
@@ -124,7 +131,12 @@ const renderHeader = header => {
 
 /**
  * Constructs the car HTML and inserts it into the HTML right before the end of car-list.
- * @param { Object } car - All car properties which we use to render the car image, make, model and version
+ * @param { Object } car - All car properties which we use to render a car list entry
+ * @param { string } car.id - The id of the car
+ * @param { string } car.naming.chargetrip_version - A Chargetrip version to create destinction between specific models
+ * @param { string } car.media.image.thumbnail_url - The url of the car image
+ * @param { string } car.naming.model - The name of the model
+ * @param { string } car.naming.make - The name of the make
  */
 const renderCar = car => {
   // Add the id of the car being rendered to our array
@@ -165,7 +177,7 @@ const renderCar = car => {
  * A function that manages the state of our observer. It either connects or disconnects to our car list.
  * @param { Map } cars - Contains our cars grouped by make
  */
-const handleObserving = cars => {
+const handleObserving = groupedCars => {
   // Get every car list element
   let targets = [...document.querySelectorAll('.car-list-element')];
 
@@ -175,7 +187,7 @@ const handleObserving = cars => {
   // Before we attach our observer we have to make sure we have data and whether or offset is within range.
   // When we search it might happen that we don't have any results or less than 3.
   // In these scenario's we won't need the observer and can disconnect it.
-  if (targets.length - offset > 0 && cars.size) {
+  if (targets.length - offset > 0 && groupedCars.size) {
     // Attach our observer to the 3rd last element in our list
     // We don't attach it to the last one, because then it will block the scrolling behaviour
     // Now it will fetch and attach before the user is at the end so the scroll interaction feels fluid.
