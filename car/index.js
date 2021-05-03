@@ -25,7 +25,7 @@ const headers = {
 };
 
 const client = createClient({
-  url: 'https://api.chargetrip.io/graphql',
+  url: 'https://staging-api.chargetrip.io/graphql',
   fetchOptions: {
     method: 'POST',
     headers,
@@ -39,31 +39,43 @@ let searchKeyword = '';
 // Keeps track of which page of cars we are currently on.
 let currentPage = 0;
 
+// Keep a full list of sorted cars
+let groupedCars = new Map();
+
+// Keep track of what headers we already rendered when doing pagination
+let renderedHeaders = [];
+
+// Keep track of which cars we already rendered when doing pagination
+let renderedCars = [];
+
 /**
  * The function that handles all our GraphQL networking alongside it's parameters.
- * @param {Object} - Object that manages the page, size and search to be send towards our request
+ * @param { page: number, size: number, search: string } - Object that manages the page, size and search to be send towards our request
  */
 const fetchCars = ({ page, size = 10, search = '' }) => {
   client
-    .query(getCarList, { page: page, size: size, search: search })
+    .query(getCarList, { page, size, search })
     .toPromise()
     .then(response => {
-      groupCars(response.data?.carList);
+      groupCars(groupedCars, response.data?.carList);
     })
     .catch(error => console.log(error));
 };
 
 /**
  * A function to group the carlist by make
- * @param {Object} cars - A list of cars coming from the Chargetrip API
+ * @param { Map } groupedCars - Our current set of already rendered cars grouped by make
+ * @param { Object } cars - A list of cars coming from the Chargetrip API
  */
-const groupCars = cars => {
-  let groupedCars = new Map();
-
+const groupCars = (groupedCars, cars) => {
+  // Loop through all the cars
   cars.forEach(car => {
+    // Check whether we have a specific make as a key in our map
     if (groupedCars.has(car.naming.make)) {
+      // If we have the specific key in our map extend it's children by adding the car to it
       groupedCars.set(car.naming.make, [...groupedCars.get(car.naming.make), car]);
     } else {
+      // If we don't have the specific key in our map add it alongside the car
       groupedCars.set(car.naming.make, [car]);
     }
   });
@@ -74,14 +86,18 @@ const groupCars = cars => {
 
 /**
  * Render function that constructs or list and list headers.
- * @param {Map} groupedCars - Contains our cars grouped by make
+ * @param { Map } groupedCars - Contains our cars grouped by make
  */
 const renderCarList = groupedCars => {
   groupedCars.forEach((cars, header) => {
-    if (searchKeyword === '') renderHeader(header);
+    // Check if we are not searching and if we have already rendered the header
+    if (searchKeyword === '' && !renderedHeaders.includes(header)) renderHeader(header);
 
     cars.forEach(car => {
-      renderCar(car);
+      // Check whether the car has already been rendered or not
+      if (!renderedCars.includes(car.id)) {
+        renderCar(car);
+      }
     });
   });
 
@@ -95,6 +111,9 @@ const renderCarList = groupedCars => {
  * @param {String} header - The title that we want to render.
  */
 const renderHeader = header => {
+  // Prevent duplicates by setting the header as rendered
+  renderedHeaders.push(header);
+
   document.getElementById('car-list').insertAdjacentHTML(
     'beforeend',
     `
@@ -105,9 +124,15 @@ const renderHeader = header => {
 
 /**
  * Constructs the car HTML and inserts it into the HTML right before the end of car-list.
- * @param {Object} car - All car properties which we use to render the car image, make, model and version
+ * @param { Object } car - All car properties which we use to render the car image, make, model and version
  */
 const renderCar = car => {
+  // Add the id of the car being rendered to our array
+  renderedCars.push(car.id);
+
+  // Not always is the chargetrip version available, if not we render an empty string.
+  const version = car.naming.chargetrip_version ? car.naming.chargetrip_version : '';
+
   // We insert the new html bottom-up. This way we maintain the right alphabetical order.
   document.getElementById('car-list').insertAdjacentHTML(
     'beforeend',
@@ -117,7 +142,7 @@ const renderCar = car => {
         <img class="car-image" alt="car image" src="${car.media.image.thumbnail_url}"/>
       </div>
       <div class="car-list-data">
-        <p><strong>${car.naming.model} ${car.naming.chargetrip_version}</strong></p>
+        <p><strong>${car.naming.model} ${version}</strong></p>
         <p>${car.naming.make}</p>
       </div>
     </li>
@@ -138,7 +163,7 @@ const renderCar = car => {
 
 /**
  * A function that manages the state of our observer. It either connects or disconnects to our car list.
- * @param {Map} cars - Contains our cars grouped by make
+ * @param { Map } cars - Contains our cars grouped by make
  */
 const handleObserving = cars => {
   // Get every car list element
@@ -163,7 +188,7 @@ const handleObserving = cars => {
 
 /**
  * The callback of the intersection observer that fetches the new data for us when we reach the end
- * @param {Element} entries - An array of elements that are being observed by our observer
+ * @param { Element } entries - An array of elements that are being observed by our observer
  */
 const loadNextPage = entries => {
   entries.forEach(entry => {
@@ -202,6 +227,11 @@ document.getElementById('search-area').addEventListener(
 
     // Empties our current car-list so we can replace it with the search results
     document.getElementById('car-list').replaceChildren();
+
+    // Reset our rendered and grouped defaults so we have a clean list to start building our search results.
+    renderedCars = [];
+    renderedHeaders = [];
+    groupedCars.clear();
 
     // Initializes the search request
     fetchCars({ page: currentPage, size: 10, search: searchKeyword });
