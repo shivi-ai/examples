@@ -142,9 +142,6 @@ const renderCar = car => {
   // Add the id of the car being rendered to our array
   renderedCars.push(car.id);
 
-  // Not always is the chargetrip version available, if not we render an empty string.
-  const version = car.naming.chargetrip_version ? car.naming.chargetrip_version : '';
-
   // We insert the new html bottom-up. This way we maintain the right alphabetical order.
   document.getElementById('car-list').insertAdjacentHTML(
     'beforeend',
@@ -154,7 +151,7 @@ const renderCar = car => {
         <img class="car-image" alt="car image" src="${car.media.image.thumbnail_url}"/>
       </div>
       <div class="car-list-data">
-        <p><strong>${car.naming.model} ${version}</strong></p>
+        <p><strong>${car.naming.model} ${car.naming.chargetrip_version || ''}</strong></p>
         <p>${car.naming.make}</p>
       </div>
     </li>
