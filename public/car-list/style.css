@@ -1,10 +1,38 @@
+:root {
+  --base: 16px;
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+  --font-size-base: 0.875rem;
+  --font-size-small: 0.75rem;
+  --font-size-micro: 0.5rem;
+
+  --background-base: #ffffff;
+  --background-subdued: #e5f0f5;
+  --background-base: #f4f8fb;
+  --background-alt: #e5f0f5;
+  --background-alt2: #c9dee9;
+  --background-alt3: #8dadbf;
+  --background-alt4: #608192;
+
+  --accent-base: #0078ff;
+  --accent-alt: #005ee5;
+  --accent-alt2: #0041c8;
+
+  --font-base: #1b2023;
+  --font-alt: #2c353a;
+  --font-alt2: #45535b;
+  --font-alt3: #566a75;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  color: #1b2023;
+  color: var(--font-base);
   font-family: 'Inter', 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: var(--base);
   font-weight: normal;
 }
 
@@ -27,26 +55,26 @@ p {
 
 h1 {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: var(--font-size-h1);
   line-height: 2.5rem;
 }
 
 h3 {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: var(--font-size-h3);
   line-height: 1.75rem;
 }
 
 p {
   font-style: normal;
   font-weight: normal;
-  font-size: 0.875rem;
+  font-size: var(--font-size-base);
   line-height: 1.75rem;
 }
 
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--background-base);
 }
 
 ul {
@@ -59,25 +87,25 @@ input {
   height: 3rem;
   width: 100%;
   border-radius: 1.5rem;
-  border: 1px solid #c9dee9;
+  border: 1px solid var(--background-alt);
   margin-top: 0.5rem;
   padding-left: 3rem;
   outline: none;
-  font-size: 0.875rem;
+  font-size: var(--font-size-base);
   font-family: 'Inter', sans-serif;
   font-weight: bold;
   background: url('./images/search.svg') no-repeat center left 1rem;
 }
 
 input:focus {
-  border: 1px solid #0078ff;
+  border: 1px solid var(--accent-base);
 }
 
 ::placeholder {
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--font-size-base);
   font-weight: bold;
-  color: #566a75;
+  color: var(--font-alt3);
   opacity: 1;
 }
 
@@ -97,7 +125,7 @@ input:focus {
   width: 360px;
   height: calc(100% - 2rem);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--background-base);
   box-shadow: 0px 8px 62px rgba(0, 0, 0, 0.07), 0px 9.63424px 10.0459px rgba(0, 0, 0, 0.08),
     0px 5.80506px 6.13245px rgba(0, 0, 0, 0.0310277), 0px -4px 3.46624px rgba(0, 0, 0, 0.024633),
     0px 24px 64px rgba(0, 0, 0, 0.08);
@@ -110,7 +138,7 @@ main {
 
 .card header {
   padding: 1rem;
-  background: #ffffff;
+  background: var(--background-base);
   position: relative;
 }
 
@@ -133,17 +161,17 @@ main {
 }
 
 .car-list-header {
-  font-size: 0.875rem;
+  font-size: var(--font-size-base);
   font-weight: bold;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #e5f0f5;
-  border-top: 1px solid #e5f0f5;
+  border-bottom: 1px solid var(--background-alt);
+  border-top: 1px solid var(--background-alt);
   text-transform: uppercase;
   margin: 0.5rem 0;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background: #ffffff;
+  background: var(--background-base);
   z-index: 10;
 }
 
@@ -156,8 +184,8 @@ main {
 .car-list-image {
   width: 104px;
   height: 64px;
-  background-color: #f4f8fb;
-  border: 1px solid #e5f0f5;
+  background-color: var(--background-subdued);
+  border: 1px solid var(--background-alt);
   border-radius: 4px;
   display: flex;
   place-content: center;
