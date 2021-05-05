@@ -228,11 +228,16 @@ const observer = new IntersectionObserver(loadNextPage, options);
 document.getElementById('search-area').addEventListener(
   'input',
   debounce(e => {
-    // Resets our current page param to 0 so we don't miss any search results
-    currentPage = 0;
-
     // Updates our searchKeyword to reflect our inputfield
     searchKeyword = e.target.value;
+
+    // When we are searching we no longer have a sticky header so we can remove that
+    if (searchKeyword !== '') {
+      document.getElementsByTagName('header')[0].classList.add('no-shadow');
+    }
+
+    // Resets our current page param to 0 so we don't miss any search results
+    currentPage = 0;
 
     // Empties our current car-list so we can replace it with the search results
     document.getElementById('car-list').replaceChildren();
