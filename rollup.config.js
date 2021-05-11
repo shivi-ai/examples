@@ -46,15 +46,6 @@ export default [
     plugins,
   },
   {
-    input: 'car-list/index.js',
-    output: {
-      file: 'public/car-list/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
     input: 'stations/index.js',
     output: {
       file: 'public/stations/bundle.js',
