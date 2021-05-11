@@ -212,3 +212,47 @@ main {
 .mapboxgl-ctrl-attrib-button {
   display: none;
 }
+
+/* View project on the github link */
+.github-link {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+
+  background-color: #fff;
+  border-radius: 20px;
+
+  color: #0c0c10;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 40px;
+  z-index: 2;
+}
+
+.github-link a {
+  padding: 0 16px 0 32px;
+  margin: 0 8px 0 0;
+  background: url('images/github.svg') no-repeat left center;
+  border-right: 1px solid #edf2f6;
+  color: var(--font-base);
+  font-weight: bold;
+}
+
+.github-link button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: url('images/close.svg') no-repeat;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.github button:focus {
+  outline: none;
+}
