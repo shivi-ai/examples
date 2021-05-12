@@ -1,8 +1,15 @@
 import qql from 'graphql-tag';
 
 export const getCarList = qql`
-query carList($page: Int, $size: Int, $search: String) {
-  carList(page: $page, size: $size, search: $search) {
+query carList($page: Int, $size: Int, $search: String, $availability: [Int]) {
+  carList(
+    page: $page, 
+    size: $size, 
+    search: $search, 
+    filter: {
+      availability: $availability
+    }
+  ) {
     id
     naming {
       make

@@ -54,10 +54,11 @@ let renderedCars = [];
  * @param { number } page - Number of the page we are on
  * @param { number } [size] - Number of cars that we should fetch in one request
  * @param { string } search - The keywords that we should filter our car list on
+ * @param { array } availability - An array of availability statuses, currently only picking up cars that are no longer for sale or currently active.
  */
-const fetchCars = ({ page, size = 10, search = '' }) => {
+const fetchCars = ({ page, size = 10, search = '', availability = [0, 1] }) => {
   client
-    .query(getCarList, { page, size, search })
+    .query(getCarList, { page, size, search, availability })
     .toPromise()
     .then(response => {
       groupCars(groupedCars, response.data?.carList);
