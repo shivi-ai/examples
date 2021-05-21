@@ -35,19 +35,6 @@ export const ConnectorStatus = {
   ERROR: 'error',
 };
 
-export const Amenities = {
-  coffee: 'Coffee',
-  hotel: 'Hotel',
-  museum: 'Museum',
-  park: 'Park',
-  playground: 'Playground',
-  bathroom: 'Bathroom',
-  restaurant: 'Restaurant',
-  shopping: 'Shopping mall',
-  supermarket: 'Supermarket',
-  pharmacy: 'Pharmacy',
-};
-
 export const ParkingType = {
   ALONG_MOTORWAY: 'Along motorway',
   PARKING_GARAGE: 'Parking garage',
@@ -58,7 +45,6 @@ export const ParkingType = {
 };
 
 export const getParkingType = type => ParkingType[type] || 'Unknown';
-export const getAmenityName = type => Amenities[type] || 'Unknown';
 export const getConnectorName = name => ConnectorName[name] || 'Unknown';
 
 /* We don't provide icon for these plug types. The default plug icon is shown instead.*/
@@ -71,13 +57,13 @@ const noPlugIcon = [
   ConnectorName.PANTOGRAPH_TOP_DOWN,
 ];
 export const getConnectorIcon = standard =>
-  `plug-${ConnectorName[standard] && noPlugIcon.indexOf(standard) === -1 ? standard.toUpperCase() : 'DEFAULT'}`;
+  `${ConnectorName[standard] && noPlugIcon.indexOf(standard) === -1 ? standard.toUpperCase() : 'DEFAULT'}`;
 
 /**
  * We are interested only in the availability of the station, so we first check if there are available connectors.
  *
- * @param charger
- * @returns {string} Status of a connector
+ * @param { Object } charger - a small subset of charger details
+ * @returns { string } - Status of a connector
  */
 export const getConnectorStatus = charger => {
   if (charger.status.free) {
@@ -91,6 +77,11 @@ export const getConnectorStatus = charger => {
   }
 };
 
+/**
+ * Format the enum status to a human readable string
+ * @param { Enum } status - The current status of the connector
+ * @returns { String } - Status of the connector
+ */
 export const getConnectorStatusLabel = status => {
   switch (status) {
     case ConnectorStatus.FREE:

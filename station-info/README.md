@@ -16,13 +16,13 @@ We use our Playground environment for this example. Our Playground has a station
 
 To get stations around a location and fetch specific station details:
 
-1. We need to use `stationAround` query. We need to pass the information about a geojson point, and the distance we want to search in. In addition to this we can also add the power we would like the stations to have or specify which amenities should be around. As a result we will get a list of stations that meet our requirements. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#get-stations-around-a-geojson-point).
+1. We need to use `stationAround` query. We need to pass the information about a geojson point, and the distance we want to search in. In addition to this we can also add the power we would like the stations to have or specify which amenities should be around. As a result we will get a list of stations that meet our requirements. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Stations/query-stations-around).
 2. Now we can show stations on the map.
-3. Click on s station will fetch its details. We use `station` query for that. You can specify what data you would like to get back. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#get-single-station-data).
+3. Click on a station will fetch its details. We use the `station` query for that. You can specify what data you would like to get back. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Stations/query-station-details).
 4. Each station has information about the charging speed and the availability. This information is useful if you want to display different icons base on the type of the station or its availability.
 
 ### Useful links
 
-1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/);
+1. Chargetrip GraphAPI [docs](https://developers.chargetrip.com/);
 2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/);
 3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).

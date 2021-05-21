@@ -1,6 +1,5 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getStationData, getStationsAround } from './queries';
-import { showError } from './station';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
@@ -23,7 +22,8 @@ const client = createClient({
 });
 
 /**
- * In this example we fetch 20 station around the Hamburg center, Germany.
+ * Fetch 20 station around the city center of Hamburg, Germany.
+ * We set the radius around the geolocation in which we fetch stations to 3km
  */
 export const fetchStations = () =>
   client
@@ -40,7 +40,8 @@ export const fetchStations = () =>
     .catch(error => console.log(error));
 
 /**
- * Fetch station data by its ID
+ * Fetch the detail data of a specific station
+ * @param { string } id - the id of the station
  */
 export const fetchStationData = id =>
   client
@@ -49,10 +50,6 @@ export const fetchStationData = id =>
     })
     .toPromise()
     .then(response => {
-      if (!response.data.station) {
-        throw Error(response.errors?.[0]?.message || 'No data, please check Network tab for more details.');
-      }
-
       return response.data;
     })
-    .catch(error => showError(error));
+    .catch(error => console.log(error));
