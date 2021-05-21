@@ -6,37 +6,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 5,
-  center: [8.1320104, 52.3758916],
-});
-
-// Display the charge time on a hover
-const popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false,
-});
-
-map.on('mouseenter', 'legs', e => {
-  if (e.features[0]?.properties?.icon !== 'arrival' && e.features[0]?.properties?.icon !== 'location_big') {
-    map.getCanvas().style.cursor = 'pointer';
-
-    const coordinates = e.features[0]?.geometry?.coordinates;
-    const description = e.features[0]?.properties?.description;
-
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    popup
-      .setLngLat(coordinates)
-      .setHTML(description)
-      .addTo(map);
-  }
-});
-
-map.on('mouseleave', 'legs', function() {
-  map.getCanvas().style.cursor = '';
-  popup.remove();
+  zoom: 6,
+  center: [9.1320104, 54.9758916],
 });
 
 /**
@@ -48,13 +19,36 @@ map.on('mouseleave', 'legs', function() {
 export const drawRoute = (coordinates, legs) => {
   if (map.loaded()) {
     drawPolyline(coordinates);
+    drawChargingTimes(legs);
     showLegs(legs);
   } else {
     map.on('load', () => {
       drawPolyline(coordinates);
+      drawChargingTimes(legs);
       showLegs(legs);
     });
   }
+};
+
+/**
+ * Render the charging times at each station directly on top of it's marker.
+ * @param {array} legs - each leg represents either a charging station, or a via point or final point
+ */
+const drawChargingTimes = legs => {
+  legs.forEach((leg, idx) => {
+    if (idx == legs.length - 1) {
+      return;
+    }
+
+    const chargeTime = leg.chargeTime;
+    const hrs = ~~(chargeTime / 3600);
+    const mins = ~~((chargeTime % 3600) / 60);
+
+    new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(leg.destination.geometry.coordinates)
+      .setHTML(`<small>${hrs}:${mins}</small>`)
+      .addTo(map);
+  });
 };
 
 /**

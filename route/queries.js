@@ -28,14 +28,14 @@ mutation newRoute{
         routeRequest: {
           origin: {
             type: Feature
-            geometry: { type: Point, coordinates: [4.8951679, 52.3702157] }
-            properties: { name: "Amsterdam, Netherlands" }
+            geometry: { type: Point, coordinates: [9.732625731357011, 52.3806314590276] }
+            properties: { name: "Hanover, Germany" }
 
           }
           destination: {
             type: Feature
-            geometry: { type: Point, coordinates: [13.3888599, 52.5170365] }
-            properties: { name: "Berlin, Germany" }
+            geometry: { type: Point, coordinates: [9.922192327081783, 57.046057998779176] }
+            properties: { name: "Aalborg, Denmark" }
           }
         }
       }
@@ -64,6 +64,7 @@ query getRoute($id: ID!) {
             type
             coordinates
           }
+          properties
         }
         destination{
           geometry
@@ -71,6 +72,7 @@ query getRoute($id: ID!) {
             type
             coordinates
           }
+          properties
         }
       }
     }
@@ -100,6 +102,7 @@ subscription routeUpdatedById($id: ID!){
             type
             coordinates
           }
+          properties
         }
         destination{
           geometry
@@ -107,6 +110,7 @@ subscription routeUpdatedById($id: ID!){
             type
             coordinates
           }
+          properties
         }
       }
     }
