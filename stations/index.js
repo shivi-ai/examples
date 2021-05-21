@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getStationsAround } from './queries.js';
-import { showStations, showCenter, centerMe } from './map.js';
+import { showStations, showCenter } from './map.js';
 import { initFilters } from './filters.js';
 
 /**
@@ -11,7 +11,7 @@ import { initFilters } from './filters.js';
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  'x-client-id': '5e8c22366f9c5f23ab0eff39',
+  'x-client-id': '5ed1175bad06853b3aa1e492',
 };
 
 const client = createClient({
@@ -31,7 +31,7 @@ const fetchStations = ({ distance, power, amenities }) =>
   client
     .query(getStationsAround, {
       query: {
-        location: { type: 'Point', coordinates: [4.8979755, 52.3745403] },
+        location: { type: 'Point', coordinates: [10.197422, 56.171395] },
         distance,
         power,
         amenities,
@@ -56,14 +56,3 @@ const displayMap = filters => {
 };
 
 initFilters(displayMap);
-
-document.getElementById('centerMe').addEventListener('click', () => {
-  centerMe();
-});
-
-navigator.permissions.query({ name: 'geolocation' }).then(result => {
-  if (result.state === 'denied') {
-    document.getElementById('centerMe').innerHTML = '🚫';
-    console.log('User denied sharing his location');
-  }
-});

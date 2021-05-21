@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
   zoom: 11.4,
-  center: [4.8979755, 52.3745403],
+  center: [10.197422, 56.171395],
 });
 
 map.on('load', function() {
@@ -37,8 +37,6 @@ map.on('load', function() {
       },
     });
   }
-
-  document.getElementById('centerMe').style.visibility = 'visible';
 });
 
 /**
@@ -58,7 +56,8 @@ const selectPinlet = station => `${station.status}-${station.speed}`;
 export const showStations = stations => {
   if (!stations) return;
 
-  document.getElementById('stationAmount').innerHTML = stations.length;
+  document.getElementById('stationAmount').innerHTML =
+    stations.length > 1 ? `${stations.length} stations` : `${stations.length} station`;
   if (map.getLayer('path')) map.removeLayer('path');
   if (map.getSource('path')) map.removeSource('path');
 
@@ -99,7 +98,7 @@ export const showCenter = () => {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [4.8979755, 52.3745403],
+            coordinates: [10.197422, 56.171395],
           },
         },
       ],
@@ -116,53 +115,4 @@ export const showCenter = () => {
       'icon-size': 1,
     },
   });
-};
-
-/* Center map on my location */
-const userLocationOptions = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
-
-const getLocation = async () => {
-  return new Promise((resolve, reject) => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(resolve, reject, userLocationOptions);
-    } else {
-      reject();
-    }
-  });
-};
-
-export const centerMe = async () => {
-  try {
-    const {
-      coords: { latitude, longitude },
-    } = await getLocation();
-
-    if (latitude && longitude) {
-      if (map.getLayer('user-location') && map.getSource('user-location-source')) {
-        map.getSource('user-location-source').setData({
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              geometry: {
-                type: 'Point',
-                coordinates: [longitude, latitude],
-              },
-            },
-          ],
-        });
-      }
-
-      map.flyTo({
-        center: [longitude, latitude],
-      });
-    }
-  } catch (error) {
-    document.getElementById('centerMe').innerHTML = '🚫';
-    console.log(error);
-  }
 };

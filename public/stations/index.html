@@ -2,96 +2,95 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Chargetrip API: station map example</title>
+    <title>Chargetrip API: stations around example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta
-      name="description"
-      content="Show charging stations on the map with the Chargetrip API. Filter stations based on a power or amenities available nearby."
-    />
-    <meta
-      name="keywords"
-      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map, filters"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="Query stations around a GeoJSON point with the Chargetrip API." />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="map"></div>
     <div class="github-link">
       <a href="https://github.com/chargetrip/examples/tree/master/stations" title="github project">
         View on Github
       </a>
       <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
     </div>
-
-    <button id="centerMe" class="centerMe-button">📌</button>
-
-    <div class="station-filters">
+    <div id="map"></div>
+    <div class="card">
       <header>
-        <div>Showing <span id="stationAmount"></span> stations</div>
-        <div class="subtext">Note: example is limited to 20 stations</div>
+        <h1 id="stationAmount">13 stations</h1>
+        <p>Limited to 20 stations</p>
       </header>
-      <div class="section">
-        <h2>Reachable from your location</h2>
-        <div class="range-slider">
-          <label class="range-thumb" id="range-thumb" for="range"></label>
-          <input type="range" min="1000" max="10000" value="3000" step="1000" id="range" />
-          <div class="range-info">
-            <span>1</span>
-            <span>10</span>
+      <main>
+        <section>
+          <div class="range-slider">
+            <div class="labels">
+              <label>Distance from location</label>
+              <label id="distance" for="range"></label>
+            </div>
+            <input type="range" min="1000" max="10000" value="3000" step="1000" id="range" />
           </div>
+        </section>
+        <section>
+          <h3>Charging power</h3>
+          <ul class="checklist power">
+            <li>
+              <input type="checkbox" class="filter-input" id="turbo" value="turbo" />
+              <label for="turbo">
+                <span class="title">Turbo - 100 to 350 kW</span>
+                <span class="subtitle">Aprox. 30 min charge</span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" class="filter-input" id="fast" value="fast" />
+              <label for="fast">
+                <span class="title">Fast - 43 to 100 kW</span>
+                <span class="subtitle">Aprox. 60 min charge</span>
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" class="filter-input" id="slow" value="slow" />
+              <label for="slow">
+                <span class="title">Slow - 1 to 43 kW</span>
+                <span class="subtitle">Aprox. 7 hour charge</span>
+              </label>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Amenities</h3>
+          <ul class="checklist amenities">
+            <li>
+              <input type="checkbox" class="filter-input" id="supermarket" value="supermarket" />
+              <label for="supermarket">Supermarket</label>
+            </li>
+            <li>
+              <input type="checkbox" class="filter-input" id="bathroom" value="bathroom" />
+              <label for="bathroom">Bathroom</label>
+            </li>
+            <li>
+              <input type="checkbox" class="filter-input" id="restaurant" value="restaurant" />
+              <label for="restaurant">Restaurant</label>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
         </div>
-      </div>
-
-      <div class="section">
-        <h2>Charging Power</h2>
-        <ul class="filters power">
-          <li>
-            <input type="checkbox" class="filter-input" id="turbo" value="turbo" />
-            <label for="turbo">Turbo - 100 to 350 kW <br /><span>Aprox. 30 min charge</span></label>
-          </li>
-          <li>
-            <input type="checkbox" class="filter-input" id="fast" value="fast" />
-            <label for="fast">Fast - 43 to 100 kW <br /><span>Aprox. 60 min charge</span></label>
-          </li>
-          <li>
-            <input type="checkbox" class="filter-input" id="slow" value="slow" />
-            <label for="slow">Slow - 1 to 43 kW <br /><span>Aprox. 7 hour charge</span></label>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>Amenities</h2>
-        <ul class="filters amenities">
-          <li>
-            <input type="checkbox" class="filter-input" id="supermarket" value="supermarket" />
-            <label for="supermarket">Supermarket</label>
-          </li>
-          <li></li>
-          <li>
-            <input type="checkbox" class="filter-input" id="bathroom" value="bathroom" />
-            <label for="bathroom">Bathroom</label>
-          </li>
-          <li>
-            <input type="checkbox" class="filter-input" id="restaurant" value="restaurant" />
-            <label for="restaurant">Restaurant</label>
-          </li>
-        </ul>
-      </div>
-      <a
-        class="chargetrip-logo"
-        href="https://chargetrip.com/"
-        aria-label="Made with love at Chargetrip"
-        title="Made with love at Chargetrip"
-        >Made with ❤️ at</a
-      >
+      </footer>
     </div>
   </body>
   <script src="bundle.js"></script>

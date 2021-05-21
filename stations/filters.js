@@ -20,19 +20,15 @@ export const defaultFilters = {
  * Update map when filters change
  */
 const rangeSlider = document.getElementById('range');
-const rangeThumb = document.getElementById('range-thumb');
+const rangeValue = document.getElementById('distance');
 
 const updateRangeSliderValue = () => {
-  const percent = (rangeSlider.value - 1000) / 9000;
-  const newPosition = percent * rangeSlider.offsetWidth - percent * 60;
-
-  rangeThumb.innerHTML = `${rangeSlider.value / 1000} km`;
-  rangeThumb.style.left = `calc((${newPosition}px))`;
+  rangeValue.innerHTML = `${rangeSlider.value / 1000} km`;
 };
 
 const getFilters = () => {
-  const selectedAmenityInputs = [...document.querySelectorAll('.filters.amenities input[type=checkbox]:checked')];
-  const selectedPowerInputs = [...document.querySelectorAll('.filters.power input[type=checkbox]:checked')];
+  const selectedAmenityInputs = [...document.querySelectorAll('.amenities input[type=checkbox]:checked')];
+  const selectedPowerInputs = [...document.querySelectorAll('.power input[type=checkbox]:checked')];
 
   const selectedAmenities = selectedAmenityInputs.map(input => input.value);
   const selectedPowers = selectedPowerInputs
@@ -52,7 +48,7 @@ export const initFilters = callback => {
     callback(getFilters());
   });
 
-  const filters = [...document.querySelectorAll('.filters input')];
+  const filters = [...document.querySelectorAll('.checklist input')];
   filters.forEach(input => input.addEventListener('change', () => callback(getFilters())));
 
   updateRangeSliderValue();
