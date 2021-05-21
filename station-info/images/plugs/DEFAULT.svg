@@ -1,0 +1,11 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g id="DEFAULT">
+<path d="M12 14.5C10.8954 14.5 10 15.3954 10 16.5H14C14 15.3954 13.1046 14.5 12 14.5Z" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 16.5C9.5 15.1193 10.6193 14 12 14C13.3807 14 14.5 15.1193 14.5 16.5C14.5 16.7761 14.2761 17 14 17H10C9.72386 17 9.5 16.7761 9.5 16.5Z" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3ZM1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12Z" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 7.5C9.05229 7.5 9.5 7.94772 9.5 8.5V11.5C9.5 12.0523 9.05229 12.5 8.5 12.5C7.94772 12.5 7.5 12.0523 7.5 11.5V8.5C7.5 7.94772 7.94772 7.5 8.5 7.5Z" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 7.5C16.0523 7.5 16.5 7.94772 16.5 8.5V11.5C16.5 12.0523 16.0523 12.5 15.5 12.5C14.9477 12.5 14.5 12.0523 14.5 11.5V8.5C14.5 7.94772 14.9477 7.5 15.5 7.5Z" fill="currentColor"/>
+</g>
+<defs>
+</svg>
