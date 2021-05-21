@@ -4,7 +4,7 @@ This tutorial explains how to show charging stations on a map by using the Charg
 
 1. The Chargetrip Tile Server offers a pre-rendered fully clustered charge station solution with the ability to filter stations;
 2. Zoom in/out and recenter the map when clicking on a cluster;
-3. This example shows stations from two different providers: EcoMovement and Open Charge Map.
+3. This example shows stations from the EcoMovement provider.
 
 To see this example live 👉 [demo](https://chargetrip.github.io/examples/tile-server/).
 
