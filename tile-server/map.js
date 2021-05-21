@@ -1,10 +1,5 @@
 import mapboxgl from 'mapbox-gl';
 
-const providers = {
-  eco: '5ed1175bad06853b3aa1e492',
-  ocm: '5e8c22366f9c5f23ab0eff39',
-};
-
 /**
  * Mapbox runs 'transformRequest' before it makes a request for an external URL
  * We use this callback to set a client key in the header of the request to Chargetrip API.
@@ -15,16 +10,10 @@ const providers = {
  * You need a registered `x-client-id` to access the full database.
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  *
- * IMPORTANT!
- * In this example we switch between two data providers. Mapbox has caching on zoom levels in place to make
- * the map blazing fast. For the purpose of this demo we have to make sure Mapbox invalidates all tiles
- * when we change between ocm and eco-movement providers. We do this by setting a max-age to 0 in the request header.
- * Don't use this technique in a real-world project because you will lose the built-in optimisation!
  */
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
-export const displayMap = provider => {
+export const displayMap = () => {
   let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
@@ -33,7 +22,7 @@ export const displayMap = provider => {
     transformRequest: (url, resourceType) => {
       if (resourceType === 'Tile' && url.startsWith('https://api.chargetrip.io')) {
         const headers = {
-          'x-client-id': providers[provider] || providers['eco'],
+          'x-client-id': '5ed1175bad06853b3aa1e492',
           'Cache-Control': 'max-age=0',
         };
 
@@ -45,11 +34,6 @@ export const displayMap = provider => {
     },
   });
 
-  const clusterIcon = () => {
-    if (provider === 'ocm') return 'cluster-unknown';
-    return 'cluster';
-  };
-
   /**
    * Display all stations that we request from the Tile Server.
    *
@@ -57,7 +41,6 @@ export const displayMap = provider => {
    * The stations will be clustered.
    * When clicking on a cluster you will zoom in and the map will be centered around that point.
    */
-
   map.on('load', () => {
     map.addSource('stations', {
       type: 'vector',
@@ -93,7 +76,7 @@ export const displayMap = provider => {
       interactive: true,
       filter: ['>', ['get', 'count'], 1],
       layout: {
-        'icon-image': clusterIcon(),
+        'icon-image': 'cluster',
         'icon-size': 0.9,
         'icon-offset': [0, -16],
         'text-field': [
@@ -135,47 +118,46 @@ export const displayMap = provider => {
       });
     }
   });
+
   /**
-   * If Ecomovement has been selected as provider a polygon will be displayed.
-   * This polygon will show in what area data is available for free.
+   * Our ecomovement data is limited on our free key.
+   * We draw a polygon using this function to show what area of data is available for free.
    */
-  if (provider !== 'ocm') {
-    map.on('load', () => {
-      map.addSource('eco', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          geometry: {
-            type: 'Polygon',
-            coordinates: [
-              [
-                [-180, -90],
-                [180, -90],
-                [180, 90],
-                [-180, 90],
-                [-180, -90],
-              ],
-              [
-                [7.8, 61],
-                [11.3, 61],
-                [11.3, 45],
-                [7.8, 45],
-                [7.8, 61],
-              ],
+  map.on('load', () => {
+    map.addSource('eco', {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        geometry: {
+          type: 'Polygon',
+          coordinates: [
+            [
+              [-180, -90],
+              [180, -90],
+              [180, 90],
+              [-180, 90],
+              [-180, -90],
             ],
-          },
+            [
+              [7.8, 61],
+              [11.3, 61],
+              [11.3, 45],
+              [7.8, 45],
+              [7.8, 61],
+            ],
+          ],
         },
-      });
-      map.addLayer({
-        id: 'eco',
-        type: 'fill',
-        source: 'eco',
-        layout: {},
-        paint: {
-          'fill-color': '#282A30',
-          'fill-opacity': 0.6,
-        },
-      });
+      },
     });
-  }
+    map.addLayer({
+      id: 'eco',
+      type: 'fill',
+      source: 'eco',
+      layout: {},
+      paint: {
+        'fill-color': '#282A30',
+        'fill-opacity': 0.6,
+      },
+    });
+  });
 };
