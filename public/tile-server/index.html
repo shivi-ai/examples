@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>
-      const searchParams = new URLSearchParams(document.location.search);
-      const provider = searchParams.get('provider');
-
-      if (!provider) {
-        window.history.replaceState(null, null, '?provider=eco#eco');
-      }
-    </script>
-
     <meta charset="utf-8" />
     <title>Chargetrip API: Tile Service example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,74 +10,56 @@
     />
     <meta
       name="keywords"
-      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map"
+      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map, supercluster"
     />
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="map"></div>
-    <button class="legend-button" aria-label="display legend" title="display-legend"></button>
-    <div class="legend" id="legend">
-      <div class="section-title">Availability</div>
-      <ul class="section section-border">
-        <li class="section-available">Available <br /><span>At least one connector is available</span></li>
-        <li class="section-in-use">In use <br /><span>All connectors are in use</span></li>
-        <li class="section-unkown">Unkown <br /><span>The status is currently unkown</span></li>
-        <li class="section-broken">Broken <br /><span>All connectors are inoperational</span></li>
-      </ul>
-      <div class="section-title">Charging speed</div>
-      <ul class="section">
-        <li class="section-turbo">Turbo<br /><span>150 kW to 350 kW</span></li>
-        <li class="section-fast">Fast<br /><span>43 kW to 150 kW</span></li>
-        <li class="section-slow">Slow<br /><span>1 kW to 43 kW</span></li>
-      </ul>
-    </div>
     <div class="github-link">
-      <a href="https://github.com/chargetrip/examples/tree/master/tile-server" title="github examples">
+      <a href="https://github.com/chargetrip/examples/tree/master/tile-server" title="github project">
         View on Github
       </a>
       <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
     </div>
-
+    <div id="map"></div>
     <div class="card">
-      <div class="card-section">
-        <div><h1>Charging Station Provider</h1></div>
-        <div class="providers">
-          <a id="eco" href="?provider=eco#eco">EcoMovement</a>
-          <a id="ocm" href="?provider=ocm#ocm">Open Charge</a>
+      <header>
+        <h1>Station provider</h1>
+        <p>Vector tile server</p>
+      </header>
+      <main>
+        <div class="provider">
+          <div class="logo">
+            <img src="images/ecomovement.svg" alt="Logo of Ecomovement" />
+          </div>
+          <div class="provider-info">
+            <h3>
+              EcoMovement
+            </h3>
+            <p>
+              High quality dynamic charging locations data. For the purpose of this example, only part of it is public
+              (within the polygon). If you want to use the full database, create an account
+              <a href="https://account.chargetrip.com">here</a>.
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="card-section">
-        <div class="provider-eco">
-          EcoMovement
-          <span>Premium</span>
+      </main>
+      <footer>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
         </div>
-        <div class="provider-info">
-          High quality dynamic charging locations data. Verified and more extensive database of charging points. For the
-          purpose of this example, only part of it is public (within the polygon). If you want to use the full database,
-          contact us at
-          <a href="https://chargetrip.com">Chargetrip</a>.
-        </div>
-      </div>
-      <div class="card-section">
-        <div class="provider-ocm">Open Charge Map</div>
-        <div class="provider-info">
-          Global and public charging locations data. Provided for free. This provider doesn't have any information about
-          the availability of the stations.
-        </div>
-      </div>
-      <a
-        class="chargetrip-logo"
-        href="https://chargetrip.com/"
-        aria-label="Made with love at Chargetrip"
-        title="Made with love at Chargetrip"
-        >Made with ❤️ at</a
-      >
+      </footer>
     </div>
   </body>
   <script src="bundle.js"></script>
