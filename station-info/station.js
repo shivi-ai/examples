@@ -101,7 +101,7 @@ const renderHeader = station => {
  */
 const renderConnectors = connectors => {
   let connectorList = document.getElementById('connector-list');
-  connectorList.replaceChildren();
+  connectorList.textContent = '';
 
   connectors.forEach(connector => {
     console.log(connector);
@@ -139,7 +139,7 @@ const renderConnectors = connectors => {
  */
 const renderAmenities = amenities => {
   let amenityList = document.getElementById('amenity-list');
-  amenityList.replaceChildren();
+  amenityList.textContent = '';
 
   Object.keys(amenities || {})?.forEach(amenity => {
     console.log(amenity);
@@ -164,7 +164,7 @@ const renderAmenities = amenities => {
  */
 const renderDetails = details => {
   let stationDetails = document.getElementById('station-details');
-  stationDetails.replaceChildren();
+  stationDetails.textContent = '';
 
   details.forEach(detail => {
     stationDetails.insertAdjacentHTML(
