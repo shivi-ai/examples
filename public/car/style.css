@@ -228,6 +228,11 @@ header p {
   align-items: center;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.car-list-element:hover {
+  background-color: var(--background-subdued);
 }
 
 .car-list-image {
