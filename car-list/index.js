@@ -241,7 +241,7 @@ document.getElementById('search-area').addEventListener(
     currentPage = 0;
 
     // Empties our current car-list so we can replace it with the search results
-    document.getElementById('car-list').replaceChildren();
+    document.getElementById('car-list').textContent = '';
 
     // Reset our rendered and grouped defaults so we have a clean list to start building our search results.
     renderedCars = [];

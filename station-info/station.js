@@ -29,7 +29,6 @@ export const displayStationData = data => {
 
   // Format the connectors so they can be rendered
   const connectors = station.chargers?.map(charger => {
-    console.log(charger);
     const status = getConnectorStatus(charger);
     return {
       name: getConnectorName(charger.standard),
@@ -101,10 +100,9 @@ const renderHeader = station => {
  */
 const renderConnectors = connectors => {
   let connectorList = document.getElementById('connector-list');
-  connectorList.replaceChildren();
+  connectorList.textContent = '';
 
   connectors.forEach(connector => {
-    console.log(connector);
     connectorList.insertAdjacentHTML(
       'afterbegin',
       `
@@ -139,10 +137,9 @@ const renderConnectors = connectors => {
  */
 const renderAmenities = amenities => {
   let amenityList = document.getElementById('amenity-list');
-  amenityList.replaceChildren();
+  amenityList.textContent = '';
 
   Object.keys(amenities || {})?.forEach(amenity => {
-    console.log(amenity);
     amenityList.insertAdjacentHTML(
       'beforeend',
       `
@@ -164,7 +161,7 @@ const renderAmenities = amenities => {
  */
 const renderDetails = details => {
   let stationDetails = document.getElementById('station-details');
-  stationDetails.replaceChildren();
+  stationDetails.textContent = '';
 
   details.forEach(detail => {
     stationDetails.insertAdjacentHTML(
