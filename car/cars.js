@@ -155,7 +155,7 @@ const renderCarNamingData = namingData => {
  * @param { boolean } isTable - This value defines whether we should render a list or a table
  */
 const renderCarListData = (elementId, data, isTable) => {
-  document.getElementById(elementId).replaceChildren();
+  document.getElementById(elementId).textContent = '';
 
   // Add table header when rendering a table
   if (isTable) {
