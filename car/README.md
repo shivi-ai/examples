@@ -17,7 +17,7 @@ This example is built with vanilla JS. To establish a connection with Chargetrip
 
 ### Preparation
 
-Our Playground gives you access to only 4 cars. Some car parameters are courtesy of our partner [EV Database](https://ev-database.org/). If you want to access the full database, please contact us.
+Our Playground gives you access to only 12 cars. Some car parameters are courtesy of our partner [EV Database](https://ev-database.org/). If you want to access the full database, please contact us or create an [account](https://account.chargetrip.com).
 
 ### Steps to take
 
