@@ -1,39 +1,13 @@
-import { createClient, defaultExchanges } from '@urql/core';
-import { getCarList } from './queries.js';
-import { displayCarsData } from './cars';
+import mapboxgl from 'mapbox-gl';
+import { getCarList } from './client';
 
-/**
- * For the purpose of this example we use urgl - lightweights GraphQL client.
- * To establish a connection with Chargetrip GraphQL API you need to have an API key.
- * The key in this example is a public one and gives an access only to a part of our extensive database.
- * You need a registered `x-client-id` to access the full database.
- * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
- */
-const headers = {
-  'x-client-id': '5ed1175bad06853b3aa1e492',
-};
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
-const client = createClient({
-  url: 'https://api-2.chargetrip.io/graphql',
-  fetchOptions: {
-    method: 'POST',
-    headers,
-  },
-  exchanges: [...defaultExchanges],
+new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
+  zoom: 5,
+  center: [8.1320104, 52.3758916],
 });
 
-/**
- * You can access a list of all available cars using the `carList` query.
- * In this example we use our playground, which has only 4 card available.
- * Chargetrip operates an extensive database of EV makes, editions, and versions,
- * each with their specific consumption models.
- * You need a registered x-client-id to access the full car database.
- * Contact us if you are interested in working with the full database.
- * **/
-client
-  .query(getCarList)
-  .toPromise()
-  .then(response => {
-    displayCarsData(response.data?.carList);
-  })
-  .catch(error => console.log(error));
+getCarList();
