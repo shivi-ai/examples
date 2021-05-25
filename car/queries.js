@@ -1,70 +1,78 @@
 import qql from 'graphql-tag';
 
-export const getCarList = qql`
+export const getCarListQuery = qql`
 query carList {
-  carList(size: 200, page: 0) {
-      id
-      naming {
-        make
-        model
-        version
-        edition
-        chargetrip_version
+  carList(
+    page: 0, 
+    size: 12
+  ) {
+    id
+    naming {
+      make
+      model
+      version
+      edition
+      chargetrip_version
+    }
+    media {
+      image {
+        thumbnail_url
+        thumbnail_height
+        thumbnail_width
       }
-      connectors {
-        standard
-        power
-        time
-        speed
-      }
-      adapters {
-        standard
-        power
-        time
-        speed
-      }
-      battery {
-        usable_kwh
-        full_kwh
-      }
-      body {
-        seats
-      }
-      range {
-        chargetrip_range {
-          best
-          worst
-       }
-      }
-      media {
-        image {
-          id
-          type
-          url
-          height
-          width
-          thumbnail_url
-          thumbnail_height
-          thumbnail_width
-        }
-        brand {
-          id
-          type
-          url
-          height
-          width
-          thumbnail_url
-          thumbnail_height
-          thumbnail_width
-        }
-        video {
-          id
-          url
-       }
-      }
-      routing {
-       fast_charging_support
-      }
-      }
+    }
   }
+}
+`;
+
+export const getCarDetailsQuery = qql`
+query car($carId: ID) {
+  car(id: $carId) {
+    naming {
+      make
+      model
+      version
+      edition
+      chargetrip_version
+    }
+    media {
+      image {
+        url
+      }
+      brand {
+        thumbnail_url
+      }
+    }
+    battery {
+      usable_kwh
+    }
+    range {
+      real
+      best {
+        highway
+        city
+        combined
+      }
+      worst {
+        highway
+        city
+        combined
+      }
+      chargetrip_range {
+        best
+        worst
+      }
+    }
+    routing {
+      fast_charging_support
+    }
+    connectors {
+      standard
+    }
+    performance {
+      acceleration
+      top_speed
+    }
+  }
+}
 `;
