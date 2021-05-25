@@ -21,11 +21,11 @@ Our Playground gives you access to only 4 cars. Some car parameters are courtesy
 
 ### Steps to take
 
-1. Query a list of all cars. Using GraphQL you can query only the data you need. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#getting-a-list-of-all-cars).
+1. Query a list of all cars. Using GraphQL you can query only the data you need. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Cars/query-car).
 2. Show information about the cars.
 
 ### Useful links
 
-1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/);
+1. Chargetrip GraphAPI [docs](https://developers.chargetrip.com/);
 2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/);
 3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).
