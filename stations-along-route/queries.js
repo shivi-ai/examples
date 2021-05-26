@@ -1,11 +1,11 @@
 import qql from 'graphql-tag';
 
 /*
- * In this example we request a route from Amsterdam, Netherlands to Utrecht, Netherlands
+ * In this example we request a route from Hanover, Germany to Aalborg, Denmark
  * Your origin and destination are required fields. You also need to select an EV.
  * Only the EV ID here is mandatory, all other fields are optional and when not specified will use the default values.
  * The changing conditions are:
- *   - full battery at Amsterdam, Netherlands
+ *   - full battery at Hanover, Germany
  *   - EV can charge at CHAdeMO changers
  *   - should use climate (temperature and weather conditions)
  *   - one passenger in the car (drive alone)
@@ -31,14 +31,13 @@ mutation newRoute{
         routeRequest: {
           origin: {
             type: Feature
-            geometry: { type: Point, coordinates: [4.8951679, 52.3702157] }
-            properties: { name: "Amsterdam, Netherlands" }
-
+            geometry: { type: Point, coordinates: [9.732625731357011, 52.3806314590276] }
+            properties: { name: "Hanover, Germany" }
           }
           destination: {
             type: Feature
-            geometry: { type: Point, coordinates: [8.0472, 52.2799] }
-            properties: { name: "Osnabrück, Germany" }
+            geometry: { type: Point, coordinates: [9.922192327081783, 57.046057998779176] }
+            properties: { name: "Aalborg, Denmark" }
           }
           stationsAlongRouteRadius: 2000
         }
@@ -56,6 +55,7 @@ subscription routeUpdatedById($id: ID!){
       duration
       consumption
       polyline
+      charges
       legs{
         distance
         origin{

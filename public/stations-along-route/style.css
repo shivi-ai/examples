@@ -1,292 +1,305 @@
+:root {
+  --base: 16px;
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+  --font-size-base: 0.875rem;
+  --font-size-small: 0.75rem;
+  --font-size-micro: 0.5rem;
+
+  --background-body: #ffffff;
+  --background-subdued: #e5f0f5;
+  --background-base: #f4f8fb;
+  --background-alt: #e5f0f5;
+  --background-alt2: #c9dee9;
+  --background-alt3: #8dadbf;
+  --background-alt4: #608192;
+
+  --accent-base: #0078ff;
+  --accent-alt: #005ee5;
+  --accent-alt2: #0041c8;
+
+  --status-approved: #2bc7b4;
+
+  --font-base: #1b2023;
+  --font-alt: #2c353a;
+  --font-alt2: #45535b;
+  --font-alt3: #566a75;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  color: #323c4d;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
+  color: var(--font-base);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: var(--base);
   font-weight: normal;
 }
 
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-span {
-  font-weight: 600;
-}
-
-ul,
-ol {
-  padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
-  list-style: none;
+  padding: 0;
 }
 
 h1 {
-  margin: 0;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 28px;
+  font-weight: bold;
+  font-size: var(--font-size-h1);
+  line-height: 2.5rem;
 }
 
-h2 {
-  margin-bottom: 10px;
-  margin-top: 0px;
+h3 {
+  font-weight: 600;
+  font-size: var(--font-size-h3);
+  line-height: 1.75rem;
+}
+
+p {
+  font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  color: #e8edf1;
+  font-size: var(--font-size-base);
+  line-height: 1.75rem;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: var(--font-base);
 }
 
-section {
-  border-bottom: 1px solid #e8edf1;
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-section:last-child {
-  padding-bottom: 16px;
-  border-bottom: none;
-}
-
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.journey-specs {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  width: 360px;
-  height: 160px;
-  max-height: calc(100% - 2em);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
-  background-color: #030303;
-  border-radius: 8px;
-  overflow-y: auto;
-}
-
-.journey-specs header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 0px 20px 0;
-  background-color: #030303;
-  color: #e8edf1;
-}
-
-.journey-specs-details {
-  position: absolute;
-  top: 160px;
-  left: 16px;
-  width: 360px;
-  max-height: calc(100% - 2em);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow-y: auto;
-}
-
-.station-data:focus {
-  outline: none;
-}
-
-.tags {
-  display: none;
-  margin-top: 16px;
-}
-
-.tag {
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  margin: 0 6px;
-  border: 1px solid #ffffff;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.info {
-  padding: 0 16px 8px;
-  border-bottom: 1px solid #e8edf1;
-}
-
-.info h2 {
-  padding: 20px 0 0 0;
-  margin-bottom: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  color: #0c0c10;
-}
-.info li {
+li {
+  padding: 0.25rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0 0 30px;
-  font-size: 15px;
-  line-height: 48px;
 }
 
-.info-amount {
-  background: url('images/station-amount.svg') no-repeat left center;
-}
-
-.info-show {
-  background: url('images/show.svg') no-repeat left center;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  height: 24px;
-  width: 56px;
-  border-radius: 4px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The ON and OFF slider */
-.switch-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.switch-slider-text {
-  position: relative;
-  top: -13px;
-  left: 23px;
+li p:last-child {
   font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  color: #ffffff;
 }
 
-.switch-slider:before {
-  position: absolute;
-  content: '';
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  top: 3px;
-  background-color: white;
-  border-radius: 4px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .switch-slider {
-  border-radius: 4px;
-  background-color: #1f97ff;
-  border: 1px solid #086cc2;
-}
-
-input:focus + .switch-slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .switch-slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-  left: 8px;
-}
-
-input:checked + .switch-slider .switch-slider-text {
-  left: 5px;
-}
-
-.tags {
-  display: none;
-  margin-top: 10px;
-}
-
-.tag {
+button {
+  width: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  margin: 0 6px;
-  border: 1px solid #ffffff;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--background-body);
+  border-radius: 4px;
+  background-color: var(--accent-base);
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  font-weight: bold;
+}
+
+button:disabled {
+  background-color: var(--background-alt2);
+  color: var(--font-alt3);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+section {
+  padding: 1rem;
+  border-top: 1px solid var(--background-alt);
+}
+
+main section:first-child {
+  border-top: none;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  top: 1rem;
+  left: 1rem;
+  width: 360px;
+  border-radius: 8px;
+  background-color: var(--background-body);
+  box-shadow: 0px 8px 62px rgba(0, 0, 0, 0.07), 0px 9.63424px 10.0459px rgba(0, 0, 0, 0.08),
+    0px 5.80506px 6.13245px rgba(0, 0, 0, 0.0310277), 0px -4px 3.46624px rgba(0, 0, 0, 0.024633),
+    0px 24px 64px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+
+  grid-template-rows: min-content 1fr min-content;
+}
+
+.card header {
+  z-index: 10;
+  grid-area: header;
+  width: inherit;
+  padding: 1rem;
+  background: var(--background-body);
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.02), 0px 2px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+header p {
+  color: var(--font-alt3);
+}
+
+.border-crossing {
+  display: flex;
+  align-items: center;
+  margin: 0.25rem 0 0;
+}
+
+.border-crossing p {
+  font-size: var(--font-size-base);
+  color: var(--font-base);
+  font-weight: bold;
+  padding-left: 0.5rem;
+}
+
+.border-crossing .icon {
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 12px;
-  font-size: 14px;
+  background: url('images/border.svg') no-repeat center center #1b2023;
+}
+
+.card main {
+  grid-area: main;
+  overflow-y: auto;
+}
+
+.switch {
+  -webkit-appearance: none;
+  width: 2.5rem;
+  height: 1.25rem;
+  border-radius: 0.75rem;
+  background-color: var(--background-alt);
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.switch:after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--background-body);
+  box-shadow: 0px 1.66667px 5px rgba(37, 42, 50, 0.12);
+  border-radius: 1rem;
+  margin-top: 0.125rem;
+  margin-left: 0.125rem;
+  transition: transform 150ms ease;
+}
+
+.switch:checked {
+  background-color: var(--accent-base);
+}
+
+.switch:checked:after {
+  transform: translateX(calc(100% + 0.25rem));
+}
+
+.card footer {
+  grid-area: footer;
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 360px;
+  background: var(--background-body);
+  border-top: 1px solid var(--background-alt);
+}
+
+.chargetrip-logo {
+  display: inline-block;
+  height: 2.5rem;
+  line-height: 39px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  background-size: 5.25rem;
+  padding-right: 5.5rem;
+  font-size: var(--font-size-small);
   font-weight: 600;
-  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--font-alt3);
+  font-weight: bold;
 }
 
-.station-type {
-  padding: 20px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 20px;
-}
-.station-type span {
-  font-size: 16px;
-  height: 50px;
+.prefooter {
+  padding: 1rem;
+  border-bottom: 1px solid var(--background-alt);
 }
 
-.station-type-fast {
-  padding: 40px;
-  background: url('images/along-fast.svg') no-repeat left center;
+.disclaimer {
+  padding: 0 1rem;
 }
 
-.station-type-turbo {
-  padding: 40px;
-  background: url('images/along-turbo.svg') no-repeat left center;
+.mapboxgl-ctrl-attrib-button {
+  display: none;
 }
 
 /* View project on the github link */
 .github-link {
   position: fixed;
   top: 16px;
-  right: 66px;
+  right: 16px;
   display: flex;
   align-items: center;
 
   padding: 0 12px;
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
 
-  background-color: #030303;
+  background-color: #fff;
   border-radius: 20px;
 
-  color: #fff;
+  color: #0c0c10;
   font-size: 15px;
   font-weight: 500;
   line-height: 40px;
+  z-index: 2;
 }
 
 .github-link a {
   padding: 0 16px 0 32px;
   margin: 0 8px 0 0;
   background: url('images/github.svg') no-repeat left center;
-  border-right: 1px solid #54545c;
-  color: #fff;
-  text-decoration: none;
+  border-right: 1px solid #edf2f6;
+  color: var(--font-base);
+  font-weight: bold;
 }
 
 .github-link button {
@@ -301,106 +314,4 @@ input:checked + .switch-slider .switch-slider-text {
 
 .github button:focus {
   outline: none;
-}
-
-/* Display a legend of chargeing stations */
-.legend-button {
-  position: fixed;
-  right: 16px;
-  top: 16px;
-  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
-  border-radius: 50%;
-  background: url('images/legend.svg') no-repeat center center #fff;
-  -webkit-appearance: none;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  border: none;
-}
-
-.legend-button:focus {
-  outline: none;
-}
-
-.legend {
-  display: none;
-  position: absolute;
-  width: 320px;
-  max-height: calc(630px - 2em);
-  right: 16px;
-  top: 64px;
-
-  background: #ffffff;
-  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  overflow-y: auto;
-}
-
-.section {
-  /* padding: 16px;
-  padding-bottom: 5px; */
-}
-
-.section-border {
-  border-bottom: 1px solid #edf2f6;
-  padding-bottom: 16px;
-}
-
-.section-title {
-  padding: 24px 16px 0 16px;
-  margin-bottom: 12px;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  color: #0c0c10;
-}
-
-.section li {
-  padding: 13px 0 9px 8px;
-  margin: 0 20px;
-  padding-left: 40px;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  color: #202024;
-}
-
-.section li span {
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 17px;
-  color: #787884;
-}
-
-.section-required {
-  padding: 0 0 30px 60px;
-  background: url('images/required-station.svg') no-repeat left center;
-}
-
-.section-alternative {
-  padding: 0 0 30px 60px;
-  margin-bottom: 8px;
-  background: url('images/alternative-station.svg') no-repeat left center;
-}
-
-.section-turbo {
-  background: url('images/turbo.svg') no-repeat left center;
-}
-
-.section-fast {
-  background: url('images/fast.svg') no-repeat left center;
-}
-
-/* Link to Chargetrip website */
-.chargetrip-logo {
-  display: inline-block;
-  height: 40px;
-  line-height: 38px;
-  background: url('images/chargetrip.svg') no-repeat right center transparent;
-  background-size: 72px;
-  padding-right: 76px;
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0 15px;
-  color: var(--black);
 }
