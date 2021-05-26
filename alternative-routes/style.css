@@ -1,202 +1,274 @@
+:root {
+  --base: 16px;
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+  --font-size-base: 0.875rem;
+  --font-size-small: 0.75rem;
+  --font-size-micro: 0.5rem;
+
+  --background-body: #ffffff;
+  --background-subdued: #e5f0f5;
+  --background-base: #f4f8fb;
+  --background-alt: #e5f0f5;
+  --background-alt2: #c9dee9;
+  --background-alt3: #8dadbf;
+  --background-alt4: #608192;
+
+  --accent-base: #0078ff;
+  --accent-alt: #005ee5;
+  --accent-alt2: #0041c8;
+
+  --status-approved: #2bc7b4;
+
+  --font-base: #1b2023;
+  --font-alt: #2c353a;
+  --font-alt2: #45535b;
+  --font-alt3: #566a75;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  color: #323c4d;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
+  color: var(--font-base);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: var(--base);
   font-weight: normal;
 }
 
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-span {
-  font-weight: 600;
-}
-
-ul,
-ol {
-  padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
-  list-style: none;
+  padding: 0;
 }
 
 h1 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 200;
-  line-height: 24px;
+  font-weight: bold;
+  font-size: var(--font-size-h1);
+  line-height: 2.5rem;
 }
 
-h2 {
-  padding: 8px 16px 0;
-  margin-bottom: 10px;
-  font-size: 18px;
+h3 {
   font-weight: 600;
-  line-height: 24px;
+  font-size: var(--font-size-h3);
+  line-height: 1.75rem;
+}
+
+p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: var(--font-size-base);
+  line-height: 1.75rem;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: var(--font-base);
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+li p:last-child {
+  font-weight: 600;
+}
+
+button {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--background-body);
+  border-radius: 4px;
+  background-color: var(--accent-base);
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  font-weight: bold;
+}
+
+button:disabled {
+  background-color: var(--background-alt2);
+  color: var(--font-alt3);
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 section {
-  border-bottom: 1px solid #e8edf1;
+  padding: 1rem;
+  border-top: 1px solid var(--background-alt);
 }
 
-section:last-child {
-  padding-bottom: 16px;
-  border-bottom: none;
+main section:first-child {
+  border-top: none;
 }
 
 #map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.journey-specs {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+.card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  top: 1rem;
+  left: 1rem;
   width: 360px;
-  max-height: calc(100% - 2em);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
   border-radius: 8px;
+  background-color: var(--background-body);
+  box-shadow: 0px 8px 62px rgba(0, 0, 0, 0.07), 0px 9.63424px 10.0459px rgba(0, 0, 0, 0.08),
+    0px 5.80506px 6.13245px rgba(0, 0, 0, 0.0310277), 0px -4px 3.46624px rgba(0, 0, 0, 0.024633),
+    0px 24px 64px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+
+  grid-template-rows: min-content 1fr min-content;
+}
+
+.card header {
+  z-index: 10;
+  grid-area: header;
+  width: inherit;
+  padding: 1rem;
+  background: var(--background-body);
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.02), 0px 2px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+header p {
+  color: var(--font-alt3);
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  background: var(--background-alt);
+  height: 2rem;
+  align-items: center;
+  border-radius: 0.375rem;
+  margin-top: 1rem;
+}
+
+.tab-highlighter {
+  height: 28px;
+  width: calc(33% - 2px);
+  left: 2px;
+  top: 2px;
+  background: var(--background-body);
+  border-radius: 6px;
+  position: absolute;
+  box-shadow: 0px 2px 6px rgba(37, 42, 50, 0.12);
+  z-index: 10;
+  transition: transform 300ms ease;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  z-index: 15;
+  cursor: pointer;
+}
+
+.tab p {
+  font-weight: 600;
+}
+
+.tab.active p {
+  color: var(--font-base);
+}
+
+.card main {
+  grid-area: main;
   overflow-y: auto;
 }
 
-.journey-specs header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 0;
-  background-color: #030303;
-  color: #e8edf1;
+.card footer {
+  grid-area: footer;
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 360px;
+  background: var(--background-body);
+  border-top: 1px solid var(--background-alt);
 }
 
-.duration {
-  font-size: 22px;
+.chargetrip-logo {
+  display: inline-block;
+  height: 2.5rem;
+  line-height: 39px;
+  background: url('images/chargetrip.svg') no-repeat right center transparent;
+  background-size: 5.25rem;
+  padding-right: 5.5rem;
+  font-size: var(--font-size-small);
   font-weight: 600;
-  line-height: 28px;
+  text-transform: uppercase;
+  color: var(--font-alt3);
+  font-weight: bold;
 }
 
-.tags {
+.prefooter {
+  padding: 1rem;
+  border-bottom: 1px solid var(--background-alt);
+}
+
+.disclaimer {
+  padding: 0 1rem;
+}
+
+.mapboxgl-ctrl-attrib-button {
   display: none;
-  margin-top: 16px;
 }
 
-.tag {
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  margin: 0 6px;
-  border: 1px solid #ffffff;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-/* Route selector radio button*/
-.route-selector {
-  display: flex;
-  justify-content: space-between;
-  width: 328px;
-  height: 40px;
-  margin: 16px;
-  padding: 0px;
-  background: #edf2f6;
-  box-sizing: border-box;
-  border: 1.49026px solid #edf2f6;
-  border-radius: 6px;
-}
-
-.checkbox:checked ~ .background-color {
-  background-color: #0078ff;
-}
-
-[type='checkbox']:checked,
-[type='checkbox']:not(:checked),
-[type='radio']:checked,
-[type='radio']:not(:checked) {
-  position: absolute;
-  left: -9999px;
-  width: 0;
-  height: 0;
-  visibility: hidden;
-}
-
-.checkbox:checked + label:before,
-.checkbox:not(:checked) + label:before {
-  cursor: pointer;
-  z-index: 2;
-  font-size: 15px;
-  line-height: 24px;
-}
-
-.checkbox-routes:checked + label,
-.checkbox-routes:not(:checked) + label {
-  font-size: 15px;
-  line-height: 34px;
+.mapboxgl-popup {
+  font-size: var(--font-size-base);
   text-align: center;
-  width: 30%;
-  height: 32px;
-  margin: 3px;
-  cursor: pointer;
-  color: black;
+  line-height: 1.25rem;
+  padding: 0 1rem;
+  max-width: 320px !important;
 }
 
-.checkbox-routes:checked + label {
-  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+.mapboxgl-popup-content {
   border-radius: 4px;
-  background-color: #0078ff;
-  color: #fff;
-}
-
-/* Information about the selected route */
-.info {
-  padding: 8px 16px;
-}
-
-.info li {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  line-height: 18px;
-}
-
-.info.trip li {
-  padding: 0 0 0 30px;
-  line-height: 50px;
-}
-
-.trip {
-  padding: 8px 16px;
-  border-bottom: 1px solid #e8edf1;
-}
-
-.trip-duration {
-  background: url('images/time.svg') no-repeat left center;
-}
-
-.trip-fuel {
-  background: url('images/fuel.svg') no-repeat left center;
-}
-
-.trip-consumption {
-  background: url('images/consumption.svg') no-repeat left center;
-}
-
-.trip-co2 {
-  background: url('images/co2.svg') no-repeat left center;
+  padding: 0.375 1rem 0.5rem 1rem;
+  box-shadow: 0 2px 6px rgba(37, 42, 50, 0.12);
 }
 
 /* View project on the github link */
@@ -210,20 +282,23 @@ section:last-child {
   padding: 0 12px;
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
 
-  background-color: #030303;
+  background-color: #fff;
   border-radius: 20px;
 
-  color: #fff;
+  color: #0c0c10;
   font-size: 15px;
   font-weight: 500;
   line-height: 40px;
+  z-index: 2;
 }
 
 .github-link a {
   padding: 0 16px 0 32px;
   margin: 0 8px 0 0;
   background: url('images/github.svg') no-repeat left center;
-  border-right: 1px solid #54545c;
+  border-right: 1px solid #edf2f6;
+  color: var(--font-base);
+  font-weight: bold;
 }
 
 .github-link button {
@@ -238,54 +313,4 @@ section:last-child {
 
 .github button:focus {
   outline: none;
-}
-
-/* Link to Chargetrip website */
-.chargetrip-logo {
-  display: inline-block;
-  height: 40px;
-  line-height: 38px;
-  background: url('images/chargetrip.svg') no-repeat right center transparent;
-  background-size: 72px;
-  padding-right: 76px;
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0 15px;
-  color: var(--black);
-}
-
-/* Mapbox popup styles */
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
-  border-bottom-color: #030303;
-}
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
-  border-top-color: #030303;
-}
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: #030303;
-}
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: #030303;
-}
-.mapboxgl-popup-close-button {
-  display: none;
-}
-
-.mapboxgl-popup-tip {
-  margin-bottom: 5px;
-}
-
-.mapboxgl-popup-content {
-  max-width: 71px;
-  max-height: 35px;
-  padding: 10px;
-  background: #030303;
-  color: #ffffff;
-  text-align: center;
-  font-size: 10px;
-  line-height: 12px;
 }
