@@ -17,7 +17,7 @@ import { getDurationString } from '../utils';
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  'x-client-id': '5e8c22366f9c5f23ab0eff39',
+  'x-client-id': '5ed1175bad06853b3aa1e492',
 };
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
@@ -64,7 +64,9 @@ client
         if (status === 'done' && route) {
           unsubscribe();
           decodePolylines(route, alternatives); // draw a polyline on a map
-          displayRouteData(route); // fill in the route information
+          renderTabData(route, alternatives); // Set the tab times
+          renderRouteHeader(route); // Render header HTML data
+          renderRouteDetails(route); // fill in the route information
         }
       }),
     );
@@ -80,7 +82,8 @@ client
         if (status === 'done' && route) {
           unsubscribe();
           decodePolylines(route, alternatives);
-          displayRouteData(route);
+          renderRouteHeader(route);
+          renderRouteDetails(route);
         }
       });
   })
@@ -95,7 +98,8 @@ client
  * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
  * so we have to reverse every pair.
  *
- * @param data {object} route specification
+ * @param { object } route - The fastest route
+ * @param { array } alternatives - The alternative route objects
  */
 const decodePolylines = (route, alternatives) => {
   const routes = [];
@@ -115,39 +119,67 @@ const decodePolylines = (route, alternatives) => {
 };
 
 /**
- * Show journey specific information like duration, consumption, costs etc.
- *
- * @param data {object} route specification
+ * Small function that sets the time on how much longer the different routes are
+ * @param { object } route - The fastest route
+ * @param { array } alternatives - The alternative route objects
  */
-export const displayRouteData = data => {
-  if (document.querySelector('.tags').style.display !== 'flex') {
-    document.getElementById('loader').remove();
-    document.querySelector('.tags').style.display = 'flex';
-  }
+const renderTabData = (route, alternatives) => {
+  const routeDurations = [
+    'Fastest',
+    `+${getDurationString(alternatives[0].duration - route.duration)}`,
+    `+${getDurationString(alternatives[1].duration - route.duration)}`,
+  ];
 
-  // the total duration of the journey (including charge time), in seconds
+  document.querySelectorAll('.tab').forEach((tab, idx) => {
+    tab.lastElementChild.innerHTML = routeDurations[idx];
+  });
+};
+
+/**
+ * Function that renders the header details
+ * @param { object } data - All available route data
+ */
+export const renderRouteHeader = data => {
+  const routeDistance = data.distance ? `${(data.distance / 1000).toFixed(0)} km` : 'Unknown';
+  const routeStops = `${data.charges ?? 0} stops`;
+  const routeEnergy = data.consumption ? `${data.consumption.toFixed(2)} kWh` : 'Unknown';
+
   document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
+  document.getElementById('route-metadata').innerHTML = `${routeDistance} / ${routeStops} / ${routeEnergy}`;
+};
 
-  // the total distance of the route, in meters
-  document.getElementById('distance').innerHTML = data.distance ? `${(data.distance / 1000).toFixed(0)} km` : 'Unknown';
+/**
+ * Function that renders a list with certainroute details
+ * @param { object } data - all available route data
+ */
+export const renderRouteDetails = data => {
+  // Format route data so it is presentable
+  const routeDetails = formatRouteDetails(data);
 
-  // the amount of stops in this route
-  document.getElementById('stop').innerHTML = `${data.charges ?? 0} stops`;
+  // Clear the previous rendered details
+  document.getElementById('route-details').textContent = '';
 
-  // the total time required to charge of the entire route, in seconds
-  document.getElementById('charge-duration').innerHTML = getDurationString(data.chargeTime ?? 0);
+  // Loop over the formatted data and render lists inside the HTML
+  Object.keys(routeDetails).forEach(key => {
+    document.getElementById('route-details').insertAdjacentHTML(
+      'beforeend',
+      `<li>
+        <p>${key}</p>
+        <p>${routeDetails[key]}</p>
+      </li>`,
+    );
+  });
+};
 
-  // the total energy used of the route, in kWh
-  document.getElementById('consumption-overview').innerHTML = data.consumption
-    ? `${data.consumption.toFixed(2)} kWh`
-    : 'Unknown';
-  document.getElementById('consumption').innerHTML = data.consumption
-    ? `${data.consumption.toFixed(2)} kWh`
-    : 'Unknown';
-
-  // the money saved by the user driving this route with the electric vehicle
-  document.getElementById('cost').innerHTML = `${data.saving?.currency || '€'} ${data.saving?.money ?? 0} `;
-
-  // the total amount of CO2 which were used with a petrol vehicle
-  document.getElementById('co2').innerHTML = data.saving?.co2 ? `${data.saving.co2 / 1000} Kg` : 'Unknown';
+/**
+ * Small helper function that helps us map the route data to data that can be displayed
+ * @param { object } data - all available route data
+ * @returns formatted data that's ready to render */
+const formatRouteDetails = data => {
+  return {
+    'Charge duration': `${getDurationString(data.chargeTime ?? 0)}`,
+    'Saved on fuel': `${data.saving?.currency || '€'}${data.saving?.money ?? 0}`,
+    'Total consumption': data.consumption ? `${data.consumption.toFixed(2)} kWh` : 'Unknown',
+    'CO2 spared': data.saving?.co2 ? `${data.saving.co2 / 1000} Kg` : 'Unknown',
+  };
 };

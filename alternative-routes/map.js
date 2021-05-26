@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-import { displayRouteData } from './index';
+import { renderRouteDetails, renderRouteHeader } from './index';
 import { getDurationString } from '../utils';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
@@ -7,8 +7,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 5,
-  center: [8.1320104, 52.3758916],
+  zoom: 6.8,
+  center: [8.8320104, 47.9758916],
 });
 
 // Display the charge time on a hover
@@ -19,11 +19,12 @@ const popup = new mapboxgl.Popup({
 
 /**
  * Draw route polyline and show charging stations on the map.
- *
- * @param coordinates {array} Array of coordinates
- * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
+ * @param { array } routes - The route and alternative routes between two points
  */
 export const drawRoutes = routes => {
+  const routeOptions = document.querySelectorAll('.tab');
+  const tabHighlighter = document.getElementById('tab-highlighter');
+
   if (map.loaded()) {
     routes.forEach((route, index) => drawPolyline(route, index, index === 0 ? '#0078FF' : '#9CA7B2'));
     map.moveLayer(`0`);
@@ -41,7 +42,9 @@ export const drawRoutes = routes => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.lngLat;
       const description =
-        `<b>${getDurationString(routes[i].data.duration ?? 0)}</b>` + '</br>' + `${routes[i].data.charges ?? 0} stops`;
+        `<strong>${getDurationString(routes[i].data.duration ?? 0)}` +
+        ` • ` +
+        `${routes[i].data.charges ?? 0} stops</strong>`;
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -54,6 +57,7 @@ export const drawRoutes = routes => {
     });
 
     map.on('click', `${i}`, () => {
+      tabHandler(routeOptions, i, tabHighlighter);
       highlightRoute(i, routes);
     });
 
@@ -63,15 +67,32 @@ export const drawRoutes = routes => {
     });
   }
 
-  const routeOptions = document.querySelectorAll('input[type=radio][name="routes"]');
-  routeOptions.forEach((route, index) => route.addEventListener('change', () => highlightRoute(index, routes)));
+  routeOptions.forEach((option, index) => {
+    option.addEventListener('click', e => {
+      e.preventDefault();
+      tabHandler(routeOptions, index, tabHighlighter);
+      highlightRoute(index, routes);
+    });
+  });
 };
 
 /**
- * Draw a polyline on a map.
- *
- * @param routes {object} All routes recieved from the route query
- * @param index {number} The index of the route that should be drawn
+ * Small helper function that sets the font color and tab highlight
+ * @param { object } routeOptions - All possible route options that are available in the tabs
+ * @param { number } index - Current active index
+ * @param { element } tabHighlighter - The highlight element that indicates the active tab
+ */
+const tabHandler = (routeOptions, index, tabHighlighter) => {
+  routeOptions.forEach(option => option.classList.remove('active'));
+  routeOptions[index].classList.add('active');
+  tabHighlighter.style.transform = `translateX(calc(${index * 100}% + ${index * 2}px)`;
+};
+
+/**
+ * Draw the polyline on the map
+ * @param { object } route - All the route data to draw the route
+ * @param { number } index - The current index of the route we are going to draw
+ * @param { string } linecolor - The line color in a hex string
  */
 const drawPolyline = (route, index, linecolor) => {
   const geojson = {
@@ -113,12 +134,11 @@ const drawPolyline = (route, index, linecolor) => {
 };
 
 /**
- * Show the charging station, origin and destination on the map.
+ * Helper function that draws the legs of a route. Allows us to show charging stations, origin and destination
+ * Last leg of the route is always a destination point
+ * All other legs are either charging stations or via points (if route has additional stops)
  *
- * Last leg of the route is a destination point.
- * All other legs are either charging stations or via points (if route has stops).
- *
- * @param legs {array} route legs
+ * @param { array } legs - The legs of the route
  */
 const showLegs = legs => {
   if (legs.length === 0) return;
@@ -184,11 +204,10 @@ const showLegs = legs => {
 /**
  * Highlight the route that was clicked.
  *
- * @param routes {object} All routes recieved from the route query
- * @param id {number} id of the polyline that was clicked on
+ * @param { object } routes - All routes recieved from the route query
+ * @param { number } id - index / id of the polyline that was clicked on
  */
 const highlightRoute = (id, routes) => {
-  document.getElementById(`route-${id}`).checked = true;
   map.setPaintProperty(`${id}`, 'line-color', '#0078FF');
   for (let j = 0; j < routes.length; j++) {
     if (j !== id) {
@@ -197,5 +216,6 @@ const highlightRoute = (id, routes) => {
   }
   map.moveLayer(`${id}`);
   showLegs(routes[id].data.legs);
-  displayRouteData(routes[id].data);
+  renderRouteDetails(routes[id].data);
+  renderRouteHeader(routes[id].data);
 };
