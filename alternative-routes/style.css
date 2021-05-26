@@ -178,6 +178,26 @@ header p {
   color: var(--font-alt3);
 }
 
+.border-crossing {
+  display: flex;
+  align-items: center;
+  margin: 0.25rem 0 0;
+}
+
+.border-crossing p {
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  color: var(--font-base);
+  padding-left: 0.5rem;
+}
+
+.border-crossing .icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: url('images/border.svg') no-repeat center center #1b2023;
+}
+
 .tabs {
   position: relative;
   display: flex;

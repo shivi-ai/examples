@@ -187,6 +187,7 @@ header p {
 
 .border-crossing p {
   font-size: var(--font-size-base);
+  color: var(--font-base);
   font-weight: bold;
   padding-left: 0.5rem;
 }
