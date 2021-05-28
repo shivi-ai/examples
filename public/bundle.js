@@ -3886,6 +3886,7 @@
   var metaDescription = document.querySelector('meta[name="description"]');
   var urlParams = new URLSearchParams(window.location.search);
   var pageId = urlParams.get('id');
+  var title = document.getElementById('overview-title');
   var examples = [
     {
       id: 'stations-around',
@@ -3959,6 +3960,7 @@
   } else {
     iframe.style.display = 'none';
     overview.style.display = 'grid';
+    title.style.display = 'initial';
     document.title = 'Chargetrip API examples';
     metaDescription.setAttribute(
       'content',

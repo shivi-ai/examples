@@ -3,6 +3,7 @@ const overview = document.getElementById('overview');
 const metaDescription = document.querySelector('meta[name="description"]');
 const urlParams = new URLSearchParams(window.location.search);
 const pageId = urlParams.get('id');
+const title = document.getElementById('overview-title');
 
 const examples = [
   {
@@ -77,6 +78,7 @@ if (page) {
 } else {
   iframe.style.display = 'none';
   overview.style.display = 'grid';
+  title.style.display = 'initial';
 
   document.title = 'Chargetrip API examples';
   metaDescription.setAttribute(
