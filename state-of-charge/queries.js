@@ -1,11 +1,11 @@
 import qql from 'graphql-tag';
 
 /*
- * In this example we request a route from Amsterdam, Netherlands to Berlin, Germany
+ * In this example we request a route from Hanover, Germany to Aalborg, Denmark
  * Your origin and destination are required fields. You also need to select an EV.
  * Only the EV ID here is mandatory, all other fields are optional and when not specified will use the default values.
  * The conditions are:
- *   - full battery at Amsterdam, Germany
+ *   - full battery at Hanover, Germany
  *   - EV can charge at CHAdeMO changers
  *   - should use climate (temperature and weather conditions)
  *   - min power of chargers is 43 kWh. This is the default setting
@@ -31,12 +31,14 @@ mutation newRoute{
         routeRequest: {
           origin: {
             type: Feature
-            geometry: { type: Point, coordinates: [4.8951679, 52.3702157] }
+            geometry: { type: Point, coordinates: [9.732625731357011, 52.3806314590276] }
+            properties: { name: "Hanover, Germany" }
 
           }
           destination: {
             type: Feature
-            geometry: { type: Point, coordinates: [13.3888599, 52.5170365] }
+            geometry: { type: Point, coordinates: [9.922192327081783, 57.046057998779176] }
+            properties: { name: "Aalborg, Denmark" }
           }
         }
       }
@@ -49,16 +51,19 @@ query getRoute($id: ID!) {
   route(id: $id) {
     status
     route {
+      charges
+      distance
       duration
+      consumption
       polyline
       legs{
-        rangeEnd
-        rangeStart
+        chargeTime
         origin{
           geometry{
             type
             coordinates
           }
+          properties
         }
         destination{
           geometry
@@ -66,6 +71,7 @@ query getRoute($id: ID!) {
             type
             coordinates
           }
+          properties
         }
       }
     }
@@ -77,16 +83,19 @@ subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status
     route {
+      charges
+      distance
       duration
+      consumption
       polyline
       legs{
-        rangeEnd
-        rangeStart
+        chargeTime
         origin{
           geometry{
             type
             coordinates
           }
+          properties
         }
         destination{
           geometry
@@ -94,6 +103,7 @@ subscription routeUpdatedById($id: ID!){
             type
             coordinates
           }
+          properties
         }
       }
     }

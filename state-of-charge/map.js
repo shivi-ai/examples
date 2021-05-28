@@ -5,46 +5,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 6,
-  center: [8.1320104, 52.3758916],
-});
-
-// Display the charge time on a hover
-const popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false,
-});
-
-map.on('mouseenter', 'legs', e => {
-  if (e.features[0]?.properties?.icon !== 'arrival' && e.features[0]?.properties?.icon !== 'location_big') {
-    map.getCanvas().style.cursor = 'pointer';
-
-    const coordinates = e.features[0]?.geometry?.coordinates;
-    const description = `Expected state of charge at arrival ${(e.features[0]?.properties?.description / 1000).toFixed(
-      0,
-    )} km`;
-
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    popup
-      .setLngLat(coordinates)
-      .setHTML(description)
-      .addTo(map);
-  }
-});
-
-map.on('mouseleave', 'legs', function() {
-  map.getCanvas().style.cursor = '';
-  popup.remove();
+  zoom: 5.5,
+  center: [9.1320104, 55.1758916],
 });
 
 /**
  * Draw route polyline and show charging stations on the map.
- *
- * @param coordinates {array} Array of coordinates
- * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
+ * @param { array } coordinates - Array of coordinates
+ * @param { array } legs - stops -- each leg represents either a charging station, or via point or final point
  */
 export const drawRoute = (coordinates, legs) => {
   if (map.loaded()) {
@@ -60,8 +28,7 @@ export const drawRoute = (coordinates, legs) => {
 
 /**
  * Draw route polyline on a map.
- *
- * @param coordinates {array} polyline coordinates
+ * @param { array } coordinates - polyline coordinates
  */
 const drawPolyline = coordinates => {
   if (map.getLayer('polyline')) map.removeLayer('polyline');
@@ -103,13 +70,12 @@ const drawPolyline = coordinates => {
 };
 
 /**
- * Show the charging station, origin and destination on the map.
- *
+ * Show the charging station, origin and destination on the map
  * The origin of the first leg is the start of your route.
  * The destination of the last is the destination of your route.
  * The desitinatation of all other legs are charging stations or via points.
  *
- * @param legs {array} route legs
+ * @param { array } legs - route legs
  */
 const showLegs = legs => {
   if (map.getLayer('legs')) map.removeLayer('legs');

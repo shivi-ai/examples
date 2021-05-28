@@ -13,8 +13,8 @@ import { getDurationString } from '../utils';
  * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
  * so we have to reverse every pair.
  *
- * @param data {object} route specification.
- * @param id {string} route ID.
+ * @param { object } data - route specification.
+ * @param { string } id - route ID.
  */
 fetchRoute(getStateOfCharge(), routeData => {
   drawRoutePolyline(routeData);
@@ -25,19 +25,18 @@ export const drawRoutePolyline = data => {
   const reversed = decodedData.map(item => item.reverse());
 
   drawRoute(reversed, data.legs);
-  displayRouteData(data);
+  renderRouteHeader(data);
 };
 
 /**
- * Show journey specific information like duration, consumption, costs etc.
- *
- * @param data {object} route specification
+ * Function that renders the header details
+ * @param { object } data - All available route data
  */
-const displayRouteData = data => {
-  // the total duration of the journey (including charge time), in seconds
-  document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
+const renderRouteHeader = data => {
+  const routeDistance = data.distance ? `${(data.distance / 1000).toFixed(0)} km` : 'Unknown';
+  const routeStops = `${data.charges ?? 0} stops`;
+  const routeEnergy = data.consumption ? `${data.consumption.toFixed(2)} kWh` : 'Unknown';
 
-  // remove loader after first initial route is calculated
-  const loader = document.getElementById('loader');
-  if (loader) loader.remove();
+  document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
+  document.getElementById('route-metadata').innerHTML = `${routeDistance} / ${routeStops} / ${routeEnergy}`;
 };
