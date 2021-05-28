@@ -78,7 +78,7 @@ if (page) {
 } else {
   iframe.style.display = 'none';
   overview.style.display = 'grid';
-  title.style.display = 'initial';
+  title.style.display = 'block';
 
   document.title = 'Chargetrip API examples';
   metaDescription.setAttribute(
