@@ -245,6 +245,7 @@ li {
 .content h1 {
   max-width: 1280px;
   margin: 4rem auto 1.5rem;
+  display: none;
 }
 
 .overview {
