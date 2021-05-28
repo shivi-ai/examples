@@ -1,7 +1,7 @@
 import { drawRoute } from './map.js';
 import * as mapboxPolyline from '@mapbox/polyline';
 import { fetchRoute, fetchRoutePath } from './client';
-import { loadGraph, displayElevationData, displaySpecs } from './elevationGraph';
+import { renderRouteHeader, renderRouteDetails, loadGraph } from './elevationGraph';
 
 /**
  * Draw a route on a map.
@@ -12,8 +12,8 @@ import { loadGraph, displayElevationData, displaySpecs } from './elevationGraph'
  * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
  * so we have to reverse every pair.
  *
- * @param data {object} route specification.
- * @param id {string} route ID.
+ * @param { object } data - route specification.
+ * @param { string } id - route ID.
  */
 fetchRoute((routeId, routeData) => {
   drawRoutePolyline(routeId, routeData);
@@ -23,13 +23,12 @@ fetchRoute((routeId, routeData) => {
 const drawRoutePolyline = (id, data) => {
   const decodedData = mapboxPolyline.decode(data?.polyline);
   const reversed = decodedData.map(item => item.reverse());
-  const { elevationUp, elevationDown } = data;
 
   drawRoute(id, reversed, data?.legs);
-  displayElevationData(elevationUp, elevationDown);
+  renderRouteHeader(data);
 
   // fetch information about start of the route
   fetchRoutePath(id, reversed[0]).then(data => {
-    displaySpecs(data);
+    renderRouteDetails(data);
   });
 };

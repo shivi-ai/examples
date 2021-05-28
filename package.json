@@ -6,7 +6,7 @@
   "dependencies": {
     "@mapbox/polyline": "^1.1.0",
     "@urql/core": "^1.7.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^3.3.0",
     "core-js": "3",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",

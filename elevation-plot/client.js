@@ -11,7 +11,7 @@ import { pipe, subscribe } from 'wonka';
  * Read more about authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  'x-client-id': '5e8c22366f9c5f23ab0eff39',
+  'x-client-id': '5ed1175bad06853b3aa1e492',
 };
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
@@ -41,7 +41,6 @@ const client = createClient({
  * 1. create a new route and receive back its ID;
  * 2. subscribe to route updates in order to receive its details.
  */
-
 export const fetchRoute = callback => {
   client
     .mutation(createRoute)
@@ -83,8 +82,8 @@ export const fetchRoute = callback => {
 /**
  * Fetch route path data.
  *
- * @param id {string} Route ID
- * @param point {array} Coordinates of the path
+ * @param { string } id - Route ID
+ * @param { array } point - Coordinates of the path
  *
  * @returns {Promise<OperationResult<any> | void>}
  */

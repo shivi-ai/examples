@@ -1,21 +1,20 @@
 import mapboxgl from 'mapbox-gl';
 import { fetchRoutePath } from './client';
-import { positionElevationIndicator, displaySpecs } from './elevationGraph';
+import { positionElevationIndicator, renderRouteDetails } from './elevationGraph';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 6,
-  center: [7.7, 52],
+  zoom: 5.5,
+  center: [9.1320104, 55.1758916],
 });
 
 /**
  * Draw route polyline and show the point of origin and destination on the map.
- *
- * @param coordinates {array} Array of coordinates.
- * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point.
+ * @param { array } coordinates - Array of coordinates.
+ * @param { array } legs - stops -- each leg represents either a charging station, or via point or final point.
  */
 export const drawRoute = (id, coordinates, legs) => {
   if (map.loaded()) {
@@ -42,7 +41,7 @@ export const drawRoute = (id, coordinates, legs) => {
     const position = closestPointIndex / coordinates.length;
 
     fetchRoutePath(id, closestPoint).then(data => {
-      displaySpecs(data);
+      renderRouteDetails(data);
     });
 
     positionElevationIndicator(position);
@@ -52,8 +51,7 @@ export const drawRoute = (id, coordinates, legs) => {
 
 /**
  * Draw route polyline on a map.
- *
- * @param coordinates {array} polyline coordinates
+ * @param { array } coordinates - polyline coordinates
  */
 const drawPolyline = coordinates => {
   const geojson = {
@@ -94,11 +92,9 @@ const drawPolyline = coordinates => {
 
 /**
  * Show the origin and destination on the map.
- *
  * The destination of the last leg is the destination point.
  * The origin of the first leg is the origin of our route.
- *
- * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
+ * @param { array } legs - stops -- each leg represents either a charging station, or via point or final point
  */
 const showLegs = legs => {
   if (!legs || legs.length === 0) return;
@@ -142,9 +138,8 @@ const showLegs = legs => {
 
 /**
  * Create a second polyline up untill the point that was clicked.
- *
- * @param coordinates {array} the coordinates that need to be split.
- * @param closestPoint {array} the point at which the coordinates need to be split.
+ * @param { array } coordinates - the coordinates that need to be split.
+ * @param { array } closestPoint - the point at which the coordinates need to be split.
  */
 const splitPolyline = (coordinates, closestPoint, closestPointIndex) => {
   const clickedRoute = coordinates.splice(0, closestPointIndex);
@@ -155,8 +150,7 @@ const splitPolyline = (coordinates, closestPoint, closestPointIndex) => {
 
 /**
  * With this function we will mark the route up until the point that was clicked.
- *
- * @param coordinates {array} The coordinates until the point that was clicked.
+ * @param { array } coordinates - The coordinates until the point that was clicked.
  */
 const drawClickedLine = coordinates => {
   if (map.getLayer('clicked-polyline')) map.removeLayer('clicked-polyline');
@@ -200,8 +194,7 @@ const drawClickedLine = coordinates => {
 
 /**
  * Display the end of the clicked polyline.
- *
- * @param end {array} The coordinates of the end of the clicked line.
+ * @param { array } end - The coordinates of the end of the clicked line.
  */
 const addLineEnd = end => {
   if (map.getLayer('end')) map.removeLayer('end');
@@ -235,8 +228,8 @@ const addLineEnd = end => {
 /**
  * Find the closest point in the polyline.
  *
- * @param polyline {array} polyline coordinates.
- * @param location {array} the location that was clicked on the polyline.
+ * @param { array } polyline - polyline coordinates.
+ * @param { array } location - the location that was clicked on the polyline.
  */
 const findClosestPoint = (polyline, location) => {
   const [x1, y1] = location;
