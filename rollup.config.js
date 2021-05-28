@@ -28,6 +28,15 @@ const plugins = [
 
 export default [
   {
+    input: 'navigation/index.js',
+    output: {
+      file: 'public/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
     input: 'route/index.js',
     output: {
       file: 'public/route/bundle.js',
