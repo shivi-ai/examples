@@ -1,73 +1,80 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html>
   <head>
+    <meta charset="utf-8" />
     <title>Chargetrip API: Elevation plot example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Build a route with the Chargetrip API and show elevation data" />
-    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing elevation consumption" />
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap" rel="stylesheet" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="map"></div>
-    <div class="github">
-      <a href="https://github.com/chargetrip/examples/tree/master/elevation-plot" title="github examples">
+    <div class="github-link">
+      <a href="" title="github project">
         View on Github
       </a>
       <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
     </div>
-
-    <div class="tooltip">
-      <span>Click on the line to see more details</span>
-    </div>
-
-    <div class="journey-specs" id="journey">
-      <header class="header">
-        <h1>Journey Specs</h1>
-        <div class="header-route">Amsterdam • Berlin</div>
-        <div class="tags">
-          <div id="upHill" class="tag">Uphill --•--</div>
-          <div id="downHill" class="tag">Downhill --•--</div>
+    <div id="map"></div>
+    <div class="card">
+      <header>
+        <h1 id="duration">-</h1>
+        <div class="route-metadata" id="route-metadata">-</div>
+        <div id="border-crossing" class="border-crossing">
+          <span class="icon"></span>
+          <p>Border crossing</p>
         </div>
       </header>
-
-      <div class="content">
-        <h2>Elevation levels</h2>
+      <main>
+        <section>
+          <h3>Elevation levels</h3>
+        </section>
         <div class="chart">
-          <div id="loader">Loading...</div>
-          <canvas id="elevationGraph" height="130px"></canvas>
-          <div class="elevation-indicator" id="elevationIndicator"></div>
-          <canvas class="stations-layer" id="stationsLayer"></canvas>
+          <div id="elevation-loader" class="elevation-loader">
+            <p>Loading elevation data</p>
+          </div>
+          <canvas id="elevation-graph" height="200px"></canvas>
+          <div class="elevation-indicator" id="elevation-indicator"></div>
         </div>
-
-        <h2>Details</h2>
-        <ul class="info">
-          <li class="info-elevation">
-            Elevation
-            <span id="height">--•--</span>
-          </li>
-          <li class="info-consumption">
-            Consumption Estimation
-            <span id="consumption">--•--</span>
-          </li>
-          <li class="info-average-speed">
-            Average Speed
-            <span id="average-speed">--•--</span>
-          </li>
-        </ul>
-
-        <a
-          class="chargetrip-logo"
-          href="https://chargetrip.com/"
-          aria-label="Made with love at Chargetrip"
-          title="Made with love at Chargetrip"
-          >Made with ❤️ at</a
-        >
-      </div>
+        <section>
+          <div class="elevation-instruction">
+            <p>To see specific route segment data, click anywhere on the polyline on the map.</p>
+          </div>
+        </section>
+        <section>
+          <h3>Details</h3>
+          <ul id="route-details">
+            <li>
+              <p>Elevation</p>
+              <p>-</p>
+            </li>
+            <li>
+              <p>Consumption estimation</p>
+              <p>-</p>
+            </li>
+            <li>
+              <p>Average speed</p>
+              <p>-</p>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
+        </div>
+      </footer>
     </div>
   </body>
   <script src="bundle.js"></script>
