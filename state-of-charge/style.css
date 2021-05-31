@@ -333,7 +333,7 @@ header p {
   position: relative;
 }
 
-.loading-toast {
+.toast {
   position: absolute;
   width: 100%;
   background: var(--background-body);
@@ -345,10 +345,21 @@ header p {
   transition: transform 300ms ease;
 }
 
-.loading-toast p {
-  margin-left: 0.75rem;
+.toast p {
   color: var(--font-alt3);
   font-weight: 600;
+}
+
+.loading-toast p {
+  margin-left: 0.75rem;
+}
+
+.error-toast {
+  background: #ef0b0b;
+}
+
+.error-toast p {
+  color: var(--background-body);
 }
 
 .loader {
