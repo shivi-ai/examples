@@ -86,3 +86,20 @@ if (page) {
     'Discover how to work with the Chargetrip API by exploring any of our examples.',
   );
 }
+
+const isLoggedIn = () => {
+  const signIn = document.getElementById('sign-in');
+  const signUp = document.getElementById('sign-up');
+
+  const cookies = document.cookie;
+  const accessToken = cookies.match('(^|;)\\s*' + 'access_token' + '\\s*=\\s*([^;]+)')?.pop();
+
+  if (accessToken === undefined) return;
+
+  signUp.remove();
+  signIn.href = 'https://account.chargetrip.com/';
+  [...signIn.childNodes][1].style.stroke = '#0078FF';
+  [...signIn.childNodes][3].innerHTML = 'Account';
+};
+
+isLoggedIn();

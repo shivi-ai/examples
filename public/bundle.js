@@ -2012,14 +2012,13 @@
     if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true);
   };
 
-  // `SameValue` abstract operation
-  // https://tc39.github.io/ecma262/#sec-samevalue
-  var sameValue =
-    Object.is ||
-    function is(x, y) {
-      // eslint-disable-next-line no-self-compare
-      return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
-    };
+  var charAt$1 = stringMultibyte.charAt;
+
+  // `AdvanceStringIndex` abstract operation
+  // https://tc39.github.io/ecma262/#sec-advancestringindex
+  var advanceStringIndex = function(S, index, unicode) {
+    return index + (unicode ? charAt$1(S, index).length : 1);
+  };
 
   // `RegExpExec` abstract operation
   // https://tc39.github.io/ecma262/#sec-regexpexec
@@ -2039,6 +2038,52 @@
 
     return regexpExec.call(R, S);
   };
+
+  // @@match logic
+  fixRegexpWellKnownSymbolLogic('match', 1, function(MATCH, nativeMatch, maybeCallNative) {
+    return [
+      // `String.prototype.match` method
+      // https://tc39.github.io/ecma262/#sec-string.prototype.match
+      function match(regexp) {
+        var O = requireObjectCoercible(this);
+        var matcher = regexp == undefined ? undefined : regexp[MATCH];
+        return matcher !== undefined ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
+      },
+      // `RegExp.prototype[@@match]` method
+      // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@match
+      function(regexp) {
+        var res = maybeCallNative(nativeMatch, regexp, this);
+        if (res.done) return res.value;
+
+        var rx = anObject(regexp);
+        var S = String(this);
+
+        if (!rx.global) return regexpExecAbstract(rx, S);
+
+        var fullUnicode = rx.unicode;
+        rx.lastIndex = 0;
+        var A = [];
+        var n = 0;
+        var result;
+        while ((result = regexpExecAbstract(rx, S)) !== null) {
+          var matchStr = String(result[0]);
+          A[n] = matchStr;
+          if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+          n++;
+        }
+        return n === 0 ? null : A;
+      },
+    ];
+  });
+
+  // `SameValue` abstract operation
+  // https://tc39.github.io/ecma262/#sec-samevalue
+  var sameValue =
+    Object.is ||
+    function is(x, y) {
+      // eslint-disable-next-line no-self-compare
+      return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+    };
 
   // @@search logic
   fixRegexpWellKnownSymbolLogic('search', 1, function(SEARCH, nativeSearch, maybeCallNative) {
@@ -3881,6 +3926,41 @@
     },
   );
 
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== 'undefined' && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === 'string') return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === 'Object' && o.constructor) n = o.constructor.name;
+    if (n === 'Map' || n === 'Set') return Array.from(o);
+    if (n === 'Arguments' || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError(
+      'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
+    );
+  }
+
   var iframe = document.getElementById('iframe');
   var overview = document.getElementById('overview');
   var metaDescription = document.querySelector('meta[name="description"]');
@@ -3967,5 +4047,25 @@
       'Discover how to work with the Chargetrip API by exploring any of our examples.',
     );
   }
+
+  var isLoggedIn = function isLoggedIn() {
+    var _cookies$match;
+
+    var signIn = document.getElementById('sign-in');
+    var signUp = document.getElementById('sign-up');
+    var cookies = document.cookie;
+    var accessToken =
+      (_cookies$match = cookies.match('(^|;)\\s*' + 'access_token' + '\\s*=\\s*([^;]+)')) === null ||
+      _cookies$match === void 0
+        ? void 0
+        : _cookies$match.pop();
+    if (accessToken === undefined) return;
+    signUp.remove();
+    signIn.href = 'https://account.chargetrip.com/';
+    _toConsumableArray(signIn.childNodes)[1].style.stroke = '#0078FF';
+    _toConsumableArray(signIn.childNodes)[3].innerHTML = 'Account';
+  };
+
+  isLoggedIn();
 })();
 //# sourceMappingURL=bundle.js.map
