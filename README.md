@@ -4,7 +4,7 @@
   <p><h3 align="center">Ready-to-run examples to get you started with Chargetrip API</h3></p>
   <a href="https://chargetrip.com">Website</a>
   <span>⚡️</span>
-  <a href="https://docs.chargetrip.com/">Docs</a>
+  <a href="https://developers.chargetrip.com/">Docs</a>
   <span>⚡</span>
   <a href="https://chargetrip.github.io/examples/">Examples</a>
   <span>⚡</span>
@@ -18,15 +18,16 @@ We improve our documentation continuously, and your feedback is valuable.
 
 Available examples:
 
-1. Build a simple route [example](https://chargetrip.github.io/examples/route/);
-2. Select a car [example](https://chargetrip.github.io/examples/car/);
-3. Show stations on a map [example](https://chargetrip.github.io/examples/stations/);
-4. Query a specific station [example](https://chargetrip.github.io/examples/station-info/);
-5. Show stations using the Vector Tile Server [example](https://chargetrip.github.io/examples/tile-server/);
-6. Build a route and display an elevation profile [example](https://chargetrip.github.io/examples/elevation-plot/).
-7. Build a route and recalculate if your SOC changes [example](https://chargetrip.github.io/examples/state-of-charge/)
-8. Build a route and display stations along the route [example](https://chargetrip.github.io/examples/stations-along-route/);
-9. Build a route and display alternative routes [example](https://chargetrip.github.io/examples/alternative-routes/);
+1. Build a simple route [example](https://examples.chargetrip.com/?id=route);
+2. Query a list of cars [example](https://examples.chargetrip.com/?id=car-list);
+3. Query the details of a car [example](https://examples.chargetrip.com/?id=car-details);
+4. Show stations on a map [example](https://examples.chargetrip.com/?id=stations-around);
+5. Query a specific station [example](https://examples.chargetrip.com/?id=station-details);
+6. Show stations using the Vector Tile Server [example](https://examples.chargetrip.com/?id=tile-server);
+7. Build a route and display an elevation profile [example](https://examples.chargetrip.com/?id=elevation-plot);
+8. Build a route and recalculate if your SOC changes [example](https://examples.chargetrip.com/?id=state-of-charge)
+9. Build a route and display stations along the route [example](https://examples.chargetrip.com/?id=stations-along-route);
+10. Build a route and display alternative routes [example](https://examples.chargetrip.com/?id=alternative-routes);
 
 ## Installation and local development
 
@@ -46,6 +47,6 @@ This command starts a local development server on `http://localhost:5000`. It wi
 
 ## Useful links
 
-1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/)
+1. Chargetrip GraphAPI [docs](https://developers.chargetrip.com/)
 2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/)
 3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).
