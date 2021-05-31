@@ -17,7 +17,21 @@ import { getDurationString } from '../utils';
  * @param { string } id - route ID.
  */
 fetchRoute(getStateOfCharge(), routeData => {
-  drawRoutePolyline(routeData);
+  const errorToast = document.getElementById('error-toast');
+  const vehicleRange = document.getElementById('vehicle-range');
+  const rangeSlider = document.getElementById('range');
+
+  vehicleRange.innerHTML = `${rangeSlider.value} km`;
+
+  if (routeData) {
+    drawRoutePolyline(routeData);
+  } else {
+    errorToast.style.transform = `translateY(0)`;
+
+    setTimeout(() => {
+      errorToast.style.transform = `translateY(100%)`;
+    }, 2500);
+  }
 });
 
 export const drawRoutePolyline = data => {

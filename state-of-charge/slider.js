@@ -3,6 +3,7 @@ import { drawRoutePolyline } from './index';
 
 const rangeSlider = document.getElementById('range');
 const loadingToast = document.getElementById('loading-toast');
+const errorToast = document.getElementById('error-toast');
 
 /**
  * Attach an event listener to our slider to update the current vehicle range
@@ -20,7 +21,16 @@ rangeSlider.addEventListener('change', () => {
   loadingToast.style.transform = `translateY(0)`;
 
   fetchRoute(rangeSlider.value, routeData => {
-    drawRoutePolyline(routeData);
+    if (routeData) {
+      drawRoutePolyline(routeData);
+    } else {
+      errorToast.style.transform = `translateY(0)`;
+
+      setTimeout(() => {
+        errorToast.style.transform = `translateY(100%)`;
+      }, 3500);
+    }
+
     rangeSlider.disabled = false;
     loadingToast.style.transform = `translateY(100%)`;
   });

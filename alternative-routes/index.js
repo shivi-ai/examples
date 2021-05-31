@@ -63,8 +63,8 @@ client
         // for this example we want to only draw the initial route
         if (status === 'done' && route) {
           unsubscribe();
-          decodePolylines(route, alternatives); // draw a polyline on a map
           renderTabData(route, alternatives); // Set the tab times
+          decodePolylines(route, alternatives); // draw a polyline on a map
           renderRouteHeader(route); // Render header HTML data
           renderRouteDetails(route); // fill in the route information
         }
@@ -79,8 +79,10 @@ client
       .toPromise()
       .then(response => {
         const { status, route, alternatives } = response.data.route;
+
         if (status === 'done' && route) {
           unsubscribe();
+          renderTabData(route, alternatives);
           decodePolylines(route, alternatives);
           renderRouteHeader(route);
           renderRouteDetails(route);
@@ -124,14 +126,23 @@ const decodePolylines = (route, alternatives) => {
  * @param { array } alternatives - The alternative route objects
  */
 const renderTabData = (route, alternatives) => {
-  const routeDurations = [
-    'Fastest',
-    `+${getDurationString(alternatives[0].duration - route.duration)}`,
-    `+${getDurationString(alternatives[1].duration - route.duration)}`,
-  ];
+  const tabsWrapper = document.getElementById('tabs-wrapper');
+  const tabHighlighter = document.getElementById('tab-highlighter');
+  const routeDurations = alternatives.map(
+    alternative => `+${getDurationString(alternative.duration - route.duration)}`,
+  );
 
-  document.querySelectorAll('.tab').forEach((tab, idx) => {
-    tab.lastElementChild.innerHTML = routeDurations[idx];
+  routeDurations.unshift('Fastest');
+  tabsWrapper.textContent = '';
+  tabHighlighter.style.width = `calc(${100 / routeDurations.length}% - 4px)`;
+
+  routeDurations.forEach((routeDuration, idx) => {
+    tabsWrapper.insertAdjacentHTML(
+      'beforeend',
+      `<div class="tab ${idx === 0 ? 'active' : ''}">
+        <p>${routeDuration}</p>
+      </div>`,
+    );
   });
 };
 

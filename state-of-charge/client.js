@@ -57,6 +57,8 @@ export const fetchRoute = (soc, callback) => {
           if (status === 'done' && route) {
             unsubscribe();
             callback(route);
+          } else if (status === 'not_found') {
+            callback();
           }
         }),
       );
@@ -72,6 +74,8 @@ export const fetchRoute = (soc, callback) => {
           if (status === 'done' && route) {
             unsubscribe();
             callback(routeId, route);
+          } else if (status === 'not_found') {
+            callback();
           }
         });
     })

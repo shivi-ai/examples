@@ -201,12 +201,17 @@ header p {
 .tabs {
   position: relative;
   display: flex;
-  justify-content: space-around;
   background: var(--background-alt);
   height: 2rem;
-  align-items: center;
   border-radius: 0.375rem;
   margin-top: 1rem;
+}
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .tab-highlighter {

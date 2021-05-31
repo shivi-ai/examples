@@ -31,7 +31,7 @@ mutation newRoute{
           }
           destination: {
             type: Feature
-            geometry: { type: Point, coordinates: [8.691150976172072, 50.11546729917974] }
+            geometry: { type: Point, coordinates: [9.165197732508853, 48.785521962794526] }
             properties: { name: "Frankfurt, Germany" }
           }
         }
