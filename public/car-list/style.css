@@ -8,7 +8,7 @@
   --font-size-small: 0.75rem;
   --font-size-micro: 0.5rem;
 
-  --background-base: #ffffff;
+  --background-body: #ffffff;
   --background-subdued: #e5f0f5;
   --background-base: #f4f8fb;
   --background-alt: #e5f0f5;
@@ -74,7 +74,7 @@ p {
 
 a {
   text-decoration: none;
-  color: var(--background-base);
+  color: var(--font-base);
 }
 
 ul {
@@ -125,7 +125,7 @@ input:focus {
   width: 360px;
   height: calc(100% - 2rem);
   border-radius: 8px;
-  background-color: var(--background-base);
+  background-color: var(--background-body);
   box-shadow: 0px 8px 62px rgba(0, 0, 0, 0.07), 0px 9.63424px 10.0459px rgba(0, 0, 0, 0.08),
     0px 5.80506px 6.13245px rgba(0, 0, 0, 0.0310277), 0px -4px 3.46624px rgba(0, 0, 0, 0.024633),
     0px 24px 64px rgba(0, 0, 0, 0.08);
@@ -138,7 +138,7 @@ main {
 
 .card header {
   padding: 1rem;
-  background: var(--background-base);
+  background: var(--background-body);
   position: relative;
 }
 
@@ -175,7 +175,7 @@ main {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background: var(--background-base);
+  background: var(--background-body);
   z-index: 10;
 }
 
