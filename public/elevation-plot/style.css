@@ -142,6 +142,7 @@ main section:first-child {
   display: grid;
   top: 1rem;
   left: 1rem;
+  height: calc(100vh - 2rem);
   width: 360px;
   border-radius: 8px;
   background-color: var(--background-body);
