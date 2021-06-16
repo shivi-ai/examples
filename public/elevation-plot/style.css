@@ -221,15 +221,31 @@ header p {
   top: -1.5rem;
 }
 
-.elevation-indicator {
-  display: none;
+.slider {
+  -webkit-appearance: none;
   position: absolute;
-  bottom: 44px;
-  left: 1rem;
-  height: 200px;
-  width: 2px;
-  background-color: var(--font-base);
+  left: 0.75rem;
+  bottom: 8.875rem;
+  height: 0rem;
+  width: 90%;
+  -webkit-transition: 0.2s;
+  transition: opacity 100%;
   z-index: 3;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0.125rem;
+  height: 12.5rem;
+  background: var(--font-base);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 0.125rem;
+  height: 12.5rem;
+  background: var(--font-base);
+  cursor: pointer;
 }
 
 .elevation-instruction {

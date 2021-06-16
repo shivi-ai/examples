@@ -1,6 +1,6 @@
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRoute, getRoutePath, routeUpdate, queryRoute } from './queries';
+import { createRoute, routeUpdate, queryRoute } from './queries';
 import { pipe, subscribe } from 'wonka';
 
 /**
@@ -78,18 +78,3 @@ export const fetchRoute = callback => {
     })
     .catch(error => console.log(error));
 };
-
-/**
- * Fetch route path data.
- *
- * @param { string } id - Route ID
- * @param { array } point - Coordinates of the path
- *
- * @returns {Promise<OperationResult<any> | void>}
- */
-export const fetchRoutePath = (id, point) =>
-  client
-    .query(getRoutePath(id, point))
-    .toPromise()
-    .then(response => response.data)
-    .catch(error => console.log(error));

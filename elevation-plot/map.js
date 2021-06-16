@@ -1,6 +1,4 @@
 import mapboxgl from 'mapbox-gl';
-import { fetchRoutePath } from './client';
-import { positionElevationIndicator, renderRouteDetails } from './elevationGraph';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
@@ -33,19 +31,6 @@ export const drawRoute = (id, coordinates, legs) => {
 
   map.on('mouseleave', 'polyline', () => {
     map.getCanvas().style.cursor = '';
-  });
-
-  map.on('click', 'polyline', e => {
-    const location = [e.lngLat.lng, e.lngLat.lat];
-    const [closestPoint, closestPointIndex] = findClosestPoint(coordinates, location);
-    const position = closestPointIndex / coordinates.length;
-
-    fetchRoutePath(id, closestPoint).then(data => {
-      renderRouteDetails(data);
-    });
-
-    positionElevationIndicator(position);
-    splitPolyline([...coordinates], closestPoint, closestPointIndex);
   });
 };
 
@@ -223,26 +208,4 @@ const addLineEnd = end => {
       'icon-size': 1.2,
     },
   });
-};
-
-/**
- * Find the closest point in the polyline.
- *
- * @param { array } polyline - polyline coordinates.
- * @param { array } location - the location that was clicked on the polyline.
- */
-const findClosestPoint = (polyline, location) => {
-  const [x1, y1] = location;
-  let closestPoint = Math.sqrt(Math.pow(Math.abs(x1 - polyline[0][0]), 2) + Math.pow(Math.abs(y1 - polyline[0][1]), 2));
-  let closestPointIndex = 0;
-
-  for (let i = 1; i < polyline.length - 1; i++) {
-    let distance = Math.sqrt(Math.pow(Math.abs(x1 - polyline[i][0]), 2) + Math.pow(Math.abs(y1 - polyline[i][1]), 2));
-    if (distance <= closestPoint) {
-      closestPoint = distance;
-      closestPointIndex = i;
-    }
-  }
-
-  return [polyline[closestPointIndex], closestPointIndex];
 };

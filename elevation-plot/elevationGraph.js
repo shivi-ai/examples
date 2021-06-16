@@ -6,13 +6,15 @@ import { getDurationString } from '../utils';
  * @param { object } route - All route data
  */
 export const loadGraph = route => {
-  const { elevationPlot, distance } = route;
+  const { pathPlot, distance } = route;
   const ctx = document.getElementById('elevation-graph').getContext('2d');
 
-  // Set the labels on the x-axis
-  const labels = new Array(elevationPlot.length).fill('').map((_, idx) => {
+  const elevation = pathPlot.map(plot => plot.elevation);
+
+  // add labels
+  const labels = new Array(elevation.length).fill('').map((_, idx) => {
     if (idx === 0) return '0';
-    if (idx === elevationPlot.length - 1) return `${(distance / 1000).toFixed(0)}`;
+    if (idx === elevation.length - 1) return `${(distance / 1000).toFixed(0)}`;
 
     return '';
   });
@@ -26,7 +28,7 @@ export const loadGraph = route => {
     data: {
       datasets: [
         {
-          data: elevationPlot,
+          data: elevation,
           fill: true,
           showLine: false,
           backgroundColor: 'rgba(0, 120, 255, 0.2)',
@@ -82,18 +84,6 @@ export const loadGraph = route => {
 };
 
 /**
- * Move the elevation indicator to the point on the graph to reflect the position on the polyline.
- * @param { number } position - x position of the indicator
- */
-export const positionElevationIndicator = position => {
-  const elevationGraph = document.getElementById('elevation-graph');
-  const elevationIndicator = document.getElementById('elevation-indicator');
-
-  elevationIndicator.style.display = 'block';
-  elevationIndicator.style.marginLeft = position * (elevationGraph.offsetWidth - 10) + 'px';
-};
-
-/**
  * Function that renders the header details
  * @param { object } data - All available route data
  */
@@ -115,9 +105,9 @@ export const renderRouteDetails = data => {
 
   // Format the data so it's inline with the HTML
   const formattedData = {
-    Elevation: `${data.routePath.elevation} m`,
-    'Consumption estimation': `${data.routePath.consumptionPerKm} kWh / km`,
-    'Average speed': `${data.routePath.averageSpeed} km / u`,
+    Elevation: `${data.elevation} m`,
+    'Consumption estimation': `${data.consumptionPerKm} kWh / km`,
+    'Average speed': `${data.averageSpeed} km / u`,
   };
 
   // Loop over the formatted data and render tables or lists inside the HTML
