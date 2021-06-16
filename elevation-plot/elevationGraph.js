@@ -21,6 +21,7 @@ export const loadGraph = route => {
 
   // Hide loader
   document.getElementById('elevation-loader').style.display = 'none';
+  document.getElementById('slider-container').style.opacity = '1';
 
   // Construct the chart with chart.js and our dataset
   new Chart(ctx, {

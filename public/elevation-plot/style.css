@@ -227,6 +227,7 @@ header p {
   top: 0;
   left: 2px;
   height: calc(100% - 2.75rem);
+  opacity: 0;
 }
 
 .slider-input {
@@ -248,6 +249,7 @@ header p {
   background-image: url('./images/handle.svg');
   background-position: center center;
   background-repeat: no-repeat;
+  cursor: grab;
 }
 
 .slider-input::-moz-range-thumb {
@@ -260,6 +262,7 @@ header p {
   background-image: url('./images/handle.svg');
   background-position: center center;
   background-repeat: no-repeat;
+  cursor: grab;
 }
 
 .slider-output {
