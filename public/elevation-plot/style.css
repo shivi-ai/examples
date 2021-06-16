@@ -270,20 +270,6 @@ header p {
   background-color: var(--background-alt4);
 }
 
-.elevation-instruction {
-  padding: 0.5rem;
-  background-color: var(--background-base);
-  border: 1px solid var(--accent-base);
-  border-radius: 0.25rem;
-  text-align: center;
-}
-
-.elevation-instruction p {
-  font-weight: 600;
-  color: var(--font-alt2);
-  line-height: 1.25rem;
-}
-
 .card footer {
   grid-area: footer;
   border-radius: 0 0 0.5rem 0.5rem;
