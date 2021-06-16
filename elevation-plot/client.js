@@ -1,6 +1,6 @@
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRoute, routeUpdate, queryRoute } from './queries';
+import { createRoute, routeUpdate } from './queries';
 import { pipe, subscribe } from 'wonka';
 
 /**
@@ -11,16 +11,16 @@ import { pipe, subscribe } from 'wonka';
  * Read more about authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  'x-client-id': '5ed1175bad06853b3aa1e492',
+  'x-client-id': '5ec52d3dd61c7b770cd5d529',
 };
 
-const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
+const subscriptionClient = new SubscriptionClient('wss://staging-api.chargetrip.io/graphql', {
   reconnect: true,
   connectionParams: headers,
 });
 
 const client = createClient({
-  url: 'https://api.chargetrip.io/graphql',
+  url: 'https://staging-api.chargetrip.io/graphql',
   fetchOptions: {
     method: 'POST',
     headers,
@@ -61,20 +61,6 @@ export const fetchRoute = callback => {
           }
         }),
       );
-
-      // Query for the route once to check if the route is computed before the subscription was setup.
-      // In this case we use the response from the query and unsubscribe from the route.
-      // For more informations about routes: https://docs.chargetrip.com/#routes
-      client
-        .query(queryRoute, { id: routeId })
-        .toPromise()
-        .then(response => {
-          const { status, route } = response.data.route;
-          if (status === 'done' && route) {
-            unsubscribe();
-            callback(routeId, route);
-          }
-        });
     })
     .catch(error => console.log(error));
 };
