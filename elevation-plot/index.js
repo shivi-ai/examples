@@ -26,12 +26,19 @@ const drawRoutePolyline = (id, data) => {
 
   drawRoute(id, reversed, data?.legs);
   renderRouteHeader(data);
-
   renderRouteDetails(data.pathPlot[0]);
 
-  const plotSlider = document.getElementById('myRange');
+  const plotSliderInput = document.getElementById('slider-input');
+  const plotSliderOutput = document.getElementById('slider-output');
 
-  plotSlider.addEventListener('input', () => {
-    renderRouteDetails(data.pathPlot[plotSlider.value]);
+  plotSliderInput.addEventListener('input', () => {
+    renderRouteDetails(data.pathPlot[plotSliderInput.value]);
+
+    const val = plotSliderInput.value;
+    const min = plotSliderInput.min ? plotSliderInput.min : 0;
+    const max = plotSliderInput.max ? plotSliderInput.max : 100;
+    const newVal = Number(((val - min) * 100) / (max - min));
+
+    plotSliderOutput.style.left = `calc(${newVal}% + (${11 - newVal * 0.25}px))`;
   });
 };
