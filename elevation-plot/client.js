@@ -1,6 +1,6 @@
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRoute, getRoutePath, routeUpdate, queryRoute } from './queries';
+import { createRoute, routeUpdate } from './queries';
 import { pipe, subscribe } from 'wonka';
 
 /**
@@ -61,35 +61,6 @@ export const fetchRoute = callback => {
           }
         }),
       );
-
-      // Query for the route once to check if the route is computed before the subscription was setup.
-      // In this case we use the response from the query and unsubscribe from the route.
-      // For more informations about routes: https://docs.chargetrip.com/#routes
-      client
-        .query(queryRoute, { id: routeId })
-        .toPromise()
-        .then(response => {
-          const { status, route } = response.data.route;
-          if (status === 'done' && route) {
-            unsubscribe();
-            callback(routeId, route);
-          }
-        });
     })
     .catch(error => console.log(error));
 };
-
-/**
- * Fetch route path data.
- *
- * @param { string } id - Route ID
- * @param { array } point - Coordinates of the path
- *
- * @returns {Promise<OperationResult<any> | void>}
- */
-export const fetchRoutePath = (id, point) =>
-  client
-    .query(getRoutePath(id, point))
-    .toPromise()
-    .then(response => response.data)
-    .catch(error => console.log(error));

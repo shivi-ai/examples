@@ -5,7 +5,7 @@ This tutorial expands on the route example. It will not only show a route on a m
 1.  Display a route on a map;
 2.  Display an elevation plot;
 3.  Display information about a specific point in your journey;
-4.  Updating the journey specs for a specific location in your journey, when you click on the polyline.
+4.  Updating the journey specs for a specific location in your journey, using the slider.
 
 To see this example live 👉 [demo](https://chargetrip.github.io/examples/elevation-plot/).
 
@@ -35,7 +35,7 @@ Once we have a car and station database, we can start planning the route:
 2. With a route ID we can request route information. We will subscribe to a route update to receive dynamic updates for it (recommended route, alternative routes (if available), time duration, consumption etc). You can read all the details about this subscription in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Routes/subscribe-to-route-updates).
 3. Having the route details, we can show a route on a map. To show the origin and the destination, we use the route `legs` object, where each leg has an origin and a destination.
 4. With the route details we can create an elevation graph using the `elevationPlot` array. This array will give you a hundred points of elevation. To display the graph we use [chartJS](https://www.chartjs.org/docs/latest/) in this example.
-5. With the route ID and a specific location within the polyline we can request information about that route path segment using the `routePath` query. We use this to display information like elevation, consumption and the average speed. With every click on the polyline we send a new request and update the journey specs.
+5. The pathPlot property on the route query gives you back consumption, elevation, speed data, and more, for a 100 points on your route. We have used this data to create an elevation graph. To see the specific consumption, elevation or speed at a specific point you can move the slider.
 
 ### Useful links
 

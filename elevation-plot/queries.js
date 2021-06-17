@@ -49,7 +49,11 @@ subscription routeUpdatedById($id: ID!){
     status
     route {
       distance
-      elevationPlot
+      pathPlot {
+        elevation
+        consumptionPerKm
+        averageSpeed
+      }
       elevationUp
       elevationDown
       polyline
@@ -74,47 +78,3 @@ subscription routeUpdatedById($id: ID!){
   }
 }
 `;
-
-export const queryRoute = qql`
-query getRoute($id: ID!) {
-  route(id: $id) {
-    status
-    route {
-      distance
-      elevationPlot
-      elevationUp
-      elevationDown
-      id
-      polyline
-      duration
-      legs{
-        distance
-        origin{
-          geometry{
-            type
-            coordinates
-          }
-        }
-        destination{
-          geometry
-          {
-            type
-            coordinates
-          }
-        }
-      }
-    }
-  }
-}`;
-
-export const getRoutePath = (id, location) => `
-{
-    routePath(
-      id: "${id}"
-      location: { type: Point, coordinates: [${location}] }
-    ) {
-      elevation
-      averageSpeed
-      consumptionPerKm
-    }
-}`;
