@@ -91,7 +91,7 @@ export const loadGraph = route => {
 export const renderRouteHeader = data => {
   document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
   document.getElementById('route-metadata').innerHTML = `
-    Uphill ${(data.elevationUp / 1000).toFixed(0) ?? 'Unknown'} km / 
+    Uphill ${(data.elevationUp / 1000).toFixed(0) ?? 'Unknown'} km/ 
     Downhill ${(data.elevationDown / 1000).toFixed(0) ?? 'Unknown'} km
   `;
 };
@@ -107,8 +107,8 @@ export const renderRouteDetails = data => {
   // Format the data so it's inline with the HTML
   const formattedData = {
     Elevation: `${data.elevation} m`,
-    'Consumption estimation': `${data.consumptionPerKm} kWh / km`,
-    'Average speed': `${data.averageSpeed} km / u`,
+    'Consumption estimation': `${data.consumptionPerKm} kWh/km`,
+    'Average speed': `${data.averageSpeed} km/h`,
   };
 
   // Loop over the formatted data and render tables or lists inside the HTML

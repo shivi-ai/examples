@@ -1,7 +1,7 @@
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { createRoute, routeUpdate, queryRoute } from './queries.js';
+import { createRoute, routeUpdate } from './queries.js';
 import { drawRoute } from './map.js';
 import * as mapboxPolyline from '@mapbox/polyline';
 import { getDurationString } from '../utils';
@@ -68,21 +68,6 @@ client
         }
       }),
     );
-
-    // Query for the route once to check if the route is computed before the subscription was setup.
-    // In this case we use the response from the query and unsubscribe from the route.
-    // For more informations about routes: https://docs.chargetrip.com/#routes
-    client
-      .query(queryRoute, { id: routeId })
-      .toPromise()
-      .then(response => {
-        const { status, route } = response.data.route;
-        if (status === 'done' && route) {
-          unsubscribe();
-          drawRoutePolyline(route);
-          displayRouteData(route);
-        }
-      });
   })
   .catch(error => console.log(error));
 

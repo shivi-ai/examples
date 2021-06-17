@@ -43,43 +43,6 @@ mutation newRoute{
   }
 `;
 
-export const queryRoute = qql`
-query getRoute($id: ID!) {
-  route(id: $id) {
-    route {
-      charges
-      saving {
-        money
-        co2
-      }
-      chargeTime
-      distance
-      duration
-      consumption
-      polyline
-      legs{
-        chargeTime
-        origin{
-          geometry{
-            type
-            coordinates
-          }
-          properties
-        }
-        destination{
-          geometry
-          {
-            type
-            coordinates
-          }
-          properties
-        }
-      }
-    }
-    status
-  }
-}`;
-
 export const routeUpdate = qql`
 subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
