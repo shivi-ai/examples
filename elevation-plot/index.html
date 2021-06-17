@@ -34,17 +34,23 @@
           <h3>Elevation levels</h3>
         </section>
         <div class="chart">
+          <div id="slider-container" class="slider-container">
+            <div id="slider-output" class="slider-output" for="elevation-slider"></div>
+            <input
+              name="elevation-slider"
+              type="range"
+              min="0"
+              max="99"
+              value="0"
+              class="slider-input"
+              id="slider-input"
+            />
+          </div>
           <div id="elevation-loader" class="elevation-loader">
             <p>Loading elevation data</p>
           </div>
           <canvas id="elevation-graph" height="200px"></canvas>
-          <div class="elevation-indicator" id="elevation-indicator"></div>
         </div>
-        <section>
-          <div class="elevation-instruction">
-            <p>To see specific route segment data, click anywhere on the polyline on the map.</p>
-          </div>
-        </section>
         <section>
           <h3>Details</h3>
           <ul id="route-details">
