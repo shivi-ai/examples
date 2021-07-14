@@ -22,6 +22,7 @@ export const displayMap = () => {
     transformRequest: (url, resourceType) => {
       if (resourceType === 'Tile' && url.startsWith('https://api.chargetrip.io')) {
         const headers = {
+          //Replace this x-client-id with your own to get access to more station data
           'x-client-id': '5ed1175bad06853b3aa1e492',
           'Cache-Control': 'max-age=0',
         };

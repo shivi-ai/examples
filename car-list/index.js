@@ -21,6 +21,7 @@ new mapboxgl.Map({
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
+  //Replace this x-client-id with your own to get access to more cars
   'x-client-id': '5ed1175bad06853b3aa1e492',
 };
 
