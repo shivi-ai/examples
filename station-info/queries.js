@@ -1,8 +1,7 @@
 import qql from 'graphql-tag';
 
 /**
- * For this query we are requesting the 20 closest stations.
- * The default for this query is 10.
+ * For this query we are requesting data about a specific station
  */
 export const getStationData = qql`
 query station($stationId: ID!){
