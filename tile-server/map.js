@@ -59,7 +59,7 @@ export const displayMap = () => {
       layout: {
         'icon-image': ['concat', ['get', 'status'], '-', ['get', 'speed']],
         'icon-size': 0.9,
-        'icon-offset': [0, -16],
+        'icon-offset': [0, -18],
       },
       source: 'stations',
       'source-layer': 'stations',
