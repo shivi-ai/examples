@@ -76,6 +76,7 @@ export const showStations = stations => {
       'icon-image': '{icon}',
       'icon-allow-overlap': true,
       'icon-size': 0.9,
+      'icon-offset': [0, -16],
     },
     source: {
       type: 'geojson',
