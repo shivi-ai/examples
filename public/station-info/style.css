@@ -8,7 +8,7 @@
   --font-size-small: 0.75rem;
   --font-size-micro: 0.5rem;
 
-  --background-base: #ffffff;
+  --background-body: #ffffff;
   --background-subdued: #e5f0f5;
   --background-base: #f4f8fb;
   --background-alt: #e5f0f5;
@@ -130,7 +130,7 @@ button:disabled {
   width: 360px;
   height: calc(100vh - 2rem);
   border-radius: 8px;
-  background-color: var(--background-base);
+  background-color: var(--background-body);
   box-shadow: 0px 8px 62px rgba(0, 0, 0, 0.07), 0px 9.63424px 10.0459px rgba(0, 0, 0, 0.08),
     0px 5.80506px 6.13245px rgba(0, 0, 0, 0.0310277), 0px -4px 3.46624px rgba(0, 0, 0, 0.024633),
     0px 24px 64px rgba(0, 0, 0, 0.08);
@@ -149,7 +149,7 @@ button:disabled {
   grid-area: header;
   width: inherit;
   padding: 1rem;
-  background: var(--background-base);
+  background: var(--background-body);
   box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.02), 0px 2px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
@@ -217,14 +217,14 @@ section:first-child {
 
 .charger {
   background-color: var(--accent-base);
-  color: var(--background-base);
+  color: var(--background-body);
   border-radius: 0.25rem;
   overflow: hidden;
   display: flex;
 }
 
 svg {
-  fill: var(--background-base) !important;
+  fill: var(--background-body) !important;
 }
 
 .charger-plug {
@@ -283,6 +283,69 @@ svg {
   justify-content: center;
 }
 
+.tabs {
+  position: relative;
+  display: flex;
+  background-color: var(--background-alt);
+  height: 2rem;
+  border-radius: 0.375rem;
+  margin-top: 1rem;
+}
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.tab-highlighter {
+  height: 28px;
+  width: calc((100% / 7) - 4px);
+  left: 2px;
+  top: 2px;
+  background-color: var(--background-body);
+  border-radius: 6px;
+  position: absolute;
+  box-shadow: 0px 2px 6px rgba(37, 42, 50, 0.12);
+  z-index: 10;
+  transition: transform 300ms ease;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  z-index: 15;
+  cursor: pointer;
+}
+
+.tab p {
+  font-weight: 600;
+  color: var(--font-alt3);
+}
+
+.tab.active p {
+  color: var(--font-base);
+}
+
+.chart {
+  position: relative;
+  margin-top: 1rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.custom-tooltip {
+  box-shadow: 0px 2px 6px rgba(37, 42, 50, 0.12);
+  background-color: var(--background-body);
+  border-radius: 6px;
+  position: absolute;
+  padding: 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  top: 0px !important;
+}
+
 .station-details .row:first-child p {
   color: var(--font-alt3);
 }
@@ -300,7 +363,7 @@ svg {
   grid-area: footer;
   border-radius: 0 0 0.5rem 0.5rem;
   width: 360px;
-  background: var(--background-base);
+  background: var(--background-body);
   border-top: 1px solid var(--background-alt);
 }
 
