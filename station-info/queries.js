@@ -17,6 +17,12 @@ query station($stationId: ID!){
     operator {
       name
     }
+    predicted_occupancy {
+      weekday
+      occupancy
+      period_begin
+      period_end
+    }
     opening_times {
       twentyfourseven
     }
