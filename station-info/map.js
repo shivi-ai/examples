@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import { fetchStationData } from './client';
 import { displayStationData } from './station';
-import { formatGraphData } from './occupancy';
+import { renderGraph } from './occupancy';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
@@ -20,7 +20,7 @@ map.on('click', 'stations', function(e) {
   if (stationId) {
     fetchStationData(stationId).then(data => {
       displayStationData(data);
-      formatGraphData(data.station.predicted_occupancy, 0);
+      renderGraph(data.station.predicted_occupancy, 0);
     });
   }
 

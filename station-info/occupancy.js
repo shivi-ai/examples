@@ -1,38 +1,68 @@
 import Chart from 'chart.js/auto';
 
+// Keep chart global so we know whether we need to update or construct the chart.
+// Only one instance is allowed to run.
 let chart = null;
 
 /**
- * Helper function to add tab handling on the days of the week
+ * Helper function that handles all clicks and data updates on the day of the week tabs
+ * @param { object } data - The occupancy data
  */
 export const addOccupancyListeners = data => {
   const dayOptions = document.querySelectorAll('.tab');
   const tabHighlighter = document.getElementById('tab-highlighter');
 
-  dayOptions.forEach((option, idx) => {
+  dayOptions.forEach((option, index) => {
     option.addEventListener('click', e => {
       e.preventDefault();
       dayOptions.forEach(option => option.classList.remove('active'));
-      dayOptions[idx].classList.add('active');
-      tabHighlighter.style.transform = `translateX(calc(${idx * 100}% + ${idx * 4}px)`;
-      formatGraphData(data, idx);
+      dayOptions[index].classList.add('active');
+      tabHighlighter.style.transform = `translateX(calc(${index * 100}% + ${index * 4}px)`;
+      renderGraph(data, index);
     });
   });
 };
 
 /**
- * Small helper function to format data to a format that is usable for the graph
- * @param {*} data - TODO
+ * Function that renders the occupancy data
+ * @param { object } data - occupancy data that is coming from our API
+ * @param { number } tabbarIndex - current day of the week that is selected
  */
-export const formatGraphData = (data, tabbarIndex) => {
+export const renderGraph = (data, tabbarIndex) => {
   const occupancyEl = document.getElementById('occupancy');
 
+  // Check whether we have occupancy data.
+  // If there is no data available we hide the occupancy content
   if (!data.length) {
     occupancyEl.style.display = 'none';
-  } else {
-    occupancyEl.style.display = 'block';
+    return;
   }
 
+  occupancyEl.style.display = 'block';
+  const { labels, occupancyData } = formatGraphData(data, tabbarIndex);
+
+  // Check whether we already have a Chart JS object
+  // If not we draw the Graph, otherwise we update the current data.
+  if (!chart) {
+    drawGraph(labels, occupancyData);
+  } else {
+    chart.data.labels = labels;
+    chart.data.datasets.forEach(dataset => {
+      dataset.data = occupancyData;
+    });
+    chart.update();
+  }
+};
+
+/**
+ * Small helper function to format data to a format that is usable for the graph
+ * @param { object } data - occupancy data that is coming from our API
+ * @param { number } tabbarIndex - current day of the week that is selected
+ * @returns { object } - object that contains labels and formatted data to use inside the graph
+ */
+const formatGraphData = (data, tabbarIndex) => {
+  // Get data for the selected day
+  // Map data to new format that supports labels
   const formattedData = data
     .filter(({ weekday }) => weekday === tabbarIndex + 1)
     .map((item, i) => {
@@ -45,20 +75,18 @@ export const formatGraphData = (data, tabbarIndex) => {
       };
     });
 
+  // Flatten data so we got one array for labels and one array for data
   const labels = formattedData.map(data => data.label);
   const occupancyData = formattedData.map(data => data.occupancy);
 
-  if (!chart) {
-    drawGraph(labels, occupancyData);
-  } else {
-    chart.data.labels = labels;
-    chart.data.datasets.forEach(dataset => {
-      dataset.data = occupancyData;
-    });
-    chart.update();
-  }
+  return { labels, occupancyData };
 };
 
+/**
+ * Constructs the graph with the correct configuration and initial dataset.
+ * @param { array } labels - An array with labels that our graph needs to render
+ * @param { array } occupancyData - An array with occupancy integers ranging from 1 - 10
+ */
 const drawGraph = (labels, occupancyData) => {
   const ctx = document.getElementById('occupancy-graph').getContext('2d');
 
@@ -127,14 +155,19 @@ const drawGraph = (labels, occupancyData) => {
         tooltip: {
           enabled: false,
           position: 'nearest',
-          external: externalTooltipHandler,
+          external: tooltipHandler,
         },
       },
     },
   });
 };
 
-const getOrCreateTooltip = chart => {
+/**
+ * Small helper function that draws a new element for our custom tooltip
+ * @param { Chart } chart - The chart.js main chart property
+ * @returns A HTML object that is added to the chart
+ */
+const renderToolTip = chart => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div');
 
   if (!tooltipEl) {
@@ -147,9 +180,13 @@ const getOrCreateTooltip = chart => {
   return tooltipEl;
 };
 
-const externalTooltipHandler = context => {
+/**
+ * Our external tooltip helper for positioning and formatting the data to show alongside the graph
+ * @param { context } context - The canvas context
+ */
+const tooltipHandler = context => {
   const { chart, tooltip } = context;
-  const tooltipEl = getOrCreateTooltip(chart);
+  const tooltipEl = renderToolTip(chart);
 
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
