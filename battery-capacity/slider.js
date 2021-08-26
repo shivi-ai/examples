@@ -54,4 +54,5 @@ rangeSlider.addEventListener('change', e => {
   });
 });
 
-export const getBatteryCapacity = () => rangeSlider.value;
+export const getBatteryCapacity = () =>
+  usableBatteryCapacityInKWH + (usableBatteryCapacityInKWH / 100) * rangeSlider.value;

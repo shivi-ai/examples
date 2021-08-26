@@ -25,9 +25,10 @@ Available examples:
 5. Query a specific station [example](https://examples.chargetrip.com/?id=station-details);
 6. Show stations using the Vector Tile Server [example](https://examples.chargetrip.com/?id=tile-server);
 7. Build a route and display an elevation profile [example](https://examples.chargetrip.com/?id=elevation-plot);
-8. Build a route and recalculate if your SOC changes [example](https://examples.chargetrip.com/?id=state-of-charge)
+8. Build a route and recalculate if the SOC changes [example](https://examples.chargetrip.com/?id=state-of-charge)
 9. Build a route and display stations along the route [example](https://examples.chargetrip.com/?id=stations-along-route);
 10. Build a route and display alternative routes [example](https://examples.chargetrip.com/?id=alternative-routes);
+11. Build a route and recalculate if the battery capacity changes [example](https://examples.chargetrip.com/?id=battery-capacity)
 
 ## Installation and local development
 

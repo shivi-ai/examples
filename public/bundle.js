@@ -3971,13 +3971,13 @@
     {
       id: 'stations-around',
       url: '/stations/',
-      title: 'Chargetrip API: stations around example',
+      title: 'Chargetrip API: Stations around example',
       description: 'Query stations around a GeoJSON point with the Chargetrip API.',
     },
     {
       id: 'station-details',
       url: '/station-info/',
-      title: 'Chargetrip API: station example',
+      title: 'Chargetrip API: Station example',
       description: 'Query particular station with the Chargetrip API.',
     },
     {
@@ -4007,13 +4007,13 @@
     {
       id: 'stations-along-route',
       url: '/stations-along-route/',
-      title: 'Chargetrip API: stations along route example',
+      title: 'Chargetrip API: Stations along route example',
       description: 'Build a route with the Chargetrip API and display stations along the route.',
     },
     {
       id: 'alternative-routes',
       url: '/alternative-routes/',
-      title: 'Chargetrip API: alternative routes example',
+      title: 'Chargetrip API: Alternative routes example',
       description: 'Plot alternative routes between two locations.',
     },
     {
@@ -4025,8 +4025,14 @@
     {
       id: 'state-of-charge',
       url: '/state-of-charge/',
-      title: 'Chargetrip API: example of the impact of your SOC',
+      title: 'Chargetrip API: Impact of SoC changes example',
       description: 'Update a route based on the state of charge at departure',
+    },
+    {
+      id: 'battery-capacity',
+      url: '/battery-capacity/',
+      title: 'Chargetrip API: Impact of battery capacity changes example',
+      description: 'Update a route based on the battery capacity at departure',
     },
   ];
   var page = examples.filter(function(value) {
