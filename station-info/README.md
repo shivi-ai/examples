@@ -20,7 +20,7 @@ To get stations around a location and fetch specific station details:
 2. Now we can show stations on the map.
 3. Click on a station will fetch its details. We use the `station` query for that. You can specify what data you would like to get back. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Stations/query-station-details).
 4. Each station has information about the charging speed and availability. This information is useful if you want to display different icons based on the type of the station or its availability.
-5. Apart from the actual availability we also render the historical availability on stations. This way planning ahead becomes easier since you know whether or not there will be chargers available.
+5. Next to the real-time availability we also have data on the predicted occupancy of a station. This way planning ahead becomes even easier for EV drivers.
 
 ### Useful links
 
