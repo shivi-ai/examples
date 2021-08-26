@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chargetrip API: example of setting custom battery capacity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Update a route based on custom battery capacity." />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/state-of-charge" target="_top" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+    <div id="map"></div>
+    <div class="card">
+      <header>
+        <h1 id="duration">-</h1>
+        <div class="route-metadata" id="route-metadata">-</div>
+        <div id="border-crossing" class="border-crossing">
+          <span class="icon"></span>
+          <p>Border crossing</p>
+        </div>
+      </header>
+      <main>
+        <section>
+          <div class="car-details-image-wrapper">
+            <p>Tesla</p>
+            <p>Model S 75D (2016-2019)</p>
+            <img
+              id="car-details-image"
+              class="car-details-image"
+              src="https://cars.chargetrip.io/5f1aafc4657beb0286638961.png"
+            />
+          </div>
+        </section>
+        <section>
+          <div class="description">
+            <h3>Battery capacity</h3>
+            <p>
+              The Chargetrip API offers you the ability to extend or limit the battery capacity. This way, you can offer
+              your end-users the opportunity to adjust the range of their car based on their driving experience. We
+              advise you to remain within the boundaries of -20% and +20%.
+            </p>
+          </div>
+          <div class="range-slider">
+            <div class="labels">
+              <label>Set battery capacity</label>
+              <label id="battery-capacity" for="range">-% • -km</label>
+            </div>
+            <input type="range" min="-20" max="20" value="0" step="1" id="range" />
+          </div>
+        </section>
+        <section>
+          <h3>General</h3>
+          <ul class="car-details">
+            <li>
+              <p>State of charge</p>
+              <p>100%</p>
+            </li>
+            <li>
+              <p>Adapter 1</p>
+              <p>Type 2 Combo</p>
+            </li>
+            <li>
+              <p>Adapter 2</p>
+              <p>CHAdeMO</p>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <div id="loading-toast" class="loading-toast toast">
+          <div class="loader">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Updating route</p>
+        </div>
+        <div id="error-toast" class="error-toast toast">
+          <p>Route could not be calculated</p>
+        </div>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            target="_top"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>
