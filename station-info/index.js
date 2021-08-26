@@ -1,6 +1,6 @@
 import { fetchStations, fetchStationData } from './client';
 import { displayStationData } from './station';
-import { addOccupancyListeners, formatGraphData } from './occupancy';
+import { addOccupancyListeners, renderGraph } from './occupancy';
 import { showStations } from './map.js';
 
 /**
@@ -15,7 +15,7 @@ fetchStations()
     fetchStationData(stations[0].id).then(data => {
       displayStationData(data);
       addOccupancyListeners(data.station.predicted_occupancy);
-      formatGraphData(data.station.predicted_occupancy, 0);
+      renderGraph(data.station.predicted_occupancy, 0);
     });
   })
   .catch(error => console.log(error));
