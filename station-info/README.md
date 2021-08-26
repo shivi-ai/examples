@@ -19,7 +19,8 @@ To get stations around a location and fetch specific station details:
 1. We need to use `stationAround` query. We need to pass the information about a geojson point, and the distance we want to search in. In addition to this we can also add the power we would like the stations to have or specify which amenities should be around. As a result we will get a list of stations that meet our requirements. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Stations/query-stations-around).
 2. Now we can show stations on the map.
 3. Click on a station will fetch its details. We use the `station` query for that. You can specify what data you would like to get back. You can read all the details about this query in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Stations/query-station-details).
-4. Each station has information about the charging speed and the availability. This information is useful if you want to display different icons base on the type of the station or its availability.
+4. Each station has information about the charging speed and availability. This information is useful if you want to display different icons based on the type of the station or its availability.
+5. Apart from the actual availability we also render the historical availability on stations. This way planning ahead becomes easier since you know whether or not there will be chargers available.
 
 ### Useful links
 
