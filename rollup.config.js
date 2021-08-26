@@ -126,4 +126,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'battery-capacity/index.js',
+    output: {
+      file: 'public/battery-capacity/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];
