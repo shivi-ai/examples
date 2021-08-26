@@ -12,7 +12,7 @@ import { pipe, subscribe } from 'wonka';
  */
 const headers = {
   //Replace this x-client-id with your own to get access to more station data
-  'x-client-id': '5ec52d3dd61c7b770cd5d529',
+  'x-client-id': '5ed1175bad06853b3aa1e492',
 };
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
