@@ -61,14 +61,13 @@ const drawOperatorName = legs => {
     popup.remove();
   });
 
-  console.log('fetching names');
-
   legs.forEach((leg, idx) => {
     if (idx == legs.length - 1) {
       return;
     }
 
     searchOperatorList({ page: 0, size: 10, search: leg.operatorId, searchById: true }, data => {
+      console.log(data);
       const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(leg.destination.geometry.coordinates)
         .setHTML(`<small>${data.length ? data[0].name : 'Unknown'}</small>`)

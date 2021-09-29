@@ -61,21 +61,12 @@ export const searchOperatorList = ({ page, size = 10, search = '', searchById = 
     .toPromise()
     .then(response => {
       callback(response.data.operatorList);
-      // if (response.data.operatorList) {
-      //   renderOperators(response.data.operatorList);
-      // }
     });
 };
 
-export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = [], excluded = [] }) => {
-  /**
-   * To create a route you need:
-   *
-   * 1. Create a new route and receive back its ID;
-   * 2. Subscribe to route updates in order to receive its details.
-   */
+export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = [], exclude = [] }) => {
   client
-    .mutation(createRouteQuery, { type, level1, level2, level3, excluded })
+    .mutation(createRouteQuery, { type, level1, level2, level3, exclude })
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
@@ -86,8 +77,6 @@ export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = 
         subscribe(result => {
           const { status, route } = result.data.routeUpdatedById;
 
-          // you can keep listening to the route changes to update route information
-          // for this example we want to only draw the initial route
           if (status === 'done' && route) {
             unsubscribe();
             drawRoutePolyline(route);

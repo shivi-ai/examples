@@ -161,7 +161,7 @@ const recalculateRoute = () => {
     const level1 = [];
     const level2 = [];
     const level3 = [];
-    const excluded = [];
+    const exclude = [];
 
     // eslint-disable-next-line no-unused-vars
     for (const [id, { priority }] of priorities.entries()) {
@@ -176,7 +176,7 @@ const recalculateRoute = () => {
           level3.push(id);
           break;
         case 'excluded':
-          excluded.push(id);
+          exclude.push(id);
           break;
         default:
           break;
@@ -184,11 +184,11 @@ const recalculateRoute = () => {
     }
 
     createRoute({
-      type: 'preferred',
+      type: level1.length > 0 || level2.length > 0 || level3.length > 0 ? 'preferred' : 'none',
       level1: level1,
       level2: level2,
       level3: level3,
-      excluded: excluded,
+      exclude: exclude,
     });
   } else {
     createRoute({});
