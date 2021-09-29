@@ -15,3 +15,20 @@ export const getDurationString = duration => {
 
   return durationHours === 0 ? `${durationMinutes} min` : `${durationHours} hr ${durationMinutes} min`;
 };
+
+/**
+ * Small helper function to debounce search terms
+ */
+export const debounce = (func, wait) => {
+  let timeout;
+
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};

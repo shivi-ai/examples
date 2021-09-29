@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getCarList } from './queries.js';
-import { debounce } from './debounce.js';
+import { debounce } from '../utils';
 
 import mapboxgl from 'mapbox-gl';
 
