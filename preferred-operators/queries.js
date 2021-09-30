@@ -1,61 +1,7 @@
 import qql from 'graphql-tag';
 
-export const getOperatorListQuery = qql`
-query operatorList($page: Int, $size: Int) {
-    operatorList(
-        page: $page, 
-        size: $size
-    ) {
-      id
-      external_id
-      name
-      country
-      contact {
-        phone
-        email
-        website
-        facebook
-        twitter
-        properties
-      }
-    }
-}
-`;
-
-export const searchOperatorListQuery = qql`
-query operatorList($page: Int, $size: Int, $search: String) {
-    operatorList(
-        page: $page, 
-        size: $size,
-        query:{
-            name: $search 
-        }
-    ) {
-      id
-      external_id
-      name
-    }
-}
-`;
-
-export const searchOperatorByIdListQuery = qql`
-query operatorList($page: Int, $size: Int, $search: ID) {
-    operatorList(
-        page: $page, 
-        size: $size,
-        query:{
-            id: $search 
-        }
-    ) {
-      id
-      external_id
-      name
-    }
-}
-`;
-
 /*
- * In this example we request a route from Amsterdam, Netherlands to Berlin, Germany
+ * In this example we request a route from Hanover, Germany to Nørresundby, Denmark
  * Your origin and destination are required fields. You also need to select an EV.
  * Only the EV ID here is mandatory, all other fields are optional and when not specified will use the default values.
  * The changing conditions are:
@@ -64,6 +10,7 @@ query operatorList($page: Int, $size: Int, $search: ID) {
  *   - should use climate (temperature and weather conditions)
  *   - min power of chargers is 43 kWh. This is the default setting
  *   - one passenger in the car (drive alone)
+ *   - optionally a preferred operator selection which is used to compute a route aligned with the operator ranking
  */
 export const createRouteQuery = qql`
 mutation newRoute($type: RouteOperatorsType, $level1: [ID], $level2: [ID], $level3: [ID], $exclude: [ID]) {
@@ -142,5 +89,59 @@ subscription routeUpdatedById($id: ID!){
       }
     }
   }
+}
+`;
+
+export const getOperatorListQuery = qql`
+query operatorList($page: Int, $size: Int) {
+    operatorList(
+        page: $page, 
+        size: $size
+    ) {
+      id
+      external_id
+      name
+      country
+      contact {
+        phone
+        email
+        website
+        facebook
+        twitter
+        properties
+      }
+    }
+}
+`;
+
+export const searchOperatorListQuery = qql`
+query operatorList($page: Int, $size: Int, $search: String) {
+    operatorList(
+        page: $page, 
+        size: $size,
+        query:{
+            name: $search 
+        }
+    ) {
+      id
+      external_id
+      name
+    }
+}
+`;
+
+export const searchOperatorByIdListQuery = qql`
+query operatorList($page: Int, $size: Int, $search: ID) {
+    operatorList(
+        page: $page, 
+        size: $size,
+        query:{
+            id: $search 
+        }
+    ) {
+      id
+      external_id
+      name
+    }
 }
 `;

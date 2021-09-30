@@ -53,7 +53,7 @@ let renderedCars = [];
  * The function that handles all our GraphQL networking alongside it's parameters.
  * @param { Object } - Object that manages the page, size and search to be send towards our request
  * @param { number } page - Number of the page we are on
- * @param { number } [size] - Number of cars that we should fetch in one request
+ * @param { number } size - Number of cars that we should fetch in one request
  * @param { string } search - The keywords that we should filter our car list on
  * @param { array } availability - An array of availability statuses, currently only picking up cars that are no longer for sale or currently active.
  */

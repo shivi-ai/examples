@@ -9,10 +9,10 @@ import {
   routeUpdateSubscription,
   searchOperatorByIdListQuery,
 } from './queries.js';
-import { drawRoutePolyline } from './route.js';
+import { drawRoutePolyline } from './map.js';
 
 /**
- * For the purpose of this example we use urgl - lightweights GraphQL client.
+ * For the purpose of this example we use urql - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
  * The key in this example is a public one and gives an access only to a part of our extensive database.
  * You need a registered `x-client-id` to access the full database.
@@ -44,6 +44,12 @@ const client = createClient({
   ],
 });
 
+/**
+ * Fetches the operator list with pagination but without any arguments.
+ * @param { Object } - Object that manages the page and size
+ * @param { number } page - Number of the page we are on
+ * @param { number } size - Number of operators that we should fetch in one request
+ */
 export const getOperatorList = ({ page, size = 10 }) => {
   client
     .query(getOperatorListQuery, { page, size })
@@ -55,6 +61,15 @@ export const getOperatorList = ({ page, size = 10 }) => {
     });
 };
 
+/**
+ * Searches through our operator list with pagination and various arguments.
+ * @param { Object } - Object that manages the page, size and search to be send towards our request
+ * @param { number } page - Number of the page we are on
+ * @param { number } size - Number of operators that we should fetch in one request
+ * @param { string } search - The keywords that we should filter our operator list on
+ * @param { boolean } searchById - Boolean whether we should search by name or id
+ * @param { function } callback - As soon as our asynchronous call is finished we do a callback to update our UI.
+ */
 export const searchOperatorList = ({ page, size = 10, search = '', searchById = false }, callback) => {
   client
     .query(searchById ? searchOperatorByIdListQuery : searchOperatorListQuery, { page, size, search })
@@ -64,6 +79,15 @@ export const searchOperatorList = ({ page, size = 10, search = '', searchById = 
     });
 };
 
+/**
+ * Creates a route based on operator preference
+ * @param { Object } - Object that manages the operator preference
+ * @param { string } type - The type of operator preference. Can be either none, preferred or required.
+ * @param { string } [level1] - The first level of operator preference. The higher the more preferred an operator is.
+ * @param { string } [level2] - The second level of operator preference.
+ * @param { string } [level3] - The third level of operator preference.
+ * @param { string } [excluded] - The excluded level of operator preference. These operators won't be used when calculating the route.
+ */
 export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = [], exclude = [] }) => {
   client
     .mutation(createRouteQuery, { type, level1, level2, level3, exclude })

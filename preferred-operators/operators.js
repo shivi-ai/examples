@@ -13,8 +13,15 @@ let searchKeyword = '';
 // Keeps track of which page of cars we are currently on.
 let currentPage = 0;
 
+/**
+ * A small helper function that renders the UI for every operator coming from the Chargetrip API.
+ * @param { Object } operators - All operators that we fetched from the Chargetrip API
+ */
 export const renderOperators = operators => {
   operators.forEach(operator => {
+    // Check if our operator ID has been assigned a different priority level than no priority.
+    // If so we need to render a different UI.
+    // This is required for when you start searching and go back to the full overview.
     const priority = priorities.has(operator.id) ? priorities.get(operator.id) : null;
 
     document.getElementById('operator-list').insertAdjacentHTML(
@@ -37,39 +44,61 @@ export const renderOperators = operators => {
     );
   });
 
-  // Now that we rendered our UI we can configure our intersection observer that will take
-  // care of our endless scroll pagination.
+  // We are using pagination by using an intersection observer.
+  // If we get a new set of data we validate whether our observer is still required.
   handleObserving(operators);
 };
 
+/**
+ * Small helper function that assigns all event listeners to the UI
+ */
 export const attachEventListeners = () => {
   attachMenuEventListener();
   attachMenuItemEventListeners();
   attachButtonEventListeners();
 };
 
+/**
+ * Event listener which registers a trigger for the priority menu.
+ * We assign the event listener on the body so you can click anywhere outside the menu to dismiss.
+ */
 const attachMenuEventListener = () => {
   document.body.addEventListener('click', toggleMenu, false);
 };
 
+/**
+ * Event listener that handles the click on any of the items inside the priority menu
+ */
 const attachMenuItemEventListeners = () => {
   [...document.querySelectorAll('.priority-action')].forEach((action, index) => {
     action.addEventListener('click', () => {
       closeMenu();
       setPriority(index);
-      setPriorityStyling();
     });
   });
 };
 
+/**
+ * Event listener on the recalculate button.
+ * This way you can first set your priorities and after that we recalculate the route.
+ * This prevents unnecessary calls to our API.
+ */
 const attachButtonEventListeners = () => {
   document.getElementById('recalculate').addEventListener('click', recalculateRoute, false);
 };
 
+/**
+ * Function that toggles the menu from open to close and vice-versa
+ * @param { Event } event - The click event.
+ */
 const toggleMenu = event => {
   const menu = document.getElementById('priority-menu');
+  // When clicking the button we traverse up the dom to get to the actual button.
   const menuButton = event.target.parentNode;
 
+  // Check if we click the menu button and if the menu is already open.
+  // If the menu is already open we close it, otherwise open the menu.
+  // If we click anywhere else and our menu is open, we close it.
   if (menuButton.classList.contains('priority-menu-action') && !menu.classList.contains('active')) {
     openMenu(menuButton);
     return;
@@ -77,23 +106,32 @@ const toggleMenu = event => {
     closeMenu();
     return;
   }
-
-  // Click inside menu handler missing
 };
 
+/**
+ * Opens and positions the priority menu
+ * @param { Element } menuButton - the menu button that has been clicked
+ */
 const openMenu = menuButton => {
   const menu = document.getElementById('priority-menu');
   const scroll = document.getElementsByTagName('main')[0];
 
-  menuButton.classList.add('active');
-
+  // Set the menu on the correct offset and open it
+  // We use the scroll area to compute the offset of the item that was clicked
   menu.classList.add('active');
   menu.style.top = `${menuButton.offsetTop - scroll.scrollTop}px`;
   menu.style.left = `${menuButton.offsetLeft - menu.clientWidth}px`;
 
+  // Keep the button that was clicked in view, so the user has a visual queue to close the menu.
+  menuButton.classList.add('active');
+
+  // Get the operator element that was clicked and assign that to the current selected operator
   selectedOperator = menuButton.parentNode;
 };
 
+/**
+ * Closes the priority menu
+ */
 const closeMenu = () => {
   const menu = document.getElementById('priority-menu');
   const menuAction = document.querySelector('.priority-menu-action.active');
@@ -102,12 +140,18 @@ const closeMenu = () => {
   menu.classList.remove('active');
 };
 
+/**
+ * Set the priority of the operator that was clicked to any of the items that was clicked inside the menu
+ * @param { number } index - The index of the item that was clicked inside the menu
+ */
 const setPriority = index => {
   switch (index) {
     case 0:
+      // Unset the priority
       priorities.delete(selectedOperator.dataset.id);
       break;
     case 1:
+      // Set the priority to high
       priorities.set(selectedOperator.dataset.id, {
         priority: 'high',
         color: 'priority',
@@ -116,6 +160,7 @@ const setPriority = index => {
       });
       break;
     case 2:
+      // Set the priority to medium
       priorities.set(selectedOperator.dataset.id, {
         priority: 'medium',
         color: 'priority',
@@ -124,6 +169,7 @@ const setPriority = index => {
       });
       break;
     case 3:
+      // Set the priority to low
       priorities.set(selectedOperator.dataset.id, {
         priority: 'low',
         color: 'priority',
@@ -132,6 +178,7 @@ const setPriority = index => {
       });
       break;
     default:
+      // Set the priority to excluded
       priorities.set(selectedOperator.dataset.id, {
         priority: 'excluded',
         color: 'excluded',
@@ -140,8 +187,14 @@ const setPriority = index => {
       });
       break;
   }
+
+  // When we changed the priority we let the UI reflect it by calling this function
+  setPriorityStyling();
 };
 
+/**
+ * Sets the correct styling based on the priority that was selected inside the priority menu.
+ */
 const setPriorityStyling = () => {
   const priority = priorities.get(selectedOperator.dataset.id);
 
@@ -156,6 +209,11 @@ const setPriorityStyling = () => {
   /* eslint-enable */
 };
 
+/**
+ * This recalculates the route based upon the new operator selection.
+ * It extracts the priorities that were set in the list and formats them to how our API is expecting the data
+ * If there are no priorities it just calculates a regular route.
+ */
 const recalculateRoute = () => {
   if (priorities.size > 0) {
     const level1 = [];
@@ -183,6 +241,17 @@ const recalculateRoute = () => {
       }
     }
 
+    /**
+     * So by default our operator preference is set to none.
+     * Whenever you add a preferred operator you will have to tell our API how you would like to use them; preferred or required.
+     * Preferred will prefer the operator ranking when calculating routes
+     * Required will require the operator ranking when calculating routes, excluded operators will be ignored
+     *
+     * Our example only uses level 1 to 3. Our API has 10 levels available for if you want to be more specific.
+     *
+     * NOTE: If you try to calculate a route with preferred operators while your type is set to none, you will get no route back.
+     * NOTE 2: If you calculate a route with only excluded, set your type to 'none'. Otherwise no route will be returned.
+     */
     createRoute({
       type: level1.length > 0 || level2.length > 0 || level3.length > 0 ? 'preferred' : 'none',
       level1: level1,
@@ -196,7 +265,9 @@ const recalculateRoute = () => {
 };
 
 /**
- * A function that manages the state of our observer. It either connects or disconnects to our car list.
+ * Intersection observer that checks if we have more pages or that we reached the end.
+ * If the end is reached we disconnect the intersection observer.
+ * @param { Array<Object> } operators - Set of operators that is being returned from the Chargetrip API
  */
 const handleObserving = operators => {
   let targets = [...document.querySelectorAll('.priority-list-element')];
@@ -235,6 +306,7 @@ const options = {
   threshold: 1.0,
 };
 
+// Intersection observer that handles pagination on the operator list
 const observer = new IntersectionObserver(loadNextPage, options);
 
 /**
@@ -256,8 +328,6 @@ document.getElementById('search-area').addEventListener(
 
     // Empties our current car-list so we can replace it with the search results
     document.getElementById('operator-list').textContent = '';
-
-    // Reset our rendered and grouped defaults so we have a clean list to start building our search results.
 
     // Initializes the search request if there is a keyword.
     // If there is no keyword, we fetch the full list from the start

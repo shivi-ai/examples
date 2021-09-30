@@ -1,11 +1,11 @@
 import qql from 'graphql-tag';
 
 /*
- * In this example we request a route from Amsterdam, Netherlands to Berlin, Germany
+ * In this example we request a route from Hanover, Germany to Nørresundby, Denmark
  * Your origin and destination are required fields. You also need to select an EV.
  * Only the EV ID here is mandatory, all other fields are optional and when not specified will use the default values.
  * The changing conditions are:
- *   - full battery at Amsterdam, Netherlands
+ *   - full battery at Hanover, Germany
  *   - EV can charge at CHAdeMO changers
  *   - should use climate (temperature and weather conditions)
  *   - min power of chargers is 43 kWh. This is the default setting
