@@ -1,6 +1,6 @@
 import qql from 'graphql-tag';
 
-export const getCarList = qql`
+export const carListQuery = qql`
 query carList($page: Int, $size: Int, $search: String, $availability: [Int]) {
   carList(
     page: $page, 

@@ -1,7 +1,6 @@
 import mapboxgl from 'mapbox-gl';
-import { fetchStationData } from './client';
-import { displayStationData } from './station';
-import { renderGraph } from './occupancy';
+import { getStationData } from './client';
+import { renderGraph, renderStationData } from './interface';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
@@ -18,8 +17,8 @@ const map = new mapboxgl.Map({
 map.on('click', 'stations', function(e) {
   const stationId = e.features[0]?.properties?.stationId;
   if (stationId) {
-    fetchStationData(stationId).then(data => {
-      displayStationData(data);
+    getStationData(stationId).then(data => {
+      renderStationData(data);
       renderGraph(data.station.predicted_occupancy, 0);
     });
   }

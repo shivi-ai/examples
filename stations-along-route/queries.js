@@ -11,7 +11,7 @@ import qql from 'graphql-tag';
  *   - one passenger in the car (drive alone)
  *   - stations along the route radius is 2km
  */
-export const createRoute = qql`
+export const createRouteQuery = qql`
 mutation newRoute{
     newRoute(
       input: {
@@ -46,7 +46,7 @@ mutation newRoute{
   }
 `;
 
-export const routeUpdate = qql`
+export const routeUpdateSubscription = qql`
 subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status

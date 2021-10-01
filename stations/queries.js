@@ -4,7 +4,7 @@ import qql from 'graphql-tag';
  * For this query we are requesting the 20 closest stations.
  * The default for this query is 10.
  */
-export const getStationsAround = qql`
+export const getStationsAroundQuery = qql`
 query stationAround($query: StationAroundQuery!){
   stationAround(
       query: $query

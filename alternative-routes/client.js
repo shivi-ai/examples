@@ -1,10 +1,12 @@
-import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRouteQuery, routeUpdateSubscription } from './queries';
 import { pipe, subscribe } from 'wonka';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { createRoute, routeUpdate } from './queries.js';
+import { decodePolylines } from './map.js';
+import { renderRouteDetails, renderRouteHeader, renderTabData } from './interface.js';
 
 /**
- * For the purpose of this example we use urgl - lightweights GraphQL client.
+ * For the purpose of this example we use urql - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
  * The key in this example is a public one and gives access only to a part of our extensive database.
  * You need a registered `x-client-id` to access the full database.
@@ -36,30 +38,34 @@ const client = createClient({
   ],
 });
 
-/*
- * To create a route you need to:
+/**
+ * To create a route you need:
  *
- * 1. create a new route and receive back its ID;
- * 2. subscribe to route updates in order to receive its details.
+ * 1. Create a new route and receive back its ID;
+ * 2. Subscribe to route updates in order to receive its details.
  */
-export const getRoute = (soc, callback) => {
+export const getRoute = () => {
   client
-    .mutation(createRouteQuery, { soc: soc })
+    .mutation(createRoute)
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
+      if (!routeId) return Promise.reject('Could not retrieve Route ID. The response is not valid.');
 
       const { unsubscribe } = pipe(
-        client.executeSubscription(createRequest(routeUpdateSubscription, { id: routeId })),
+        client.executeSubscription(createRequest(routeUpdate, { id: routeId })),
         subscribe(result => {
-          const { status, route } = result.data?.routeUpdatedById;
-          // You can keep listening to the route changes to update route information.
-          // For this example we want to only draw the initial route.
+          const { status, route, alternatives } = result.data.routeUpdatedById;
+
+          // you can keep listening to the route changes to update route information
+          // for this example we want to only draw the initial route
           if (status === 'done' && route) {
             unsubscribe();
-            callback(route);
-          } else if (status === 'not_found') {
-            callback();
+            decodePolylines(route, alternatives); // draw a polyline on a map
+
+            renderTabData(route, alternatives); // Set the tab times
+            renderRouteHeader(route); // Render header HTML data
+            renderRouteDetails(route); // fill in the route information
           }
         }),
       );

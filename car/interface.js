@@ -29,45 +29,60 @@ export const renderCarList = cars => {
     );
   });
 
-  attachEventHandlers(cars);
+  attachEventListeners(cars);
 };
 
 /**
  * To allow navigation between car list and car details we add a few click handlers.
  */
-const attachEventHandlers = cars => {
-  const detailsPage = document.getElementById('car-details');
-
-  // Attach event listener to every row in the list that gets the car id on click.
-  // It also sets a class so our detail page animates in.
-  [...document.querySelectorAll('.car-list-element')].forEach((el, idx) => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-
-      // Remove the current car image sources so they don't show up when navigating to a different car
-      document.getElementById('car-details-image').src = '';
-      document.getElementById('car-details-brand').src = '';
-
-      // On click we format all the details of the specific car before rendering the UI
-      formatCarDetails(cars[idx].id);
-
-      // We show the details page and hide the car list
-      detailsPage.classList.add('show');
-      [...document.querySelectorAll('.card > *')].forEach(el => {
-        el.classList.add('hide');
-      });
+const attachEventListeners = cars => {
+  [...document.querySelectorAll('.car-list-element')].forEach((car, index) => {
+    car.addEventListener('click', event => {
+      didClickCar(event, cars, index);
     });
   });
 
-  // Event listener that enables us to go back from the car detail page to the car list view
-  document.getElementById('car-details-back').addEventListener('click', e => {
-    e.preventDefault();
+  document.getElementById('car-details-back').addEventListener('click', didClickBack);
+};
 
-    // We hide the details page and show the car list
-    detailsPage.classList.remove('show');
-    [...document.querySelectorAll('.card > *')].forEach(el => {
-      el.classList.remove('hide');
-    });
+/**
+ * Click action that get's triggered when somebody clicks on a car. It also sets a class so our detail page animates in.
+ * @param { Event } event - the click event
+ * @param { Object } cars - list of all the cars
+ * @param { number } index - index of the clicked element
+ */
+const didClickCar = (event, cars, index) => {
+  event.preventDefault();
+
+  const detailsPage = document.getElementById('car-details');
+
+  // Remove the current car image sources so they don't show up when navigating to a different car
+  document.getElementById('car-details-image').src = '';
+  document.getElementById('car-details-brand').src = '';
+
+  // On click we format all the details of the specific car before rendering the UI
+  formatCarDetails(cars[index].id);
+
+  // We show the details page and hide the car list
+  detailsPage.classList.add('show');
+  [...document.querySelectorAll('.card > *')].forEach(el => {
+    el.classList.add('hide');
+  });
+};
+
+/**
+ * Function that allows us to go back from a car detail to the car list
+ * @param { Event } event - the click event
+ */
+const didClickBack = event => {
+  event.preventDefault();
+
+  const detailsPage = document.getElementById('car-details');
+
+  // We hide the details page and show the car list
+  detailsPage.classList.remove('show');
+  [...document.querySelectorAll('.card > *')].forEach(el => {
+    el.classList.remove('hide');
   });
 };
 
@@ -88,7 +103,7 @@ export const formatCarDetails = carId => {
 };
 
 /**
- * A small helper function that structures the raw car data into nicely formatted objects
+ * Function that structures the raw car data into nicely formatted objects
  * @param { object } data - The raw car data coming from the backend
  * @returns - An array with formatted data
  */

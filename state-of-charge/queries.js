@@ -11,14 +11,14 @@ import qql from 'graphql-tag';
  *   - min power of chargers is 43 kWh. This is the default setting
  *   - one passenger in the car (drive alone)
  */
-export const createRoute = soc => `
-mutation newRoute{
+export const createRouteQuery = qql`
+mutation newRoute($soc: Float!){
     newRoute(
       input: {
         ev: {
           id: "5d161be5c9eef46132d9d20a"
           battery: {
-            stateOfCharge: { value: ${soc}, type: km }
+            stateOfCharge: { value: $soc, type: km }
           }
           plugs: { chargingPower: 150, standard: TESLA_S }
           adapters: [

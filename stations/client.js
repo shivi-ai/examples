@@ -1,5 +1,5 @@
 import { createClient, defaultExchanges } from '@urql/core';
-import { getStationDataQuery, getStationsAroundQuery } from './queries';
+import { getStationsAroundQuery } from './queries.js';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
@@ -23,36 +23,21 @@ const client = createClient({
 });
 
 /**
- * Fetch 20 station around the city center of Hamburg, Germany.
- * We set the radius around the geolocation in which we fetch stations to 3km
+ * In this example we fetch the closest stations within a radius of 3000 meters
  */
-export const getStations = () => {
+export const getStations = ({ distance = 3000, power = [], amenities = [] }) => {
   return client
     .query(getStationsAroundQuery, {
       query: {
-        location: { type: 'Point', coordinates: [9.9801115, 53.5475679] },
-        distance: 3000,
+        location: { type: 'Point', coordinates: [10.197422, 56.171395] },
+        distance,
+        power,
+        amenities,
       },
     })
     .toPromise()
     .then(response => {
       return response.data?.stationAround;
-    })
-    .catch(error => console.log(error));
-};
-
-/**
- * Fetch the detail data of a specific station
- * @param { string } id - the id of the station
- */
-export const getStationData = id => {
-  return client
-    .query(getStationDataQuery, {
-      stationId: id,
-    })
-    .toPromise()
-    .then(response => {
-      return response.data;
     })
     .catch(error => console.log(error));
 };

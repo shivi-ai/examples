@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+import * as mapboxPolyline from '@mapbox/polyline';
 import { renderRouteDetails, renderRouteHeader } from './index';
 import { getDurationString } from '../utils';
 
@@ -18,10 +19,39 @@ const popup = new mapboxgl.Popup({
 });
 
 /**
+ * Draw a route on a map.
+ *
+ * Route object contains `polyline` data -  the polyline encoded route (series of coordinates as a single string).
+ * We need to decode this information first. We use Mapbox polyline tool (https://www.npmjs.com/package/@mapbox/polyline) for this.
+ * As a result of decoding we get pairs [latitude, longitude].
+ * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
+ * so we have to reverse every pair.
+ *
+ * @param { object } route - The fastest route
+ * @param { array } alternatives - The alternative route objects
+ */
+export const decodePolylines = (route, alternatives) => {
+  const routes = [];
+
+  const decodedData = mapboxPolyline.decode(route.polyline);
+  const reversed = decodedData.map(item => item.reverse());
+
+  routes.push({ data: route, polyline: reversed });
+
+  alternatives.map(item => {
+    const decoded = mapboxPolyline.decode(item.polyline);
+    const itemReversed = decoded.map(item => item.reverse());
+    routes.push({ data: item, polyline: itemReversed });
+  });
+
+  drawRoutes(routes);
+};
+
+/**
  * Draw route polyline and show charging stations on the map.
  * @param { array } routes - The route and alternative routes between two points
  */
-export const drawRoutes = routes => {
+const drawRoutes = routes => {
   const routeOptions = document.querySelectorAll('.tab');
   const tabHighlighter = document.getElementById('tab-highlighter');
 

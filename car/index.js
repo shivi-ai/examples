@@ -1,13 +1,15 @@
-import mapboxgl from 'mapbox-gl';
 import { getCarList } from './client';
+import { drawMap } from './map';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
+/**
+ * This project shows you how to fetch a car list and render the car details
+ * The project structure contains;
+ *
+ *    - client.js - All networking requests
+ *    - interface.js - All interface rendering
+ *    - map.js - All map rendering (including routes and waypoints)
+ *    - queries.js - The GraphQL queries used in the networking requests
+ */
 
-new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 5,
-  center: [8.1320104, 52.3758916],
-});
-
+drawMap();
 getCarList();

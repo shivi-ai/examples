@@ -1,14 +1,18 @@
-import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRouteQuery, routeUpdateSubscription } from './queries';
 import { pipe, subscribe } from 'wonka';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { createRouteQuery, routeUpdateSubscription } from './queries.js';
 
 /**
+ * Example application of how to build a route with the Chargetrip API.
+ * This route will show alternative stations along the route.
+ * Please have a look to Readme file in this repo for more details.
+ *
  * For the purpose of this example we use urgl - lightweights GraphQL client.
  * To establish a connection with Chargetrip GraphQL API you need to have an API key.
  * The key in this example is a public one and gives access only to a part of our extensive database.
  * You need a registered `x-client-id` to access the full database.
- * Read more about authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
+ * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
   //Replace this x-client-id with your own to get access to more station data
@@ -36,30 +40,30 @@ const client = createClient({
   ],
 });
 
-/*
- * To create a route you need to:
+/**
+ * To create a route you need:
  *
- * 1. create a new route and receive back its ID;
- * 2. subscribe to route updates in order to receive its details.
+ * 1. Create a new route and receive back its ID;
+ * 2. Subscribe to route updates in order to receive its details.
  */
-export const getRoute = (soc, callback) => {
+export const getRoute = callback => {
   client
-    .mutation(createRouteQuery, { soc: soc })
+    .mutation(createRouteQuery)
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
+      if (!routeId) return Promise.reject('Could not retrieve Route ID. The response is not valid.');
 
       const { unsubscribe } = pipe(
         client.executeSubscription(createRequest(routeUpdateSubscription, { id: routeId })),
         subscribe(result => {
           const { status, route } = result.data?.routeUpdatedById;
-          // You can keep listening to the route changes to update route information.
-          // For this example we want to only draw the initial route.
+
+          // you can keep listening to the route changes to update route information
+          // for this example we want to only draw the initial route
           if (status === 'done' && route) {
             unsubscribe();
             callback(route);
-          } else if (status === 'not_found') {
-            callback();
           }
         }),
       );
