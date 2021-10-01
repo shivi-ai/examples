@@ -1,11 +1,16 @@
 import { createRoute, getOperatorList } from './client';
 import { attachEventListeners } from './operators';
 
-/*
- * On initial load we configure our UI. We fetch a first route without any preferred operators.
- * We also fetch the operator list with the first 10 items on page 0.
- * Finally we register the event listeners for certain elements.
+/**
+ * This project shows you how to fetch a car list and render the car details
+ * The project structure contains;
+ *
+ *    - client.js - All networking requests
+ *    - interface.js - All interface rendering
+ *    - map.js - All map rendering (including routes and waypoints)
+ *    - queries.js - The GraphQL queries used in the networking requests
  */
+
 createRoute({});
 getOperatorList({ page: 0 });
 attachEventListeners();

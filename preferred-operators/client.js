@@ -1,7 +1,7 @@
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { renderOperators } from './operators.js';
+import { renderOperators } from './interface.js';
 import {
   getOperatorListQuery,
   searchOperatorListQuery,
