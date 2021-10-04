@@ -1,9 +1,11 @@
 import mapboxgl from 'mapbox-gl';
 import * as mapboxPolyline from '@mapbox/polyline';
-import { renderRouteDetails, renderRouteHeader } from './index';
+import { renderRouteDetails, renderRouteHeader, tabHandler } from './interface';
 import { getDurationString } from '../utils';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
+
+export let routes;
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -31,18 +33,20 @@ const popup = new mapboxgl.Popup({
  * @param { array } alternatives - The alternative route objects
  */
 export const decodePolylines = (route, alternatives) => {
-  const routes = [];
+  const _routes = [];
 
   const decodedData = mapboxPolyline.decode(route.polyline);
   const reversed = decodedData.map(item => item.reverse());
 
-  routes.push({ data: route, polyline: reversed });
+  _routes.push({ data: route, polyline: reversed });
 
   alternatives.map(item => {
     const decoded = mapboxPolyline.decode(item.polyline);
     const itemReversed = decoded.map(item => item.reverse());
-    routes.push({ data: item, polyline: itemReversed });
+    _routes.push({ data: item, polyline: itemReversed });
   });
+
+  routes = _routes;
 
   drawRoutes(routes);
 };
@@ -52,9 +56,6 @@ export const decodePolylines = (route, alternatives) => {
  * @param { array } routes - The route and alternative routes between two points
  */
 const drawRoutes = routes => {
-  const routeOptions = document.querySelectorAll('.tab');
-  const tabHighlighter = document.getElementById('tab-highlighter');
-
   if (map.loaded()) {
     routes.forEach((route, index) => drawPolyline(route, index, index === 0 ? '#0078FF' : '#9CA7B2'));
     map.moveLayer(`0`);
@@ -87,7 +88,10 @@ const drawRoutes = routes => {
     });
 
     map.on('click', `${i}`, () => {
-      tabHandler(routeOptions, i, tabHighlighter);
+      const routeOptions = document.querySelectorAll('.tab');
+      const tabHighlighter = document.getElementById('tab-highlighter');
+
+      tabHandler(i, routeOptions, tabHighlighter);
       highlightRoute(i, routes);
     });
 
@@ -96,26 +100,6 @@ const drawRoutes = routes => {
       popup.remove();
     });
   }
-
-  routeOptions.forEach((option, index) => {
-    option.addEventListener('click', e => {
-      e.preventDefault();
-      tabHandler(routeOptions, index, tabHighlighter);
-      highlightRoute(index, routes);
-    });
-  });
-};
-
-/**
- * Small helper function that sets the font color and tab highlight
- * @param { object } routeOptions - All possible route options that are available in the tabs
- * @param { number } index - Current active index
- * @param { element } tabHighlighter - The highlight element that indicates the active tab
- */
-const tabHandler = (routeOptions, index, tabHighlighter) => {
-  routeOptions.forEach(option => option.classList.remove('active'));
-  routeOptions[index].classList.add('active');
-  tabHighlighter.style.transform = `translateX(calc(${index * 100}% + ${index * 2}px)`;
 };
 
 /**
@@ -237,7 +221,7 @@ const showLegs = legs => {
  * @param { object } routes - All routes recieved from the route query
  * @param { number } id - index / id of the polyline that was clicked on
  */
-const highlightRoute = (id, routes) => {
+export const highlightRoute = (id, routes) => {
   map.setPaintProperty(`${id}`, 'line-color', '#0078FF');
   for (let j = 0; j < routes.length; j++) {
     if (j !== id) {

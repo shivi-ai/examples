@@ -2,8 +2,6 @@ import { createClient, createRequest, defaultExchanges, subscriptionExchange } f
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createRoute, routeUpdate } from './queries.js';
-import { decodePolylines } from './map.js';
-import { renderRouteDetails, renderRouteHeader, renderTabData } from './interface.js';
 
 /**
  * For the purpose of this example we use urql - lightweights GraphQL client.
@@ -44,7 +42,7 @@ const client = createClient({
  * 1. Create a new route and receive back its ID;
  * 2. Subscribe to route updates in order to receive its details.
  */
-export const getRoute = () => {
+export const getRoute = callback => {
   client
     .mutation(createRoute)
     .toPromise()
@@ -61,11 +59,7 @@ export const getRoute = () => {
           // for this example we want to only draw the initial route
           if (status === 'done' && route) {
             unsubscribe();
-            decodePolylines(route, alternatives); // draw a polyline on a map
-
-            renderTabData(route, alternatives); // Set the tab times
-            renderRouteHeader(route); // Render header HTML data
-            renderRouteDetails(route); // fill in the route information
+            callback(route, alternatives);
           }
         }),
       );

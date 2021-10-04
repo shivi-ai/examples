@@ -1,4 +1,4 @@
-import { fetchRoute } from './client';
+import { getRoute } from './client';
 import { renderRouteHeader, renderRouteDetails, renderGraph, attachEventListeners } from './interface';
 import { drawRoutePolyline } from './map';
 
@@ -12,7 +12,7 @@ import { drawRoutePolyline } from './map';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-fetchRoute((routeId, routeData) => {
+getRoute((routeId, routeData) => {
   drawRoutePolyline(routeId, routeData);
 
   renderRouteHeader(routeData);

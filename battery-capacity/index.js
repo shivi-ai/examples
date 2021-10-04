@@ -1,6 +1,5 @@
-import { renderRouteHeader } from '../alternative-routes/interface';
 import { getRoute } from './client';
-import { attachEventListeners, getBatteryCapacity, renderErrorToast } from './interface';
+import { attachEventListeners, getBatteryCapacity, renderRouteHeader, renderErrorToast } from './interface';
 import { drawRoutePolyline } from './map';
 
 /**
@@ -13,7 +12,7 @@ import { drawRoutePolyline } from './map';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-getRoute(getBatteryCapacity, routeData => {
+getRoute(getBatteryCapacity(), routeData => {
   if (routeData) {
     drawRoutePolyline(routeData);
     renderRouteHeader(routeData);

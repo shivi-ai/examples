@@ -1,7 +1,6 @@
-import { drawRoutePolyline } from '../route/map';
+import { drawRoutePolyline } from './map';
 import { getRoute } from './client';
-import { attachEventListeners, renderErrorToast, renderRouteHeader } from './interface';
-import { getStateOfCharge } from './slider';
+import { getStateOfCharge, attachEventListeners, renderErrorToast, renderRouteHeader } from './interface';
 
 /**
  * This project shows you how to fetch a car list and render the car details

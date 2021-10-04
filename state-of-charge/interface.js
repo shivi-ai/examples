@@ -1,5 +1,5 @@
 import { getRoute } from './client';
-import { drawRoutePolyline } from './index';
+import { drawRoutePolyline } from './map';
 import { getDurationString } from '../utils';
 
 export const getStateOfCharge = () => {

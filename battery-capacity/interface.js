@@ -1,5 +1,5 @@
 import { getRoute } from './client';
-import { drawRoutePolyline } from './index';
+import { drawRoutePolyline } from './map';
 import { getDurationString } from '../utils';
 
 // This example uses a Tesla 75D (2016-2019). By default it has a useable battery capacity of 72.5 kWh and

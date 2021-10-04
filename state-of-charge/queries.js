@@ -46,7 +46,7 @@ mutation newRoute($soc: Float!){
   }
 `;
 
-export const routeUpdate = qql`
+export const routeUpdateSubscription = qql`
 subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status

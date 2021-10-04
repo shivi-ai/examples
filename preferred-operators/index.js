@@ -1,5 +1,5 @@
 import { createRoute, getOperatorList } from './client';
-import { attachEventListeners } from './operators';
+import { attachEventListeners } from './interface';
 
 /**
  * This project shows you how to fetch a car list and render the car details

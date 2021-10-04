@@ -1,4 +1,6 @@
 import { getRoute } from './client.js';
+import { decodePolylines } from './map.js';
+import { attachEventListeners, renderRouteDetails, renderRouteHeader, renderTabData } from './interface.js';
 
 /**
  * This project shows you how to render alternative routes.
@@ -10,4 +12,12 @@ import { getRoute } from './client.js';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-getRoute();
+getRoute((route, alternatives) => {
+  decodePolylines(route, alternatives);
+
+  renderTabData(route, alternatives);
+  renderRouteHeader(route);
+  renderRouteDetails(route);
+
+  attachEventListeners();
+});

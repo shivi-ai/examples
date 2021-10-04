@@ -1,4 +1,29 @@
 import { getDurationString } from '../utils';
+import { highlightRoute, routes } from './map';
+
+/**
+ * Attach event listeners to our tabs
+ */
+export const attachEventListeners = () => {
+  const routeOptions = document.querySelectorAll('.tab');
+  const tabHighlighter = document.getElementById('tab-highlighter');
+
+  routeOptions.forEach((option, index) => {
+    option.addEventListener('click', didClickTab.bind(null, index, routeOptions, tabHighlighter));
+  });
+};
+
+/**
+ * Small helper function that sets the font color and tab highlight
+ * @param { object } routeOptions - All possible route options that are available in the tabs
+ * @param { number } index - Current active index
+ * @param { element } tabHighlighter - The highlight element that indicates the active tab
+ */
+export const tabHandler = (index, routeOptions, tabHighlighter) => {
+  routeOptions.forEach(option => option.classList.remove('active'));
+  routeOptions[index].classList.add('active');
+  tabHighlighter.style.transform = `translateX(calc(${index * 100}% + ${index * 4}px)`;
+};
 
 /**
  * Small function that sets the time on how much longer the different routes are
@@ -73,4 +98,17 @@ const formatRouteDetails = data => {
     'Total consumption': data.consumption ? `${data.consumption.toFixed(2)} kWh` : 'Unknown',
     'CO2 spared': data.saving?.co2 ? `${data.saving.co2 / 1000} Kg` : 'Unknown',
   };
+};
+
+/**
+ * The function that handles highlighting the correct tab and route when a tab is clicked
+ * @param { number } index - The index of the tab clicked
+ * @param { HTMLCollection } routeOptions - A collection of tabs
+ * @param { HTMLElement } tabHighlighter - The highlight element of the tabs
+ * @param { Event } event - The click event
+ */
+const didClickTab = (index, routeOptions, tabHighlighter, event) => {
+  event.preventDefault();
+  tabHandler(index, routeOptions, tabHighlighter);
+  highlightRoute(index, routes);
 };
