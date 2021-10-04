@@ -56,7 +56,7 @@ const didReleaseRangeSlider = event => {
   event.preventDefault();
   event.target.disabled = true;
 
-  const computedBatteryCapacity = getBatteryCapacity;
+  const computedBatteryCapacity = getBatteryCapacity();
   const loadingToast = document.getElementById('loading-toast');
 
   loadingToast.style.transform = `translateY(0)`;

@@ -44,7 +44,7 @@ const client = createClient({
  */
 export const getRoute = (soc, callback) => {
   client
-    .mutation(createRouteQuery, { soc: soc })
+    .mutation(createRouteQuery, { soc: parseFloat(soc) })
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
@@ -59,7 +59,7 @@ export const getRoute = (soc, callback) => {
             unsubscribe();
             callback(route);
           } else if (status === 'not_found') {
-            callback();
+            console.log('not found');
           }
         }),
       );
