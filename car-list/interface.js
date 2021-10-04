@@ -134,10 +134,7 @@ const handleObserving = (groupedCars, cars) => {
 
   console.log(cars);
 
-  // Before we attach our observer we have to make sure we have data and whether or offset is within range.
-  // When we search it might happen that we don't have any results or less than 3.
-  // In these scenario's we won't need the observer and can disconnect it.
-  if (targets.length - offset > 0 && groupedCars.size) {
+  if (cars.length - offset > 0) {
     // Attach our observer to the 3rd last element in our list
     // We don't attach it to the last one, because then it will block the scrolling behaviour
     // Now it will fetch and attach before the user is at the end so the scroll interaction feels fluid.
@@ -145,6 +142,7 @@ const handleObserving = (groupedCars, cars) => {
   } else {
     // Disconnect the observer when we don't need it anymore
     observer.disconnect();
+    console.log('disconnect');
   }
 };
 

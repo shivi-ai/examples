@@ -9,7 +9,6 @@ import {
   routeUpdateSubscription,
   searchOperatorByIdListQuery,
 } from './queries.js';
-import { drawRoutePolyline } from './map.js';
 
 /**
  * For the purpose of this example we use urql - lightweights GraphQL client.
