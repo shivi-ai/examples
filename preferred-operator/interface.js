@@ -1,5 +1,6 @@
 import { debounce } from '../utils';
 import { createRoute, getOperatorList, searchOperatorList } from './client';
+import { drawRoutePolyline } from './map';
 
 // Keeps track of priority levels
 let priorities = new Map([]);
@@ -12,6 +13,8 @@ let searchKeyword = '';
 
 // Keeps track of which page of cars we are currently on.
 let currentPage = 0;
+
+const loadingToast = document.getElementById('loading-toast');
 
 /**
  * A small helper function that renders the UI for every operator coming from the Chargetrip API.
@@ -56,7 +59,6 @@ export const attachEventListeners = () => {
   attachMenuEventListener();
   attachMenuItemEventListeners();
   attachButtonEventListeners();
-  // attachScrollEventListener();
 };
 
 /**
@@ -87,16 +89,6 @@ const attachMenuItemEventListeners = () => {
 const attachButtonEventListeners = () => {
   document.getElementById('recalculate').addEventListener('click', recalculateRoute, false);
 };
-
-// const attachScrollEventListener = () => {
-//   document.getElementsByTagName('main')[0].addEventListener('scroll', didScroll);
-// };
-
-// const didScroll = event => {
-//   console.log('they see me scrolling', event.target.scrollTop);
-//   const menu = document.getElementById('priority-menu');
-//   menu.style.top = `${menu.offsetTop - event.target.scrollTop}px`;
-// };
 
 /**
  * Function that toggles the menu from open to close and vice-versa
@@ -225,6 +217,8 @@ const setPriorityStyling = () => {
  * If there are no priorities it just calculates a regular route.
  */
 const recalculateRoute = () => {
+  loadingToast.style.transform = `translateY(0)`;
+
   if (priorities.size > 0) {
     const level1 = [];
     const level2 = [];
@@ -262,16 +256,38 @@ const recalculateRoute = () => {
      * NOTE: If you try to calculate a route with preferred operators while your type is set to none, you will get no route back.
      * NOTE 2: If you calculate a route with only excluded, set your type to 'none'. Otherwise no route will be returned.
      */
-    createRoute({
-      type: level1.length > 0 || level2.length > 0 || level3.length > 0 ? 'preferred' : 'none',
-      level1: level1,
-      level2: level2,
-      level3: level3,
-      exclude: exclude,
-    });
+    createRoute(
+      {
+        type: level1.length > 0 || level2.length > 0 || level3.length > 0 ? 'preferred' : 'none',
+        level1: level1,
+        level2: level2,
+        level3: level3,
+        exclude: exclude,
+      },
+      route => parseRouteResponse(route),
+    );
   } else {
-    createRoute({});
+    createRoute({}, route => parseRouteResponse(route));
   }
+};
+
+const parseRouteResponse = route => {
+  if (route) {
+    drawRoutePolyline(route);
+  } else {
+    renderErrorToast();
+  }
+
+  loadingToast.style.transform = `translateY(100%)`;
+};
+
+export const renderErrorToast = () => {
+  const errorToast = document.getElementById('error-toast');
+  errorToast.style.transform = `translateY(0)`;
+
+  setTimeout(() => {
+    errorToast.style.transform = `translateY(100%)`;
+  }, 3500);
 };
 
 /**

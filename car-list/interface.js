@@ -36,7 +36,7 @@ export const groupCars = cars => {
   });
 
   // Now that we formatted our data we can start rendering our UI
-  renderCarList(groupedCars);
+  renderCarList(groupedCars, cars);
 };
 
 /**
@@ -46,7 +46,7 @@ export const groupCars = cars => {
  * @param { Object } groupedCars[].cars - The cars within a specific section
  * @param { string } groupedCars[].cars[].id - The id of the specific car that we are rendering
  */
-const renderCarList = groupedCars => {
+const renderCarList = (groupedCars, cars) => {
   groupedCars.forEach((cars, header) => {
     // Check if we are not searching and if we have already rendered the header
     if (searchKeyword === '' && !renderedHeaders.includes(header)) renderHeader(header);
@@ -61,7 +61,7 @@ const renderCarList = groupedCars => {
 
   // Now that we rendered our UI we can configure our intersection observer that will take
   // care of our endless scroll pagination.
-  handleObserving(groupedCars);
+  handleObserving(groupedCars, cars);
 };
 
 /**
@@ -125,12 +125,14 @@ const renderCar = car => {
  * A function that manages the state of our observer. It either connects or disconnects to our car list.
  * @param { Map } cars - Contains our cars grouped by make
  */
-const handleObserving = groupedCars => {
+const handleObserving = (groupedCars, cars) => {
   // Get every car list element
   let targets = [...document.querySelectorAll('.car-list-element')];
 
   // Setup our offset that defines when we are going to fetch new data.
   let offset = 3;
+
+  console.log(cars);
 
   // Before we attach our observer we have to make sure we have data and whether or offset is within range.
   // When we search it might happen that we don't have any results or less than 3.

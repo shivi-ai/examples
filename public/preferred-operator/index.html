@@ -52,6 +52,17 @@
             <button id="recalculate">Calculate route with operators</button>
           </div>
           <div class="disclaimer">
+            <div id="loading-toast" class="loading-toast toast">
+              <div class="loader">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <p>Updating route</p>
+            </div>
+            <div id="error-toast" class="error-toast toast">
+              <p>Route could not be calculated</p>
+            </div>
             <a
               class="chargetrip-logo"
               href="https://chargetrip.com/"

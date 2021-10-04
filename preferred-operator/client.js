@@ -88,7 +88,7 @@ export const searchOperatorList = ({ page, size = 10, search = '', searchById = 
  * @param { string } [level3] - The third level of operator preference.
  * @param { string } [excluded] - The excluded level of operator preference. These operators won't be used when calculating the route.
  */
-export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = [], exclude = [] }) => {
+export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = [], exclude = [] }, callback) => {
   client
     .mutation(createRouteQuery, { type, level1, level2, level3, exclude })
     .toPromise()
@@ -103,7 +103,9 @@ export const createRoute = ({ type = 'none', level1 = [], level2 = [], level3 = 
 
           if (status === 'done' && route) {
             unsubscribe();
-            drawRoutePolyline(route);
+            callback(route);
+          } else if (status === 'not_found') {
+            callback();
           }
         }),
       );

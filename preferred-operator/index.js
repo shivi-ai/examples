@@ -1,5 +1,6 @@
 import { createRoute, getOperatorList } from './client';
-import { attachEventListeners } from './interface';
+import { attachEventListeners, renderErrorToast } from './interface';
+import { drawRoutePolyline } from './map';
 
 /**
  * This project shows you how to fetch a car list and render the car details
@@ -11,6 +12,13 @@ import { attachEventListeners } from './interface';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-createRoute({});
+createRoute({}, route => {
+  if (route) {
+    drawRoutePolyline(route);
+  } else {
+    renderErrorToast();
+  }
+});
+
 getOperatorList({ page: 0 });
 attachEventListeners();
