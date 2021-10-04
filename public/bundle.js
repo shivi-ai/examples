@@ -4017,6 +4017,12 @@
       description: 'Plot alternative routes between two locations.',
     },
     {
+      id: 'preferred-operator',
+      url: '/preferred-operator/',
+      title: 'Chargetrip API: Preferred operators example',
+      description: 'Construct a route based on operator preference or operator exclusion.',
+    },
+    {
       id: 'elevation-plot',
       url: '/elevation-plot/',
       title: 'Chargetrip API: Elevation plot example',

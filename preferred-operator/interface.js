@@ -56,6 +56,7 @@ export const attachEventListeners = () => {
   attachMenuEventListener();
   attachMenuItemEventListeners();
   attachButtonEventListeners();
+  // attachScrollEventListener();
 };
 
 /**
@@ -63,7 +64,7 @@ export const attachEventListeners = () => {
  * We assign the event listener on the body so you can click anywhere outside the menu to dismiss.
  */
 const attachMenuEventListener = () => {
-  document.body.addEventListener('click', toggleMenu, false);
+  document.body.addEventListener('click', didToggleMenu, false);
 };
 
 /**
@@ -87,11 +88,21 @@ const attachButtonEventListeners = () => {
   document.getElementById('recalculate').addEventListener('click', recalculateRoute, false);
 };
 
+// const attachScrollEventListener = () => {
+//   document.getElementsByTagName('main')[0].addEventListener('scroll', didScroll);
+// };
+
+// const didScroll = event => {
+//   console.log('they see me scrolling', event.target.scrollTop);
+//   const menu = document.getElementById('priority-menu');
+//   menu.style.top = `${menu.offsetTop - event.target.scrollTop}px`;
+// };
+
 /**
  * Function that toggles the menu from open to close and vice-versa
  * @param { Event } event - The click event.
  */
-const toggleMenu = event => {
+const didToggleMenu = event => {
   const menu = document.getElementById('priority-menu');
   // When clicking the button we traverse up the dom to get to the actual button.
   const menuButton = event.target.parentNode;
@@ -114,12 +125,11 @@ const toggleMenu = event => {
  */
 const openMenu = menuButton => {
   const menu = document.getElementById('priority-menu');
-  const scroll = document.getElementsByTagName('main')[0];
 
   // Set the menu on the correct offset and open it
   // We use the scroll area to compute the offset of the item that was clicked
   menu.classList.add('active');
-  menu.style.top = `${menuButton.offsetTop - scroll.scrollTop}px`;
+  menu.style.top = `${menuButton.offsetTop}px`;
   menu.style.left = `${menuButton.offsetLeft - menu.clientWidth}px`;
 
   // Keep the button that was clicked in view, so the user has a visual queue to close the menu.

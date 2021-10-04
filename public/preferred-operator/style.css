@@ -183,7 +183,7 @@ main section:first-child {
 }
 
 .card header {
-  z-index: 10;
+  z-index: 20;
   grid-area: header;
   width: inherit;
   padding: 1rem;
@@ -205,6 +205,7 @@ header p {
 .card main {
   grid-area: main;
   overflow-y: auto;
+  position: relative;
 }
 
 .description p {

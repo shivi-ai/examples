@@ -136,9 +136,9 @@ export default [
     plugins,
   },
   {
-    input: 'preferred-operators/index.js',
+    input: 'preferred-operator/index.js',
     output: {
-      file: 'public/preferred-operators/bundle.js',
+      file: 'public/preferred-operator/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
