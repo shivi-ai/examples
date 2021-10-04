@@ -46,7 +46,6 @@ export const getRoute = (capacity, callback) => {
     .mutation(createRoute, { capacity: capacity })
     .toPromise()
     .then(response => {
-      console.log(response);
       const routeId = response.data.newRoute;
 
       const { unsubscribe } = pipe(

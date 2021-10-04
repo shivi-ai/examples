@@ -132,8 +132,6 @@ const handleObserving = (groupedCars, cars) => {
   // Setup our offset that defines when we are going to fetch new data.
   let offset = 3;
 
-  console.log(cars);
-
   if (cars.length - offset > 0) {
     // Attach our observer to the 3rd last element in our list
     // We don't attach it to the last one, because then it will block the scrolling behaviour
@@ -142,7 +140,6 @@ const handleObserving = (groupedCars, cars) => {
   } else {
     // Disconnect the observer when we don't need it anymore
     observer.disconnect();
-    console.log('disconnect');
   }
 };
 

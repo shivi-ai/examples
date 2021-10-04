@@ -59,7 +59,7 @@ export const getRoute = (soc, callback) => {
             unsubscribe();
             callback(route);
           } else if (status === 'not_found') {
-            console.log('not found');
+            callback();
           }
         }),
       );
