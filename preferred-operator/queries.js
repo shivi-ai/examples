@@ -58,19 +58,10 @@ subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status
     route {
-      charges
-      saving {
-        money
-        co2
-      }
-      chargeTime
-      distance
       duration
-      consumption
       polyline
       legs{
-        operatorId
-        chargeTime
+        name
         origin{
           geometry{
             type
@@ -98,18 +89,7 @@ query operatorList($page: Int, $size: Int) {
         page: $page, 
         size: $size
     ) {
-      id
-      external_id
       name
-      country
-      contact {
-        phone
-        email
-        website
-        facebook
-        twitter
-        properties
-      }
     }
 }
 `;
@@ -123,24 +103,6 @@ query operatorList($page: Int, $size: Int, $search: String) {
             name: $search 
         }
     ) {
-      id
-      external_id
-      name
-    }
-}
-`;
-
-export const searchOperatorByIdListQuery = qql`
-query operatorList($page: Int, $size: Int, $search: ID) {
-    operatorList(
-        page: $page, 
-        size: $size,
-        query:{
-            id: $search 
-        }
-    ) {
-      id
-      external_id
       name
     }
 }

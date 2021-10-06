@@ -14,15 +14,11 @@ query carList($page: Int, $size: Int, $search: String, $availability: [Int]) {
     naming {
       make
       model
-      version
-      edition
       chargetrip_version
     }
     media {
       image {
         thumbnail_url
-        thumbnail_height
-        thumbnail_width
       }
     }
   }

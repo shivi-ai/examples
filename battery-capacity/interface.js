@@ -64,6 +64,7 @@ const didReleaseRangeSlider = event => {
   getRoute(computedBatteryCapacity, routeData => {
     if (routeData) {
       drawRoutePolyline(routeData);
+      renderRouteHeader(routeData);
     } else {
       renderErrorToast();
     }

@@ -23,41 +23,35 @@ export const drawRoutePolyline = data => {
   const decodedData = mapboxPolyline.decode(data.polyline);
   const reversed = decodedData.map(item => item.reverse());
 
-  drawRoute(reversed, data.legs);
+  drawRoute(reversed, data.legs, data.duration);
 };
 
-export const drawRoute = (coordinates, legs) => {
+export const drawRoute = (coordinates, legs, duration) => {
   if (map.loaded()) {
     drawPolyline(coordinates);
-    drawOperatorName(legs);
+    drawPopUps(legs, duration);
     showLegs(legs);
   } else {
     map.on('load', () => {
       drawPolyline(coordinates);
-      drawOperatorName(legs);
+      drawPopUps(legs, duration);
       showLegs(legs);
     });
   }
 };
 
-const drawOperatorName = legs => {
+const drawPopUps = (legs, duration) => {
   popups.forEach(popup => {
     popup.remove();
   });
 
-  legs.forEach((leg, idx) => {
-    if (idx == legs.length - 1) {
-      return;
-    }
+  legs.forEach((leg, index) => {
+    const popup = new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(leg.destination.geometry.coordinates)
+      .setHTML(`<small>${index == legs.length - 1 ? getDurationString(duration) : leg.name}</small>`)
+      .addTo(map);
 
-    searchOperatorList({ page: 0, size: 10, search: leg.operatorId, searchById: true }, data => {
-      const popup = new mapboxgl.Popup({ closeOnClick: false })
-        .setLngLat(leg.destination.geometry.coordinates)
-        .setHTML(`<small>${data.length ? data[0].name : 'Unknown'}</small>`)
-        .addTo(map);
-
-      popups.push(popup);
-    });
+    popups.push(popup);
   });
 };
 

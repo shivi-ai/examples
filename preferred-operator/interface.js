@@ -252,9 +252,12 @@ const recalculateRoute = () => {
      * Required will require the operator ranking when calculating routes, excluded operators will be ignored
      *
      * Our example only uses level 1 to 3. Our API has 10 levels available for if you want to be more specific.
+     * Using a lower level (such as level 7) for the lowest priority makes it less likely for the operator to be used.
      *
      * NOTE: If you try to calculate a route with preferred operators while your type is set to none, you will get no route back.
      * NOTE 2: If you calculate a route with only excluded, set your type to 'none'. Otherwise no route will be returned.
+     *
+     * More information can be found in our documentation; https://docs.chargetrip.com/API-Reference/Routes/mutate-route#mutation
      */
     createRoute(
       {

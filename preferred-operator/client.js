@@ -7,7 +7,7 @@ import {
   searchOperatorListQuery,
   createRouteQuery,
   routeUpdateSubscription,
-  searchOperatorByIdListQuery,
+  getOperatorByIdQuery,
 } from './queries.js';
 
 /**
@@ -66,18 +66,16 @@ export const getOperatorList = ({ page, size = 10 }) => {
  * @param { number } page - Number of the page we are on
  * @param { number } size - Number of operators that we should fetch in one request
  * @param { string } search - The keywords that we should filter our operator list on
- * @param { boolean } searchById - Boolean whether we should search by name or id
  * @param { function } callback - As soon as our asynchronous call is finished we do a callback to update our UI.
  */
-export const searchOperatorList = ({ page, size = 10, search = '', searchById = false }, callback) => {
+export const searchOperatorList = ({ page, size = 10, search = '' }, callback) => {
   client
-    .query(searchById ? searchOperatorByIdListQuery : searchOperatorListQuery, { page, size, search })
+    .query(searchOperatorListQuery, { page, size, search })
     .toPromise()
     .then(response => {
       callback(response.data.operatorList);
     });
 };
-
 /**
  * Creates a route based on operator preference
  * @param { Object } - Object that manages the operator preference

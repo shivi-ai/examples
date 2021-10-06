@@ -50,6 +50,7 @@ const didUpdateRangeSlider = event => {
   getRoute(event.target.value, routeData => {
     if (routeData) {
       drawRoutePolyline(routeData);
+      renderRouteHeader(routeData);
     } else {
       renderErrorToast();
     }
