@@ -12,7 +12,10 @@ import { attachEventListeners, parseRouteResponse } from './interface';
  */
 
 const loadingToast = document.getElementById('loading-toast');
+const recalculateButton = document.getElementById('recalculate');
+
 loadingToast.style.transform = `translateY(0)`;
+recalculateButton.disabled = true;
 
 createRoute({}, route => {
   parseRouteResponse(route);

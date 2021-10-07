@@ -216,7 +216,8 @@ const setPriorityStyling = () => {
  * It extracts the priorities that were set in the list and formats them to how our API is expecting the data
  * If there are no priorities it just calculates a regular route.
  */
-const recalculateRoute = () => {
+const recalculateRoute = event => {
+  event.target.disabled = true;
   loadingToast.style.transform = `translateY(0)`;
 
   if (priorities.size > 0) {
@@ -281,6 +282,7 @@ export const parseRouteResponse = route => {
     renderErrorToast();
   }
 
+  document.getElementById('recalculate').disabled = false;
   loadingToast.style.transform = `translateY(100%)`;
 };
 
