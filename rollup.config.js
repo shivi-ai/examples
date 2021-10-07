@@ -135,4 +135,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'preferred-operator/index.js',
+    output: {
+      file: 'public/preferred-operator/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];

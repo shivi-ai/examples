@@ -11,7 +11,7 @@ import qql from 'graphql-tag';
  *   - min power of chargers is 43 kWh. This is the default setting
  *   - one passenger in the car (drive alone)
  */
-export const createRoute = qql`
+export const createRouteQuery = qql`
 mutation newRoute{
     newRoute(
       input: {
@@ -43,7 +43,7 @@ mutation newRoute{
     }
 `;
 
-export const routeUpdate = qql`
+export const routeUpdateSubscription = qql`
 subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status

@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+import * as mapboxPolyline from '@mapbox/polyline';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
@@ -10,12 +11,30 @@ export const map = new mapboxgl.Map({
 });
 
 /**
+ * Draw a route on a map.
+ *
+ * Route object contains `polyline` data -  the polyline encoded route (series of coordinates as a single string).
+ * We need to decode this information first. We use Mapbox polyline tool (https://www.npmjs.com/package/@mapbox/polyline) for this.
+ * As a result of decoding we get pairs [latitude, longitude].
+ * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
+ * so we have to reverse every pair.
+ *
+ * @param data {object} route specification
+ */
+export const drawRoutePolyline = data => {
+  const decodedData = mapboxPolyline.decode(data.polyline);
+  const reversed = decodedData.map(item => item.reverse());
+
+  drawRoute(reversed, data.legs);
+};
+
+/**
  * Draw route polyline and show charging stations on the map.
  *
  * @param coordinates {array} Array of coordinates
  * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
  */
-export const drawRoute = (coordinates, legs) => {
+const drawRoute = (coordinates, legs) => {
   if (map.loaded()) {
     drawPolyline(coordinates);
     showLegs(legs);

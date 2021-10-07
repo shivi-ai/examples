@@ -1,21 +1,25 @@
-import { fetchStations, fetchStationData } from './client';
-import { displayStationData } from './station';
-import { addOccupancyListeners, renderGraph } from './occupancy';
+import { getStations, getStationData } from './client';
 import { showStations } from './map.js';
+import { attachEventListeners, renderGraph, renderStationData } from './interface';
 
 /**
- * This function kicks off the example and renders 20 stations
- * within a radius of 3km of the city center of Hamburg, Germany.
+ * This project shows you how to fetch a car list and render the car details
+ * The project structure contains;
  *
- * It will also render the details of the first station on the card on the left.
+ *    - client.js - All networking requests
+ *    - interface.js - All interface rendering
+ *    - map.js - All map rendering (including routes and waypoints)
+ *    - queries.js - The GraphQL queries used in the networking requests
+ *    - utils.js - Some helpers to format station data for rendering
  */
-fetchStations()
+
+getStations()
   .then(stations => {
     showStations(stations);
-    fetchStationData(stations[0].id).then(data => {
-      displayStationData(data);
-      addOccupancyListeners(data.station.predicted_occupancy);
+    getStationData(stations[0].id).then(data => {
+      renderStationData(data);
       renderGraph(data.station.predicted_occupancy, 0);
+      attachEventListeners(data.station.predicted_occupancy);
     });
   })
   .catch(error => console.log(error));

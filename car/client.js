@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
 import { getCarListQuery, getCarDetailsQuery } from './queries.js';
-import { renderCarList } from './cars';
+import { renderCarList } from './interface';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.

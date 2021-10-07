@@ -3,7 +3,7 @@ import qql from 'graphql-tag';
 /**
  * For this query we are requesting data about a specific station
  */
-export const getStationData = qql`
+export const getStationDataQuery = qql`
 query station($stationId: ID!){
   station(id: $stationId) {
     id
@@ -59,7 +59,7 @@ query station($stationId: ID!){
  * For this query we are requesting the 20 closest stations.
  * The default for this query is 10.
  */
-export const getStationsAround = qql`
+export const getStationsAroundQuery = qql`
 query stationAround($query: StationAroundQuery!){
   stationAround(
       query: $query

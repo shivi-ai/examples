@@ -1,6 +1,6 @@
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
-import { createRoute, routeUpdate } from './queries';
+import { createRouteQuery, routeUpdateSubscription } from './queries';
 import { pipe, subscribe } from 'wonka';
 
 /**
@@ -42,15 +42,15 @@ const client = createClient({
  * 1. create a new route and receive back its ID;
  * 2. subscribe to route updates in order to receive its details.
  */
-export const fetchRoute = callback => {
+export const getRoute = callback => {
   client
-    .mutation(createRoute)
+    .mutation(createRouteQuery)
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
 
       const { unsubscribe } = pipe(
-        client.executeSubscription(createRequest(routeUpdate, { id: routeId })),
+        client.executeSubscription(createRequest(routeUpdateSubscription, { id: routeId })),
         subscribe(result => {
           const { status, route } = result.data?.routeUpdatedById;
 

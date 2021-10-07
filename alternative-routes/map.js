@@ -1,8 +1,11 @@
 import mapboxgl from 'mapbox-gl';
-import { renderRouteDetails, renderRouteHeader } from './index';
+import * as mapboxPolyline from '@mapbox/polyline';
+import { renderRouteDetails, renderRouteHeader, tabHandler } from './interface';
 import { getDurationString } from '../utils';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
+
+export let routes;
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -18,13 +21,41 @@ const popup = new mapboxgl.Popup({
 });
 
 /**
+ * Draw a route on a map.
+ *
+ * Route object contains `polyline` data -  the polyline encoded route (series of coordinates as a single string).
+ * We need to decode this information first. We use Mapbox polyline tool (https://www.npmjs.com/package/@mapbox/polyline) for this.
+ * As a result of decoding we get pairs [latitude, longitude].
+ * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
+ * so we have to reverse every pair.
+ *
+ * @param { object } route - The fastest route
+ * @param { array } alternatives - The alternative route objects
+ */
+export const decodePolylines = (route, alternatives) => {
+  const _routes = [];
+
+  const decodedData = mapboxPolyline.decode(route.polyline);
+  const reversed = decodedData.map(item => item.reverse());
+
+  _routes.push({ data: route, polyline: reversed });
+
+  alternatives.map(item => {
+    const decoded = mapboxPolyline.decode(item.polyline);
+    const itemReversed = decoded.map(item => item.reverse());
+    _routes.push({ data: item, polyline: itemReversed });
+  });
+
+  routes = _routes;
+
+  drawRoutes(routes);
+};
+
+/**
  * Draw route polyline and show charging stations on the map.
  * @param { array } routes - The route and alternative routes between two points
  */
-export const drawRoutes = routes => {
-  const routeOptions = document.querySelectorAll('.tab');
-  const tabHighlighter = document.getElementById('tab-highlighter');
-
+const drawRoutes = routes => {
   if (map.loaded()) {
     routes.forEach((route, index) => drawPolyline(route, index, index === 0 ? '#0078FF' : '#9CA7B2'));
     map.moveLayer(`0`);
@@ -57,7 +88,10 @@ export const drawRoutes = routes => {
     });
 
     map.on('click', `${i}`, () => {
-      tabHandler(routeOptions, i, tabHighlighter);
+      const routeOptions = document.querySelectorAll('.tab');
+      const tabHighlighter = document.getElementById('tab-highlighter');
+
+      tabHandler(i, routeOptions, tabHighlighter);
       highlightRoute(i, routes);
     });
 
@@ -66,26 +100,6 @@ export const drawRoutes = routes => {
       popup.remove();
     });
   }
-
-  routeOptions.forEach((option, index) => {
-    option.addEventListener('click', e => {
-      e.preventDefault();
-      tabHandler(routeOptions, index, tabHighlighter);
-      highlightRoute(index, routes);
-    });
-  });
-};
-
-/**
- * Small helper function that sets the font color and tab highlight
- * @param { object } routeOptions - All possible route options that are available in the tabs
- * @param { number } index - Current active index
- * @param { element } tabHighlighter - The highlight element that indicates the active tab
- */
-const tabHandler = (routeOptions, index, tabHighlighter) => {
-  routeOptions.forEach(option => option.classList.remove('active'));
-  routeOptions[index].classList.add('active');
-  tabHighlighter.style.transform = `translateX(calc(${index * 100}% + ${index * 2}px)`;
 };
 
 /**
@@ -207,7 +221,7 @@ const showLegs = legs => {
  * @param { object } routes - All routes recieved from the route query
  * @param { number } id - index / id of the polyline that was clicked on
  */
-const highlightRoute = (id, routes) => {
+export const highlightRoute = (id, routes) => {
   map.setPaintProperty(`${id}`, 'line-color', '#0078FF');
   for (let j = 0; j < routes.length; j++) {
     if (j !== id) {

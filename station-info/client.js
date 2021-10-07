@@ -1,5 +1,5 @@
 import { createClient, defaultExchanges } from '@urql/core';
-import { getStationData, getStationsAround } from './queries';
+import { getStationDataQuery, getStationsAroundQuery } from './queries';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
@@ -26,9 +26,9 @@ const client = createClient({
  * Fetch 20 station around the city center of Hamburg, Germany.
  * We set the radius around the geolocation in which we fetch stations to 3km
  */
-export const fetchStations = () =>
-  client
-    .query(getStationsAround, {
+export const getStations = () => {
+  return client
+    .query(getStationsAroundQuery, {
       query: {
         location: { type: 'Point', coordinates: [9.9801115, 53.5475679] },
         distance: 3000,
@@ -39,14 +39,15 @@ export const fetchStations = () =>
       return response.data?.stationAround;
     })
     .catch(error => console.log(error));
+};
 
 /**
  * Fetch the detail data of a specific station
  * @param { string } id - the id of the station
  */
-export const fetchStationData = id =>
-  client
-    .query(getStationData, {
+export const getStationData = id => {
+  return client
+    .query(getStationDataQuery, {
       stationId: id,
     })
     .toPromise()
@@ -54,3 +55,4 @@ export const fetchStationData = id =>
       return response.data;
     })
     .catch(error => console.log(error));
+};
