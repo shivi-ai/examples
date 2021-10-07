@@ -89,6 +89,7 @@ query operatorList($page: Int, $size: Int) {
         page: $page, 
         size: $size
     ) {
+      id
       name
     }
 }
@@ -103,6 +104,7 @@ query operatorList($page: Int, $size: Int, $search: String) {
             name: $search 
         }
     ) {
+      id
       name
     }
 }
