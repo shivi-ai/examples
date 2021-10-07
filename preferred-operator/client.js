@@ -2,13 +2,7 @@ import { createClient, createRequest, defaultExchanges, subscriptionExchange } f
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { renderOperators } from './interface.js';
-import {
-  getOperatorListQuery,
-  searchOperatorListQuery,
-  createRouteQuery,
-  routeUpdateSubscription,
-  getOperatorByIdQuery,
-} from './queries.js';
+import { getOperatorListQuery, searchOperatorListQuery, createRouteQuery, routeUpdateSubscription } from './queries.js';
 
 /**
  * For the purpose of this example we use urql - lightweights GraphQL client.
