@@ -274,7 +274,7 @@ const recalculateRoute = () => {
   }
 };
 
-const parseRouteResponse = route => {
+export const parseRouteResponse = route => {
   if (route) {
     drawRoutePolyline(route);
   } else {
