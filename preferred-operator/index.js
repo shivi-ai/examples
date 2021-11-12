@@ -1,5 +1,5 @@
-import { createRoute, getOperatorList } from './client';
-import { attachEventListeners, parseRouteResponse } from './interface';
+import { createRoute, fetchOperatorList } from './client';
+import { attachEventListeners, parseRouteResponse, renderOperators } from './interface';
 
 /**
  * This project shows you how to fetch a car list and render the car details
@@ -21,5 +21,5 @@ createRoute({}, route => {
   parseRouteResponse(route);
 });
 
-getOperatorList({ page: 0 });
+fetchOperatorList({ page: 0 }, renderOperators);
 attachEventListeners();

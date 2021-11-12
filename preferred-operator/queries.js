@@ -83,25 +83,14 @@ subscription routeUpdatedById($id: ID!){
 }
 `;
 
-export const getOperatorListQuery = qql`
-query operatorList($page: Int, $size: Int) {
-    operatorList(
-        page: $page, 
-        size: $size
-    ) {
-      id
-      name
-    }
-}
-`;
-
 export const searchOperatorListQuery = qql`
-query operatorList($page: Int, $size: Int, $search: String) {
+query operatorList($page: Int, $size: Int, $search: String, $countries: [CountryCodeAlpha2!]) {
     operatorList(
         page: $page, 
         size: $size,
-        query:{
-            name: $search 
+        search: $search,
+        filter: {
+          countries: $countries
         }
     ) {
       id

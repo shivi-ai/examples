@@ -1,8 +1,7 @@
 import { createClient, createRequest, defaultExchanges, subscriptionExchange } from '@urql/core';
 import { pipe, subscribe } from 'wonka';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { renderOperators } from './interface.js';
-import { getOperatorListQuery, searchOperatorListQuery, createRouteQuery, routeUpdateSubscription } from './queries.js';
+import { searchOperatorListQuery, createRouteQuery, routeUpdateSubscription } from './queries.js';
 
 /**
  * For the purpose of this example we use urql - lightweights GraphQL client.
@@ -38,23 +37,6 @@ const client = createClient({
 });
 
 /**
- * Fetches the operator list with pagination but without any arguments.
- * @param { Object } - Object that manages the page and size
- * @param { number } page - Number of the page we are on
- * @param { number } size - Number of operators that we should fetch in one request
- */
-export const getOperatorList = ({ page, size = 10 }) => {
-  client
-    .query(getOperatorListQuery, { page, size })
-    .toPromise()
-    .then(response => {
-      if (response.data.operatorList) {
-        renderOperators(response.data.operatorList);
-      }
-    });
-};
-
-/**
  * Searches through our operator list with pagination and various arguments.
  * @param { Object } - Object that manages the page, size and search to be send towards our request
  * @param { number } page - Number of the page we are on
@@ -62,9 +44,9 @@ export const getOperatorList = ({ page, size = 10 }) => {
  * @param { string } search - The keywords that we should filter our operator list on
  * @param { function } callback - As soon as our asynchronous call is finished we do a callback to update our UI.
  */
-export const searchOperatorList = ({ page, size = 10, search = '' }, callback) => {
+export const fetchOperatorList = ({ page, size = 10, search = '', countries = [] }, callback) => {
   client
-    .query(searchOperatorListQuery, { page, size, search })
+    .query(searchOperatorListQuery, { page, size, search, countries })
     .toPromise()
     .then(response => {
       callback(response.data.operatorList);
