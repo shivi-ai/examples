@@ -1,5 +1,5 @@
 import { debounce } from '../utils';
-import { createRoute, getOperatorList, searchOperatorList } from './client';
+import { createRoute, fetchOperatorList } from './client';
 import { drawRoutePolyline } from './map';
 
 // Keeps track of priority levels
@@ -10,6 +10,9 @@ let selectedOperator;
 
 // Keeps track of the active search keyword. This way we always fetch the right results when using pagination.
 let searchKeyword = '';
+
+// Keeps track of the filters and refetches the list
+let countryFilters = [];
 
 // Keeps track of which page of cars we are currently on.
 let currentPage = 0;
@@ -59,6 +62,7 @@ export const attachEventListeners = () => {
   attachMenuEventListener();
   attachMenuItemEventListeners();
   attachButtonEventListeners();
+  attachTagEventListeners();
 };
 
 /**
@@ -88,6 +92,41 @@ const attachMenuItemEventListeners = () => {
  */
 const attachButtonEventListeners = () => {
   document.getElementById('recalculate').addEventListener('click', recalculateRoute, false);
+};
+
+/**
+ * Event listener to handle clicks on country tags
+ * By clicking a country we refresh the list and only get operators from that country
+ */
+const attachTagEventListeners = () => {
+  [...document.querySelectorAll('.country-tag')].forEach(tag => {
+    tag.addEventListener('click', didToggleTag, false);
+  });
+};
+
+/**
+ * a
+ * @param { Event } event - the click event
+ */
+const didToggleTag = event => {
+  const countryCode = event.target.dataset.countryCode;
+  const countryIdx = countryFilters.indexOf(countryCode);
+
+  event.target.classList.toggle('active');
+
+  if (countryIdx > -1) {
+    countryFilters.splice(countryIdx, 1);
+  } else {
+    countryFilters.push(countryCode);
+  }
+
+  // Resets our current page param to 0 so we don't miss any filter results
+  currentPage = 0;
+
+  // Empties our current operator list so we can replace it with the filter results
+  document.getElementById('operator-list').textContent = '';
+
+  fetchOperatorList({ page: currentPage, size: 10, search: searchKeyword, countries: countryFilters }, renderOperators);
 };
 
 /**
@@ -321,11 +360,7 @@ const loadNextPage = entries => {
     if (entry.isIntersecting) {
       currentPage += 1;
 
-      if (searchKeyword !== '') {
-        searchOperatorList({ page: currentPage, size: 10, search: searchKeyword }, renderOperators);
-      } else {
-        getOperatorList({ page: currentPage, size: 10 });
-      }
+      fetchOperatorList({ page: currentPage, size: 10, search: searchKeyword }, renderOperators);
     }
   });
 };
@@ -360,12 +395,9 @@ document.getElementById('search-area').addEventListener(
     // Empties our current car-list so we can replace it with the search results
     document.getElementById('operator-list').textContent = '';
 
-    // Initializes the search request if there is a keyword.
-    // If there is no keyword, we fetch the full list from the start
-    if (searchKeyword !== '') {
-      searchOperatorList({ page: currentPage, size: 10, search: searchKeyword }, renderOperators);
-    } else {
-      getOperatorList({ page: currentPage, size: 10 });
-    }
+    fetchOperatorList(
+      { page: currentPage, size: 10, search: searchKeyword, countries: countryFilters },
+      renderOperators,
+    );
   }, 250),
 );

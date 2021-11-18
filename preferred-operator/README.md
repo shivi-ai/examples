@@ -1,11 +1,16 @@
-# Query all cars from our database
+# Plot a route based on operator preference
 
-This tutorial covers how to fetch cars from our database:
+This tutorial covers how to plot a route that is based on operator preference. By using operator preference you can customize routes to exclude or prioritize certain station operators.
 
-1.  query all cars using the Chargetrip GraphQL API;
-2.  display information about the cars.
+Certain use cases for when this could be used;
 
-To see this example live 👉 [demo](https://examples.chargetrip.com/?id=car-details).
+1. Support a certain level of payment compability
+2. Prioritize stations that you are partnering with
+3. Exclude stations that are not compatible with your car list
+
+The operator list can be searched by name and filtered on alpha 2 based country codes. In this example we use a small subset of countries to filter the list. The full list can be found on our API schema.
+
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=preferred-operator`).
 
 ### Technical stack
 
@@ -15,14 +20,12 @@ To see our Chargetrip API in action, you can go to the [Playground](https://play
 
 This example is built with vanilla JS. To establish a connection with Chargetrip API, we use [urql](https://formidable.com/open-source/urql/) - lightweight GraphQL client. We use our Playground environment for this example. It means that only part of our extensive database is available. You need a registered `x-client-id` to access the full database.
 
-### Preparation
-
-Our Playground gives you access to only 4 cars. Some car parameters are courtesy of our partner [EV Database](https://ev-database.org/). If you want to access the full database, please contact us.
-
 ### Steps to take
 
-1. Query a list of all cars. Using GraphQL you can query only the data you need. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#getting-a-list-of-all-cars).
-2. Show information about the cars.
+1. Query a route with default and hardcoded parameters.
+2. Query a list of operators.
+3. Configure the UI to allow for configuring operator preferences and exclusions.
+4. Store preferences and update the route on request.
 
 ### Useful links
 
