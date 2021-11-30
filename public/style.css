@@ -254,7 +254,8 @@ li {
   max-width: 1280px;
   column-gap: 2rem;
   row-gap: 3rem;
-  margin: 0 auto 4rem;
+  margin: 0 auto 0;
+  padding-bottom: 4rem;
 }
 
 .overview .example {
