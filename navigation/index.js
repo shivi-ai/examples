@@ -34,13 +34,15 @@ const examples = [
     id: 'tile-server',
     url: '/tile-server/',
     title: 'Chargetrip API: Tile Service example using the mvt response',
-    description: 'Show charging stations on the map with the Chargetrip API and the Chargetrip Tile Service',
+    description:
+      'Show charging stations on the map with the Chargetrip API and the mvt response from Chargetrip Tile Service',
   },
   {
     id: 'tile-json',
     url: '/tile-json/',
     title: 'Chargetrip API: Tile Service example using the GeoJSON response',
-    description: 'Show charging stations on the map with the Chargetrip API and the Chargetrip Tile Service',
+    description:
+      'Show charging stations on the map with the Chargetrip API and the GeoJSON response from Chargetrip Tile Service',
   },
   {
     id: 'route',

@@ -1,8 +1,8 @@
-# Display all stations with the Vector Tile Server
+# Display all stations with the Vector Tile Service
 
-This tutorial explains how to show charging stations on a map by using the Chargetrip Vector Tile Server:
+This tutorial guides you through the process of showing charging stations on a map by using the mvt response from the Chargetrip Tile Service:
 
-1. The Chargetrip Tile Server offers a pre-rendered fully clustered charge station solution with the ability to filter stations;
+1. The Chargetrip Tile Service offers a pre-rendered fully clustered charge station solution with the ability to filter stations;
 2. Zoom in/out and recenter the map when clicking on a cluster;
 3. This example shows stations from the EcoMovement provider.
 
@@ -20,8 +20,8 @@ This example is built with vanilla JS. Only part of our extensive database is av
 
 This examples uses the Chargetrip Tile Service to show the stations on the map. Our Tile Service is not only super fast, but also secures the data of our providers, like EcoMovement. This example shows only part of EcoMovement database. If you want to use a full database, please contact us.
 
-1. We have to fetch the stations from our Tile Server. You need to add a set of filters to the tile requests for rendering stations on your map. You can read all the details about the Tile Server in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Tile-Service/introduction). In this example we fetch stations with either a CHADEMO or IEC_62196_T2_COMBO connector. You can see them in the request.
-2. After we have accessed the tile server, we can show the stations on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
+1. We have to fetch the stations from our Tile Service. You need to add a set of filters to the tile requests for rendering stations on your map. You can read all the details about the Tile Service in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Tile-Service/introduction). In this example we fetch stations with either a CHADEMO or IEC_62196_T2_COMBO connector. You can see them in the request.
+2. After we have accessed the tile service, we can show the stations on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
 
 ### Useful links
 

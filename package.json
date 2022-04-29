@@ -7,7 +7,6 @@
     "@googlemaps/js-api-loader": "^1.14.1",
     "@mapbox/polyline": "^1.1.0",
     "@urql/core": "^1.7.0",
-    "axios": "^0.26.1",
     "chart.js": "^3.3.0",
     "core-js": "3",
     "dotenv": "^16.0.0",

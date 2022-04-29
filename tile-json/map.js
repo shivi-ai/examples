@@ -1,14 +1,9 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import axios from 'axios';
 import { GOOGLE_MAPS_TOKEN } from '@env';
+import { getTiles } from './client';
 
 /**
- * This example shows how to use the GeoJSOn response from our Vector Tile Server with Google Maps
- *
- * To establish a connection with Chargetrip GraphQL API you need to have an API key.
- * The key sin this example is are public ones and gives access only to a part of our extensive database.
- * You need a registered `x-client-id` to access the full database.
- * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
+ * This example illustrates how the GeoJSON response from the tile service can be used in combination with Google Maps.
  */
 
 // Add your own API Key in your .env file
@@ -32,35 +27,25 @@ async function displayMap() {
 
   addPolygon(google);
 
-  var maptiles = new google.maps.ImageMapType({
-    getTileUrl: function(coord, zoom) {
-      axios
-        .get(
-          `https://api.chargetrip.io/station/${zoom}/${coord.x}/${coord.y}/tile.json?connectors[]=IEC_62196_T2&connectors[]=IEC_62196_T2_COMBO&connectors[]=TESLA_S&connectors[]=CHADEMO&powerGroups[]=fast&powerGroups[]=turbo`,
-          {
-            headers: {
-              // Replace this x-client-id with your own to get access to more station data
-              'x-client-id': '5ed1175bad06853b3aa1e492',
-            },
-          },
-        )
-        .then(response => {
-          if (response.data) {
-            for (let i = 0; i < response.data.features?.length; i++) {
-              const feature = response.data.features[i];
-              if (feature.properties?.count > 1) {
-                addClusterMarker(google, feature);
-              } else {
-                addStationMarker(google, response.data.features[i]);
-              }
-            }
+  var mapTiles = new google.maps.ImageMapType({
+    getTileUrl: async (coord, zoom) => {
+      const data = await getTiles(coord, zoom);
+
+      if (data.features) {
+        for (let i = 0; i < data.features?.length; i++) {
+          const feature = data.features[i];
+          if (feature.properties?.count > 1) {
+            addClusterMarker(google, feature);
+          } else {
+            addStationMarker(google, data.features[i]);
           }
-        });
+        }
+      }
     },
     tileSize: new google.maps.Size(256, 256),
   });
 
-  map.overlayMapTypes.insertAt(0, maptiles);
+  map.overlayMapTypes.insertAt(0, mapTiles);
 }
 
 /**
