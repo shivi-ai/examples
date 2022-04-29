@@ -16,6 +16,7 @@ jobs:
       - name: Install and Build
         env:
           MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          GOOGLE_MAPS_TOKEN: ${{ secrets.GOOGLE_MAPS_TOKEN }}
         run: |
           yarn install
           yarn build

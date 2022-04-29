@@ -9,5 +9,15 @@
         "corejs": 3
       }
     ]
+  ],
+  "plugins": [
+    [
+      "dotenv-import",
+      {
+        "moduleName": "@env",
+        "path": ".env",
+        "safe": false
+      }
+    ]
   ]
 }
