@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chargetrip API: Tile Service example with Google Maps</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="Show charging stations on the map with the Chargetrip API and the Chargetrip Tile Service"
+    />
+    <meta
+      name="keywords"
+      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map, supercluster"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/tile-json" target="_top" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+
+    <div class="card">
+      <header>
+        <h1>Station provider</h1>
+        <p>Vector tile server</p>
+      </header>
+      <main>
+        <div class="provider">
+          <div class="logo">
+            <img src="images/ecomovement.svg" alt="Logo of Ecomovement" />
+          </div>
+          <div class="provider-info">
+            <h3>
+              EcoMovement
+            </h3>
+            <p>
+              High quality dynamic charging locations data. For the purpose of this example, only part of it is public
+              (within the polygon). If you want to use the full database, create an account
+              <a href="https://account.chargetrip.com">here</a>.
+            </p>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            target="_top"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>
