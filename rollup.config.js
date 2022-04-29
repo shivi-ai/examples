@@ -144,4 +144,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'tile-json/index.js',
+    output: {
+      file: 'public/tile-json/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];
