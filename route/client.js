@@ -14,8 +14,9 @@ import { createRouteQuery, routeUpdateSubscription } from './queries.js';
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  //Replace this x-client-id with your own to get access to more station data
+  //Replace this x-client-id and app-id with your own to get access to more cars
   'x-client-id': '5ed1175bad06853b3aa1e492',
+  'x-app-id': '623998b2c35130073829b2d2',
 };
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
