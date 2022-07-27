@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chargetrip API: example of isolines</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="isolines" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="github-link">
+      <a href="https://github.com/chargetrip/examples/tree/master/isolines" target="_top" title="github project">
+        View on Github
+      </a>
+      <button aria-label="remove github link" title="remove github link" onclick="this.parentElement.remove()"></button>
+    </div>
+    <div id="map"></div>
+    <div class="card">
+      <header>
+        <h1>Isolines</h1>
+      </header>
+      <main>
+        <section>
+          <div class="car-details-image-wrapper">
+            <p>BMW</p>
+            <p>i3s 94 Ah (2017 - 2018)</p>
+            <img
+              id="car-details-image"
+              class="car-details-image"
+              src="https://cars.chargetrip.io/625036e07d209b7fe2a5b792.png"
+            />
+          </div>
+        </section>
+      </main>
+      <footer>
+        <div id="loading-toast" class="loading-toast toast">
+          <div class="loader">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Updating route</p>
+        </div>
+        <div id="error-toast" class="error-toast toast">
+          <p>Route could not be calculated</p>
+        </div>
+        <div class="disclaimer">
+          <a
+            class="chargetrip-logo"
+            href="https://chargetrip.com/"
+            target="_top"
+            aria-label="Powered by Chargetrip"
+            title="Powered by Chargetrip"
+          >
+            Powered by
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>

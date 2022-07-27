@@ -86,6 +86,12 @@ const examples = [
     title: 'Chargetrip API: Impact of battery capacity changes example',
     description: 'Update a route based on the battery capacity at departure',
   },
+  {
+    id: 'isolines',
+    url: '/isolines/',
+    title: 'Chargetrip API: Impact of SoC changes example',
+    description: 'Update a route based on the state of charge at departure',
+  },
 ];
 
 const page = examples.filter(value => value.id === pageId)[0];

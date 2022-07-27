@@ -153,4 +153,13 @@ export default [
     },
     plugins,
   },
+  {
+    input: 'isolines/index.js',
+    output: {
+      file: 'public/isolines/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
 ];
