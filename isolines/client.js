@@ -18,6 +18,7 @@ const headers = {
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
   reconnect: true,
+  timeout: 4000,
   connectionParams: headers,
 });
 
@@ -51,10 +52,10 @@ export const getIsoline = callback => {
       const isolineId = response.data.createIsoline;
       console.log('id', isolineId);
       const { unsubscribe } = pipe(
-        client.executeSubscription(createRequest(isolineSubscription, { id: '62e13ed77542630f98a977ba' })),
+        client.executeSubscription(createRequest(isolineSubscription, { id: isolineId })),
         subscribe(result => {
-          console.log('res', result);
           const { isoline } = result.data;
+          console.log('status', isoline.status);
           // To improve performance please un subscribe when you have reached a final status.
           if (isoline.status === 'done') {
             unsubscribe();
@@ -65,5 +66,5 @@ export const getIsoline = callback => {
         }),
       );
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log('error', error));
 };

@@ -341,7 +341,7 @@ header p {
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  transform: translateY(100%);
+  transform: translateY(0);
   transition: transform 300ms ease;
 }
 
@@ -351,10 +351,12 @@ header p {
 }
 
 .loading-toast p {
+  transform: translateY(0);
   margin-left: 0.75rem;
 }
 
 .error-toast {
+  transform: translateY(100%);
   background: #ef0b0b;
 }
 

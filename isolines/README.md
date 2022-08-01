@@ -1,12 +1,11 @@
-# Change your state of charge (SOC) and recalculate the route
+# Creat and display an isoline
 
-This tutorial covers the basics of building a route and showing how your SOC effects the route:
+This tutorial covers the basics of creating an isoline and showing how far a gien EV can travel:
 
-1.  show a route on a map;
-2.  show charging stations and expected SOC;
-3.  show a slider that changes your EVs SOC.
+1.  Create an isoline;
+2.  show an isoline on the map;
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/state-of-charge/).
+To see this example live 👉 [demo](https://chargetrip.github.io/examples/isolines/).
 
 ### Technical stack
 
@@ -19,20 +18,17 @@ We use our Playground environment for this example. It means that only part of o
 
 ### Preparation
 
-To build a route, you will need a car (the associated consumption model of a vehicle will be applied to the routing algorithm), station database, origin, and a destination.
+To build an isoline, you will need a car (the associated consumption model of a vehicle will be applied to the isoline algorithm), and an origin.
 
-For this example, we use **Tesla model S**, **Hanover, Germany** as an origin, and **Aalborg, Denmark** as a destination point.
+For this example, we use **BMW i3s 94 Ah (2017 - 2018)**, **Frankfurt, Germany** as an origin.
 Chargetrip operates an extensive database of EVs, each with their specific consumption models. You can find more information about our database and available queries by checking [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Cars/introduction).
-
-Our Playground has a station database that is populated with small set of EcoMovement station data. Importing your own database or using one of the databases Chargetrip has an integration with, is possible. For more details, contact us.
 
 ### Steps to take
 
-Once we have a car and station database, we can start planning the route:
+Once we have selected a car and the amount of polygons, we can create an isoline:
 
-1. We have to request a new route. For that we use the `newRoute` mutation. We will need to pass information about the car including SOC, origin and destination. The SOC is a variable in this mutation. As a result we will get an ID of a newly created route. You can read all the details about this mutation in our [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Routes/mutate-route).
-2. With a route ID we can request route information and show the route on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
-3. Using the slider we can request a new route when the SOC changes and show how this effects the route.
+1. We have to request an iosline. For that we use the `createIsoline` mutation. We will need to pass a car ID, origin and the amount of polygons. Adding season to the mutation is optional. As a result we will get an ID of a newly created isoline. You can read all about this mutation in our [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/isolines/mutate-isoline).
+2. With an isoline ID we can request polygon information and show the isoline on a map. Keep in mind that it takes a bit longer for an isloine to calculate, we show a loading bar because of this reason. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
 
 ### Useful links
 
