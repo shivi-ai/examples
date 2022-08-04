@@ -87,26 +87,4 @@ const addLayer = (dataLayer, index) => {
       'line-opacity': index === 4 ? 1 : 0.2, // 1 - (index + 1) * 0.1
     },
   });
-
-  // map.addLayer({
-  //   id: `layer-fill-${index}`,
-  //   type: 'fill',
-  //   source: `layer-${index}`,
-  //   layout: {},
-  //   paint: {
-  //     'fill-color': '#0078ff',
-  //     'fill-opacity': 0.02,
-  //   },
-  // });
-
-  // map.addLayer({
-  //   id: `layer-outline-${index}`,
-  //   type: 'fill',
-  //   source: `layer-${index}`,
-  //   layout: {},
-  //   paint: {
-  //     'line-color': '#000000',
-  //     'line-width': 4,
-  //   },
-  // });
 };
