@@ -50,13 +50,11 @@ export const getIsoline = callback => {
     .toPromise()
     .then(response => {
       const isolineId = response.data.createIsoline;
-      console.log('id', isolineId);
       const { unsubscribe } = pipe(
         client.executeSubscription(createRequest(isolineSubscription, { id: isolineId })),
         subscribe(result => {
           const { isoline } = result.data;
-          console.log('status', isoline.status);
-          // To improve performance please un subscribe when you have reached a final status.
+          // To improve performance please unsubscribe when you have reached a final status.
           if (isoline.status === 'done') {
             unsubscribe();
             callback(isoline);

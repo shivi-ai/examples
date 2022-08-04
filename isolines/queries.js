@@ -20,7 +20,7 @@ mutation createIsoline {
         geometry: { type: Point, coordinates: [8.6821, 50.1109] }
         properties: { name: "Frankfurt, Germany" }
       }
-      polygon_count: 100
+      polygon_count: 5
       season: summer
     }
   )
