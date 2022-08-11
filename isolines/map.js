@@ -15,7 +15,7 @@ const map = new mapboxgl.Map({
  * Draw isolines on a map.
  *
  * An isoline object contains `polygon` data
- * The polygon has geometry data with coordinates that can be renered on map.
+ * The polygon has geometry data with coordinates that can trigger a rerender on the map.
  * We can use the polygon_count to get the amount of polygons available and loop through all of them.
  *
  * @param data {object} isoline details
