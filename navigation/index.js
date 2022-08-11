@@ -89,8 +89,8 @@ const examples = [
   {
     id: 'isolines',
     url: '/isolines/',
-    title: 'Chargetrip API: Impact of SoC changes example',
-    description: 'Update a route based on the state of charge at departure',
+    title: 'Chargetrip API: Rendering the range of a vehicle on a map',
+    description: 'Use isolines to show how far an electric vehicle can travel from a specific origin',
   },
 ];
 
