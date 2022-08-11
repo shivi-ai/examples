@@ -8,7 +8,7 @@ import qql from 'graphql-tag';
  *   - origin Frankfurt, Germany
  *   - The EV is a BMW i3s 94 Ah (2017-2018)
  *   - season is summer
- *   - polygon count is 100
+ *   - polygon count is 5
  */
 export const createIsoline = qql`
 mutation createIsoline {
