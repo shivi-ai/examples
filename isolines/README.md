@@ -20,7 +20,7 @@ We use our Playground environment for this example. It means that only part of o
 
 To build an isoline, you will need a car (the associated consumption model of a vehicle will be applied to the isoline algorithm), and an origin.
 
-For this example, we use **BMW i3s 94 Ah (2017 - 2018)**, **Frankfurt, Germany** as an origin.
+For this example, we use **BMW i3s 94 Ah (2017 - 2018)** as the vehicle and **Frankfurt, Germany** as an origin.
 Chargetrip operates an extensive database of EVs, each with their specific consumption models. You can find more information about our database and available queries by checking [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Cars/introduction).
 
 ### Steps to take
