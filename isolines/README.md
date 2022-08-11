@@ -5,7 +5,7 @@ This tutorial covers the basics of creating an isoline and showing how far a gie
 1.  Create an isoline;
 2.  show an isoline on the map;
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/isolines/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=isolines/).
 
 ### Technical stack
 

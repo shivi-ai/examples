@@ -6,7 +6,7 @@ This tutorial covers the basics of building a simple route between an origin and
 2.  show charging stations and information about the journey;
 3.  show alternative charging stations.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/stations-along-route/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=stations-along-route/).
 
 ### Technical stack
 

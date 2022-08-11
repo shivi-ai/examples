@@ -5,7 +5,7 @@ This tutorial covers how to fetch cars from our database:
 1.  query all cars using the Chargetrip GraphQL API;
 2.  display information about the cars.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/car/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=car/).
 
 ### Technical stack
 

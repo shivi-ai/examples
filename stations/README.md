@@ -1,7 +1,7 @@
 # Build a station map with Chargetrip API
 
 This tutorial explains how to show charging stations on a map and how to filter them.  
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/stations).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=stations).
 
 ### Technical stack
 
