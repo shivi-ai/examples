@@ -52,7 +52,6 @@ export const drawIso = data => {
 };
 
 const addLayer = (dataLayer, index) => {
-  console.log(index);
 
   map.addSource(`layer-${index}`, {
     type: 'geojson',
