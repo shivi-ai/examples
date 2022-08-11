@@ -16,7 +16,7 @@ const map = new mapboxgl.Map({
  *
  * An isoline object contains `polygon` data
  * The polygon has geometry data with coordinates that can be renered on map.
- * We can use the polygon_count to get the amunt of polygons availble and loop through all of them.
+ * We can use the polygon_count to get the amount of polygons available and loop through all of them.
  *
  * @param data {object} isoline details
  */
