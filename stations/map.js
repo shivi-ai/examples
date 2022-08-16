@@ -8,6 +8,7 @@ const map = new mapboxgl.Map({
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
   zoom: 11.4,
   center: [10.197422, 56.171395],
+  cooperativeGestures: true,
 });
 
 map.on('load', function() {
