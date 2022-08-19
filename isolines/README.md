@@ -27,8 +27,9 @@ Chargetrip operates an extensive database of EVs, each with their specific consu
 
 Once we have selected a car and the amount of polygons, we can create an isoline:
 
-1. We have to request an isoline. For that we use the `createIsoline` mutation. We will need to pass a car ID, origin and the amount of polygons. Adding season to the mutation is optional. As a result we will get an ID of a newly created isoline. You can read all about this mutation in our [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/isolines/mutate-isoline).
-2. With an isoline ID we can request polygon information and show the isoline on a map. Keep in mind that it takes a bit longer for an isloine to calculate, we show a loading bar because of this reason. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
+1. To display an isoline, a mutation and subscription are required. The `createIsoline` mutation will be used to define variables such as the `polygon_count` and `location`. In return an `id` will be created that can be used on the subscription.
+2. The `isoline` subscription will provide status updates. Calculation of an isoline can take a little while depending on the `polygon_count`.
+3. When the isoline is ready, it can be plotted on the map.
 
 ### Useful links
 

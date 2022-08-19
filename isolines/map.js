@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjamo3em4wdnUwdHVlM3Z0ZTNrZmd1MXoxIn0.aFteYnUc_GxwjTLGvB3uCg';
 
 const map = new mapboxgl.Map({
+  cooperativeGestures: true,
   container: 'map',
   // style: 'mapbox://styles/chargetrip/ckf2gje0j4n2z19mgubmdk6tx', // Light Map
   // style: 'mapbox://styles/chargetrip/cl2pxb0e2001v15l2tawki0k0', // Dark Map
@@ -52,7 +53,6 @@ export const drawIso = data => {
 };
 
 const addLayer = (dataLayer, index) => {
-
   map.addSource(`layer-${index}`, {
     type: 'geojson',
     data: {

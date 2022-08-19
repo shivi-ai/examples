@@ -15,6 +15,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud
 
 export const displayMap = () => {
   let map = new mapboxgl.Map({
+    cooperativeGestures: true,
     container: 'map',
     style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
     zoom: 3.5,
