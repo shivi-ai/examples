@@ -2,16 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Chargetrip API: Tile Service example</title>
+    <title>Chargetrip API: example of isolines</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta
-      name="description"
-      content="Show charging stations on the map with the Chargetrip API and the Chargetrip Tile Service"
-    />
-    <meta
-      name="keywords"
-      content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, tile service, clusterbuster, map, supercluster"
-    />
+    <meta name="description" content="isolines" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
@@ -22,27 +16,33 @@
     <div id="map"></div>
     <div class="card">
       <header>
-        <h1>Station provider</h1>
-        <p>Vector tile server</p>
+        <h1>Isolines</h1>
       </header>
       <main>
-        <div class="provider">
-          <div class="logo">
-            <img src="images/ecomovement.svg" alt="Logo of Ecomovement" />
+        <section>
+          <div class="car-details-image-wrapper">
+            <p>BMW</p>
+            <p>i3s 94 Ah (2017 - 2018)</p>
+            <img
+              id="car-details-image"
+              class="car-details-image"
+              src="https://cars.chargetrip.io/625036e07d209b7fe2a5b792.png"
+            />
           </div>
-          <div class="provider-info">
-            <h3>
-              EcoMovement
-            </h3>
-            <p>
-              High quality dynamic charging locations data. For the purpose of this example, only part of it is public
-              (within the polygon). If you want to use the full database, create an account
-              <a href="https://account.chargetrip.com">here</a>.
-            </p>
-          </div>
-        </div>
+        </section>
       </main>
       <footer>
+        <div id="loading-toast" class="loading-toast toast">
+          <div class="loader">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Loading isoline</p>
+        </div>
+        <div id="error-toast" class="error-toast toast">
+          <p>Isoline could not be calculated</p>
+        </div>
         <div class="disclaimer">
           <a
             class="chargetrip-logo"

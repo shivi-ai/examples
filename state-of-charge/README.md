@@ -6,7 +6,7 @@ This tutorial covers the basics of building a route and showing how your SOC eff
 2.  show charging stations and expected SOC;
 3.  show a slider that changes your EVs SOC.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/state-of-charge/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=state-of-charge/).
 
 ### Technical stack
 

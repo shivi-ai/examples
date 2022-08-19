@@ -1,7 +1,7 @@
 # Show alternative routes with Chargetrip API
 
 This tutorial explains how to display alternative routes for your journey.
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/alternative-routes).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=alternative-routes).
 
 ### Technical stack
 

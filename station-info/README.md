@@ -1,7 +1,7 @@
 # Fetch station details with Chargetrip API
 
 This tutorial explains how to fetch station details and suggests how to parse the data.  
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/station-info).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=station-info).
 
 ### Technical stack
 

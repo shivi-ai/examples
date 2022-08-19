@@ -7,7 +7,7 @@ This tutorial covers the basics of building a simple route between an origin and
 3.  show information about the whole journey duration;
 4.  show information about energy consumption.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/route/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=route/).
 
 ### Technical stack
 

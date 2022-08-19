@@ -6,7 +6,7 @@ This tutorial guides you through the process of showing charging stations on a m
 2. Zoom in/out and recenter the map when clicking on a cluster;
 3. This example shows stations from the EcoMovement provider.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/tile-json/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=tile-json/).
 
 ### Technical stack
 

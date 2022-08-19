@@ -6,7 +6,7 @@ This tutorial covers the basics of building a route and showing how your battery
 2.  show charging stations;
 3.  show a slider that changes your EVs battery capacity.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/battery-capacity/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=battery-capacity/).
 
 ### Technical stack
 

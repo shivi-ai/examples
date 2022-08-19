@@ -7,7 +7,7 @@ This tutorial expands on the route example. It will not only show a route on a m
 3.  Display information about a specific point in your journey;
 4.  Updating the journey specs for a specific location in your journey, using the slider.
 
-To see this example live 👉 [demo](https://chargetrip.github.io/examples/elevation-plot/).
+To see this example live 👉 [demo](https://examples.chargetrip.com/?id=elevation-plot/).
 
 ### Technical stack
 

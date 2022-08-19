@@ -86,6 +86,12 @@ const examples = [
     title: 'Chargetrip API: Impact of battery capacity changes example',
     description: 'Update a route based on the battery capacity at departure',
   },
+  {
+    id: 'isolines',
+    url: '/isolines/',
+    title: 'Chargetrip API: Rendering the range of a vehicle on a map',
+    description: 'Use isolines to show how far an electric vehicle can travel from a specific origin',
+  },
 ];
 
 const page = examples.filter(value => value.id === pageId)[0];
