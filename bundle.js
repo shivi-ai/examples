@@ -4048,6 +4048,12 @@
       title: 'Chargetrip API: Impact of battery capacity changes example',
       description: 'Update a route based on the battery capacity at departure',
     },
+    {
+      id: 'isolines',
+      url: '/isolines/',
+      title: 'Chargetrip API: Impact of SoC changes example',
+      description: 'Update a route based on the state of charge at departure',
+    },
   ];
   var page = examples.filter(function(value) {
     return value.id === pageId;
