@@ -1,6 +1,6 @@
 import { getRoute } from './client';
 import { drawRoutePolyline } from './map';
-import { getDurationString } from '../../utils';
+import { getDurationString } from '../../../utils';
 
 export const getStateOfCharge = () => {
   return document.getElementById('range').value;

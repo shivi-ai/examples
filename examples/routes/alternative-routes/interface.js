@@ -1,4 +1,4 @@
-import { getDurationString } from '../../utils';
+import { getDurationString } from '../../../utils';
 import { highlightRoute, routes } from './map';
 
 /**
