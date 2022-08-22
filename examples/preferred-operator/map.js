@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import * as mapboxPolyline from '@mapbox/polyline';
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 
 /**
  * More information on how a route can be drawn can be found in our route example.

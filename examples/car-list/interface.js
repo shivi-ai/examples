@@ -1,4 +1,4 @@
-import { debounce } from '../utils';
+import { debounce } from '../../utils';
 import { getCarList } from './client';
 
 // Keeps track of the active search keyword. This way we always fetch the right results when using pagination.

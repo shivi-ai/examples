@@ -1,6 +1,6 @@
 import { getRoute } from './client';
 import { drawRoutePolyline } from './map';
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 
 // This example uses a Tesla 75D (2016-2019). By default it has a useable battery capacity of 72.5 kWh and
 // a Chargetrip best range of 389. These two values are interchangeable when adjusting the capacity.
