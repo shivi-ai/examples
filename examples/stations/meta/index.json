@@ -1,5 +1,4 @@
 {
   "label": "Stations",
-  "sublabel": "Example of how to query the 20 closest stations",
-  "background": "note"
+  "icon": "stations"
 }

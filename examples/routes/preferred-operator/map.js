@@ -1,6 +1,13 @@
 import mapboxgl from 'mapbox-gl';
-import { getDurationString } from '../../utils';
 import * as mapboxPolyline from '@mapbox/polyline';
+import { getDurationString } from '../../../utils';
+
+/**
+ * More information on how a route can be drawn can be found in our route example.
+ * Route example: https://examples.chargetrip.com/?id=route
+ */
+
+let popups = [];
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 
@@ -12,71 +19,46 @@ const map = new mapboxgl.Map({
   center: [9.1320104, 54.9758916],
 });
 
-/**
- * Draw a route on a map.
- *
- * Route object contains `polyline` data -  the polyline encoded route (series of coordinates as a single string).
- * We need to decode this information first. We use Mapbox polyline tool (https://www.npmjs.com/package/@mapbox/polyline) for this.
- * As a result of decoding we get pairs [latitude, longitude].
- * To draw a route on a map we use Mapbox GL JS. This tool uses the format [longitude,latitude],
- * so we have to reverse every pair.
- *
- * @param data {object} route specification
- */
 export const drawRoutePolyline = data => {
   const decodedData = mapboxPolyline.decode(data.polyline);
   const reversed = decodedData.map(item => item.reverse());
 
-  drawRoute(reversed, data.legs);
+  drawRoute(reversed, data.legs, data.duration);
 };
 
-/**
- * Draw route polyline and show charging stations on the map.
- *
- * @param coordinates {array} Array of coordinates
- * @param legs {array} route legs (stops) - each leg represents either a charging station, or via point or final point
- */
-const drawRoute = (coordinates, legs) => {
+export const drawRoute = (coordinates, legs, duration) => {
   if (map.loaded()) {
     drawPolyline(coordinates);
-    drawChargingTimes(legs);
+    drawPopUps(legs, duration);
     showLegs(legs);
   } else {
     map.on('load', () => {
       drawPolyline(coordinates);
-      drawChargingTimes(legs);
+      drawPopUps(legs, duration);
       showLegs(legs);
     });
   }
 };
 
-/**
- * Render the charging times at each station directly on top of it's marker.
- * @param {array} legs - each leg represents either a charging station, or a via point or final point
- */
-const drawChargingTimes = legs => {
-  legs.forEach((leg, idx) => {
-    if (idx == legs.length - 1) {
-      return;
-    }
+const drawPopUps = (legs, duration) => {
+  popups.forEach(popup => {
+    popup.remove();
+  });
 
-    const chargeTime = leg.chargeTime;
-    const hrs = ~~(chargeTime / 3600);
-    const mins = ~~((chargeTime % 3600) / 60);
-
-    new mapboxgl.Popup({ closeOnClick: false })
+  legs.forEach((leg, index) => {
+    const popup = new mapboxgl.Popup({ closeOnClick: false })
       .setLngLat(leg.destination.geometry.coordinates)
-      .setHTML(`<small>${hrs}:${mins}</small>`)
+      .setHTML(`<small>${index == legs.length - 1 ? getDurationString(duration) : leg.name}</small>`)
       .addTo(map);
+
+    popups.push(popup);
   });
 };
 
-/**
- * Draw route polyline on a map.
- *
- * @param coordinates {array} polyline coordinates
- */
 const drawPolyline = coordinates => {
+  if (map.getLayer('polyline')) map.removeLayer('polyline');
+  if (map.getSource('polyline-source')) map.removeSource('polyline-source');
+
   const geojson = {
     type: 'FeatureCollection',
     features: [
@@ -113,21 +95,13 @@ const drawPolyline = coordinates => {
   });
 };
 
-/**
- * Show the charging station, origin and destination on the map.
- *
- * Last leg of the route is a destination point.
- * All other legs are either charging stations or via points (if route has stops).
- *
- * @param legs {array} route legs
- */
 const showLegs = legs => {
+  if (map.getLayer('legs')) map.removeLayer('legs');
+  if (map.getSource('legs')) map.removeSource('legs');
   if (legs.length === 0) return;
 
   let points = [];
 
-  // we want to show origin point on the map
-  // to do that we use the origin of the first leg
   points.push({
     type: 'Feature',
     properties: {
@@ -137,7 +111,6 @@ const showLegs = legs => {
   });
 
   legs.map((leg, index) => {
-    // add charging stations
     if (index !== legs.length - 1) {
       points.push({
         type: 'Feature',
@@ -148,7 +121,6 @@ const showLegs = legs => {
         geometry: leg.destination?.geometry,
       });
     } else {
-      // add destination point (last leg)
       points.push({
         type: 'Feature',
         properties: {
@@ -159,7 +131,6 @@ const showLegs = legs => {
     }
   });
 
-  // draw route points on a map
   map.addLayer({
     id: 'legs',
     type: 'symbol',
