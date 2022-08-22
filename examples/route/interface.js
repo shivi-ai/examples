@@ -1,4 +1,4 @@
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 
 export const attachEventListeners = data => {
   const driveButton = document.getElementById('drive');

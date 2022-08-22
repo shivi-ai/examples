@@ -28,16 +28,7 @@ const plugins = [
 
 export default [
   {
-    input: 'navigation/index.js',
-    output: {
-      file: 'public/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'route/index.js',
+    input: 'examples/route/index.js',
     output: {
       file: 'public/route/bundle.js',
       format: 'iife',
@@ -46,7 +37,7 @@ export default [
     plugins,
   },
   {
-    input: 'car/index.js',
+    input: 'examples/car/index.js',
     output: {
       file: 'public/car/bundle.js',
       format: 'iife',
@@ -55,7 +46,7 @@ export default [
     plugins,
   },
   {
-    input: 'car-list/index.js',
+    input: 'examples/car-list/index.js',
     output: {
       file: 'public/car-list/bundle.js',
       format: 'iife',
@@ -64,7 +55,7 @@ export default [
     plugins,
   },
   {
-    input: 'stations/index.js',
+    input: 'examples/stations/index.js',
     output: {
       file: 'public/stations/bundle.js',
       format: 'iife',
@@ -73,7 +64,7 @@ export default [
     plugins,
   },
   {
-    input: 'station-info/index.js',
+    input: 'examples/station-info/index.js',
     output: {
       file: 'public/station-info/bundle.js',
       format: 'iife',
@@ -82,7 +73,7 @@ export default [
     plugins,
   },
   {
-    input: 'tile-server/index.js',
+    input: 'examples/tile-server/index.js',
     output: {
       file: 'public/tile-server/bundle.js',
       format: 'iife',
@@ -91,7 +82,7 @@ export default [
     plugins,
   },
   {
-    input: 'elevation-plot/index.js',
+    input: 'examples/elevation-plot/index.js',
     output: {
       file: 'public/elevation-plot/bundle.js',
       format: 'iife',
@@ -100,7 +91,7 @@ export default [
     plugins,
   },
   {
-    input: 'stations-along-route/index.js',
+    input: 'examples/stations-along-route/index.js',
     output: {
       file: 'public/stations-along-route/bundle.js',
       format: 'iife',
@@ -109,7 +100,7 @@ export default [
     plugins,
   },
   {
-    input: 'state-of-charge/index.js',
+    input: 'examples/state-of-charge/index.js',
     output: {
       file: 'public/state-of-charge/bundle.js',
       format: 'iife',
@@ -118,7 +109,7 @@ export default [
     plugins,
   },
   {
-    input: 'alternative-routes/index.js',
+    input: 'examples/alternative-routes/index.js',
     output: {
       file: 'public/alternative-routes/bundle.js',
       format: 'iife',
@@ -127,7 +118,7 @@ export default [
     plugins,
   },
   {
-    input: 'battery-capacity/index.js',
+    input: 'examples/battery-capacity/index.js',
     output: {
       file: 'public/battery-capacity/bundle.js',
       format: 'iife',
@@ -136,7 +127,7 @@ export default [
     plugins,
   },
   {
-    input: 'preferred-operator/index.js',
+    input: 'examples/preferred-operator/index.js',
     output: {
       file: 'public/preferred-operator/bundle.js',
       format: 'iife',
@@ -145,7 +136,7 @@ export default [
     plugins,
   },
   {
-    input: 'tile-json/index.js',
+    input: 'examples/tile-json/index.js',
     output: {
       file: 'public/tile-json/bundle.js',
       format: 'iife',
@@ -154,7 +145,7 @@ export default [
     plugins,
   },
   {
-    input: 'isolines/index.js',
+    input: 'examples/isolines/index.js',
     output: {
       file: 'public/isolines/bundle.js',
       format: 'iife',

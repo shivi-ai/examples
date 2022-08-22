@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import * as mapboxPolyline from '@mapbox/polyline';
 import { renderRouteDetails, renderRouteHeader, tabHandler } from './interface';
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmdldHJpcCIsImEiOiJjazhpaG8ydTIwNWNpM21ud29xeXc2amhlIn0.rGKgR3JfG9Z5dCWjUI_oGA';
 

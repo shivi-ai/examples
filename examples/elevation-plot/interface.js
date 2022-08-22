@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 
 let routeData;
 

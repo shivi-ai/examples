@@ -1,4 +1,4 @@
-import { getDurationString } from '../utils';
+import { getDurationString } from '../../utils';
 import { hideAlternatives, showAlternatives } from './map';
 
 let routeData;
