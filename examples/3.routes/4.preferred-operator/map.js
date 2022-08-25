@@ -4,7 +4,7 @@ import { getDurationString } from '../../../utils';
 
 /**
  * More information on how a route can be drawn can be found in our route example.
- * Route example: https://examples.chargetrip.com/?id=route
+ * Route example: https://examples.chargetrip.com/route
  */
 
 let popups = [];

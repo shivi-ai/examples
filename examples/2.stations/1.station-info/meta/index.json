@@ -2,5 +2,5 @@
   "label": "Station details",
   "sublabel": "Example of how to query and parse station data",
   "background": "note",
-  "url": "https://examples.chargetrip.com/?id=station-info"
+  "url": "https://examples.chargetrip.com/station-info/"
 }
