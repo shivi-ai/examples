@@ -1,41 +1,20 @@
-# Change your state of charge (SOC) and recalculate the route
+# Update a route based on the state of charge
 
-This tutorial covers the basics of building a route and showing how your SOC effects the route:
+A car is not always fully charged and in the same location. That's why the state of charge can be treated as a variable. By hooking it up to a slider the impact on a route becomes visible.
 
-1.  show a route on a map;
-2.  show charging stations and expected SOC;
-3.  show a slider that changes your EVs SOC.
+## Requirements
 
-To see this example live 👉 [demo](https://examples.chargetrip.com/?id=state-of-charge/).
+- [Chargetrip API key](https://account.chargetrip.com) - to plot routes outside this region
+- [Mapbox API key](https://www.mapbox.com) - to display the map
+- [URQL](https://formidable.com/open-source/urql/) - a lightweight graphQL client
 
-### Technical stack
+## Steps to take
 
-The Chargetrip API is built around GraphQL. If you're not familiar with GraphQL, [going over the specs](https://graphql.org/learn/) will be helpful. Don't worry, you don't need to be an expert to use this API, this getting started guide should be enough to get going.
+1. Plotting a route based on battery capacity starts by executing the `newRoute` mutation. This mutation requires information about the car, origin and destination. To support changing the battery capacity, the `ev.battery.stateOfCharge` argument needs to be treated as a variable. After the mutation is finished executing a route `id` will be returned.
+2. This `id` can be used to request route updates through the `routeUpdatedById` subscription. This subscription receives dynamic updates.
+3. After the subscription returns `done` as status, the `polyline` and `legs` fields will be available. These can be used to display the route and charge stations on the map. Additional data such as distance, duration and consumption are also available.
+4. Now the `ev.battery.stateOfCharge` will be tied to a slider in the UI. Every time the slider gets updated, a new route will be generated and displayed to show the impact.
 
-To see our Chargetrip API in action, you can go to the [Playground](https://playground.chargetrip.com/). It has a big collection of mutations/queries for you to experience the power of our API.
+## Next steps
 
-This example is built with vanilla JS. To establish a connection with Chargetrip API, we use [urql](https://formidable.com/open-source/urql/) - lightweight GraphQL client.
-We use our Playground environment for this example. It means that only part of our extensive database is available. You need a registered `x-client-id` to access the full database.
-
-### Preparation
-
-To build a route, you will need a car (the associated consumption model of a vehicle will be applied to the routing algorithm), station database, origin, and a destination.
-
-For this example, we use **Tesla model S**, **Hanover, Germany** as an origin, and **Aalborg, Denmark** as a destination point.
-Chargetrip operates an extensive database of EVs, each with their specific consumption models. You can find more information about our database and available queries by checking [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Cars/introduction).
-
-Our Playground has a station database that is populated with small set of EcoMovement station data. Importing your own database or using one of the databases Chargetrip has an integration with, is possible. For more details, contact us.
-
-### Steps to take
-
-Once we have a car and station database, we can start planning the route:
-
-1. We have to request a new route. For that we use the `newRoute` mutation. We will need to pass information about the car including SOC, origin and destination. The SOC is a variable in this mutation. As a result we will get an ID of a newly created route. You can read all the details about this mutation in our [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Routes/mutate-route).
-2. With a route ID we can request route information and show the route on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
-3. Using the slider we can request a new route when the SOC changes and show how this effects the route.
-
-### Useful links
-
-1. Chargetrip API [docs](https://developers.chargetrip.com/)
-2. Chargetrip API Playground [playground](https://playground.chargetrip.com/)
-3. Chargetrip API schema [information](https://voyager.chargetrip.com/).
+The last couple of examples explained most of the variables when it comes to routing. Next steps would be exploring the routing api reference to play around with occupants, different vehicles or even cargo.

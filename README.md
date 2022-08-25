@@ -12,24 +12,7 @@
 </div>
 <hr>
 
-Here you can find ready-to-run examples explaining how to work with the Chargetrip API. Each example has instructions in the corresponding README file.  
-If something is not explained or you miss an example, please let us know by opening an issue or contacting us in [Spectrum](https://spectrum.chat/chargetrip?tab=posts) chat.
-We improve our documentation continuously, and your feedback is valuable.
-
-Available examples:
-
-1. Build a simple route [example](https://examples.chargetrip.com/?id=route);
-2. Query a list of cars [example](https://examples.chargetrip.com/?id=car-list);
-3. Query the details of a car [example](https://examples.chargetrip.com/?id=car-details);
-4. Show stations on a map [example](https://examples.chargetrip.com/?id=stations-around);
-5. Query a specific station [example](https://examples.chargetrip.com/?id=station-details);
-6. Show stations using the mvt response from the Vector Tile Service [example](https://examples.chargetrip.com/?id=tile-server);
-7. Show stations using the GeoJSON response from the Vector Tile Service [example](https://examples.chargetrip.com/?id=tile-json);
-8. Build a route and display an elevation profile [example](https://examples.chargetrip.com/?id=elevation-plot);
-9. Build a route and recalculate if the SOC changes [example](https://examples.chargetrip.com/?id=state-of-charge)
-10. Build a route and display stations along the route [example](https://examples.chargetrip.com/?id=stations-along-route);
-11. Build a route and display alternative routes [example](https://examples.chargetrip.com/?id=alternative-routes);
-12. Build a route and recalculate if the battery capacity changes [example](https://examples.chargetrip.com/?id=battery-capacity)
+Here you can find ready-to-run examples explaining how to work with the Chargetrip API. Each example has instructions in the corresponding README file. If something is not explained or you miss an example, please let us know by opening an issue. We improve our documentation continuously, and your feedback is valuable.
 
 ## Installation and local development
 

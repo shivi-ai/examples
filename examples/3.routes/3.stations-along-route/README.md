@@ -1,44 +1,19 @@
-# Build a route with Chargetrip API that shows alternative stations
+# Mutate to display stations along a route
 
-This tutorial covers the basics of building a simple route between an origin and a destination:
+Whenever the recommended stations along the route are not enough, it's possible to show additional stations along the route. To render these, all that is needed is a radius along the route.
 
-1.  show a route on a map;
-2.  show charging stations and information about the journey;
-3.  show alternative charging stations.
+## Requirements
 
-To see this example live 👉 [demo](https://examples.chargetrip.com/?id=stations-along-route/).
+- [Chargetrip API key](https://account.chargetrip.com) - to plot routes outside this region
+- [Mapbox API key](https://www.mapbox.com) - to display the map
+- [URQL](https://formidable.com/open-source/urql/) - a lightweight graphQL client
 
-### Technical stack
+## Steps to take
 
-The Chargetrip API is built around GraphQL. If you're not familiar with GraphQL, [going over the specs](https://graphql.org/learn/) will be helpful. Don't worry, you don't need to be an expert to use this API, this getting started guide should be enough to get going.
+1. Plotting a route with stations along a route starts by executing the `newRoute` mutation. This mutation requires information about the car, origin and destination. To support stations along a route, the `stationsAlongRouteRadius` argument needs to be provided. After the mutation is finished executing a route id will be returned.
+2. This `id` can be used to request route updates through the `routeUpdatedById` subscription. This subscription receives dynamic updates.
+3. After the subscription returns `done` as status, the stationsAlongRoute field can be used to plot stations around the route on the map. Apart from the `stationsAlongRoute`, the `polyline` and `legs` object can be used to display the route and recommended charge stations on the map. Additional data such as distance, duration and consumption are also available.
 
-To see our Chargetrip API in action, you can go to the [Playground](https://playground.chargetrip.com/). It has a big collection of mutations/queries for you to experience the power of our API.
+## Next steps
 
-This example is built with vanilla JS. To establish a connection with Chargetrip API, we use [urql](https://formidable.com/open-source/urql/) - lightweight GraphQL client.
-We use our Playground environment for this example. It means that only part of our extensive database is available. You need a registered `x-client-id` to access the full database.
-
-### Preparation
-
-To build a route, you will need a car (the associated consumption model of a vehicle will be applied to the routing algorithm), station database, origin, and a destination.
-
-For this example, we use **Tesla model S**, **Hanover** as an origin, and **Aalborg** as a destination point.
-Chargetrip operates an extensive database of EVs, each with their specific consumption models. You can find more information about our database and available queries by checking [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Cars/query-cars).
-
-Our Playground has a station database that is populated with a limited dataset of EcoMovement. Importing your own database or using one of the databases Chargetrip has an integration with, is possible. For more details, contact us.
-
-### Steps to take
-
-Once we have a car and station database, we can start planning the route:
-
-1. We have to request a new route. For that we use the `newRoute` mutation. We will need to pass information about the car, origin and destination. As a result we will get an ID of a newly created route. In order to show stations along a route, we need to add `stationsAlongRouteRadius` to our mutation and give it a radius between 500 and 5000 meters. You can read all the details about this mutation in our [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Routes/mutate-route).
-2. With a route ID we can request route information. We will subscribe to a route update to receive dynamic updates for it (recommended route, alternative routes (if available), time duration, consumption etc). You can read all the details about this subscription in our [Graph API documentation](https://developers.chargetrip.com/API-Reference/Routes/subscribe-to-route-updates).
-3. Having the route details we can show a route on a map. To show stations, where a car must stop for charging, we use the route `legs` object.
-4. We can also query route details for information like total distance, duration of a trip, consumption etc. You can see all available fields to query in the [Chargetrip API documentation](https://developers.chargetrip.com/API-Reference/Routes/query-route-details).
-5. We can now show the route on a map. We use [MapboxGL JS](https://docs.mapbox.com/mapbox-gl-js/overview/#quickstart) in this example.
-6. Finally we can use the `stationsAlongRoute` object tot display alternative stations.
-
-### Useful links
-
-1. Chargetrip API [docs](https://developers.chargetrip.com/)
-2. Chargetrip API Playground [playground](https://playground.chargetrip.com/)
-3. Chargetrip API schema [information](https://voyager.chargetrip.com/).
+With the stations along the route feature, there will always be a station around the corner. To improve the usability of these stations, preferred operators will be explained in the next step.

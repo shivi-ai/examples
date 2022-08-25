@@ -1,31 +1,19 @@
-# Query all cars from our database
+# Query the car list
 
-This tutorial covers how to fetch cars from our database:
+To start routing a car and consumption model is required. Learn how to provide a list of cars to be able to select the right consumption model.
 
-1.  query all cars using the Chargetrip GraphQL API;
-2.  display information about the cars.
+## Requirements
 
-To see this example live 👉 [demo](https://examples.chargetrip.com/?id=car-details).
+- [Chargetrip API key](https://account.chargetrip.com) - to fetch all vehicles instead of a subset.
+- A Mapbox API key - to display the map
+- [URQL](https://formidable.com/open-source/urql/) - a lightweight graphQL client
 
-### Technical stack
+## Steps to take
 
-The Chargetrip API is built around GraphQL. If you're not familiar with GraphQL, [going over the specs](https://graphql.org/learn/) will be helpful. Don't worry, you don't need to be an expert to use this API, this getting started guide should be enough to get going.
+1. Use the `carList` query to retrieve a list of cars. GraphQL will allow for only fetching the fields that are needed. The filter and search argument can be used to improve the way of how to look up vehicles. Use the page and size argument to implement pagination. To improve performance even more, the thumbnail image of the vehicle is used.
+2. After fetching the data, an `intersectionObserver` needs to be implemented to support endless scroll pagination.
+3. With everything set up, it's time to render the list of cars alongside the filters and search onto the screen.
 
-To see our Chargetrip API in action, you can go to the [Playground](https://playground.chargetrip.com/). It has a big collection of mutations/queries for you to experience the power of our API.
+## Next steps
 
-This example is built with vanilla JS. To establish a connection with Chargetrip API, we use [urql](https://formidable.com/open-source/urql/) - lightweight GraphQL client. We use our Playground environment for this example. It means that only part of our extensive database is available. You need a registered `x-client-id` to access the full database.
-
-### Preparation
-
-Our Playground gives you access to only 4 cars. Some car parameters are courtesy of our partner [EV Database](https://ev-database.org/). If you want to access the full database, please contact us.
-
-### Steps to take
-
-1. Query a list of all cars. Using GraphQL you can query only the data you need. You can read all the details about this query in our [Graph API documentation](https://docs.chargetrip.com/#getting-a-list-of-all-cars).
-2. Show information about the cars.
-
-### Useful links
-
-1. Chargetrip GraphAPI [docs](https://docs.chargetrip.com/);
-2. Chargetrip GraphAPI [playground](https://playground.chargetrip.com/);
-3. Chargetrip GraphAPI schema [information](https://voyager.chargetrip.com/).
+With the `carList` up and running, it's possible to retrieve additional car details. This will be explained in our next example.

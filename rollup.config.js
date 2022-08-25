@@ -46,7 +46,7 @@ export default [
     plugins,
   },
   {
-    input: 'examples/2.stations/1.station-info/index.js',
+    input: 'examples/2.stations/2.station-info/index.js',
     output: {
       file: 'public/station-info/bundle.js',
       format: 'iife',
@@ -55,7 +55,7 @@ export default [
     plugins,
   },
   {
-    input: 'examples/2.stations/2.station-list/index.js',
+    input: 'examples/2.stations/1.station-list/index.js',
     output: {
       file: 'public/stations/bundle.js',
       format: 'iife',
