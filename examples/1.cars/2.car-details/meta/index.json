@@ -1,5 +1,6 @@
 {
   "label": "Car details",
   "sublabel": "Example of how to retrieve car details",
-  "background": "accent"
+  "background": "accent",
+  "url": "https://examples.chargetrip.com/?id=car/"
 }

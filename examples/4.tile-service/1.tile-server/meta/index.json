@@ -1,5 +1,6 @@
 {
   "label": "Alternative routes",
   "sublabel": "Display alternative routes on a map",
-  "background": "accent"
+  "background": "success",
+  "url": "https://examples.chargetrip.com/?id=tile-server/"
 }

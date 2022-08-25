@@ -1,5 +1,6 @@
 {
   "label": "Elevation plot",
   "sublabel": "Display the elevation profile of a journey",
-  "background": "accent"
+  "background": "accent",
+  "url": "https://examples.chargetrip.com/?id=elevation-plot/"
 }
