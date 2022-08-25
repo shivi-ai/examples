@@ -1,5 +1,6 @@
 {
   "label": "Alternative routes",
   "sublabel": "Display alternative routes on a map",
-  "background": "accent"
+  "background": "accent",
+  "url": "https://examples.chargetrip.com/?id=alternative-routes"
 }

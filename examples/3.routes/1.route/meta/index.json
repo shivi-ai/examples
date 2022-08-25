@@ -1,5 +1,6 @@
 {
   "label": "Route",
   "sublabel": "Example of how to request a route and show it on a map",
-  "background": "accent"
+  "background": "accent",
+  "url": "https://examples.chargetrip.com/?id=route/"
 }
