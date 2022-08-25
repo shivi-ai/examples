@@ -2,5 +2,5 @@
   "label": "State of charge",
   "sublabel": "Change the SOC and reroute a journey",
   "background": "accent",
-  "url": "https://examples.chargetrip.com/?id=state-of-charge/"
+  "url": "https://examples.chargetrip.com/state-of-charge/"
 }
