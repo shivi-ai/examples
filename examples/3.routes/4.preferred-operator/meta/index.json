@@ -1,0 +1,6 @@
+{
+  "label": "Operator preference",
+  "sublabel": "Plot a route where that takes into account operator preferences or exclusions",
+  "background": "accent",
+  "url": "https://examples.chargetrip.com/preferred-operator/"
+}

@@ -28,34 +28,7 @@ const plugins = [
 
 export default [
   {
-    input: 'navigation/index.js',
-    output: {
-      file: 'public/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'route/index.js',
-    output: {
-      file: 'public/route/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'car/index.js',
-    output: {
-      file: 'public/car/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'car-list/index.js',
+    input: 'examples/1.cars/1.car-list/index.js',
     output: {
       file: 'public/car-list/bundle.js',
       format: 'iife',
@@ -64,16 +37,16 @@ export default [
     plugins,
   },
   {
-    input: 'stations/index.js',
+    input: 'examples/1.cars/2.car-details/index.js',
     output: {
-      file: 'public/stations/bundle.js',
+      file: 'public/car/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
     plugins,
   },
   {
-    input: 'station-info/index.js',
+    input: 'examples/2.stations/2.station-info/index.js',
     output: {
       file: 'public/station-info/bundle.js',
       format: 'iife',
@@ -82,43 +55,25 @@ export default [
     plugins,
   },
   {
-    input: 'tile-server/index.js',
+    input: 'examples/2.stations/1.station-list/index.js',
     output: {
-      file: 'public/tile-server/bundle.js',
+      file: 'public/stations/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
     plugins,
   },
   {
-    input: 'elevation-plot/index.js',
+    input: 'examples/3.routes/1.route/index.js',
     output: {
-      file: 'public/elevation-plot/bundle.js',
+      file: 'public/route/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
     plugins,
   },
   {
-    input: 'stations-along-route/index.js',
-    output: {
-      file: 'public/stations-along-route/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'state-of-charge/index.js',
-    output: {
-      file: 'public/state-of-charge/bundle.js',
-      format: 'iife',
-      sourcemap: true,
-    },
-    plugins,
-  },
-  {
-    input: 'alternative-routes/index.js',
+    input: 'examples/3.routes/2.alternative-routes/index.js',
     output: {
       file: 'public/alternative-routes/bundle.js',
       format: 'iife',
@@ -127,16 +82,16 @@ export default [
     plugins,
   },
   {
-    input: 'battery-capacity/index.js',
+    input: 'examples/3.routes/3.stations-along-route/index.js',
     output: {
-      file: 'public/battery-capacity/bundle.js',
+      file: 'public/stations-along-route/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
     plugins,
   },
   {
-    input: 'preferred-operator/index.js',
+    input: 'examples/3.routes/4.preferred-operator/index.js',
     output: {
       file: 'public/preferred-operator/bundle.js',
       format: 'iife',
@@ -145,7 +100,43 @@ export default [
     plugins,
   },
   {
-    input: 'tile-json/index.js',
+    input: 'examples/3.routes/5.elevation-plot/index.js',
+    output: {
+      file: 'public/elevation-plot/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'examples/3.routes/6.battery-capacity/index.js',
+    output: {
+      file: 'public/battery-capacity/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'examples/3.routes/7.state-of-charge/index.js',
+    output: {
+      file: 'public/state-of-charge/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'examples/4.tile-service/1.tile-server/index.js',
+    output: {
+      file: 'public/tile-server/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'examples/4.tile-service/2.tile-json/index.js',
     output: {
       file: 'public/tile-json/bundle.js',
       format: 'iife',
@@ -154,7 +145,7 @@ export default [
     plugins,
   },
   {
-    input: 'isolines/index.js',
+    input: 'examples/5.isolines/1.isoline/index.js',
     output: {
       file: 'public/isolines/bundle.js',
       format: 'iife',
