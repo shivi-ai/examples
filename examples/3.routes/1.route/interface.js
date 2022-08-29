@@ -82,7 +82,7 @@ const calculateAverageTemperature = data => {
   return (averageTemperature / data.legs.length).toFixed(1);
 };
 
-
+/**
  * Create a Google Map Directions URL.
  * See documentation here https://developers.google.com/maps/documentation/urls/get-started#directions-action.
  *
