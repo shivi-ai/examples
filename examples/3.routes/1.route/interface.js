@@ -26,8 +26,6 @@ export const renderRouteData = data => {
   // the average temperature based on all stops across the route
   const averageTemperature = calculateAverageTemperature(data);
 
-  const hasBorderCrossing = checkBorderCrossing(data);
-
   // A combined field containing several of the route meta data
   document.getElementById('route-metadata').innerHTML = `${routeDistance} / ${routeStops} / ${routeEnergy}`;
 
@@ -47,7 +45,7 @@ export const renderRouteData = data => {
   document.getElementById('co2').innerHTML = data.saving?.co2 ? `${data.saving.co2 / 1000} Kg` : 'Unknown';
 
   // Enable or disable our border-crossing UI
-  document.getElementById('border-crossing').style.display = hasBorderCrossing ? 'flex' : 'none';
+  document.getElementById('border-crossing').style.display = data.tags.includes('crossborder') ? 'flex' : 'none';
 
   // A rendering of the average temperature on a specific route
   const averageTemperatureTag = document.getElementById('average-temperature');
@@ -84,21 +82,7 @@ const calculateAverageTemperature = data => {
   return (averageTemperature / data.legs.length).toFixed(1);
 };
 
-/**
- * Check whether our route crosses a border based on country names.
- * @param { object } data - route specification
- * @returns { boolean } - whether we are still in the same country our not.
- */
-const checkBorderCrossing = data => {
-  // Get the country from the origin and destination name.
-  var origin = data.legs[0].origin.properties.name.split(', ');
-  var destination = data.legs[data.legs.length - 1].destination.properties.name.split(', ');
 
-  // Compare the origins country to the destination country. If they are unequal we have a border-crossing.
-  return origin.pop() !== destination.pop();
-};
-
-/**
  * Create a Google Map Directions URL.
  * See documentation here https://developers.google.com/maps/documentation/urls/get-started#directions-action.
  *

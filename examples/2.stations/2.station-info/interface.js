@@ -117,7 +117,6 @@ const renderConnectors = connectors => {
               <object type="image/svg+xml" data="images/plugs/${connector.icon}.svg">
               </object>
             </div>
- 
             <div class="charger-details">
               <div class="row">
                 <p>${connector.name}</p>

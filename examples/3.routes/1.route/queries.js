@@ -48,6 +48,7 @@ subscription routeUpdatedById($id: ID!){
   routeUpdatedById(id: $id) {
     status
     route {
+      tags
       charges
       saving {
         money
