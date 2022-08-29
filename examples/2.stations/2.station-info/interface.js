@@ -114,7 +114,8 @@ const renderConnectors = connectors => {
         <li class=${connector.status}>
           <div class="charger">
             <div class="charger-plug">
-              <img src="images/plugs/${connector.icon}.svg#${connector.icon}"/>
+              <object type="image/svg+xml" data="images/plugs/${connector.icon}.svg">
+              </object>
             </div>
  
             <div class="charger-details">
@@ -148,9 +149,8 @@ const renderAmenities = amenities => {
       `
         <li>
         <div class="amenity">
-          <svg viewBox="0 0 24 24" height="24" width="24">
-            <use xlink:href="images/amenities/${amenity}.svg#${amenity}"></use>
-          </svg>
+          <object type="image/svg+xml" data="images/amenities/${amenity}.svg">
+          </object>
         </div>
         </li>
         `,
