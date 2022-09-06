@@ -6,7 +6,7 @@
   <span>⚡️</span>
   <a href="https://developers.chargetrip.com/">Docs</a>
   <span>⚡</span>
-  <a href="https://chargetrip.github.io/examples/">Examples</a>
+  <a href="https://developers.chargetrip.com/examples">Examples</a>
   <span>⚡</span>
   <a href="https://spectrum.chat/chargetrip?tab=posts">Spectrum</a>
 </div>
