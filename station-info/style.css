@@ -223,6 +223,10 @@ section:first-child {
   display: flex;
 }
 
+svg {
+  fill: var(--background-body) !important;
+}
+
 .charger-plug {
   width: 48px;
   display: flex;
