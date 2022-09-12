@@ -127,6 +127,15 @@ export default [
     plugins,
   },
   {
+    input: 'examples/3.routes/8.tolls-and-ferries/index.js',
+    output: {
+      file: 'public/tolls-and-ferries/bundle.js',
+      format: 'iife',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
     input: 'examples/4.tile-service/1.tile-server/index.js',
     output: {
       file: 'public/tile-server/bundle.js',

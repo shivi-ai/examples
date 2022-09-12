@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chargetrip API: station example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Query particular station with the Chargetrip API." />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header></header>
+    <div class="content">
+      <div class="github-link">
+        <a href="" title="github project">
+          View on Github
+        </a>
+        <button
+          aria-label="remove github link"
+          title="remove github link"
+          onclick="this.parentElement.remove()"
+        ></button>
+      </div>
+      <div id="map"></div>
+      <div class="card">
+        <header></header>
+        <main></main>
+        <footer>
+          <div class="disclaimer">
+            <a
+              class="chargetrip-logo"
+              href="https://chargetrip.com/"
+              aria-label="Powered by Chargetrip"
+              title="Powered by Chargetrip"
+            >
+              Powered by
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+</html>
