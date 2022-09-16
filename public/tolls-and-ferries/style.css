@@ -440,7 +440,7 @@ header p {
   background-color: #0078ff;
 }
 .timeline-icon.ferry {
-  background: url('images/ferry.svg') no-repeat center center;
+  background-image: url('images/ferry.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-color: #fff;
