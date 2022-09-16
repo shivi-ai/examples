@@ -20,9 +20,6 @@ export const renderRouteData = data => {
   // the total duration of the journey (including charge time), in seconds
   document.getElementById('duration').innerHTML = `${getDurationString(data.duration ?? 0)}`;
 
-  // Enable or disable our border-crossing UI
-  // document.getElementById('border-crossing').style.display = data.tags.includes('crossborder') ? 'flex' : 'none';
-
   let extraFerryStops = 0;
   let origin = '';
   let destination = '';

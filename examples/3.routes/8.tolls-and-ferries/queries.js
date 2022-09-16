@@ -1,45 +1,15 @@
 import qql from 'graphql-tag';
 /*
- * In this example we request a route from Oslo, Norway to Aalborg, Denmark
- * Your origin and destination are required fields. You also need to select an EV.
+ * In this example a route from Aalborg, Denmakr to Oslo, Norway is requested.
+ * Origin and destination are required fields. An EV also needs to be selected.
  * Only the EV ID here is mandatory, all other fields are optional and when not specified will use the default values.
  * The changing conditions are:
- *   - 75.5% SoC at Oslo, Norway
+ *   - 80% SoC at Aalborg, Denmark
  *   - EV can charge at CHAdeMO changers
  *   - should use climate (temperature and weather conditions)
  *   - min power of chargers is 43 kWh. This is the default setting
  *   - one passenger in the car (drive alone)
  */
-// export const createRouteQuery = qql`
-// mutation newRoute{
-//   newRoute(
-//     input: {
-//       ev: {
-//         id: "5d161be5c9eef46132d9d20a",
-//         climate: true
-//         occupants: 2
-//         plugs: { chargingPower: 150, standard: TESLA_S }
-//         adapters: [
-//           { chargingPower: 150, standard: IEC_62196_T2_COMBO }
-//           { chargingPower: 150, standard: CHADEMO }
-//         ]
-//       }
-//       routeRequest: {
-//         origin: {
-//           type: Feature
-//           geometry: { type: Point, coordinates: [13.4, 52.52] }
-//           properties: { name: "Berlin, Germany" }
-//         }
-//         destination: {
-//           type: Feature
-//           geometry: { type: Point, coordinates: [10.757933, 59.911491] }
-//           properties: { name: "Oslo, Norway" }
-//         }
-//       }
-//     }
-//   )
-// }
-// `;
 
 export const createRouteQuery = qql`
 mutation newRoute{
