@@ -10,19 +10,50 @@ import qql from 'graphql-tag';
  *   - min power of chargers is 43 kWh. This is the default setting
  *   - one passenger in the car (drive alone)
  */
+// export const createRouteQuery = qql`
+// mutation newRoute{
+//   newRoute(
+//     input: {
+//       ev: {
+//         id: "5d161be5c9eef46132d9d20a",
+//         climate: true
+//         occupants: 2
+//         plugs: { chargingPower: 150, standard: TESLA_S }
+//         adapters: [
+//           { chargingPower: 150, standard: IEC_62196_T2_COMBO }
+//           { chargingPower: 150, standard: CHADEMO }
+//         ]
+//       }
+//       routeRequest: {
+//         origin: {
+//           type: Feature
+//           geometry: { type: Point, coordinates: [13.4, 52.52] }
+//           properties: { name: "Berlin, Germany" }
+//         }
+//         destination: {
+//           type: Feature
+//           geometry: { type: Point, coordinates: [10.757933, 59.911491] }
+//           properties: { name: "Oslo, Norway" }
+//         }
+//       }
+//     }
+//   )
+// }
+// `;
+
 export const createRouteQuery = qql`
 mutation newRoute{
   newRoute(
     input: {
       ev: { 
-        id: "5d161be8c9eef43905d9d216", 
+        id: "5d161be5c9eef46132d9d20a", 
+        climate: true
+        occupants: 2
         plugs: { chargingPower: 150, standard: TESLA_S }
         adapters: [
           { chargingPower: 150, standard: IEC_62196_T2_COMBO }
           { chargingPower: 150, standard: CHADEMO }
         ]
-        battery: { stateOfCharge: { value: 80, type: percentage } }, 
-        climate: true, occupants: 1 
       }
       routeRequest: {
         origin: {
@@ -58,7 +89,22 @@ subscription routeUpdatedById($id: ID!){
       consumption
       polyline
       legs{
+        name
+        rangeStartPercentage
+        rangeEndPercentage
         chargeTime
+        operatorName
+        plugsAvailable
+        stationId
+        type
+        duration
+        distance
+        steps {
+          type
+          distance
+          duration
+          polyline
+        }
         origin{
           geometry{
             type

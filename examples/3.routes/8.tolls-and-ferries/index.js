@@ -1,5 +1,5 @@
 import { getRoute } from './client';
-import { attachEventListeners, renderRouteData } from './interface';
+import { renderRouteData } from './interface';
 import { drawRoutePolyline } from './map';
 
 /**
@@ -12,8 +12,9 @@ import { drawRoutePolyline } from './map';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-getRoute(route => {
+let stateOfCharge = 80;
+
+getRoute(stateOfCharge, route => {
   drawRoutePolyline(route);
   renderRouteData(route);
-  attachEventListeners(route);
 });
