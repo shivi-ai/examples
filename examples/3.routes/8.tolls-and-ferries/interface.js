@@ -2,8 +2,6 @@ import { getDurationString } from '../../../utils';
 
 // Array used for journey overview.
 let journeyLegs = [];
-let wholeRouteContainsTolls = false;
-let wholeRouteContainsFerries = false;
 
 /**
  * Render journey overview.
@@ -26,19 +24,17 @@ export const renderRouteData = data => {
   // Convert the legs we receive from the API to journey overview legs we can display.
   // First check if the route has loaded yet
   if (data) {
+    console.log(data);
     // Determine origin and destination
     origin = data.legs[0].origin.properties.name;
     destination = data.legs[data.legs.length - 1].destination.properties.name;
     // Go through the legs we receive from the backend - stations and final.
     for (let i = 0; i < data.legs.length; i++) {
-      let ferrySteps = getNumberOfFerryStepsInLeg(data.legs[i]);
-      // Used to determine number of stops, at top of journey overview details
-      extraFerryStops += ferrySteps;
       // 'Regular' route, no ferry. Add route to station as a leg
-      if (ferrySteps == 0) {
+      if (!data.legs[i].tags.includes('ferry')) {
         // Check for tolls
         let tollsOnLeg = false;
-        if (containsTolls(data.legs[i])) {
+        if (data.legs[i].tags.includes('toll')) {
           tollsOnLeg = true;
         }
         // Station steps are split up into a drive to the station, followed by the charging info at the station
@@ -59,6 +55,8 @@ export const renderRouteData = data => {
       }
       // Leg contains ferry steps, so split it up
       else {
+        extraFerryStops += getNumberOfFerryStepsInLeg(data.legs[i]);
+        // Used to determine number of stops, at top of journey overview details
         splitLeg(data.legs[i]);
       }
     }
@@ -73,7 +71,7 @@ export const renderRouteData = data => {
   // Populate journey overview
   if (journeyLegs) {
     // Show ferrys & tolls indicator if present on route
-    document.getElementById('toll').innerHTML = `${displayFerriesAndTollsIndicator()}`;
+    document.getElementById('toll').innerHTML = `${displayFerriesAndTollsIndicator(data.tags)}`;
     // Show start point
     document.getElementById('journey-timeline').innerHTML += `
     <div class="timeline-item timelineStartPoint start">
@@ -137,35 +135,19 @@ export const renderRouteData = data => {
  *
  * @return {string} html elements to render ferry/toll information
  */
-function displayFerriesAndTollsIndicator() {
+function displayFerriesAndTollsIndicator(routeTags) {
   let ferriesAndTollsIconsIndicator = ``;
   let ferriesAndTollsTextIndicator = ``;
-  if (wholeRouteContainsTolls) {
+  if (routeTags.includes('toll')) {
     ferriesAndTollsIconsIndicator += `<span class="icon-toll"></span>`;
     ferriesAndTollsTextIndicator += ` Tolls | `;
   }
-  if (wholeRouteContainsFerries) {
+  if (routeTags.includes('ferry')) {
     ferriesAndTollsIconsIndicator += `<span class="icon-ferry"></span>`;
     ferriesAndTollsTextIndicator += `Ferry`;
   }
   return `${ferriesAndTollsIconsIndicator} 
   <h4 id="tolls-indicator"> ${ferriesAndTollsTextIndicator}</h4>`;
-}
-
-/**
- * Display checks if tolls are present on the leg
- *
- * @param leg
- * @return {boolean}
- */
-function containsTolls(leg) {
-  for (let i = 0; i < leg.steps.length; i++) {
-    if (leg.steps[i].type === 'toll') {
-      wholeRouteContainsTolls = true;
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
@@ -179,7 +161,6 @@ function getNumberOfFerryStepsInLeg(leg) {
   let ferrysteps = 0;
   for (let i = 0; i < leg.steps.length; i++) {
     if (leg.steps[i].type === 'ferry') {
-      wholeRouteContainsFerries = true;
       ferrysteps++;
     }
   }

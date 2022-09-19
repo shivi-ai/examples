@@ -12,9 +12,7 @@ import { drawRoutePolyline } from './map';
  *    - queries.js - The GraphQL queries used in the networking requests
  */
 
-let stateOfCharge = 80;
-
-getRoute(stateOfCharge, route => {
+getRoute(route => {
   drawRoutePolyline(route);
   renderRouteData(route);
 });

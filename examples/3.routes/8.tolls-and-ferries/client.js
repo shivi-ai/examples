@@ -37,9 +37,9 @@ const client = createClient({
   ],
 });
 
-export const getRoute = (soc, callback) => {
+export const getRoute = callback => {
   client
-    .mutation(createRouteQuery, { soc: parseFloat(soc) })
+    .mutation(createRouteQuery)
     .toPromise()
     .then(response => {
       const routeId = response.data.newRoute;
