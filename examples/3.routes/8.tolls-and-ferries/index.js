@@ -3,7 +3,7 @@ import { renderRouteData } from './interface';
 import { drawRoutePolyline } from './map';
 
 /**
- * This project shows you how to add tolls and ferries to a journey overview
+ * This project shows you how to add toll roads and ferries to a journey overview
  * The project structure contains;
  *
  *    - client.js - All networking requests

@@ -8,8 +8,8 @@ const map = new mapboxgl.Map({
   cooperativeGestures: true,
   container: 'map',
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
-  zoom: 6,
-  center: [9.647487, 58.389399],
+  zoom: 6.5,
+  center: [7.647487, 58.489399],
 });
 
 /**
@@ -60,13 +60,9 @@ const drawChargingTimes = legs => {
       return;
     }
 
-    const chargeTime = leg.chargeTime;
-    const hrs = ~~(chargeTime / 3600);
-    const mins = ~~((chargeTime % 3600) / 60);
-
     new mapboxgl.Popup({ closeOnClick: false })
       .setLngLat(leg.destination.geometry.coordinates)
-      .setHTML(`<small>${hrs}:${mins}</small>`)
+      .setHTML(`<small>${getDurationString(leg.chargeTime, true)}</small>`)
       .addTo(map);
   });
 };

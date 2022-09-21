@@ -48,12 +48,12 @@ export const getRoute = callback => {
         client.executeSubscription(createRequest(routeUpdateSubscription, { id: routeId })),
         subscribe(result => {
           const { status, route } = result.data?.routeUpdatedById;
-          // You can keep listening to the route changes to update route information.
-          // For this example we want to only draw the initial route.
+          // Subscription used as computation time can increase for longer routes.
           if (status === 'done' && route) {
             unsubscribe();
             callback(route);
-          } else if (status === 'not_found') {
+          } else if (status === 'not_found' || status === 'error') {
+            unsubscribe();
             callback();
           }
         }),

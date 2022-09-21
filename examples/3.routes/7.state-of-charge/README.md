@@ -17,4 +17,4 @@ A car is not always fully charged and in the same location. That's why the state
 
 ## Next steps
 
-This last example showed us how modifying the state of charge variable can alter the route. In the next step we will look at how we can display more information to the user on the journey overview such as ferries and tolls.
+In this last example, it's possible to see how a route is impacted by a car's state of charge. The next step will cover how to add ferries and toll roads to the journey overview.

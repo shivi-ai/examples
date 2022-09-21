@@ -1,6 +1,6 @@
 {
-  "label": "Tolls and Ferries",
-  "sublabel": "Display tolls and ferries on your journey overview",
+  "label": "Toll roads and Ferries",
+  "sublabel": "Extend the journey overview by displaying toll roads and ferries",
   "background": "accent",
   "url": "https://examples.chargetrip.com/tolls-and-ferries/"
 }
