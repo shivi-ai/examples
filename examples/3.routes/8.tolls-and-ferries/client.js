@@ -52,9 +52,6 @@ export const getRoute = callback => {
           if (status === 'done' && route) {
             unsubscribe();
             callback(route);
-          } else if (status === 'not_found' || status === 'error') {
-            unsubscribe();
-            callback();
           }
         }),
       );
