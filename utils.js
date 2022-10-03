@@ -10,9 +10,12 @@ export function parseSeconds(secs) {
  * @param duration {number} seconds
  * @returns {string} string in format h:min
  */
-export const getDurationString = duration => {
+export const getDurationString = (duration, formatForChargingStations = false) => {
   const { hours: durationHours, minutes: durationMinutes } = parseSeconds(duration);
 
+  if (formatForChargingStations) {
+    return `${durationHours}:${durationMinutes}`;
+  }
   return durationHours === 0 ? `${durationMinutes} min` : `${durationHours} hr ${durationMinutes} min`;
 };
 

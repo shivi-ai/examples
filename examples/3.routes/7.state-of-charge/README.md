@@ -17,4 +17,4 @@ A car is not always fully charged and in the same location. That's why the state
 
 ## Next steps
 
-The last couple of examples explained most of the variables when it comes to routing. Next steps would be exploring the routing api reference to play around with occupants, different vehicles or even cargo.
+In this last example, it's possible to see how a route is impacted by a car's state of charge. The next step will cover how to add ferries and toll roads to the journey overview.
