@@ -18,7 +18,6 @@ const headers = {
 
 const subscriptionClient = new SubscriptionClient('wss://api.chargetrip.io/graphql', {
   reconnect: true,
-  timeout: 4000,
   connectionParams: headers,
 });
 
