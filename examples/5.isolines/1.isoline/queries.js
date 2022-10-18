@@ -17,10 +17,11 @@ mutation createIsoline {
       vehicle_id: "5d161beec9eef4c250d9d225"
       origin: {
         type: Feature
-        geometry: { type: Point, coordinates: [8.6821, 50.1109] }
+        geometry: { type: Point, coordinates: [2.1686, 41.3874] }
         properties: { name: "Frankfurt, Germany" }
       }
       polygon_count: 5
+      ferry_connections: none
       season: summer
     }
   )
