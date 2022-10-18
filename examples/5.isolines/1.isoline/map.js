@@ -9,7 +9,7 @@ const map = new mapboxgl.Map({
   // style: 'mapbox://styles/chargetrip/cl2pxb0e2001v15l2tawki0k0', // Dark Map
   style: 'mapbox://styles/chargetrip/ckgcbf3kz0h8819qki8uwhe0k',
   zoom: 7.0,
-  center: [8.6821, 50.1109],
+  center: [1.0686, 41.6974],
 });
 
 /**
@@ -59,7 +59,7 @@ const addLayer = (dataLayer, index) => {
       type: 'Feature',
       geometry: {
         type: 'Polygon',
-        coordinates: dataLayer,
+        coordinates: dataLayer[0],
       },
     },
   });
