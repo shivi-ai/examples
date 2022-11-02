@@ -2,5 +2,6 @@
   "label": "GeoJSON tiles",
   "sublabel": "Example of how to show stations on a map using the GeoJSON response from our Tile Service",
   "background": "success",
-  "url": "https://examples.chargetrip.com/tile-json/"
+  "url": "https://examples.chargetrip.com/tile-json/",
+  "github": "https://github.com/chargetrip/examples/tree/main/examples/4.tile-service/2.tile-json"
 }

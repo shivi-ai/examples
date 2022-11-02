@@ -2,5 +2,6 @@
   "label": "Stations",
   "sublabel": "Example of how to query the 20 closest stations",
   "background": "note",
-  "url": "https://examples.chargetrip.com/stations/"
+  "url": "https://examples.chargetrip.com/stations/",
+  "github": "https://github.com/chargetrip/examples/tree/main/examples/2.stations/1.station-list"
 }

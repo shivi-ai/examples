@@ -2,5 +2,6 @@
   "label": "Isolines",
   "sublabel": "Example of how to show how far a vehicle is able to go from a certain location",
   "background": "accent-light",
-  "url": "https://examples.chargetrip.com/isolines/"
+  "url": "https://examples.chargetrip.com/isolines/",
+  "github": "https://github.com/chargetrip/examples/tree/main/examples/5.isolines/1.isoline"
 }
