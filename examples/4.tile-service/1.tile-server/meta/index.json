@@ -2,5 +2,6 @@
   "label": "Mapbox Vector Tiles",
   "sublabel": "Render stations on a map by using Mapbox Vector Tiles",
   "background": "success",
-  "url": "https://examples.chargetrip.com/tile-server/"
+  "url": "https://examples.chargetrip.com/tile-server/",
+  "github": "https://github.com/chargetrip/examples/tree/main/examples/4.tile-service/1.tile-service"
 }
