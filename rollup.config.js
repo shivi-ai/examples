@@ -28,18 +28,18 @@ const plugins = [
 
 export default [
   {
-    input: 'examples/1.cars/1.car-list/index.js',
+    input: 'examples/1.vehicles/1.vehicle-list/index.js',
     output: {
-      file: 'public/car-list/bundle.js',
+      file: 'public/vehicle-list/bundle.js',
       format: 'iife',
       sourcemap: true,
     },
     plugins,
   },
   {
-    input: 'examples/1.cars/2.car-details/index.js',
+    input: 'examples/1.vehicles/2.vehicle-details/index.js',
     output: {
-      file: 'public/car/bundle.js',
+      file: 'public/vehicle/bundle.js',
       format: 'iife',
       sourcemap: true,
     },

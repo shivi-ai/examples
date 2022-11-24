@@ -155,16 +155,16 @@ main {
   display: none;
 }
 
-.car-list {
+.vehicle-list {
   overflow-y: scroll;
   height: calc(100% - 88px);
 }
 
-.car-list-header:first-child {
+.vehicle-list-header:first-child {
   margin: 0 0 0.5rem;
 }
 
-.car-list-header {
+.vehicle-list-header {
   font-size: var(--font-size-base);
   font-weight: bold;
   padding: 0.5rem 1rem;
@@ -179,13 +179,13 @@ main {
   z-index: 10;
 }
 
-.car-list-element {
+.vehicle-list-element {
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
 }
 
-.car-list-image {
+.vehicle-list-image {
   width: 104px;
   height: 64px;
   background-color: var(--background-subdued);
@@ -197,16 +197,16 @@ main {
   flex-shrink: 0;
 }
 
-.car-image {
+.vehicle-image {
   width: 100%;
   height: 100%;
 }
 
-.car-list-data {
+.vehicle-list-data {
   margin-left: 1rem;
 }
 
-.car-list-data p {
+.vehicle-list-data p {
   line-height: 1.25rem;
 }
 

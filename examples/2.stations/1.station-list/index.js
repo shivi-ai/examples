@@ -3,7 +3,7 @@ import { attachEventListeners } from './interface.js';
 import { getStations } from './client.js';
 
 /**
- * This project shows you how to fetch a car list and render the car details
+ * This project shows you how to fetch a vehicle list and render the vehicle details
  * The project structure contains;
  *
  *    - client.js - All networking requests
