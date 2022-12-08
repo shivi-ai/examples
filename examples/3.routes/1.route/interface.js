@@ -96,16 +96,19 @@ const getGoogleMapDirectionsURL = legs => {
   const origin = legs[0].origin?.geometry?.coordinates;
   const destination = legs[legs.length - 1].destination?.geometry?.coordinates;
 
-  // coordinates are an array with longitude as first value and latitude as the second one
+  // Coordinates are an array with longitude as first value and latitude as the second one
   // we have to reverse it as Google Maps accept latitude first
-  googleDirURL += `&origin=${origin?.reverse()?.join(',')}&destination=${destination?.reverse()?.join(',')}`;
+  const googleOrigin = origin?.slice().reverse()?.join(',');
+  const googleDestination = destination?.slice().reverse()?.join(',');
+  googleDirURL += `&origin=${googleOrigin}&destination=${googleDestination}`;
 
   if (legs.length > 2) {
     googleDirURL += `&waypoints=`;
-    legs.map((leg, index) => {
-      // add charging stations and waypoints
+
+    legs.forEach((leg, index) => {
+      // Add charging stations and waypoints
       if (index !== legs.length - 1) {
-        googleDirURL += `${leg.destination?.geometry?.coordinates?.reverse()?.join(',')}|`;
+        googleDirURL += `${leg.destination?.geometry?.coordinates?.slice().reverse()?.join(',')}|`;
       }
     });
   }
