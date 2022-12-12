@@ -1,6 +1,6 @@
 # Query the vehicle list
 
-To start routing a vehicle and consumption model is required. Learn how to provide a list of vehicles to be able to select the right consumption model.
+Routing a vehicle requires a consumption model. Learn how to render a list of vehicles to be able to select the right consumption model.
 
 ## Requirements
 
