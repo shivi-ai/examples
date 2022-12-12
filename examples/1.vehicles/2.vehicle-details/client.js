@@ -43,7 +43,7 @@ export const getVehicleList = () => {
 };
 
 /**
- * You can access more detailed information of a specific vhielce using the `vehicle` query.
+ * You can access more detailed information of a specific vehicle using the `vehicle` query.
  * This set of data is a limited set of everything that is available.
  * If you need more you can contact us to get access to our `vehiclePremium` query.
  * @param { string } vehicleId - the id of the vehicle that we want the details of
