@@ -4,7 +4,7 @@ import { getVehicleList } from './client';
 // Keeps track of the active search keyword. This way we always fetch the right results when using pagination.
 let searchKeyword = '';
 
-// Keeps track of which page of Vehicles we are currently on.
+// Keeps track of which page of vehicles we are currently on.
 let currentPage = 0;
 
 // Keep a full list of sorted Vehicles
@@ -13,7 +13,7 @@ let groupedVehicles = new Map();
 // Keep track of what headers we already rendered when doing pagination
 let renderedHeaders = [];
 
-// Keep track of which Vehicles we already rendered when doing pagination
+// Keep track of which vehicles we already rendered when doing pagination
 let renderedVehicles = [];
 
 /**

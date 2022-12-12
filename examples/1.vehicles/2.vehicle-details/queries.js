@@ -4,7 +4,7 @@ export const getVehicleListQuery = qql`
 query vehicleList {
   vehicleList(
     page: 0, 
-    size: 5
+    size: 12
   ) {
     id
     naming {
