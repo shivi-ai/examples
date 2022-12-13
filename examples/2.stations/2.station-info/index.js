@@ -3,7 +3,7 @@ import { showStations } from './map.js';
 import { attachEventListeners, renderGraph, renderStationData } from './interface';
 
 /**
- * This project shows you how to fetch a car list and render the car details
+ * This project shows you how to fetch station details
  * The project structure contains;
  *
  *    - client.js - All networking requests

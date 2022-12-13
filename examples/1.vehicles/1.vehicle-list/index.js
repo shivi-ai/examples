@@ -1,8 +1,8 @@
 import { drawMap } from './map.js';
-import { getCarList } from './client.js';
+import { getVehicleList } from './client.js';
 
 /**
- * This project shows you how to fetch a car list and render the car details
+ * This project shows you how to fetch a vehicle list and render the vehicle details
  * The project structure contains;
  *
  *    - client.js - All networking requests
@@ -12,4 +12,4 @@ import { getCarList } from './client.js';
  */
 
 drawMap();
-getCarList({ page: 0 });
+getVehicleList({ page: 0 });

@@ -1,10 +1,10 @@
 import qql from 'graphql-tag';
 
-export const getCarListQuery = qql`
-query carList {
-  carList(
+export const getVehicleListQuery = qql`
+query vehicleList {
+  vehicleList(
     page: 0, 
-    size: 12
+    size: 20
   ) {
     id
     naming {
@@ -21,9 +21,9 @@ query carList {
 }
 `;
 
-export const getCarDetailsQuery = qql`
-query car($carId: ID) {
-  car(id: $carId) {
+export const getVehicleDetailsQuery = qql`
+query vehicle($vehicleId: ID!) {
+  vehicle(id: $vehicleId) {
     naming {
       make
       model
@@ -41,7 +41,6 @@ query car($carId: ID) {
       usable_kwh
     }
     range {
-      real
       best {
         highway
         city

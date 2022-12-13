@@ -1,6 +1,6 @@
 import { createClient, defaultExchanges } from '@urql/core';
-import { getCarListQuery, getCarDetailsQuery } from './queries.js';
-import { renderCarList } from './interface';
+import { getVehicleListQuery, getVehicleDetailsQuery } from './queries.js';
+import { renderVehicleList } from './interface';
 
 /**
  * For the purpose of this example we use urgl - lightweights GraphQL client.
@@ -10,7 +10,7 @@ import { renderCarList } from './interface';
  * Read more about an authorisation in our documentation (https://docs.chargetrip.com/#authorisation).
  */
 const headers = {
-  //Replace this x-client-id and app-id with your own to get access to more cars
+  //Replace this x-client-id and app-id with your own to get access to more vehicles
   'x-client-id': '5ed1175bad06853b3aa1e492',
   'x-app-id': '623998b2c35130073829b2d2',
 };
@@ -25,32 +25,32 @@ const client = createClient({
 });
 
 /**
- * You can access a list of all available cars using the `carList` query.
- * In this example we use our playground, which has only 12 cars available.
+ * You can access a list of all available vehicles using the `vehicleList` query.
+ * In this example we use our playground, which has only 12 vehicles available.
  * Chargetrip operates an extensive database of EV makes, editions, and versions,
  * each with their specific consumption models.
- * You need a registered x-client-id to access the full car database.
+ * You need a registered x-client-id to access the full vehicle database.
  * You can obtain a registered x-client-id on https://account.chargetrip.com/
  * **/
-export const getCarList = () => {
+export const getVehicleList = () => {
   client
-    .query(getCarListQuery)
+    .query(getVehicleListQuery)
     .toPromise()
     .then(response => {
-      renderCarList(response.data?.carList);
+      renderVehicleList(response.data?.vehicleList);
     })
     .catch(error => console.log(error));
 };
 
 /**
- * You can access more detailed information of a specific car using the `car` query.
+ * You can access more detailed information of a specific vehicle using the `vehicle` query.
  * This set of data is a limited set of everything that is available.
- * If you need more you can contact us to get access to our `carPremium` query.
- * @param { string } carId - the id of the car that we want the details of
+ * If you need more you can contact us to get access to our `vehiclePremium` query.
+ * @param { string } vehicleId - the id of the vehicle that we want the details of
  */
-export const getCarDetails = (carId, callback) => {
+export const getVehicleDetails = (vehicleId, callback) => {
   client
-    .query(getCarDetailsQuery, { carId })
+    .query(getVehicleDetailsQuery, { vehicleId })
     .toPromise()
     .then(response => {
       callback(response.data);
