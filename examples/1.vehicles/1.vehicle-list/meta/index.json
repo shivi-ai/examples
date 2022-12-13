@@ -2,5 +2,6 @@
   "label": "Vehicle list",
   "sublabel": "Example of how to query the list of vehicles.",
   "background": "accent",
-  "url": "https://examples.chargetrip.com/vehicle-list/"
+  "url": "https://examples.chargetrip.com/vehicle-list/",
+  "github": "https://github.com/chargetrip/examples/tree/main/examples/1.vehicles/1.vehicle-list"
 }
