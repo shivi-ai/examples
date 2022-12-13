@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Chargetrip API: Query the car example</title>
+    <title>Chargetrip API: Query the vehicle example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Query the list of cars with Chargetrip API and compare the models" />
-    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, ev-cars, ev-routing, station" />
+    <meta name="description" content="Query the list of vehicles with Chargetrip API and compare the models" />
+    <meta name="keywords" content="Chargetrip, Chargetrip API, EV, electric vehicles, ev-routing, station" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="../favicon-57.png" type="image/x-icon" />
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
@@ -16,12 +16,12 @@
     <div id="map"></div>
     <div class="card">
       <header>
-        <h1>Car details</h1>
-        <p>Select a car for more details</p>
+        <h1>Vehicle details</h1>
+        <p>Select a vehicle for more details</p>
       </header>
       <main>
-        <ul id="car-list" class="car-list">
-          <!-- Car list is being rendered through cars.js here -->
+        <ul id="vehicle-list" class="vehicle-list">
+          <!-- Vehicle list is being rendered through vehicles.js here -->
         </ul>
       </main>
       <footer>
@@ -38,10 +38,10 @@
         </div>
       </footer>
 
-      <!-- Second page that renders all the car details -->
-      <div id="car-details" class="car-details">
+      <!-- Second page that renders all the vehicle details -->
+      <div id="vehicle-details" class="vehicle-details">
         <div class="top-bar">
-          <div id="car-details-back" class="back">
+          <div id="vehicle-details-back" class="back">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
@@ -51,35 +51,35 @@
               />
             </svg>
           </div>
-          <p><strong>Car details</strong></p>
+          <p><strong>Vehicle details</strong></p>
         </div>
-        <div class="car-details-image-wrapper">
-          <img id="car-details-image" class="car-details-image" src="" />
-          <div class="car-details-brand-wrapper">
-            <img id="car-details-brand" class="car-details-brand" src="" />
+        <div class="vehicle-details-image-wrapper">
+          <img id="vehicle-details-image" class="vehicle-details-image" src="" />
+          <div class="vehicle-details-brand-wrapper">
+            <img id="vehicle-details-brand" class="vehicle-details-brand" src="" />
           </div>
         </div>
-        <section class="car-details-naming">
-          <h1 id="car-details-name">-</h1>
-          <p id="car-details-version">-</p>
+        <section class="vehicle-details-naming">
+          <h1 id="vehicle-details-name">-</h1>
+          <p id="vehicle-details-version">-</p>
         </section>
         <section>
           <h3>General</h3>
-          <ul id="car-details-general">
-            <!-- Car details rendered through car.js here -->
+          <ul id="vehicle-details-general">
+            <!-- Vehicle details rendered through vehicle.js here -->
           </ul>
         </section>
         <section>
           <h3>Range</h3>
-          <!-- Car details rendered through car.js here -->
+          <!-- Vehicle details rendered through vehicle.js here -->
           <table>
-            <tbody id="car-details-range"></tbody>
+            <tbody id="vehicle-details-range"></tbody>
           </table>
         </section>
         <section>
           <h3>Performance</h3>
-          <ul id="car-details-performance">
-            <!-- Car details rendered through car.js here -->
+          <ul id="vehicle-details-performance">
+            <!-- Vehicle details rendered through vehicle.js here -->
           </ul>
         </section>
       </div>

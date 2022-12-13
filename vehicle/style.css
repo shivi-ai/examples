@@ -204,11 +204,11 @@ header p {
   overflow-y: auto;
 }
 
-.car-list-header:first-child {
+.vehicle-list-header:first-child {
   margin: 0 0 0.5rem;
 }
 
-.car-list-header {
+.vehicle-list-header {
   font-size: var(--font-size-base);
   font-weight: bold;
   padding: 0.5rem 1rem;
@@ -223,7 +223,7 @@ header p {
   z-index: 10;
 }
 
-.car-list-element {
+.vehicle-list-element {
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
@@ -231,11 +231,11 @@ header p {
   transition: background-color 150ms ease;
 }
 
-.car-list-element:hover {
+.vehicle-list-element:hover {
   background-color: var(--background-subdued);
 }
 
-.car-list-image {
+.vehicle-list-image {
   width: 104px;
   height: 64px;
   background-color: var(--background-subdued);
@@ -247,16 +247,16 @@ header p {
   flex-shrink: 0;
 }
 
-.car-image {
+.vehicle-image {
   width: 100%;
   height: 100%;
 }
 
-.car-list-data {
+.vehicle-list-data {
   margin-left: 1rem;
 }
 
-.car-list-data p {
+.vehicle-list-data p {
   line-height: 1.25rem;
 }
 
@@ -295,8 +295,8 @@ header p {
   display: none;
 }
 
-/* Car details screen */
-.car-details {
+/* Vehicle details screen */
+.vehicle-details {
   background: var(--background-body);
   width: 100%;
   height: 100%;
@@ -309,7 +309,7 @@ header p {
   transition: transform 250ms ease-in-out;
 }
 
-.car-details.show {
+.vehicle-details.show {
   transform: translateX(0);
 }
 
@@ -336,7 +336,7 @@ header p {
   color: var(--background-body);
 }
 
-.car-details-image-wrapper {
+.vehicle-details-image-wrapper {
   height: 280px;
   width: 100%;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -349,11 +349,11 @@ header p {
   padding-top: 40px;
 }
 
-.car-details-image {
+.vehicle-details-image {
   width: 100%;
 }
 
-.car-details-brand-wrapper {
+.vehicle-details-brand-wrapper {
   position: absolute;
   bottom: -32px;
   left: 1rem;
@@ -367,21 +367,21 @@ header p {
   justify-content: center;
 }
 
-.car-details-brand {
+.vehicle-details-brand {
   width: 100%;
 }
 
-.car-details-naming {
+.vehicle-details-naming {
   border-top: none;
 }
 
-.car-details li {
+.vehicle-details li {
   padding: 0.25rem 0;
   display: flex;
   justify-content: space-between;
 }
 
-.car-details li p:last-child {
+.vehicle-details li p:last-child {
   font-weight: 600;
 }
 
